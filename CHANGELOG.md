@@ -1,3 +1,10 @@
+# 1.0.0 (2025-04-14)
+
+
+### Features
+
+* initial commit ([251b5d4](https://github.com/Itsavirus-com/coolnomix-fe/commit/251b5d45cd13d2af5e1a54cebd4aa9f8a495699d))
+
 ## [3.66.2](https://github.com/ixartz/Next-js-Boilerplate/compare/v3.66.1...v3.66.2) (2025-04-12)
 
 
