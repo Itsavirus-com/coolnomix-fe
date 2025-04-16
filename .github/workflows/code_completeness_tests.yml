@@ -1,0 +1,63 @@
+name: Code Completeness Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - staging
+      - development
+
+jobs:
+  tsc-compilation:
+    name: Typescript Compilation Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Node setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: yarn
+
+      - name: Install NPM Packages
+        run: yarn install
+
+      - name: Typescript compilation
+        run: yarn tsc
+
+  linting:
+    name: Linting Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Node setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: yarn
+
+      - name: Install NPM Packages
+        run: yarn install
+
+      - name: Run eslint
+        run: yarn eslint . --ext .js,.ts,.tsx
+
+  formatting:
+    name: Formatting Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Node setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: yarn
+
+      - name: Install NPM Packages
+        run: yarn install
+
+      - name: Run prettier
+        run: yarn prettier . --check

@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: .docker/dockerfile.prod
+      target: production
+    container_name: project-name-prod
+    env_file:
+      - ../.env.production
+    image: project-name-prod
+    ports:
+      - 1235:80
+    restart: unless-stopped

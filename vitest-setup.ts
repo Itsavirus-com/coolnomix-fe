@@ -1,5 +1,5 @@
-import failOnConsole from 'vitest-fail-on-console';
-import '@testing-library/jest-dom/vitest';
+import failOnConsole from 'vitest-fail-on-console'
+import '@testing-library/jest-dom/vitest'
 
 failOnConsole({
   shouldFailOnDebug: true,
@@ -7,4 +7,4 @@ failOnConsole({
   shouldFailOnInfo: true,
   shouldFailOnLog: true,
   shouldFailOnWarn: true,
-});
+})

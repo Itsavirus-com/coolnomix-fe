@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: .docker/dockerfile.dev
+      target: development
+    container_name: project-name-dev
+    env_file:
+      - ../.env.development
+    image: project-name-dev
+    ports:
+      - 1234:1234
+    restart: unless-stopped
+    volumes:
+      - ../:/app
