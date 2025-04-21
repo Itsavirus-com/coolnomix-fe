@@ -6,5 +6,5 @@ failOnConsole({
   shouldFailOnError: true,
   shouldFailOnInfo: true,
   shouldFailOnLog: true,
-  shouldFailOnWarn: true,
+  shouldFailOnWarn: true
 })

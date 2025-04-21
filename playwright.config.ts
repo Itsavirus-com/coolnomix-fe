@@ -22,7 +22,7 @@ export default defineConfig({
 
   expect: {
     // Set timeout for async expect matchers
-    timeout: 10 * 1000,
+    timeout: 10 * 1000
   },
 
   // Run your local dev server before starting the tests:
@@ -31,7 +31,7 @@ export default defineConfig({
     command: process.env.CI ? 'npm run start' : 'npm run dev:next',
     url: baseURL,
     timeout: 2 * 60 * 1000,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !process.env.CI
   },
 
   // Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions.
@@ -44,21 +44,21 @@ export default defineConfig({
     trace: 'retain-on-failure',
 
     // Record videos when retrying the failed test.
-    video: process.env.CI ? 'retain-on-failure' : undefined,
+    video: process.env.CI ? 'retain-on-failure' : undefined
   },
 
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'] }
     },
     ...(process.env.CI
       ? [
           {
             name: 'firefox',
-            use: { ...devices['Desktop Firefox'] },
-          },
+            use: { ...devices['Desktop Firefox'] }
+          }
         ]
-      : []),
-  ],
+      : [])
+  ]
 })

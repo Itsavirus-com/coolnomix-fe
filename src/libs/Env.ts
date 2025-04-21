@@ -12,11 +12,10 @@ export const ENV = createEnv({
     NEXT_PUBLIC_API_BASE_URL: z.string().optional(),
     NEXT_PUBLIC_API_TIMEOUT: z.number().optional(),
     NEXT_PUBLIC_LANGUAGE_STORAGE_KEY: z.string().optional(),
-    NEXT_PUBLIC_ACCESS_TOKEN_STORAGE_KEY: z.string().optional(),
-
+    NEXT_PUBLIC_ACCESS_TOKEN_STORAGE_KEY: z.string().optional()
   },
   shared: {
-    NODE_ENV: z.enum(['test', 'development', 'production']).optional(),
+    NODE_ENV: z.enum(['test', 'development', 'production']).optional()
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
@@ -29,6 +28,6 @@ export const ENV = createEnv({
     NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
     NEXT_PUBLIC_API_TIMEOUT: process.env.API_TIMEOUT,
     NEXT_PUBLIC_LANGUAGE_STORAGE_KEY: 'LOCALE',
-    NEXT_PUBLIC_ACCESS_TOKEN_STORAGE_KEY: 'ACCESS_TOKEN',
-  },
+    NEXT_PUBLIC_ACCESS_TOKEN_STORAGE_KEY: 'ACCESS_TOKEN'
+  }
 })

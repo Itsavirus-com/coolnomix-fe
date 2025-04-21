@@ -1,0 +1,22 @@
+rc: ./.lefthookrc
+
+pre-commit:
+  piped: true
+  commands:
+    1-tsc-compilation:
+      skip: true
+      glob: '*.{ts,tsx}'
+      run: yarn tsc-files --noEmit --pretty {staged_files}
+    2-linting:
+      glob: '*.{js,ts,tsx}'
+      run: yarn eslint {staged_files} --fix && git add {staged_files}
+    3-formatting:
+      glob: '*.{js,ts,tsx,css,scss,md,json}'
+      run: yarn prettier --write {staged_files} && git add {staged_files}
+
+pre-push:
+  parallel: true
+  commands:
+    unit-test:
+      glob: '*.{ts,tsx}'
+      run: yarn jest --bail --findRelatedTests --passWithNoTests {push_files}

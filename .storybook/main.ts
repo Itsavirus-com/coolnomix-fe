@@ -6,16 +6,16 @@ const config: StorybookConfig = {
     '@storybook/addon-onboarding',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
+    '@storybook/addon-interactions'
   ],
   framework: {
     name: '@storybook/nextjs',
-    options: {},
+    options: {}
   },
   staticDirs: ['../public'],
   core: {
-    disableTelemetry: true,
-  },
+    disableTelemetry: true
+  }
 }
 
 export default config

@@ -1,84 +1,125 @@
-import antfu from '@antfu/eslint-config'
-import nextPlugin from '@next/eslint-plugin-next'
-import jestDom from 'eslint-plugin-jest-dom'
-import jsxA11y from 'eslint-plugin-jsx-a11y'
-import playwright from 'eslint-plugin-playwright'
-import testingLibrary from 'eslint-plugin-testing-library'
+import { FlatCompat } from '@eslint/eslintrc'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
 
-export default antfu({
-  react: true,
-  typescript: true,
+import prettier from 'eslint-config-prettier'
+import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import tseslint from 'typescript-eslint'
+import importPlugin from 'eslint-plugin-import'
 
-  lessOpinionated: true,
-  isInEditor: false,
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-  stylistic: {
-    semi: false,
-  },
-
-  formatters: {
-    css: true,
-  },
-
-  ignores: [
-    'next-env.d.ts',
-    '.parcel-cache',
-    'dist',
-    'node_modules',
-    '.vscode',
-    'package.json',
-    'yarn.lock',
-    'yarn-error.log',
-    '.husky',
-    '.prettierignore',
-    '.eslintignore',
-    '.gitignore',
-    '.docker',
-    '.dockerignore',
-    'captain-definition',
-    'nginx.conf',
-    '.env.example',
-  ],
-}, jsxA11y.flatConfigs.recommended, {
-  plugins: {
-    '@next/next': nextPlugin,
-  },
-  rules: {
-    ...nextPlugin.configs.recommended.rules,
-    ...nextPlugin.configs['core-web-vitals'].rules,
-  },
-
-}, {
-  files: [
-    '**/*.test.ts?(x)',
-  ],
-  ...testingLibrary.configs['flat/react'],
-  ...jestDom.configs['flat/recommended'],
-}, {
-  files: [
-    '**/*.spec.ts',
-    '**/*.e2e.ts',
-  ],
-  ...playwright.configs['flat/recommended'],
-}, {
-  rules: {
-    'antfu/no-top-level-await': 'off', // Allow top-level await
-    'style/brace-style': ['error', '1tbs'], // Use the default brace style
-    'ts/consistent-type-definitions': ['error', 'type'], // Use `type` instead of `interface`
-    'react/prefer-destructuring-assignment': 'off', // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
-    'node/prefer-global/process': 'off', // Allow using `process.env`
-    'test/padding-around-all': 'error', // Add padding in test files
-    'test/prefer-lowercase-title': 'off', // Allow using uppercase titles in test titles
-    'react-hooks/exhaustive-deps': 0,
-    'ts/method-signature-style': 'off',
-    'space-before-function-paren': 0,
-    '@typescript-eslint/ban-ts-comment': 0,
-    '@typescript-eslint/ban-ts-ignore': 0,
-    'react/no-unstable-default-props': 0,
-    'react-refresh/only-export-components': 0,
-    'react-hooks-extra/no-direct-set-state-in-use-effect': 0,
-    'no-unsafe-finally': 0,
-    'no-use-before-define': 'off',
-    'no-console': 0,
-  },
+const compat = new FlatCompat({
+  baseDirectory: __dirname
 })
+
+const eslintConfig = [
+  prettier,
+  ...tseslint.configs.recommended,
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  {
+    files: ['**/*.{js,ts,tsx}'],
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      '@typescript-eslint': tseslint.plugin,
+      import: importPlugin
+    },
+    settings: {
+      react: {
+        pragma: 'React',
+        version: 'detect'
+      },
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json'
+        }
+      }
+    },
+    rules: {
+      'space-before-function-paren': 0,
+      '@typescript-eslint/ban-ts-comment': 0,
+      '@typescript-eslint/ban-ts-ignore': 0,
+      '@typescript-eslint/no-explicit-any': 0,
+      '@typescript-eslint/no-non-null-assertion': 0,
+      '@typescript-eslint/no-var-requires': 0,
+      '@typescript-eslint/no-require-imports': 0,
+      'react-hooks/exhaustive-deps': 0,
+      'generator-star-spacing': 0,
+      indent: 0,
+      curly: ['warn', 'multi-line'],
+      'multiline-ternary': 0,
+      'sort-imports': [
+        'error',
+        {
+          ignoreCase: false,
+          ignoreDeclarationSort: true, // Prevents conflicts with import/order
+          ignoreMemberSort: false, // Ensures members like { b, a } are sorted to { a, b }
+          memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+          allowSeparatedGroups: true
+        }
+      ],
+      'import/first': 'error',
+      'import/newline-after-import': 'error',
+      'import/no-duplicates': 'error',
+      'import/no-unresolved': 0,
+      'import/no-anonymous-default-export': 0,
+      'import/order': [
+        'error',
+        {
+          groups: [
+            ['builtin', 'external'],
+            'internal',
+            ['parent', 'sibling'],
+            'index',
+            'object',
+            'type'
+          ],
+          pathGroups: [
+            {
+              pattern: 'react',
+              group: 'external',
+              position: 'before'
+            },
+            {
+              pattern: '@/**',
+              group: 'internal',
+              position: 'after'
+            }
+          ],
+          'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true
+          }
+        }
+      ],
+      'import/first': 'error',
+      'import/no-duplicates': 'error',
+      'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+      'import/newline-after-import': ['error', { count: 1 }]
+    },
+    ignores: [
+      '.parcel-cache',
+      'dist',
+      'node_modules',
+      '.vscode',
+      'package.json',
+      'yarn.lock',
+      'yarn-error.log',
+      '.husky',
+      '.prettierignore',
+      '.eslintignore',
+      '.gitignore',
+      '.docker',
+      '.dockerignore',
+      'captain-definition',
+      'nginx.conf',
+      '.env.example'
+    ]
+  }
+]
+
+export default eslintConfig

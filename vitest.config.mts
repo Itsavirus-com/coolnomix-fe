@@ -11,13 +11,13 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['src/**/*'],
-      exclude: ['src/**/*.stories.{js,jsx,ts,tsx}', '**/*.d.ts'],
+      exclude: ['src/**/*.stories.{js,jsx,ts,tsx}', '**/*.d.ts']
     },
     environmentMatchGlobs: [
       ['**/*.test.tsx', 'jsdom'],
-      ['src/hooks/**/*.test.ts', 'jsdom'],
+      ['src/hooks/**/*.test.ts', 'jsdom']
     ],
     setupFiles: ['./vitest-setup.ts'],
-    env: loadEnv('', process.cwd(), ''),
-  },
+    env: loadEnv('', process.cwd(), '')
+  }
 })

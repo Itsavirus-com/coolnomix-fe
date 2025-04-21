@@ -6,8 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/`,
       lastModified: new Date(),
       changeFrequency: 'daily',
-      priority: 0.7,
-    },
-
+      priority: 0.7
+    }
   ]
 }

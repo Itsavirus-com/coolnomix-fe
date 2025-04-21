@@ -10,8 +10,8 @@ export default arcjet({
   rules: [
     // Protect against common attacks with Arcjet Shield
     shield({
-      mode: 'LIVE', // will block requests. Use "DRY_RUN" to log only
-    }),
+      mode: 'LIVE' // will block requests. Use "DRY_RUN" to log only
+    })
     // Other rules are added in different routes
-  ],
+  ]
 })

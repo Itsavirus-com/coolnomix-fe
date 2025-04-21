@@ -6,13 +6,13 @@ const preview: Preview = {
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i,
-      },
+        date: /Date$/i
+      }
     },
     nextjs: {
-      appDirectory: true,
-    },
-  },
+      appDirectory: true
+    }
+  }
 }
 
 export default preview
