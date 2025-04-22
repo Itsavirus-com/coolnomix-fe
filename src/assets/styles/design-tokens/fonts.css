@@ -1,0 +1,36 @@
+/**
+  * ----------------------
+  * This module defines the standardized font sizes for the application.
+  * Always use these values with the Text component to maintain consistency.
+  *
+  * Why REM?
+  * --------
+  * We use REM units instead of pixels because:
+  * - Scales with user's browser font settings (accessibility)
+  * - Easier responsive design implementation
+  * - Consistent scaling across the application
+  *
+  * Size Reference:
+  * ---------------
+  * xs    : 0.625rem  (10px) - Fine print, captions, supplementary information
+  * xsAlt : 0.75rem   (12px) - Alternative extra small, improved readability
+  * sm    : 0.8125rem (13px) - Secondary content, supporting text
+  * smAlt : 0.875rem  (14px) - Form inputs, buttons
+  * md    : 1rem      (16px) - Body text, general content
+  * lg    : 1.125rem  (18px) - Enhanced readability, emphasis
+  * xl    : 1.25rem   (20px) - Subheadings
+  * 2xl   : 1.5rem    (24px) - Section headings
+  * 3xl   : 2rem      (32px) - Main headings, impactful text
+*/
+
+@theme {
+  --text-xs: 0.625rem;
+  --text-xsAlt: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-smAlt: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+}

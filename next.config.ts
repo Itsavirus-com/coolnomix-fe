@@ -21,8 +21,7 @@ export default withSentryConfig(
       API_BASE_URL: '',
       SENTRY_DSN: '',
       ENVIRONMENT: ''
-    },
-    trailingSlash: true
+    }
   }),
   {
     org: 'nextjs-boilerplate-org',
