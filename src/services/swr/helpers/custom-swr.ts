@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 
-import { useTableSearchParams } from '@/components/table/table-params.hook'
+import { useTableSearchParams } from '@/components/table/use-table-params'
 
 import type { FetcherParams } from './swr.types'
 import type { SWRConfiguration } from 'swr/_internal'
