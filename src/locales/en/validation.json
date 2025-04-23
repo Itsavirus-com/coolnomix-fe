@@ -1,0 +1,16 @@
+{
+  "maximum_number": "Please enter less than or equal to {max}",
+  "minimum_character": "Please enter at least {min} characters",
+  "minimum_number": "Please enter at least or equal to {min}",
+  "more_than_number": "Please enter more than {more}",
+  "not_type_of": "Please enter a valid {type}",
+  "required_email": "Please input an email",
+  "required_full_name": "Please input a name",
+  "required_password": "Please input a password",
+  "required_current_password": "Please input your current password",
+  "required_phone_number": "Please input a phone number",
+  "required_password_confirmation": "Please input a password confirmation",
+  "validity_email": "Please input a valid email",
+  "validity_phone_number": "Please input a valid phone number",
+  "validity_password_confirmation": "Please make sure your password match"
+}

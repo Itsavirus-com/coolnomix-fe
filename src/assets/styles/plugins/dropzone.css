@@ -1,0 +1,15 @@
+.dropzone {
+  @apply bg-pure-white cursor-pointer rounded-md border-1 border-[#D9D9D999] px-4 py-2;
+}
+
+.dropzone.dropzone-upload {
+  @apply border-dashed;
+}
+
+.dropzone.dropzone-previews {
+  @apply !cursor-default;
+}
+
+.dropzone .dz-started .dz-message {
+  @apply hidden;
+}

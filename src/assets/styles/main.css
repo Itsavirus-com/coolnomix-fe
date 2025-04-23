@@ -1,0 +1,21 @@
+/* Plugins */
+@import './plugins/tailwind.css';
+
+/* Design Tokens */
+@import './design-tokens/colors.css';
+@import './design-tokens/fonts.css';
+@import './design-tokens/icons.css';
+@import './design-tokens/theme.css';
+
+/* Generic */
+@import './generic/normalize.css';
+
+/* Plugins */
+@import './plugins/dropzone.css';
+@import './plugins/shadcn.css';
+
+/* Settings */
+@import './settings/global.css';
+
+/* Utils */
+@import './utilities/utils.css';

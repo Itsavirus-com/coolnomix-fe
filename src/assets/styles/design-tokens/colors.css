@@ -1,0 +1,40 @@
+/**
+ * Roles for colors.  Prefer using these over the palette.  It makes it easier
+ * to change things.
+ *
+ * The only roles we need to place in here are the ones that span through the app.
+ *
+ * If you have a specific use-case, like a spinner color.  It makes more sense to
+ * put that in the <Spinner /> component.
+ */
+
+@theme {
+  --color-brand-primary: #222e5e;
+  --color-brand-mid: #64c1ed;
+  --color-brand-dark: #0d4979;
+  --color-brand-light: #96cbdc;
+  --color-brand-lightest: #d4e8ef;
+  --color-brand-muted: #607a9b;
+
+  --color-grey: #6b7280;
+  --color-grey-mid: #edf1f4;
+  --color-grey-dark: #71717a;
+  --color-grey-darkest: #555962;
+  --color-grey-light: #e4e4e7;
+  --color-grey-lightest: #f8f9fc;
+  --color-white: #fafafa;
+  --color-pure-white: #ffffff;
+  --color-black: #1a1c24;
+  --color-pure-black: #000000;
+
+  --color-blue: #d4e8ef;
+  --color-blue-light: #d6e0ff;
+  --color-green: #1aad15;
+  --color-green-light: #28c76f;
+  --color-red: #f30707;
+  --color-pink: #f1ccf9;
+  --color-pink-mid: #edbff7;
+  --color-purple: #dbd1fa;
+  --color-purple-mid: #dbd1fa;
+  --color-pale-blue: #d4e8ef;
+}

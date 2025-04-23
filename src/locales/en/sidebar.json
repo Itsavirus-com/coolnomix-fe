@@ -1,0 +1,9 @@
+{
+  "platform": "PLATFORM",
+  "dashboard": "Dashboard",
+  "energySavingAudit": "Energy Saving Audit",
+  "monitoring": "Monitoring",
+  "qa": "Q&A",
+  "dataLogMonitoring": "Data Log Monitoring",
+  "report": "Report"
+}

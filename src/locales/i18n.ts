@@ -17,11 +17,11 @@ i18next
     fallbackLng: 'en', // use en if detected lng is not available
     keySeparator: '.', // we do not use keys in form messages.welcome
     interpolation: {
-      escapeValue: false, // react already safes from xss
-    },
+      escapeValue: false // react already safes from xss
+    }
   })
 
-export function translate(key: any, options?: any) {
+export function translate(key: any, options?: any): any {
   return key ? i18next.t(key, options) : null
 }
 
