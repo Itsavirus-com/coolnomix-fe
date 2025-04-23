@@ -4,7 +4,7 @@ import React, { memo } from 'react'
 
 import { cn } from '@/libs/utils'
 
-import type { IconProps } from './types'
+import type { IconProps } from './icon.types'
 
 const Icon: FC<IconProps> = (props) => {
   const { icon, size = '24', className } = props

@@ -4,7 +4,7 @@ import { useSnapshot } from 'valtio'
 import { modalStore } from '@/stores/modal-store'
 import { hideModal } from '@/stores/modal-store.actions'
 
-const Modal = lazy(() => import('@/components/modal'))
+const Modal = lazy(() => import('@/components/modal/Modal'))
 
 const ModalHandler = () => {
   const {

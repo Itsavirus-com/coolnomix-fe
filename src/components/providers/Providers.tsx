@@ -6,7 +6,7 @@ import { ProgressProvider } from '@bprogress/next/app'
 
 import ModalHandler from '@/handlers/modal-handler'
 
-import type { ProvidersProps } from './types'
+import type { ProvidersProps } from './Providers.types'
 
 import '../../locales/i18n'
 

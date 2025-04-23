@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react'
 
-import Providers from '@/components/providers'
+import Providers from '@/components/providers/Providers'
 
 const App = (props: { children: ReactNode }) => {
   const { children } = props

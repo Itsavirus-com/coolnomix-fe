@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { hideModal } from '@/stores/modal-store.actions'
 
-import type { ModalProps } from './types'
+import type { ModalProps } from './modal.types'
 
 const Modal: FC<ModalProps> = (props) => {
   const { t } = useTranslation('common')
