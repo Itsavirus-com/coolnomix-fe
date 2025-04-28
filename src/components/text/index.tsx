@@ -1,6 +1,5 @@
+import clsx from 'clsx'
 import { createElement } from 'react'
-
-import { cn } from '@/libs/utils'
 
 import { createVariantClass } from './helpers'
 
@@ -19,7 +18,7 @@ const Text = ({
       tag,
       {
         ...props,
-        className: cn(createVariantClass(variant, weight), 'block', className)
+        className: clsx(createVariantClass(variant, weight), 'block', className)
       },
       children
     )}

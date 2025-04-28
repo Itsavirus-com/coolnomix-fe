@@ -7,7 +7,7 @@ const textSizeClasses: Record<TextSizeType, string> = {
   lg: 'text-lg text-black',
   md: 'text-md leading-6 text-black',
   sm: 'text-sm leading-6 text-black',
-  smAlt: 'text-smAlt leading-6 text-black',
+  smAlt: 'text-smAlt leading-[130%] text-black',
   xs: 'text-xs leading-6 text-black',
   xsAlt: 'text-xsAlt leading-6 text-black'
 }
