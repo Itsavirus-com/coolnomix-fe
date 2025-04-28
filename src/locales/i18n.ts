@@ -25,4 +25,11 @@ export function translate(key: any, options?: any): any {
   return key ? i18next.t(key, options) : null
 }
 
+export function getTranslate(ns: string) {
+  const t = (key: string, options?: Record<string, string | number>): string =>
+    translate(key, { ns, ...options })
+
+  return t
+}
+
 export default i18next
