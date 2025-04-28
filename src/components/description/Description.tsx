@@ -2,7 +2,7 @@ import type { FC } from 'react'
 
 import React from 'react'
 
-import Text from '../text'
+import Text from '../text/Text'
 
 import type { DescriptionProps } from './description.types'
 

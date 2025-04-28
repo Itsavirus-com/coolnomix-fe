@@ -12,7 +12,7 @@ import {
   BreadcrumbSeparator
 } from '../ui/breadcrumb'
 
-import type { BreadcrumbsProps } from './types'
+import type { BreadcrumbsProps } from './breadcrumbs.types'
 
 const Breadcrumbs: FC<BreadcrumbsProps> = (props) => {
   const { items } = props

@@ -4,7 +4,7 @@ import * as React from 'react'
 import { FC } from 'react'
 
 import Image from '@/components/image/Image'
-import Text from '@/components/text'
+import Text from '@/components/text/Text'
 import {
   DropdownMenu,
   DropdownMenuContent,

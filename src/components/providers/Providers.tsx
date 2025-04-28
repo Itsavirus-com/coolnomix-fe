@@ -4,7 +4,7 @@ import type { FC } from 'react'
 
 import { ProgressProvider } from '@bprogress/next/app'
 
-import ModalHandler from '@/handlers/modal-handler'
+import ModalHandler from '@/handlers/modal-handler/ModalHandler'
 
 import type { ProvidersProps } from './Providers.types'
 

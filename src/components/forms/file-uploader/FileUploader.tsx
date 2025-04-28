@@ -5,10 +5,11 @@ import Dropzone from 'react-dropzone'
 import { useTranslation } from 'react-i18next'
 import { v4 as uuidv4 } from 'uuid'
 
-import { handleFileUploadError } from './helpers'
-import useFileUploader from './use-file-uploader'
-import Icon from '../../icon'
-import Text from '../../text'
+import Icon from '@/components/icon/Icon'
+import Text from '@/components/text/Text'
+
+import { handleFileUploadError } from './file-uploader.helpers'
+import useFileUploader from './file-uploader.hook'
 
 import type { FileUploaderProps } from './file-uploader.types'
 
@@ -19,6 +20,7 @@ const FileUploader: FC<FileUploaderProps> = (props) => {
   const { t } = useTranslation('common')
 
   const {
+    inputLabel = t('upload_image_for_ac'),
     showPreview = true,
     maxFiles = 1,
     multiSelect = maxFiles > 1,
@@ -59,7 +61,7 @@ const FileUploader: FC<FileUploaderProps> = (props) => {
                   <input {...getInputProps()} />
                   <div className='text-smAlt flex justify-between'>
                     <Text tag='span' className='text-grey-darkest'>
-                      {t('upload_image_for_ac')}
+                      {inputLabel}
                     </Text>
                     <Icon icon='icon-backup' className='text-color-[#D9D9D980]' />
                   </div>

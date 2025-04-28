@@ -1,6 +1,7 @@
 import type { ComponentProps } from 'react'
 
-export type ControlledTextAreaProps = ComponentProps<'textarea'> & {
+export type ControlledInputProps = ComponentProps<'input'> & {
   label: string
   labelClassname?: string
+  testID?: string
 }

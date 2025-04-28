@@ -7,10 +7,10 @@ import { useTranslation } from 'react-i18next'
 
 import { cn } from '@/libs/utils'
 
-import Icon from '../icon'
+import Icon from '../icon/Icon'
 import { Input } from '../ui/input'
 
-import type { SearchInputProps } from './types'
+import type { SearchInputProps } from './search-input.types'
 
 const SearchInput: FC<SearchInputProps> = (props) => {
   const { t } = useTranslation('common')
