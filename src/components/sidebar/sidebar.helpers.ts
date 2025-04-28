@@ -1,6 +1,6 @@
 import type { UserType } from '@/types/general'
 
-import { ADMIN_MENU_ITEMS, SUPER_ADMIN_MENU_ITEMS } from '../constant'
+import { ADMIN_MENU_ITEMS, SUPER_ADMIN_MENU_ITEMS } from './constant'
 
 const getMenuItems = (userType: UserType) => {
   // NOTE - You can fetch from server and return here as well

@@ -4,8 +4,8 @@ import type { ReactNode } from 'react'
 
 import dynamic from 'next/dynamic'
 
-import AppSidebar from '@/components/app-sidebar'
 import Providers from '@/components/providers/Providers'
+import Sidebar from '@/components/sidebar/Sidebar'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 
 const Header = dynamic(() => import('@/components/header'), {
@@ -20,7 +20,7 @@ const App = (props: { children: ReactNode }) => {
 
   return (
     <SidebarProvider>
-      <AppSidebar userType='admin' />
+      <Sidebar userType='admin' />
       <SidebarInset>
         <Providers>
           <Header />

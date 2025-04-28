@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { FC } from 'react'
 
-import Image from '@/components/image'
+import Image from '@/components/image/Image'
 import Text from '@/components/text'
 import {
   DropdownMenu,
@@ -18,7 +18,7 @@ import {
   useSidebar
 } from '@/components/ui/sidebar'
 
-import { SidebarProfileProps } from './types'
+import { SidebarProfileProps } from './sidebar-profile.types'
 
 const SidebarProfile: FC<SidebarProfileProps> = (props) => {
   const { avatar, name, email } = props
@@ -35,7 +35,7 @@ const SidebarProfile: FC<SidebarProfileProps> = (props) => {
               className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:!bg-sidebar-accent'
             >
               <div className='relative h-8 w-8 overflow-hidden rounded-lg'>
-                <Image src={avatar} alt={name} />
+                <Image src={avatar} alt={name} fill />
               </div>
               <div className='flex flex-col'>
                 <Text weight='semibold' className='leading-[110%]'>
