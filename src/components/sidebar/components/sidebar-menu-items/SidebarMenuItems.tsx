@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import React, { memo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import Text from '@/components/text'
+import Text from '@/components/text/Text'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import {
   SidebarMenu,

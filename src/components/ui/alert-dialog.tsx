@@ -6,7 +6,7 @@ import { modalOverlay } from '@/assets/images'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/libs/utils'
 
-import Image from '../image'
+import Image from '../image/Image'
 
 function AlertDialog({ ...props }: ComponentProps<typeof AlertDialogPrimitive.Root>) {
   return <AlertDialogPrimitive.Root data-slot='alert-dialog' {...props} />

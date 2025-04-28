@@ -1,9 +1,9 @@
 import clsx from 'clsx'
 import { createElement } from 'react'
 
-import { createVariantClass } from './helpers'
+import { createVariantClass } from './text.helpers'
 
-import type { TextProps } from './types'
+import type { TextProps } from './text.types'
 
 const Text = ({
   tag = 'p',

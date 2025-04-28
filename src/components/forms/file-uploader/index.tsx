@@ -1,3 +1,3 @@
-export * from './controlled-file-uploader'
-export * from './file-uploader'
+export * from './ControlledFileUploader'
+export * from './FileUploader'
 export * from './file-uploader.types'

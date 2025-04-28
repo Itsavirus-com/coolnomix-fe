@@ -22,7 +22,7 @@
   --color-secondary: var(--color-pure-white);
   --color-secondary-foreground: var(--color-brand-primary);
   --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-foreground: var(--color-grey);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);

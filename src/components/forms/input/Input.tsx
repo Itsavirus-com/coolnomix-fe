@@ -4,12 +4,12 @@ import React from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 
 import { FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input'
 
-import type { ControlledTextAreaProps } from './types'
+import type { ControlledInputProps } from './input.types'
 
-const ControlledTextArea: FC<ControlledTextAreaProps> = (props) => {
-  const { name, label, placeholder, labelClassname, className, required } = props
+const ControlledInput: FC<ControlledInputProps> = (props) => {
+  const { name, label, placeholder, labelClassname, required, testID, ...rest } = props
 
   const { control } = useFormContext()
   const { field } = useController({
@@ -18,15 +18,15 @@ const ControlledTextArea: FC<ControlledTextAreaProps> = (props) => {
   })
 
   return (
-    <FormItem>
+    <FormItem {...rest}>
       <FormLabel name={name} id={name} className={labelClassname}>
         {label}
         {required && <span className='text-destructive'>*</span>}
       </FormLabel>
-      <Textarea placeholder={placeholder} className={className} {...field} />
+      <Input placeholder={placeholder} {...field} data-test-id={testID} />
       <FormMessage name={name} />
     </FormItem>
   )
 }
 
-export default ControlledTextArea
+export default ControlledInput

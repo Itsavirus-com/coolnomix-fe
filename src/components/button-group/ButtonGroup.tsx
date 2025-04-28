@@ -2,10 +2,10 @@ import React from 'react'
 
 import { cn } from '@/libs/utils'
 
-import Button from '../button'
-import ControlledButton from '../button/controlled'
+import Button from '../button/Button'
+import ControlledButton from '../button/ButtonControlled'
 
-import type { ButtonGroupProps } from './types'
+import type { ButtonGroupProps } from './button-group.types'
 
 const ButtonGroup = (props: ButtonGroupProps) => {
   const { buttons, className, ...rest } = props

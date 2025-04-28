@@ -1,11 +1,10 @@
 import { toast } from 'sonner'
 
-import { translate } from '@/locales/i18n'
+import { getTranslate } from '@/locales/i18n'
 
 import type { FileError, FileRejection } from 'react-dropzone'
 
-const t = (key: string, options?: Record<string, string | number>): string =>
-  translate(key, { ns: 'common', ...options })
+const t = getTranslate('common')
 
 export const formatValue = (value: any) => {
   if (typeof value === 'string') {

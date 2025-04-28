@@ -1,7 +1,7 @@
 .border-color-50 {
-  @apply border-[#D9D9D980];
+  border: 1px solid #d9d9d980;
 }
 
 .border-color-20 {
-  @apply border-[#D9D9D933];
+  border: 1px solid #d9d9d933;
 }
