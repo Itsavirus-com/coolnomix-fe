@@ -11,7 +11,7 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 const Header = dynamic(() => import('@/components/header'), {
   ssr: false,
   loading: () => (
-    <div className='bg-grey-lightest sticky top-0 z-10 h-16 animate-pulse border-b px-4' />
+    <div className='bg-grey-lightest sticky top-0 z-10 h-16 animate-pulse border-b px-4 opacity-100' />
   )
 })
 
