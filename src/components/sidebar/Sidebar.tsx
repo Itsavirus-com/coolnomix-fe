@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import { defaultImage } from '@/assets/images'
 import {
-  Sidebar,
+  Sidebar as ShadcnSidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupLabel,
@@ -12,19 +12,19 @@ import {
   SidebarRail
 } from '@/components/ui/sidebar'
 
-import SidebarMenuItems from './components/sidebar-menu-items'
-import SidebarProfile from './components/sidebar-profile'
-import { getMenuItems } from './helpers/helpers'
+import SidebarMenuItems from './components/sidebar-menu-items/SidebarMenuItems'
+import SidebarProfile from './components/sidebar-profile/SidebarProfile'
+import { getMenuItems } from './sidebar.helpers'
 
-import type { AppSidebarProps } from './types'
+import type { SidebarProps } from './sidebar.types'
 
-const AppSidebar: FC<AppSidebarProps> = (props) => {
+const Sidebar: FC<SidebarProps> = (props) => {
   const { userType, ...rest } = props
 
   const { t } = useTranslation('sidebar')
 
   return (
-    <Sidebar collapsible='icon' {...rest}>
+    <ShadcnSidebar collapsible='icon' {...rest}>
       <SidebarHeader className='bg-background h-16 border-b'>
         <SidebarProfile
           avatar={defaultImage.src}
@@ -41,8 +41,8 @@ const AppSidebar: FC<AppSidebarProps> = (props) => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarRail />
-    </Sidebar>
+    </ShadcnSidebar>
   )
 }
 
-export default AppSidebar
+export default Sidebar
