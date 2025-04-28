@@ -12,6 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle
 } from '@/components/ui/alert-dialog'
+import { cn } from '@/libs/utils'
 import { hideModal } from '@/stores/modal-store.actions'
 
 import type { ModalProps } from './modal.types'
@@ -25,6 +26,7 @@ const Modal: FC<ModalProps> = (props) => {
     message,
     confirmLabel = t('confirm'),
     cancelLabel = t('cancel'),
+    align = 'left',
     onConfirm,
     onCancel = hideModal,
     ...rest
@@ -32,12 +34,12 @@ const Modal: FC<ModalProps> = (props) => {
 
   return (
     <AlertDialog open={visible} {...rest}>
-      <AlertDialogContent className='!max-w-[626px]'>
-        <AlertDialogHeader>
+      <AlertDialogContent className={cn('!max-w-[626px]', align === 'center' && '!text-center')}>
+        <AlertDialogHeader className={cn(align === 'center' && '!text-center')}>
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription>{message}</AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
+        <AlertDialogFooter className={cn(align === 'center' && '!justify-center')}>
           <AlertDialogCancel onClick={onCancel}>{cancelLabel}</AlertDialogCancel>
           <AlertDialogAction onClick={onConfirm}>{confirmLabel}</AlertDialogAction>
         </AlertDialogFooter>
