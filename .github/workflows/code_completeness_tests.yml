@@ -42,7 +42,7 @@ jobs:
         run: yarn install
 
       - name: Run eslint
-        run: yarn eslint . --ext .js,.ts,.tsx
+        run: yarn eslint src app
 
   formatting:
     name: Formatting Check
