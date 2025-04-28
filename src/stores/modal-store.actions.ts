@@ -10,6 +10,7 @@ export const showModal = (props: ShowModalProps) => {
   modalStore.cancelLabel = props.cancelLabel
   modalStore.onConfirm = props.onConfirm
   modalStore.onCancel = props.onCancel
+  modalStore.align = props.align
 }
 
 export const hideModal = () => {
@@ -22,5 +23,6 @@ export const hideModal = () => {
     modalStore.cancelLabel = null
     modalStore.onConfirm = null
     modalStore.onCancel = null
+    modalStore.align = null
   }, 200)
 }

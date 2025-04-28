@@ -18,7 +18,6 @@ const Image: FC<ImageProps> = (props) => {
       loading={priority ? 'eager' : 'lazy'}
       decoding='async'
       quality={65}
-      fill
       style={{ objectFit: 'cover' }}
       onError={() => {
         setIsError(true)

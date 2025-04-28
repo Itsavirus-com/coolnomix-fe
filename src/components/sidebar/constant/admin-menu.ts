@@ -1,15 +1,15 @@
-import { translate } from '@/locales/i18n'
+import { qnaPath } from '@/config/paths/qna-path'
+import { getTranslate } from '@/locales/i18n'
 
-import type { SidebarMenuItemType } from '../components/sidebar-menu-items/types'
+import type { SidebarMenuItemType } from '../components/sidebar-menu-items/sidebar-menu-items.types'
 
-const t = (key: string, options?: Record<string, string | number>): string =>
-  translate(key, { ns: 'sidebar', ...options })
+const t = getTranslate('sidebar')
 
 export const ADMIN_MENU_ITEMS: SidebarMenuItemType[] = [
   {
     icon: '',
     title: t('dashboard'),
-    url: '#'
+    url: '/'
   },
   {
     icon: '',
@@ -18,7 +18,7 @@ export const ADMIN_MENU_ITEMS: SidebarMenuItemType[] = [
     items: [
       {
         title: t('qa'),
-        url: '#'
+        url: qnaPath()
       },
       {
         title: t('dataLogMonitoring'),

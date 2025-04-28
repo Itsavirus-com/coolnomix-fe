@@ -13,6 +13,9 @@ function Textarea({ className, name, ...props }: ComponentProps<'textarea'>) {
       id={name}
       autoComplete={name}
       data-test-id={`${name}-text-area`}
+      style={{
+        resize: 'none'
+      }}
       {...props}
     />
   )

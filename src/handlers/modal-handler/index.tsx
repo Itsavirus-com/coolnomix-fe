@@ -11,6 +11,7 @@ const ModalHandler = () => {
     visible,
     title,
     message,
+    align,
     confirmLabel,
     cancelLabel,
     onConfirm,
@@ -32,6 +33,7 @@ const ModalHandler = () => {
       visible={visible}
       title={title}
       message={message}
+      align={align}
       confirmLabel={confirmLabel}
       cancelLabel={cancelLabel}
       onConfirm={confirm}

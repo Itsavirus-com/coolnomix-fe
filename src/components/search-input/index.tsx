@@ -26,7 +26,7 @@ const SearchInput: FC<SearchInputProps> = (props) => {
       <Input
         placeholder={placeholder}
         className={cn(
-          'placeholder:text-grey-darkest text-xsAlt bg-[#F8F9FC] pl-8 font-medium placeholder:opacity-50',
+          'placeholder:text-grey-darkest text-xsAlt bg-grey-lightest pl-8 font-medium placeholder:opacity-50',
           className
         )}
         {...rest}
