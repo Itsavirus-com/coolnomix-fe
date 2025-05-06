@@ -15,7 +15,17 @@ import {
 import type { SelectProps } from './select.types'
 
 const ControlledSelect: FC<SelectProps> = (props) => {
-  const { name, label, placeholder, items, width = '100%', required, className } = props
+  const {
+    name,
+    label,
+    placeholder,
+    items,
+    width = '100%',
+    required,
+    index,
+    className,
+    disabled
+  } = props
 
   const { control } = useFormContext()
 
@@ -29,7 +39,7 @@ const ControlledSelect: FC<SelectProps> = (props) => {
             {label}
             {required && <span className='text-destructive'>*</span>}
           </FormLabel>
-          <Select onValueChange={onChange} defaultValue={value}>
+          <Select onValueChange={onChange} defaultValue={value} disabled={disabled}>
             <SelectTrigger style={{ width }} className='cursor-pointer'>
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
@@ -41,7 +51,7 @@ const ControlledSelect: FC<SelectProps> = (props) => {
               ))}
             </SelectContent>
           </Select>
-          <FormMessage name={name} />
+          <FormMessage name={name} index={index} />
         </FormItem>
       )}
     />

@@ -4,7 +4,7 @@ import type { FC } from 'react'
 
 import { ProgressProvider } from '@bprogress/next/app'
 
-import ModalHandler from '@/handlers/modal-handler/ModalHandler'
+import { TooltipProvider } from '../ui/tooltip'
 
 import type { ProvidersProps } from './Providers.types'
 
@@ -19,8 +19,7 @@ const Providers: FC<ProvidersProps> = (props) => {
       color='var(--color-brand-primary)'
       options={{ showSpinner: false }}
     >
-      {children}
-      <ModalHandler />
+      <TooltipProvider>{children}</TooltipProvider>
     </ProgressProvider>
   )
 }

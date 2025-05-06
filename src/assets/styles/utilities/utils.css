@@ -1,0 +1,9 @@
+.content-placement-center {
+  @apply flex items-center justify-center;
+  height: calc(100vh - (var(--spacing-header) + var(--spacing-main-content-padding) + 21px));
+}
+
+.content-placement-center--start {
+  @apply mt-12 items-start;
+  height: unset !important;
+}
