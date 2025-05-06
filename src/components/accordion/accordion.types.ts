@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
+
+import * as AccordionPrimitive from '@radix-ui/react-accordion'
 
 export type AccordionItemType = {
   key: string
@@ -6,6 +8,6 @@ export type AccordionItemType = {
   content: ReactNode
 }
 
-export type AccordionProps = {
+export type AccordionProps = ComponentProps<typeof AccordionPrimitive.Root> & {
   items: AccordionItemType[]
 }

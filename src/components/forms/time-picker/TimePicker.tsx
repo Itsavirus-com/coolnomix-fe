@@ -28,9 +28,10 @@ const TimePicker: FC<TimePickerProps> = (props) => {
     name,
     label,
     inputLabel = t('pick_a_time'),
-    disabled,
     minuteStep = 1,
     required,
+    index,
+    disabled,
     ...rest
   } = props
 
@@ -64,8 +65,8 @@ const TimePicker: FC<TimePickerProps> = (props) => {
         render={({ field }) => {
           const { value, onChange, ref } = field
 
-          const currentHours = value ? value.getHours() : 0
-          const currentMinutes = value ? value.getMinutes() : 0
+          const currentHours = value ? value?.getHours() : 0
+          const currentMinutes = value ? value?.getMinutes() : 0
 
           return (
             <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
@@ -77,7 +78,8 @@ const TimePicker: FC<TimePickerProps> = (props) => {
                   aria-expanded={isPopoverOpen}
                   className={cn(
                     'justify-start px-4 py-2 text-left font-normal',
-                    !value && 'text-muted-foreground'
+                    !value && 'text-muted-foreground',
+                    disabled && 'bg-grey-lightest cursor-not-allowed !opacity-100'
                   )}
                 >
                   {value ? (
@@ -134,7 +136,7 @@ const TimePicker: FC<TimePickerProps> = (props) => {
           )
         }}
       />
-      <FormMessage name={name} />
+      <FormMessage name={name} index={index} />
     </FormItem>
   )
 }

@@ -17,8 +17,8 @@ const ButtonGroup = (props: ButtonGroupProps) => {
 
   return (
     <div className={cn('flex items-center gap-3', className)} {...rest}>
-      <LeftButton {...leftButton} />
-      <RightButton {...rightButton} />
+      {leftButton && <LeftButton {...leftButton} />}
+      {rightButton && <RightButton {...rightButton} />}
     </div>
   )
 }

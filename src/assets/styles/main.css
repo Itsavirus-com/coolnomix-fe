@@ -9,6 +9,8 @@
 
 /* Components */
 @import './components/header.css';
+@import './components/tab-progress.css';
+@import './components/details-form-sidebar-tab.css';
 
 /* Generic */
 @import './generic/normalize.css';

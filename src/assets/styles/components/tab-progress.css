@@ -1,0 +1,3 @@
+.tab-progress {
+  @apply bg-grey-mid data-[state=active]:bg-brand-dark disabled:!bg-grey-mid h-1.5 w-9 cursor-pointer p-0;
+}
