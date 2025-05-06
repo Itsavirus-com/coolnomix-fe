@@ -8,4 +8,5 @@ export type SelectProps = ComponentProps<'select'> & {
   }[]
   placeholder: string
   width?: string
+  className?: string
 }

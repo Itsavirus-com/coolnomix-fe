@@ -2,7 +2,6 @@ import type { FC } from 'react'
 
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { v4 as uuidv4 } from 'uuid'
 
 import { FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import {
@@ -13,10 +12,10 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
-import type { SelectProps } from './types'
+import type { SelectProps } from './select.types'
 
 const ControlledSelect: FC<SelectProps> = (props) => {
-  const { name, label, placeholder, items, width, required } = props
+  const { name, label, placeholder, items, width = '100%', required, className } = props
 
   const { control } = useFormContext()
 
@@ -25,18 +24,18 @@ const ControlledSelect: FC<SelectProps> = (props) => {
       name={name}
       control={control}
       render={({ field: { onChange, value } }) => (
-        <FormItem>
+        <FormItem className={className}>
           <FormLabel name={name} id={name}>
             {label}
             {required && <span className='text-destructive'>*</span>}
           </FormLabel>
           <Select onValueChange={onChange} defaultValue={value}>
-            <SelectTrigger style={{ width }}>
+            <SelectTrigger style={{ width }} className='cursor-pointer'>
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
             <SelectContent>
               {items?.map((item) => (
-                <SelectItem key={uuidv4()} value={item.value}>
+                <SelectItem key={item.value} value={item.value} className='cursor-pointer'>
                   {item.label}
                 </SelectItem>
               ))}

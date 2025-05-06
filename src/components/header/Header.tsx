@@ -2,8 +2,8 @@ import React from 'react'
 
 import { appStateStore } from '@/stores/app-state-store'
 
-import Icon from '../icon'
-import Text from '../text'
+import Icon from '../icon/Icon'
+import Text from '../text/Text'
 
 const Header = () => {
   const { title, icon } = appStateStore.state.pageHeader

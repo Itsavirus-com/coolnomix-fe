@@ -1,5 +1,5 @@
 .dropzone {
-  @apply bg-pure-white cursor-pointer rounded-md border-1 border-[#D9D9D999] px-4 py-2;
+  @apply bg-pure-white flex h-10 cursor-pointer items-center rounded-md border-1 border-[#D9D9D999] px-4 py-2;
 }
 
 .dropzone.dropzone-upload {

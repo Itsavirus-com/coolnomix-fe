@@ -8,6 +8,7 @@ export type FileType = File & {
 }
 
 export type FileUploaderProps = {
+  inputLabel?: string
   name?: string
   value?: FileType[]
   showPreview?: boolean
@@ -21,9 +22,8 @@ export type FileUploaderProps = {
 
 export type ControlledFileUploaderProps = FileUploaderProps & {
   label?: string
-  name: string
-  value?: FileType[] | string
-  maxFiles?: number
+  title?: string
   description?: string
   acceptedFileHint?: string
+  required?: boolean
 } & ComponentProps<'div'>

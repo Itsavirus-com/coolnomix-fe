@@ -1,4 +1,4 @@
-import type { FontWeightType, TextSizeType, VariantType } from './types'
+import type { FontWeightType, TextSizeType, VariantType } from './text.types'
 
 const textSizeClasses: Record<TextSizeType, string> = {
   '3xl': 'text-3xl leading-9 text-black',

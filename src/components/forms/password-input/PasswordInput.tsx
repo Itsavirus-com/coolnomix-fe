@@ -3,15 +3,15 @@ import type { FC } from 'react'
 import React from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 
-import Icon from '@/components/icon'
+import Icon from '@/components/icon/Icon'
 import { FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import useToggle from '@/hooks/use-toggle.hook'
+import useToggle from '@/hooks/toggle.hook'
 
-import type { ControlledInputProps } from '../input/types'
+import type { ControlledInputProps } from '../input/input.types'
 
 const ControlledPasswordInput: FC<ControlledInputProps> = (props) => {
-  const { name, label, placeholder, labelClassname, className, required } = props
+  const { name, label, placeholder, labelClassname, required, testID, ...rest } = props
 
   const { control } = useFormContext()
   const { field } = useController({
@@ -22,7 +22,7 @@ const ControlledPasswordInput: FC<ControlledInputProps> = (props) => {
   const [isVisible, toggleVisibility] = useToggle()
 
   return (
-    <FormItem>
+    <FormItem {...rest}>
       <FormLabel name={name} id={name} className={labelClassname}>
         {label}
         {required && <span className='text-destructive'>*</span>}
@@ -31,7 +31,7 @@ const ControlledPasswordInput: FC<ControlledInputProps> = (props) => {
         <Input
           type={isVisible ? 'text' : 'password'}
           placeholder={placeholder}
-          className={className}
+          data-test-id={testID}
           {...field}
         />
         <Icon

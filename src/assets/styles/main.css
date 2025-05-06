@@ -7,6 +7,9 @@
 @import './design-tokens/icons.css';
 @import './design-tokens/theme.css';
 
+/* Components */
+@import './components/header.css';
+
 /* Generic */
 @import './generic/normalize.css';
 
