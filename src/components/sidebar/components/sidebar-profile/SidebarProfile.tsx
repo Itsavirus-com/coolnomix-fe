@@ -38,10 +38,10 @@ const SidebarProfile: FC<SidebarProfileProps> = (props) => {
                 <Image src={avatar} alt={name} fill />
               </div>
               <div className='flex flex-col'>
-                <Text weight='semibold' className='leading-[110%]'>
+                <Text tag='span' weight='semibold' className='leading-[110%]'>
                   {name}
                 </Text>
-                <Text variant='caption' className='text-grey-darkest leading-[130%]'>
+                <Text tag='span' variant='caption' className='text-grey-darkest leading-[130%]'>
                   {email}
                 </Text>
               </div>

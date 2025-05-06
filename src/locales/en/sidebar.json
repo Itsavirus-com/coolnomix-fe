@@ -5,5 +5,9 @@
   "monitoring": "Monitoring",
   "qa": "Q&A",
   "dataLogMonitoring": "Data Log Monitoring",
-  "report": "Report"
+  "report": "Report",
+  "list_of_branch": "List of Branch",
+  "qa_management": "QA Management",
+  "analysis": "Analysis",
+  "update_status_won_lost": "Update Status Won Lost"
 }

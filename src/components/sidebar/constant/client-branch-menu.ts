@@ -1,10 +1,11 @@
+import { qnaPath } from '@/config/paths/qna-path'
 import { getTranslate } from '@/locales/i18n'
 
 import type { SidebarMenuItemType } from '../components/sidebar-menu-items/sidebar-menu-items.types'
 
 const t = getTranslate('sidebar')
 
-export const ADMIN_MENU_ITEMS: SidebarMenuItemType[] = [
+export const CLIENT_BRANCH_MENU_ITEMS: SidebarMenuItemType[] = [
   {
     icon: '',
     title: t('dashboard'),
@@ -16,15 +17,11 @@ export const ADMIN_MENU_ITEMS: SidebarMenuItemType[] = [
     url: '#',
     items: [
       {
-        title: t('qa_management'),
-        url: '#'
+        title: t('qa'),
+        url: qnaPath()
       },
       {
         title: t('dataLogMonitoring'),
-        url: '#'
-      },
-      {
-        title: t('analysis'),
         url: '#'
       },
       {
@@ -35,7 +32,7 @@ export const ADMIN_MENU_ITEMS: SidebarMenuItemType[] = [
   },
   {
     icon: '',
-    title: t('update_status_won_lost'),
+    title: t('monitoring'),
     url: '#'
   }
 ]

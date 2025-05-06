@@ -8,30 +8,46 @@ export const qnaPath: PathGeneratorWithParams = (params) => {
   return createPath(QNA_PATH, params)
 }
 
-export const qnaStartPath: PathGenerator = () => {
-  return createPath(QNA_PATH, { suffix: 'start' })
+export const qnaSelectLanguagePath: PathGenerator = () => {
+  return createPath(QNA_PATH, { suffix: 'select-language' })
 }
 
-export const qnaStartTypePath: PathGeneratorWithParams = ({ lang }: any) => {
+export const qnaSelectEquipmentPath: PathGenerator = () => {
+  return createPath(QNA_PATH, { suffix: 'select-equipment' })
+}
+
+export const qnaTypeAcPath: PathGenerator = () => {
+  return createPath(QNA_PATH, { suffix: 'select-equipment/ac' })
+}
+
+export const qnaTypeRefrigerationPath: PathGenerator = () => {
+  return createPath(QNA_PATH, { suffix: 'select-equipment/refrigeration' })
+}
+
+export const qnaTypeRefrigerationReviewPath: PathGenerator = () => {
+  return createPath(QNA_PATH, { suffix: 'select-equipment/refrigeration/review' })
+}
+
+export const qnaAcDetailsPath: PathGeneratorWithParams = ({ type }: any) => {
   return createPath(QNA_PATH, {
-    suffix: `start/${lang}`
+    suffix: `select-equipment/ac/${type}`
   })
 }
 
-export const qnaTypeAcPath: PathGeneratorWithParams = (params: any) => {
+export const qnaAcDetailsReviewPath: PathGeneratorWithParams = ({ type }: any) => {
   return createPath(QNA_PATH, {
-    suffix: `start/${params.lang}/ac`
+    suffix: `select-equipment/ac/${type}/review`
   })
 }
 
-export const qnaAcDetailsPath: PathGeneratorWithParams = ({ lang, type }: any) => {
+export const qnaAcDetailsReviewPhase2Path: PathGeneratorWithParams = ({ type }: any) => {
   return createPath(QNA_PATH, {
-    suffix: `start/${lang}/ac/${type}`
+    suffix: `select-equipment/ac/${type}/review/phase-two`
   })
 }
 
-export const qnaTypeRefrigerationPath: PathGeneratorWithParams = ({ lang }: any) => {
+export const qnaAcDetailsSuccessPath: PathGeneratorWithParams = ({ type }: any) => {
   return createPath(QNA_PATH, {
-    suffix: `start/${lang}/refrigeration`
+    suffix: `select-equipment/ac/${type}/success`
   })
 }

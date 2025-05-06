@@ -1,4 +1,4 @@
-type UserType = 'super-admin' | 'admin' | 'sentian-technican' | 'client-group' | 'client-branch'
+type UserType = 'super-admin' | 'admin' | 'technican' | 'client-group' | 'client-branch'
 
 export type PageHeader = {
   title: string

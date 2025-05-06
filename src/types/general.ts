@@ -1,6 +1,1 @@
-export type UserType =
-  | 'super-admin'
-  | 'admin'
-  | 'sentian-technican'
-  | 'client-group'
-  | 'client-branch'
+export type UserType = 'super-admin' | 'admin' | 'technician' | 'client-group' | 'client-branch'

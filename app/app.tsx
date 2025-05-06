@@ -7,6 +7,8 @@ import dynamic from 'next/dynamic'
 import Providers from '@/components/providers/Providers'
 import Sidebar from '@/components/sidebar/Sidebar'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+import ModalHandler from '@/handlers/modal-handler/ModalHandler'
+import ToastHandler from '@/handlers/toast-handler/ToastHandler'
 
 const Header = dynamic(() => import('@/components/header/Header'), {
   ssr: false,
@@ -20,11 +22,13 @@ const App = (props: { children: ReactNode }) => {
 
   return (
     <SidebarProvider>
-      <Sidebar userType='admin' />
+      <Sidebar userType='client-group' />
       <SidebarInset>
         <Providers>
           <Header />
           <div className='px-8 py-4'>{children}</div>
+          <ModalHandler />
+          <ToastHandler />
         </Providers>
       </SidebarInset>
     </SidebarProvider>
