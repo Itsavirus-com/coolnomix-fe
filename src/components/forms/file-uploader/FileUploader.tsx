@@ -71,7 +71,27 @@ const FileUploader: FC<FileUploaderProps> = (props) => {
           }}
         </Dropzone>
       )}
-      {multiSelect && (
+      {showPreview && value?.length > 0 && (
+        <div className='flex flex-col gap-1.5'>
+          {value.map((f) => (
+            <div key={uuidv4()} className='dropzone dropzone-previews'>
+              <div className='dz-message'>
+                <div className='flex flex-row justify-between'>
+                  <Text tag='span' className='text-grey-darkest'>
+                    {f.name}
+                  </Text>
+                  <Icon
+                    icon='icon-remove'
+                    className='text-color-[#D9D9D980]'
+                    onClick={() => removeFile(value, f)}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {!!value?.length && maxFiles > 1 && (
         <Dropzone
           multiple={multiSelect}
           maxFiles={multiSelect ? maxFiles : 0}
@@ -87,7 +107,7 @@ const FileUploader: FC<FileUploaderProps> = (props) => {
                 data-test-id={name}
                 {...getRootProps()}
               >
-                <div className='dz-message'>
+                <div className='dz-message m-auto'>
                   <input {...getInputProps()} />
                   <div className='flex flex-row items-center justify-center gap-1'>
                     <Icon icon='icon-backup' className='text-grey-darkest' />
@@ -100,24 +120,6 @@ const FileUploader: FC<FileUploaderProps> = (props) => {
             )
           }}
         </Dropzone>
-      )}
-      {showPreview && value.length > 0 && (
-        <div className='dropzone dropzone-previews'>
-          {value.map((f) => (
-            <div className='dz-message' key={uuidv4()}>
-              <div className='flex flex-row justify-between'>
-                <Text tag='span' className='text-grey-darkest'>
-                  {f.name}
-                </Text>
-                <Icon
-                  icon='icon-remove'
-                  className='text-color-[#D9D9D980]'
-                  onClick={() => removeFile(value, f)}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
       )}
     </div>
   )
