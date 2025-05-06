@@ -1,4 +1,21 @@
 /**
+ * Updates a specific field or fields in an object stored in localStorage.
+ *
+ * @param key The key of the object in storage.
+ * @param updates An object containing the fields to update.
+ */
+export function updateStoredObject<T extends object>(key: string, updates: Partial<T>): boolean {
+  try {
+    const current = load(key) || {}
+    const updated = { ...current, ...updates }
+    saveString(key, JSON.stringify(updated))
+    return true
+  } catch {
+    return false
+  }
+}
+
+/**
  * Loads a string from storage.
  *
  * @param key The key to fetch.

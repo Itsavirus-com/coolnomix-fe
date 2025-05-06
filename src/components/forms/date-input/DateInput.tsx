@@ -18,7 +18,7 @@ import { DateInputProps } from './date-input.types'
 const DateInput: FC<DateInputProps> = (props) => {
   const { t } = useTranslation()
 
-  const { name, label, required, inputLabel = t('pick_a_date'), ...rest } = props
+  const { name, label, required, inputLabel = t('pick_a_date'), disabled, ...rest } = props
 
   const { control } = useFormContext()
 
@@ -37,11 +37,13 @@ const DateInput: FC<DateInputProps> = (props) => {
           <Popover>
             <PopoverTrigger asChild>
               <Button
+                disabled={disabled}
                 id='date'
                 variant='outline'
                 className={cn(
                   'justify-start px-4 py-2 text-left font-medium text-black',
-                  !field.value && 'text-muted-foreground'
+                  !field.value && 'text-muted-foreground',
+                  disabled && 'bg-grey-lightest cursor-not-allowed !opacity-100'
                 )}
               >
                 <CalendarIcon className='mr-1 h-4 w-4' />

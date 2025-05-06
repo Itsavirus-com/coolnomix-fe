@@ -23,7 +23,12 @@ const ControlledTextArea: FC<ControlledTextAreaProps> = (props) => {
         {label}
         {required && <span className='text-destructive'>*</span>}
       </FormLabel>
-      <Textarea placeholder={placeholder} data-test-id={testID} {...field} />
+      <Textarea
+        placeholder={placeholder}
+        data-test-id={testID}
+        {...field}
+        value={field.value || ''}
+      />
       <FormMessage name={name} />
     </FormItem>
   )

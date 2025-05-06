@@ -33,6 +33,7 @@ const ControlledPasswordInput: FC<ControlledInputProps> = (props) => {
           placeholder={placeholder}
           data-test-id={testID}
           {...field}
+          value={field.value || ''}
         />
         <Icon
           icon='eye'

@@ -5,4 +5,5 @@ export type DateInputProps = ComponentProps<'div'> & {
   label?: string
   inputLabel?: string
   required?: boolean
+  disabled?: boolean
 }

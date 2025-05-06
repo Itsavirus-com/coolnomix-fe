@@ -4,15 +4,10 @@ import { FormProvider as Provider, useFormContext } from 'react-hook-form'
 
 import { Label } from '@/components/ui/label'
 import { cn } from '@/libs/utils'
+import { getErrorMessage, getNestedError } from '@/utils/form-error-handling'
 
 import type * as LabelPrimitive from '@radix-ui/react-label'
-import type {
-  FieldError,
-  FieldErrorsImpl,
-  Merge,
-  SubmitHandler,
-  UseFormReturn
-} from 'react-hook-form'
+import type { SubmitHandler, UseFormReturn } from 'react-hook-form'
 
 type FormProviderProps<FormState> = {
   name?: string
@@ -65,34 +60,20 @@ function FormLabel({
   )
 }
 
-function FormMessage({ name, className, ...props }: ComponentProps<'span'> & { name: string }) {
+function FormMessage({
+  name,
+  className,
+  index,
+  ...props
+}: ComponentProps<'span'> & { name: string; index?: number }) {
   const { formState } = useFormContext()
-  const error = formState.errors[name]
-
-  const getErrorMessage = (error: FieldError | Merge<FieldError, FieldErrorsImpl<any>>): any => {
-    if (!error) {
-      return ''
-    }
-
-    if (error.message) {
-      return error.message
-    }
-
-    if (typeof error === 'object') {
-      return Object.values(error)
-        .map((err) => err?.message)
-        .filter(Boolean)
-        .join(', ')
-    }
-
-    return ''
-  }
-
-  const body = error ? getErrorMessage(error) : props.children
+  const path = name.split('.')
+  const error = getNestedError(formState.errors, path, index)
+  const message = getErrorMessage(error)
 
   return (
     <span data-slot='form-message' className={cn('text-destructive text-sm', className)} {...props}>
-      {body}
+      {message || props.children}
     </span>
   )
 }
