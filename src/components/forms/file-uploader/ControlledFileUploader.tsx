@@ -1,6 +1,6 @@
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 
 import Icon from '@/components/icon/Icon'
 import Text from '@/components/text/Text'
@@ -14,7 +14,7 @@ import FileUploader from './FileUploader'
 import type { ControlledFileUploaderProps } from './file-uploader.types'
 
 export const ControlledFileUploader = (props: ControlledFileUploaderProps) => {
-  const { t } = useTranslation('common')
+  const t = useTranslations('common')
 
   const {
     label,

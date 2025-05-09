@@ -2,8 +2,8 @@
 
 import type { FC } from 'react'
 
+import { useTranslations } from 'next-intl'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 
 import { cn } from '@/libs/utils'
 
@@ -13,7 +13,7 @@ import { Input } from '../ui/input'
 import type { SearchInputProps } from './search-input.types'
 
 const SearchInput: FC<SearchInputProps> = (props) => {
-  const { t } = useTranslation('common')
+  const t = useTranslations('common')
 
   const { placeholder = t('search'), className, ...rest } = props
 
@@ -26,7 +26,7 @@ const SearchInput: FC<SearchInputProps> = (props) => {
       <Input
         placeholder={placeholder}
         className={cn(
-          'placeholder:text-grey-darkest text-xsAlt bg-grey-lightest pl-8 font-medium placeholder:opacity-50',
+          'placeholder:text-grey-darkest text-xsAlt bg-grey-lightest border-color-20 pl-8 font-medium placeholder:opacity-50',
           className
         )}
         {...rest}

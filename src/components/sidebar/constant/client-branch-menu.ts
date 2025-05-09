@@ -1,38 +1,35 @@
-import { qnaPath } from '@/config/paths/qna-path'
-import { getTranslate } from '@/locales/i18n'
+import { dataLogMonitoringPath, qnaPath } from '@/config/paths'
 
 import type { SidebarMenuItemType } from '../components/sidebar-menu-items/sidebar-menu-items.types'
-
-const t = getTranslate('sidebar')
 
 export const CLIENT_BRANCH_MENU_ITEMS: SidebarMenuItemType[] = [
   {
     icon: '',
-    title: t('dashboard'),
+    title: 'Dashboard',
     url: '/'
   },
   {
     icon: '',
-    title: t('energySavingAudit'),
-    url: '#',
+    title: 'Energy Saving Audit',
+    url: qnaPath(),
     items: [
       {
-        title: t('qa'),
+        title: 'Q&A',
         url: qnaPath()
       },
       {
-        title: t('dataLogMonitoring'),
-        url: '#'
+        title: 'Data Log Monitoring',
+        url: dataLogMonitoringPath()
       },
       {
-        title: t('report'),
+        title: 'Report',
         url: '#'
       }
     ]
   },
   {
     icon: '',
-    title: t('monitoring'),
+    title: 'Monitoring',
     url: '#'
   }
 ]

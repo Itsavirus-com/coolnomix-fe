@@ -1,13 +1,13 @@
 'use client'
 
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import React, { FC, memo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 import { successAnimation } from '@/assets/images'
 import { cn } from '@/libs/utils'
 
-import { SuccessMessageCardProps } from './types'
+import { SuccessMessageCardProps } from './success-message-card.types'
 import Button from '../button/Button'
 import Text from '../text/Text'
 
@@ -22,7 +22,7 @@ const SuccessMessageCard: FC<SuccessMessageCardProps> = (props) => {
     ...rest
   } = props
 
-  const { t } = useTranslation('common')
+  const t = useTranslations('common')
 
   return (
     <div

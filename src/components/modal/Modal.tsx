@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 
 import {
   AlertDialog,
@@ -18,7 +18,7 @@ import { hideModal } from '@/stores/modal-store.actions'
 import type { ModalProps } from './modal.types'
 
 const Modal: FC<ModalProps> = (props) => {
-  const { t } = useTranslation('common')
+  const t = useTranslations('common')
 
   const {
     visible,

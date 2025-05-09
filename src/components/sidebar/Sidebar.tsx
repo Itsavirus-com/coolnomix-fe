@@ -1,6 +1,8 @@
+'use client'
+
 import type { FC } from 'react'
 
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 
 import { defaultImage } from '@/assets/images'
 import {
@@ -21,7 +23,7 @@ import type { SidebarProps } from './sidebar.types'
 const Sidebar: FC<SidebarProps> = (props) => {
   const { userType, ...rest } = props
 
-  const { t } = useTranslation('sidebar')
+  const t = useTranslations('sidebar')
 
   return (
     <ShadcnSidebar collapsible='icon' {...rest}>

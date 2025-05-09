@@ -1,9 +1,9 @@
 'use client'
 
 import { format } from 'date-fns'
+import { useTranslations } from 'next-intl'
 import { FC, useMemo, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 
 import Text from '@/components/text/Text'
 import { Button } from '@/components/ui/button'
@@ -22,7 +22,7 @@ import { calculateNewTime } from './helpers'
 import { TimePickerProps } from './time-picker.types'
 
 const TimePicker: FC<TimePickerProps> = (props) => {
-  const { t } = useTranslation('qna')
+  const t = useTranslations('qna')
 
   const {
     name,

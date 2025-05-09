@@ -2,9 +2,9 @@
 
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { FC } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 
 import Text from '@/components/text/Text'
 import { Button } from '@/components/ui/button'
@@ -16,9 +16,9 @@ import { cn } from '@/libs/utils'
 import type { DateRangeInputProps } from './date-range-input.types'
 
 const DateRangeInput: FC<DateRangeInputProps> = (props) => {
-  const { name, label, required, ...rest } = props
+  const { name, label, required, size = 'md', ...rest } = props
 
-  const { t } = useTranslation()
+  const t = useTranslations('common')
 
   const { control } = useFormContext()
 
@@ -35,26 +35,44 @@ const DateRangeInput: FC<DateRangeInputProps> = (props) => {
         control={control}
         render={({ field }) => (
           <Popover>
-            <PopoverTrigger asChild className='px-3 py-2.5'>
+            <PopoverTrigger asChild className={cn(size === 'sm' ? '!h-7 px-1.5' : 'p-2')}>
               <Button
                 id='date'
                 variant='outline'
                 className={cn(
-                  'justify-start text-left font-medium text-black',
+                  'hover:bg-grey-mid h-fit justify-start text-left font-medium text-black',
                   !field.value && 'text-muted-foreground'
                 )}
               >
-                <CalendarIcon className='mr-1 h-4 w-4' />
+                <CalendarIcon className={cn(size === 'sm' ? 'size-3.5' : 'size-4')} />
                 {field.value?.from ? (
                   field.value.to ? (
-                    <>
-                      {format(field.value.from, 'LLL dd, y')} -{format(field.value.to, 'LLL dd, y')}
-                    </>
+                    <Text
+                      variant={size === 'sm' ? 'caption' : 'body2'}
+                      tag='span'
+                      className='text-grey-darkest'
+                      weight='medium'
+                    >
+                      {format(field.value.from, 'LLL dd, y')} -{' '}
+                      {format(field.value.to, 'LLL dd, y')}
+                    </Text>
                   ) : (
-                    format(field.value.from, 'LLL dd, y')
+                    <Text
+                      variant={size === 'sm' ? 'caption' : 'body2'}
+                      tag='span'
+                      className='text-grey-darkest'
+                      weight='medium'
+                    >
+                      {format(field.value.from, 'LLL dd, y')}
+                    </Text>
                   )
                 ) : (
-                  <Text variant='body2' tag='span'>
+                  <Text
+                    variant={size === 'sm' ? 'caption' : 'body2'}
+                    tag='span'
+                    className='text-grey-darkest'
+                    weight='medium'
+                  >
                     {t('pick_a_date_range')}
                   </Text>
                 )}

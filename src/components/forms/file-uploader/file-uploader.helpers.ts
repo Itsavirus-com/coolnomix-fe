@@ -1,10 +1,6 @@
 import { toast } from 'sonner'
 
-import { getTranslate } from '@/locales/i18n'
-
 import type { FileError, FileRejection } from 'react-dropzone'
-
-const t = getTranslate('common')
 
 export const formatValue = (value: any) => {
   if (typeof value === 'string') {
@@ -38,7 +34,7 @@ export const handleFileUploadError = (fileRejections: FileRejection[]) => {
 
   // Show only one toast for each unique error
   uniqueErrors.forEach((message) => {
-    toast.error(t('cannot_upload_file'), {
+    toast.error('Cannot upload file', {
       description: message
     })
   })

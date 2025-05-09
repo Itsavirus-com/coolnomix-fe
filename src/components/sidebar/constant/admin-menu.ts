@@ -1,41 +1,39 @@
-import { getTranslate } from '@/locales/i18n'
+import { dataLogMonitoringPath } from '@/config/paths'
 
 import type { SidebarMenuItemType } from '../components/sidebar-menu-items/sidebar-menu-items.types'
-
-const t = getTranslate('sidebar')
 
 export const ADMIN_MENU_ITEMS: SidebarMenuItemType[] = [
   {
     icon: '',
-    title: t('dashboard'),
+    title: 'Dashboard',
     url: '/'
   },
   {
     icon: '',
-    title: t('energySavingAudit'),
+    title: 'Energy Saving Audit',
     url: '#',
     items: [
       {
-        title: t('qa_management'),
+        title: 'Q&A Management',
         url: '#'
       },
       {
-        title: t('dataLogMonitoring'),
+        title: 'Data Log Monitoring',
+        url: dataLogMonitoringPath()
+      },
+      {
+        title: 'Analysis',
         url: '#'
       },
       {
-        title: t('analysis'),
-        url: '#'
-      },
-      {
-        title: t('report'),
+        title: 'Report',
         url: '#'
       }
     ]
   },
   {
     icon: '',
-    title: t('update_status_won_lost'),
+    title: 'Update Status Won Lost',
     url: '#'
   }
 ]
