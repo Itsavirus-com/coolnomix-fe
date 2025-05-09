@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
 import { formSchema } from './regrigeration.scheme'
-import { DetailsFormProps } from '../ac/[type]/@details_forms/details-forms.types'
+import { DetailsFormProps } from '../ac/details-forms/details-forms.types'
 
-export type RefrigerationDetailsFormProps = DetailsFormProps & {
+export type RefrigerationProps = DetailsFormProps & {
   handleSubmit?: (values: z.infer<typeof formSchema>) => Promise<void>
 }

@@ -1,16 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
+import { qnaTypeRefrigerationPath } from '@/config/paths'
 
 import { formSchema } from '../../regrigeration.scheme'
 
 export const useWalkInFreezerForm = (inPreview: boolean) => {
-  const { t } = useTranslation('qna')
+  const t = useTranslations('qna')
 
   const router = useRouter()
 
@@ -47,13 +48,17 @@ export const useWalkInFreezerForm = (inPreview: boolean) => {
     router.back()
   }
 
+  const handleEdit = () => {
+    router.push(qnaTypeRefrigerationPath())
+  }
+
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
     () => [
       {
         size: 'lg',
         variant: 'secondary',
         label: inPreview ? t('edit') : t('back'),
-        onClick: handleBack
+        onClick: inPreview ? handleEdit : handleBack
       },
       {
         type: 'submit',

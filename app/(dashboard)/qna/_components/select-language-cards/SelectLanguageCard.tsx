@@ -1,5 +1,5 @@
+import { useTranslations } from 'next-intl'
 import React, { FC, memo } from 'react'
-import { useTranslation } from 'react-i18next'
 
 import Image from '@/components/image/Image'
 import Text from '@/components/text/Text'
@@ -10,7 +10,7 @@ import { SelectLanguageCardProps } from './select-language-cards.types'
 const SelectLanguageCard: FC<SelectLanguageCardProps> = (props) => {
   const { value, image, title, description, selectedLanguage, onSelectLanguage } = props
 
-  const { t } = useTranslation('common')
+  const t = useTranslations('common')
 
   return (
     <div

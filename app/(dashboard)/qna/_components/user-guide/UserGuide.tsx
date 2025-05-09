@@ -1,12 +1,14 @@
+'use client'
+
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 
 import Icon from '@/components/icon/Icon'
 import Text from '@/components/text/Text'
 
 const UserGuide = () => {
-  const { t } = useTranslation('qna')
+  const t = useTranslations('qna')
 
   return (
     <div className='bg-grey-lightest border-color-20 absolute right-0 bottom-14 left-1/2 flex w-max -translate-x-1/2 flex-col items-center gap-y-1 rounded-lg px-14 py-6 text-center'>

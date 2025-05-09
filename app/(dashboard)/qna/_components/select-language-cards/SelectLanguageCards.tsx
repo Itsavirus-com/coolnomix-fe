@@ -1,30 +1,29 @@
+'use client'
+
 import { useRouter } from 'next/navigation'
-import React, { FC, memo } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
+import React from 'react'
 
 import Button from '@/components/button/Button'
-import { qnaSelectEquipmentPath } from '@/config/paths/qna-path'
+import { qnaSelectEquipmentPath } from '@/config/paths'
 
 import { useSelectLanguage } from './select-language-cards.hook'
-import { SelectLanguageCardsProps } from './select-language-cards.types'
 import SelectLanguageCard from './SelectLanguageCard'
 
-const SelectLanguageCards: FC<SelectLanguageCardsProps> = (props) => {
-  const { items } = props
-
-  const { t } = useTranslation('qna')
+const SelectLanguageCards = () => {
+  const t = useTranslations('qna')
 
   const router = useRouter()
 
-  const { selectedLanguage, handleSelectLanguage } = useSelectLanguage()
+  const { languages, selectedLanguage, handleSelectLanguage } = useSelectLanguage()
 
   return (
     <>
       <div className='flex w-full gap-5'>
-        {items?.map((item) => (
+        {languages?.map((lang) => (
           <SelectLanguageCard
-            key={item.value}
-            {...item}
+            key={lang.value}
+            {...lang}
             selectedLanguage={selectedLanguage}
             onSelectLanguage={handleSelectLanguage}
           />
@@ -40,4 +39,4 @@ const SelectLanguageCards: FC<SelectLanguageCardsProps> = (props) => {
   )
 }
 
-export default memo(SelectLanguageCards)
+export default SelectLanguageCards

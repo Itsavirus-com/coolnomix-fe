@@ -1,15 +1,16 @@
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useCallback, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
+import { acRequest1, acRequest2, acRequest3 } from '@/assets/images'
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { qnaAcDetailsPath } from '@/config/paths/qna-path'
+import { qnaAcDetailsPath } from '@/config/paths'
 import { load, updateStoredObject } from '@/utils/storage'
 
-import { SelectAcRequestValue } from './select-ac-request-cards.types'
+import { SelectAcRequestCardType, SelectAcRequestValue } from './select-ac-request-cards.types'
 
 export const useSelectAcRequest = () => {
-  const { t } = useTranslation('qna')
+  const t = useTranslations('qna')
 
   const router = useRouter()
 
@@ -30,6 +31,30 @@ export const useSelectAcRequest = () => {
     router.back()
   }
 
+  const requestTypes: SelectAcRequestCardType[] = useMemo(
+    () => [
+      {
+        image: acRequest1,
+        title: t('asset_list'),
+        description: t('upload_your_ac_asset_list_for_faster_processing'),
+        type: 'asset-list'
+      },
+      {
+        image: acRequest2,
+        title: t('details_forms'),
+        description: t('fill_out_the_form_based_on_your_air_conditioner'),
+        type: 'details-forms'
+      },
+      {
+        image: acRequest3,
+        title: t('technician_visit'),
+        description: t('technician_will_visit_to_assess_your_ac_needs'),
+        type: 'tech-visit'
+      }
+    ],
+    []
+  )
+
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
     () => [
       {
@@ -48,5 +73,5 @@ export const useSelectAcRequest = () => {
     [selectedAcRequest]
   )
 
-  return { selectedAcRequest, handleSelectAcRequest, buttons }
+  return { requestTypes, buttons, selectedAcRequest, handleSelectAcRequest }
 }

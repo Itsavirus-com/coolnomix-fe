@@ -1,20 +1,19 @@
-import React, { FC, memo } from 'react'
+'use client'
+
+import React from 'react'
 
 import ButtonGroup from '@/components/button-group/ButtonGroup'
 
 import { useSelectAcRequest } from './select-ac-request-cards.hook'
-import { SelectAcRequestCardsProps } from './select-ac-request-cards.types'
 import SelectAcRequestCard from './SelectAcRequestCard'
 
-const SelectAcRequestCards: FC<SelectAcRequestCardsProps> = (props) => {
-  const { items } = props
-
-  const { selectedAcRequest, handleSelectAcRequest, buttons } = useSelectAcRequest()
+const SelectAcRequestCards = () => {
+  const { requestTypes, buttons, selectedAcRequest, handleSelectAcRequest } = useSelectAcRequest()
 
   return (
     <>
       <div className='flex w-full gap-3'>
-        {items?.map((item) => (
+        {requestTypes.map((item) => (
           <SelectAcRequestCard
             key={item.type}
             {...item}
@@ -28,4 +27,4 @@ const SelectAcRequestCards: FC<SelectAcRequestCardsProps> = (props) => {
   )
 }
 
-export default memo(SelectAcRequestCards)
+export default SelectAcRequestCards

@@ -1,8 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
@@ -10,7 +10,7 @@ import { ControlledButtonProps } from '@/components/button/button.types'
 import { formSchema } from '../../regrigeration.scheme'
 
 export const useWalkInChillerForm = () => {
-  const { t } = useTranslation('qna')
+  const t = useTranslations('qna')
 
   const router = useRouter()
 

@@ -11,7 +11,3 @@ export type SelectLanguageCardProps = SelectLanguageCardType & {
   selectedLanguage: SelectLanguageValue
   onSelectLanguage: (value: SelectLanguageValue) => void
 }
-
-export type SelectLanguageCardsProps = {
-  items: SelectLanguageCardType[]
-}
