@@ -44,7 +44,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*", "app/*"],
-      "@/public/*": ["./public/*"]
+      "@/public/*": ["./public/*"],
+      "@/_components/*": ["./app/(dashboard)/qna/_components/*"],
+      "@/details_forms/_components/*": [
+        "app/(dashboard)/qna/select-equipment/ac/details-forms/_components/*"
+      ]
     },
 
     // Editor support

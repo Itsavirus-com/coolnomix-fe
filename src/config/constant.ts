@@ -3,3 +3,8 @@ export const acceptedFileImage = {
   'image/png': ['.png'],
   'image/webp': ['.webp']
 }
+
+export const acceptedFileExcelAndPdf = {
+  'application/pdf': ['.pdf'],
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx']
+}
