@@ -17,6 +17,7 @@ export type FileUploaderProps = {
   multiSelect?: boolean
   acceptedFile?: Accept
   maxFiles?: number
+  disabled?: boolean
   onFileUpload?: (files?: FileType[]) => void
 }
 
