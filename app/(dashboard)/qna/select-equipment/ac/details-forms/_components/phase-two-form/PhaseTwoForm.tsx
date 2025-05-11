@@ -14,7 +14,7 @@ const PhaseTwoForm: FC<DetailsFormProps> = (props) => {
 
   const t = useTranslations('qna')
 
-  const { methods, detailsFormFields, buttons, onSubmit } = usePhaseTwoForm(inPreview)
+  const { methods, phaseTwoFormFields, buttons, onSubmit } = usePhaseTwoForm(inPreview)
 
   return (
     <FormProvider
@@ -27,10 +27,10 @@ const PhaseTwoForm: FC<DetailsFormProps> = (props) => {
       <Accordion
         type='multiple'
         defaultValue={['0', '1']}
-        items={detailsFormFields.map((_, index) => ({
+        items={phaseTwoFormFields.map((_, index) => ({
           key: index.toString(),
           title: t('air_conditioning_title', { index: index + 1 }),
-          content: <TechnicalForm index={index} formName='detailsForm' disabled={inPreview} />
+          content: <TechnicalForm index={index} formName='phaseTwo' disabled={inPreview} />
         }))}
       />
       <ButtonGroup className='mt-14 justify-end' buttons={buttons} />

@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { qnaTypeAcPath, qnaTypeRefrigerationPath } from '@/config/paths'
-import { load, updateStoredObject } from '@/utils/storage'
+import { qnaAcPath, qnaRefrigerationPath } from '@/config/paths'
+import { updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from './select-equipment-form.schema'
 import { EquipmentType, EquipmentTypeItem } from './select-equipment-form.types'
@@ -18,14 +18,9 @@ export const useSelectEquipmentForm = () => {
 
   const router = useRouter()
 
-  const currentEquipmentType = (load('QNA_FORM')?.equipmentType as EquipmentType) || ''
-
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      selectEquipmentType: currentEquipmentType
-    }
+    resolver: zodResolver(schema)
   })
 
   const equipmentTypes: EquipmentTypeItem[] = useMemo(
@@ -39,22 +34,21 @@ export const useSelectEquipmentForm = () => {
   const handleNavigate = (type: EquipmentType) => {
     switch (type) {
       case 'air-conditioning':
-        router.push(qnaTypeAcPath())
+        router.push(qnaAcPath())
         break
       case 'refrigeration':
-        router.push(qnaTypeRefrigerationPath())
+        router.push(qnaRefrigerationPath())
         break
     }
   }
 
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    handleNavigate(values.selectEquipmentType as EquipmentType)
-    updateStoredObject('QNA_FORM', { equipmentType: values.selectEquipmentType })
+    handleNavigate(values.equipmentType as EquipmentType)
+    updateStoredObject('QNA_FORM', { equipmentType: values.equipmentType })
   }, [])
 
   const handleBack = () => {
     router.back()
-    methods.reset()
   }
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(

@@ -18,7 +18,7 @@ const SelectEquipmentForm = () => {
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <ControlledSelect
         required
-        name='selectEquipmentType'
+        name='equipmentType'
         label={t('choose_equipment')}
         placeholder={t('select_the_type_of_equipment_you_want_to_proceed_with')}
         items={equipmentTypes}

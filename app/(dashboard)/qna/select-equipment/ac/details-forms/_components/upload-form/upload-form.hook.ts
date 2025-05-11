@@ -1,11 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
+import { load } from '@/utils/storage'
 
 import { formSchema } from './upload-form.schema'
 
@@ -47,6 +48,16 @@ export const useUploadForm = () => {
     ],
     []
   )
+
+  useEffect(() => {
+    const savedAnswer = load('QNA_FORM')
+
+    setTimeout(() => {
+      methods.reset({
+        acUnit: savedAnswer?.acUnit || []
+      })
+    }, 0)
+  }, [])
 
   return { methods, buttons, onSubmit }
 }

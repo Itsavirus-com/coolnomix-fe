@@ -5,5 +5,5 @@ import { requiredString } from '@/utils/required-string'
 
 export const formSchema = (t: TFunction) =>
   z.object({
-    selectEquipmentType: z.string().min(1, requiredString(t))
+    equipmentType: z.string().min(1, requiredString(t))
   })

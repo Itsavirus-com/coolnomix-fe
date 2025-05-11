@@ -14,7 +14,7 @@ import PeakLoadTarifForm from '../peak-load-tarif-form/PeakLoadTarifForm'
 const PhaseOneForm = () => {
   const t = useTranslations('qna')
 
-  const { methods, detailsFormFields, peakLoadTarifFields, buttons, onSubmit } = usePhaseOneForm()
+  const { methods, phaseOneFormFields, peakLoadTarifFields, buttons, onSubmit } = usePhaseOneForm()
 
   return (
     <>
@@ -25,13 +25,13 @@ const PhaseOneForm = () => {
         <Accordion
           type='multiple'
           defaultValue={['0', '1']}
-          items={detailsFormFields.map((_, index) => ({
+          items={phaseOneFormFields.map((_, index) => ({
             key: index.toString(),
             title: t('air_conditioning_title', { index: index + 1 }),
             content: (
               <div>
-                <BrandForm index={index} formName='detailsForm' disabled />
-                <AcForm index={index} formName='detailsForm' disabled />
+                <BrandForm index={index} formName='phaseOne' disabled />
+                <AcForm index={index} formName='phaseOne' disabled />
               </div>
             )
           }))}

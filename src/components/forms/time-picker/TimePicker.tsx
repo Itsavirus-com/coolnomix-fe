@@ -65,8 +65,10 @@ const TimePicker: FC<TimePickerProps> = (props) => {
         render={({ field }) => {
           const { value, onChange, ref } = field
 
-          const currentHours = value ? value?.getHours() : 0
-          const currentMinutes = value ? value?.getMinutes() : 0
+          const currentValue = new Date(value)
+
+          const currentHours = currentValue ? currentValue?.getHours() : 0
+          const currentMinutes = currentValue ? currentValue?.getMinutes() : 0
 
           return (
             <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>

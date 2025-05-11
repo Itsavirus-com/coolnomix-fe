@@ -36,7 +36,7 @@ const Page = () => {
               <Description label={t('air_conditioning_details')} className='mb-8' titleTag='h1'>
                 {t('fill_in_the_necessary_details_about_your_air_conditioning_system')}
               </Description>
-              <PhaseTwoForm handleContinue={handleContinue} />
+              <PhaseTwoForm inPreview={false} handleContinue={handleContinue} />
             </TabsContent>
           </div>
         </div>

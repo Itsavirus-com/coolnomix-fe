@@ -1,11 +1,9 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 
 import Button from '@/components/button/Button'
-import { qnaSelectEquipmentPath } from '@/config/paths'
 
 import { useSelectLanguage } from './select-language-cards.hook'
 import SelectLanguageCard from './SelectLanguageCard'
@@ -13,9 +11,7 @@ import SelectLanguageCard from './SelectLanguageCard'
 const SelectLanguageCards = () => {
   const t = useTranslations('qna')
 
-  const router = useRouter()
-
-  const { languages, selectedLanguage, handleSelectLanguage } = useSelectLanguage()
+  const { languages, selectedLanguage, handleSelectLanguage, handleContinue } = useSelectLanguage()
 
   return (
     <>
@@ -32,7 +28,7 @@ const SelectLanguageCards = () => {
       <Button
         className='m-auto mt-6'
         label={t('start_qna')}
-        onClick={() => router.push(qnaSelectEquipmentPath())}
+        onClick={handleContinue}
         disabled={!selectedLanguage}
       />
     </>

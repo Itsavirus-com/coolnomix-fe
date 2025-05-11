@@ -1,7 +1,9 @@
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback, useMemo, useState } from 'react'
 
 import { idnFlag, ukFlag } from '@/assets/images'
+import { qnaSelectEquipmentPath } from '@/config/paths'
 import { load, updateStoredObject } from '@/utils/storage'
 
 import { SelectLanguageCardType, SelectLanguageValue } from './select-language-cards.types'
@@ -9,7 +11,9 @@ import { SelectLanguageCardType, SelectLanguageValue } from './select-language-c
 export const useSelectLanguage = () => {
   const t = useTranslations('qna')
 
-  const currentLanguage = load('QNA_FORM')?.lang as SelectLanguageValue
+  const router = useRouter()
+
+  const currentLanguage = load('QNA_FORM')?.lang || ''
 
   const [selectedLanguage, setSelectedLanguage] = useState<SelectLanguageValue>(currentLanguage)
 
@@ -31,10 +35,14 @@ export const useSelectLanguage = () => {
     []
   )
 
-  const handleSelectLanguage = useCallback((value: SelectLanguageValue) => {
-    setSelectedLanguage(value)
-    updateStoredObject('QNA_FORM', { lang: value })
+  const handleSelectLanguage = useCallback((lang: SelectLanguageValue) => {
+    setSelectedLanguage(lang)
+    updateStoredObject('QNA_FORM', { lang })
   }, [])
 
-  return { languages, selectedLanguage, handleSelectLanguage }
+  const handleContinue = () => {
+    router.push(qnaSelectEquipmentPath())
+  }
+
+  return { languages, selectedLanguage, handleSelectLanguage, handleContinue }
 }

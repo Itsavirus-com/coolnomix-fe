@@ -14,22 +14,9 @@ export const useSelectAcRequest = () => {
 
   const router = useRouter()
 
-  const currentAcRequest = (load('QNA_FORM')?.acRequest as SelectAcRequestValue) || ''
+  const currentAcRequest = load('QNA_FORM')?.acRequest || ''
 
   const [selectedAcRequest, setSelectedAcRequest] = useState<SelectAcRequestValue>(currentAcRequest)
-
-  const handleSelectAcRequest = useCallback((value: SelectAcRequestValue) => {
-    setSelectedAcRequest(value)
-    updateStoredObject('QNA_FORM', { acRequest: value })
-  }, [])
-
-  const handleClick = useCallback(() => {
-    router.push(qnaAcDetailsPath({ type: selectedAcRequest }))
-  }, [selectedAcRequest])
-
-  const handleBack = () => {
-    router.back()
-  }
 
   const requestTypes: SelectAcRequestCardType[] = useMemo(
     () => [
@@ -54,6 +41,19 @@ export const useSelectAcRequest = () => {
     ],
     []
   )
+
+  const handleSelectAcRequest = useCallback((type: SelectAcRequestValue) => {
+    setSelectedAcRequest(type)
+    updateStoredObject('QNA_FORM', { acRequest: type })
+  }, [])
+
+  const handleClick = useCallback(() => {
+    router.push(qnaAcDetailsPath({ type: selectedAcRequest }))
+  }, [selectedAcRequest])
+
+  const handleBack = () => {
+    router.back()
+  }
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
     () => [

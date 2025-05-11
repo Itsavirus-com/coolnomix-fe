@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { qnaAcDetailsSuccessPath } from '@/config/paths'
+import { qnaSuccessSubmittedPath } from '@/config/paths'
 import { showModal } from '@/stores/modal-store.actions'
 import { remove } from '@/utils/storage'
 
@@ -31,13 +31,12 @@ export const useTechVisitForm = (inPreview: boolean) => {
 
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     console.log(values)
-    router.push(qnaAcDetailsSuccessPath({ type: 'tech-visit' }))
+    router.push(`${qnaSuccessSubmittedPath()}?type=tech-visit`)
     remove('QNA_FORM')
   }, [])
 
   const handleBack = () => {
     router.back()
-    methods.reset()
   }
 
   const handleShowModal = (values: z.infer<typeof schema>) => {

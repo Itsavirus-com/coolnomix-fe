@@ -1,11 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
+import { load } from '@/utils/storage'
 
 import { formSchema } from './step-one-form.schema'
 
@@ -32,10 +33,7 @@ export const useStepOneForm = () => {
 
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      detailsBrand: apiResponseData
-    }
+    resolver: zodResolver(schema)
   })
 
   const { fields } = useFieldArray({
@@ -67,6 +65,16 @@ export const useStepOneForm = () => {
     ],
     []
   )
+
+  useEffect(() => {
+    const savedAnswer = load('QNA_FORM')
+
+    setTimeout(() => {
+      methods.reset({
+        detailsBrand: savedAnswer?.detailsBrand || apiResponseData
+      })
+    }, 0)
+  }, [])
 
   return { methods, fields, buttons, onSubmit }
 }

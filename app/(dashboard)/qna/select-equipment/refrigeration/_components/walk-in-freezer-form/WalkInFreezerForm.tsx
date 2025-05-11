@@ -17,8 +17,8 @@ const WalkInFreezerForm: FC<RefrigerationProps> = (props) => {
       methods={methods}
       onSubmit={async (values) => {
         onSubmit(values)
-        handleContinue?.()
-        await handleSubmit?.(values)
+        if (inPreview) await handleSubmit?.(values)
+        else handleContinue?.()
       }}
     >
       <RefrigerationForm disabled={inPreview} />

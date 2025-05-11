@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import React from 'react'
 
 import SelectLanguageCards from '@/_components/select-language-cards/SelectLanguageCards'
@@ -11,13 +12,15 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const Page = () => {
+const Page = async () => {
+  const t = await getTranslations('qna')
+
   return (
     <main>
       <section className='content-placement-center'>
         <div className='flex w-[516px] flex-col items-center'>
-          <Description label='Select Language' className='mb-6 text-center' titleTag='h1'>
-            Pick your preferred language to continue
+          <Description label={t('select_language')} className='mb-6 text-center' titleTag='h1'>
+            {t('pick_your_preferred_language_to_continue')}
           </Description>
           <SelectLanguageCards />
         </div>

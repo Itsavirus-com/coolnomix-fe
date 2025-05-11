@@ -5,7 +5,7 @@ import { requiredString } from '@/utils/required-string'
 
 export const formSchema = (t: TFunction) =>
   z.object({
-    detailsForm: z.array(
+    phaseTwo: z.array(
       z.object({
         yearOfInstallation: z.string().min(1, requiredString(t)),
         serviceFrequency: z.string().min(1, requiredString(t)),

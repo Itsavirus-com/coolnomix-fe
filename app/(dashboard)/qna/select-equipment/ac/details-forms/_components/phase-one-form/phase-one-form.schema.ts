@@ -6,7 +6,7 @@ import { detailsAcSchema, peakLoadTarifSchema } from '../step-two-form/step-two-
 
 export const formSchema = (t: TFunction) =>
   z.object({
-    detailsForm: z.array(
+    phaseOne: z.array(
       z.object({
         ...detailsBrandSchema(t).shape,
         ...detailsAcSchema(t).shape

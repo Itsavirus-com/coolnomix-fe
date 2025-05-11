@@ -16,15 +16,15 @@ export const qnaSelectEquipmentPath: PathGenerator = () => {
   return createPath(QNA_PATH, { suffix: 'select-equipment' })
 }
 
-export const qnaTypeAcPath: PathGenerator = () => {
+export const qnaAcPath: PathGenerator = () => {
   return createPath(QNA_PATH, { suffix: 'select-equipment/ac' })
 }
 
-export const qnaTypeRefrigerationPath: PathGenerator = () => {
+export const qnaRefrigerationPath: PathGenerator = () => {
   return createPath(QNA_PATH, { suffix: 'select-equipment/refrigeration' })
 }
 
-export const qnaTypeRefrigerationReviewPath: PathGenerator = () => {
+export const qnaRefrigerationReviewPath: PathGenerator = () => {
   return createPath(QNA_PATH, { suffix: 'select-equipment/refrigeration/review' })
 }
 
@@ -46,8 +46,8 @@ export const qnaAcDetailsReviewPhase2Path: PathGeneratorWithParams = ({ type }: 
   })
 }
 
-export const qnaAcDetailsSuccessPath: PathGeneratorWithParams = ({ type }: any) => {
+export const qnaSuccessSubmittedPath: PathGenerator = () => {
   return createPath(QNA_PATH, {
-    suffix: `select-equipment/ac/${type}/success`
+    suffix: 'success-submitted'
   })
 }

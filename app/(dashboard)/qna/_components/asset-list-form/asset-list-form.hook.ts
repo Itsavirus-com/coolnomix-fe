@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { qnaAcDetailsSuccessPath } from '@/config/paths'
+import { qnaSuccessSubmittedPath } from '@/config/paths'
 import { remove } from '@/utils/storage'
 
 import { formSchema } from './asset-list-form.schema'
@@ -28,13 +28,12 @@ export const useAssetListForm = (inPreview: boolean) => {
 
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     console.log(values)
-    router.push(qnaAcDetailsSuccessPath({ type: 'asset-list' }))
+    router.push(qnaSuccessSubmittedPath())
     remove('QNA_FORM')
   }, [])
 
   const handleBack = () => {
     router.back()
-    methods.reset()
   }
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(

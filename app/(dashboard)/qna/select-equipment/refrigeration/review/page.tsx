@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Page = () => {
-  return <RefrigerationTabs />
+  return <RefrigerationTabs inPreview />
 }
 
 export default Page

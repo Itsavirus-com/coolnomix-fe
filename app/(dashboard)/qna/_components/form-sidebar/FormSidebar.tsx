@@ -39,7 +39,7 @@ const FormSidebar: FC<FormSidebarProps> = (props) => {
                   {tab.label}
                 </Text>
               </TabsTrigger>
-              {tab.children && (
+              {tab?.children && (
                 <div className='mt-0.5'>
                   {tab.children?.map((child, childIndex) => (
                     <TabsTrigger

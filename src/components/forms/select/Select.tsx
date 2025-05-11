@@ -39,7 +39,7 @@ const ControlledSelect: FC<SelectProps> = (props) => {
             {label}
             {required && <span className='text-destructive'>*</span>}
           </FormLabel>
-          <Select onValueChange={onChange} defaultValue={value} disabled={disabled}>
+          <Select onValueChange={onChange} value={value || ''} disabled={disabled}>
             <SelectTrigger style={{ width }} className='cursor-pointer'>
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>

@@ -1,4 +1,4 @@
-export type SelectAcRequestValue = 'asset-list' | 'details-forms' | 'tech-visit' | ''
+export type SelectAcRequestValue = 'asset-list' | 'details-forms' | 'tech-visit'
 
 export type SelectAcRequestCardType = {
   image: string

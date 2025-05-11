@@ -84,6 +84,7 @@ const TechnicalForm: FC<DetailsReviewFormProps> = (props) => {
         inputLabel={t('upload_filter_condition')}
         acceptedFile={acceptedFileImage}
         hint=''
+        disabled={disabled}
       />
     </div>
   )

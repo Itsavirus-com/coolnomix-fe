@@ -1,12 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { qnaTypeRefrigerationPath } from '@/config/paths'
+import { qnaRefrigerationPath } from '@/config/paths'
+import { load } from '@/utils/storage'
 
 import { formSchema } from '../../regrigeration.schema'
 
@@ -51,7 +52,7 @@ export const useWalkInFreezerForm = (inPreview: boolean) => {
   }
 
   const handleEdit = () => {
-    router.push(qnaTypeRefrigerationPath())
+    router.push(qnaRefrigerationPath())
   }
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
@@ -71,6 +72,14 @@ export const useWalkInFreezerForm = (inPreview: boolean) => {
     ],
     [inPreview, isSubmitted]
   )
+
+  useEffect(() => {
+    const savedAnswer = load('QNA_FORM')
+
+    setTimeout(() => {
+      methods.reset(savedAnswer?.walkInFreezerForm)
+    }, 0)
+  }, [])
 
   return {
     methods,

@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { FormSidebarTab } from '@/(dashboard)/qna/_components/form-sidebar/form-sidebar.types'
-import { qnaTypeRefrigerationReviewPath } from '@/config/paths'
+import { qnaRefrigerationReviewPath, qnaSuccessSubmittedPath } from '@/config/paths'
 import { remove } from '@/utils/storage'
 
 export const useRefrigerationTabs = () => {
@@ -51,12 +51,13 @@ export const useRefrigerationTabs = () => {
   )
 
   const handleReview = () => {
-    router.push(qnaTypeRefrigerationReviewPath())
+    router.push(qnaRefrigerationReviewPath())
   }
 
   const handleSubmit = async (values: unknown) => {
     console.log(values)
     remove('QNA_FORM')
+    router.push(qnaSuccessSubmittedPath())
   }
 
   useEffect(() => {

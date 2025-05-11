@@ -1,12 +1,12 @@
 import { useRouter } from 'next/navigation'
 
-import { qnaAcDetailsSuccessPath } from '@/config/paths'
+import { qnaSuccessSubmittedPath } from '@/config/paths'
 
 export const usePhaseTwo = () => {
   const router = useRouter()
 
   const handleContinue = () => {
-    router.replace(qnaAcDetailsSuccessPath({ type: 'details-forms' }))
+    router.replace(qnaSuccessSubmittedPath())
   }
 
   return {
