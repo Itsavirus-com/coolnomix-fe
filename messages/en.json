@@ -267,5 +267,18 @@
     "this_field_is_required": "This field is required",
     "max_operating_hours_per_day": "Max operating hours per day is 24",
     "max_running_days_per_week": "Max running days per week is 7"
+  },
+  "auth": {
+    "welcome_back": "Welcome Back!",
+    "log_in_to_access_your_account_and_continue_your_journey_with_us": "Log in to access your account and continue your journey with us.",
+    "an_awesome_login_image": "An awesome login image",
+    "an_awesome_sentian_logo": "An awesome sentian logo",
+    "an_awesome_coolnomix_logo": "An awesome coolnomix logo",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "did_you_forgot_your_password": "Did you forget your password? ",
+    "click_here_to": "Click here to",
+    "reset_it": "reset it."
   }
 }
