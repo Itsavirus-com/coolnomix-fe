@@ -1,3 +1,5 @@
+'use client'
+
 import React, { lazy } from 'react'
 import { useSnapshot } from 'valtio'
 

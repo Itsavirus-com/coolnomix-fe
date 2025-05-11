@@ -1,3 +1,5 @@
+'use client'
+
 import type { FC } from 'react'
 
 import { ProgressProvider } from '@bprogress/next/app'
