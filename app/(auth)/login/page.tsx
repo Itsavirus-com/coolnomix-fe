@@ -7,7 +7,7 @@ import Text from '@/components/text/Text'
 import { resetPasswordPath } from '@/config/paths/auth-path'
 import { ENV } from '@/libs/env'
 
-import LoginForm from '../_components/login-form/LoginForm'
+import LoginForm from './_components/login-form/LoginForm'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const Login = async () => {
+const Page = async () => {
   const t = await getTranslations('auth')
 
   return (
@@ -46,4 +46,4 @@ const Login = async () => {
   )
 }
 
-export default Login
+export default Page

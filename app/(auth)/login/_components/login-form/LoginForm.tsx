@@ -18,9 +18,24 @@ const LoginForm = () => {
   return (
     <div className='mt-6 mb-4'>
       <FormProvider methods={methods} onSubmit={onSubmit}>
-        <ControlledInput name='email' label={t('email')} placeholder='group@example.com' />
-        <ControlledPasswordInput name='password' label={t('password')} />
-        <ControlledButton type='submit' label={t('login')} className='mt-4 w-full' />
+        <ControlledInput
+          name='email'
+          label={t('email')}
+          placeholder='group@example.com'
+          testID='login-email-input'
+        />
+        <ControlledPasswordInput
+          name='password'
+          label={t('password')}
+          placeholder='********'
+          testID='login-password-input'
+        />
+        <ControlledButton
+          type='submit'
+          label={t('login')}
+          className='mt-4 w-full'
+          testID='login-button'
+        />
       </FormProvider>
     </div>
   )
