@@ -25,6 +25,8 @@ const ControlledInput: FC<ControlledInputProps> = (props) => {
     type,
     min = 0,
     max,
+    inputMode,
+    pattern,
     ...rest
   } = props
 
@@ -56,9 +58,11 @@ const ControlledInput: FC<ControlledInputProps> = (props) => {
         placeholder={placeholder}
         data-test-id={testID}
         disabled={disabled}
+        type={type}
+        inputMode={inputMode}
+        pattern={pattern}
         {...field}
         value={field.value || ''}
-        type={type}
         min={min}
         max={max}
       />

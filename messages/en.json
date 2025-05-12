@@ -280,6 +280,10 @@
     "login": "Login",
     "did_you_forgot_your_password": "Did you forget your password? ",
     "click_here_to": "Click here to",
-    "reset_it": "reset it."
+    "reset_it": "reset it.",
+    "registration": "Registration",
+    "sign_up_to_start_your_journey_with_us_it_only_takes_a_minute": "Sign up to start your journey with us. It only takes a minute!",
+    "group_name": "Group Name",
+    "continue": "Continue"
   }
 }
