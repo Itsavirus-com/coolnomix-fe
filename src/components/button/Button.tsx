@@ -1,3 +1,5 @@
+'use client'
+
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -15,6 +17,7 @@ const Button = (props: ButtonWithLinkProps) => {
     isLoading,
     type = 'button',
     testID = `${name}-button`,
+    ariaLabel,
     ...rest
   } = props
 
@@ -28,7 +31,9 @@ const Button = (props: ButtonWithLinkProps) => {
       {...rest}
     >
       {link ? (
-        <Link href={link}>{label}</Link>
+        <Link href={link} aria-label={ariaLabel}>
+          {label}
+        </Link>
       ) : (
         <>
           {isLoading && <Loader2 size={14} className='animate-spin' />}

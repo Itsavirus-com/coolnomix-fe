@@ -11,8 +11,8 @@ import type { SubmitHandler, UseFormReturn } from 'react-hook-form'
 
 type FormProviderProps<FormState> = {
   name?: string
-  methods: UseFormReturn<FormState, any>
-  onSubmit: SubmitHandler<FormState>
+  methods?: UseFormReturn<FormState, any>
+  onSubmit?: SubmitHandler<FormState>
   children: ReactNode
 }
 
@@ -23,7 +23,7 @@ const FormProvider = <FormState extends Record<string, any>>(
     name,
     methods,
     methods: { handleSubmit },
-    onSubmit,
+    onSubmit = () => {},
     children
   } = props
 
@@ -70,6 +70,8 @@ function FormMessage({
   const path = name.split('.')
   const error = getNestedError(formState.errors, path, index)
   const message = getErrorMessage(error)
+
+  if (!message) return null
 
   return (
     <span data-slot='form-message' className={cn('text-destructive text-sm', className)} {...props}>

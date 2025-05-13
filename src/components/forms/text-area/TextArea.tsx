@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 import type { ControlledTextAreaProps } from './textarea.types'
 
 const ControlledTextArea: FC<ControlledTextAreaProps> = (props) => {
-  const { name, label, placeholder, labelClassname, required, className, testID } = props
+  const { name, label, placeholder, labelClassname, required, className, testID, disabled } = props
 
   const { control } = useFormContext()
   const { field } = useController({
@@ -26,6 +26,7 @@ const ControlledTextArea: FC<ControlledTextAreaProps> = (props) => {
       <Textarea
         placeholder={placeholder}
         data-test-id={testID}
+        disabled={disabled}
         {...field}
         value={field.value || ''}
       />
