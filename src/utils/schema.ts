@@ -32,3 +32,20 @@ export const requiredFilesSchema = (t: TFunction) =>
 
 export const optionalFilesSchema = () =>
   z.union([z.array(z.instanceof(File)), z.array(fileSchema).optional()])
+
+export const requiredEmailSchema = (t: TFunction) =>
+  z
+    .string({
+      required_error: requiredString(t)
+    })
+    .min(1, requiredString(t))
+    .email(t('please_enter_a_valid_email_address'))
+    .refine(
+      (email) => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+        return emailRegex.test(email)
+      },
+      {
+        message: t('please_enter_a_valid_email_address')
+      }
+    )

@@ -266,7 +266,8 @@
   "validation": {
     "this_field_is_required": "This field is required",
     "max_operating_hours_per_day": "Max operating hours per day is 24",
-    "max_running_days_per_week": "Max running days per week is 7"
+    "max_running_days_per_week": "Max running days per week is 7",
+    "please_enter_a_valid_email_address": "Please enter a valid email address"
   },
   "auth": {
     "welcome_back": "Welcome Back!",
