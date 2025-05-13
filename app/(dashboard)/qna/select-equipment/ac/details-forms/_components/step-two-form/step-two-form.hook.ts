@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
 
-import { formSchema } from './step-two-form.scheme'
+import { formSchema } from './step-two-form.schema'
 
 const apiResponseData = [
   {
@@ -39,11 +39,13 @@ const peakLoadTarifData = [
 
 export const useStepTwoForm = () => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const schema = formSchema(tVal)
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: {
       detailsAc: apiResponseData,
       peakLoadTarif: peakLoadTarifData
@@ -60,7 +62,7 @@ export const useStepTwoForm = () => {
     name: 'peakLoadTarif'
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     console.log(values)
   }, [])
 

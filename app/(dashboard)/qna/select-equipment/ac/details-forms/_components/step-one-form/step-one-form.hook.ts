@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
 
-import { formSchema } from './step-one-form.scheme'
+import { formSchema } from './step-one-form.schema'
 
 const apiResponseData = [
   {
@@ -26,11 +26,13 @@ const apiResponseData = [
 
 export const useStepOneForm = () => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const schema = formSchema(tVal)
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: {
       detailsBrand: apiResponseData
     }
@@ -41,7 +43,7 @@ export const useStepOneForm = () => {
     name: 'detailsBrand'
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     console.log(values)
   }, [])
 

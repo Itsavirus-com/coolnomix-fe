@@ -8,7 +8,7 @@ import { z } from 'zod'
 import { ControlledButtonProps } from '@/components/button/button.types'
 import { remove } from '@/utils/storage'
 
-import { formSchema } from './phase-two-form.scheme'
+import { formSchema } from './phase-two-form.schema'
 
 const apiResponseData: any = [
   {
@@ -25,14 +25,16 @@ const apiResponseData: any = [
 
 export const usePhaseTwoForm = (inPreview: boolean) => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
   // Should be data from backend
   const isSubmitted = false
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const schema = formSchema(tVal)
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: {
       detailsForm: apiResponseData
     }
@@ -44,7 +46,7 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
   })
 
   const onSubmit = useCallback(
-    async (values: z.infer<typeof formSchema>) => {
+    async (values: z.infer<typeof schema>) => {
       console.log(values)
       remove('QNA_FORM')
     },

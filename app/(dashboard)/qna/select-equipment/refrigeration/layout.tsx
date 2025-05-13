@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import Description from '@/components/description/Description'
 import { Tabs } from '@/components/ui/tabs'
@@ -9,7 +9,7 @@ import { Tabs } from '@/components/ui/tabs'
 import { useRefrigerationTabs } from './_components/refrigeration-tabs/refrigeration-tabs.hook'
 import FormSidebar from '../../_components/form-sidebar/FormSidebar'
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: ReactNode }) => {
   const t = useTranslations('qna')
 
   const { currentTab, tabs, handleChangeTab } = useRefrigerationTabs()

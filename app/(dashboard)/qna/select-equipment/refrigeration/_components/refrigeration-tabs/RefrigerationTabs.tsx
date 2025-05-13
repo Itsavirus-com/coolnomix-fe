@@ -12,7 +12,7 @@ import WalkInFreezerForm from '../walk-in-freezer-form/WalkInFreezerForm'
 const RefrigerationTabs: FC<RefrigerationProps> = (props) => {
   const { inPreview } = props
 
-  const { handleChangeTab, handleReview } = useRefrigerationTabs()
+  const { handleChangeTab, handleReview, handleSubmit } = useRefrigerationTabs()
 
   return (
     <>
@@ -23,7 +23,11 @@ const RefrigerationTabs: FC<RefrigerationProps> = (props) => {
         />
       </TabsContent>
       <TabsContent value='walk-in-freezer'>
-        <WalkInFreezerForm inPreview={inPreview} handleContinue={handleReview} />
+        <WalkInFreezerForm
+          inPreview={inPreview}
+          handleContinue={handleReview}
+          handleSubmit={handleSubmit}
+        />
       </TabsContent>
     </>
   )

@@ -1,13 +1,10 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { z } from 'zod'
 
 import { FormSidebarTab } from '@/(dashboard)/qna/_components/form-sidebar/form-sidebar.types'
 import { qnaTypeRefrigerationReviewPath } from '@/config/paths'
 import { remove } from '@/utils/storage'
-
-import { formSchema } from '../../regrigeration.scheme'
 
 export const useRefrigerationTabs = () => {
   const t = useTranslations('qna')
@@ -57,7 +54,7 @@ export const useRefrigerationTabs = () => {
     router.push(qnaTypeRefrigerationReviewPath())
   }
 
-  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+  const handleSubmit = async (values: unknown) => {
     console.log(values)
     remove('QNA_FORM')
   }

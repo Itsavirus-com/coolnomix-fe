@@ -9,21 +9,24 @@ import { ControlledButtonProps } from '@/components/button/button.types'
 import { qnaAcDetailsSuccessPath } from '@/config/paths'
 import { remove } from '@/utils/storage'
 
-import { formSchema } from './asset-list-form.scheme'
+import { formSchema } from './asset-list-form.schema'
 
 export const useAssetListForm = (inPreview: boolean) => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const schema = formSchema(tVal)
+
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: {
       assetList: []
     }
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     console.log(values)
     router.push(qnaAcDetailsSuccessPath({ type: 'asset-list' }))
     remove('QNA_FORM')

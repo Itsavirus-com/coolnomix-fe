@@ -10,15 +10,17 @@ import { qnaAcDetailsSuccessPath } from '@/config/paths'
 import { showModal } from '@/stores/modal-store.actions'
 import { remove } from '@/utils/storage'
 
-import { formSchema } from './tech-visit.scheme'
+import { formSchema } from './tech-visit.schema'
 
 export const useTechVisitForm = (inPreview: boolean) => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const schema = formSchema(tVal)
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: {
       appointmentDate: null,
       appointmentTime: null,
@@ -27,7 +29,7 @@ export const useTechVisitForm = (inPreview: boolean) => {
     }
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     console.log(values)
     router.push(qnaAcDetailsSuccessPath({ type: 'tech-visit' }))
     remove('QNA_FORM')
@@ -38,7 +40,7 @@ export const useTechVisitForm = (inPreview: boolean) => {
     methods.reset()
   }
 
-  const handleShowModal = (values: z.infer<typeof formSchema>) => {
+  const handleShowModal = (values: z.infer<typeof schema>) => {
     showModal({
       title: t('are_you_sure_you_want_to_book_a_technician'),
       message: t('please_confirm_that_the_appointment_details_youve_entered_are_correct'),

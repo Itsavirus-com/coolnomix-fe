@@ -7,21 +7,23 @@ import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
 
-import { formSchema } from './upload-form.scheme'
+import { formSchema } from './upload-form.schema'
 
 export const useUploadForm = () => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const schema = formSchema(tVal)
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: {
       acUnit: []
     }
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     console.log(values)
   }, [])
 

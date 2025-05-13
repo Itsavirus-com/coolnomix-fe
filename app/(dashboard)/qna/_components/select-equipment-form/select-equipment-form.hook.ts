@@ -9,18 +9,20 @@ import { ControlledButtonProps } from '@/components/button/button.types'
 import { qnaTypeAcPath, qnaTypeRefrigerationPath } from '@/config/paths'
 import { load, updateStoredObject } from '@/utils/storage'
 
-import { formSchema } from './select-equipment-form.scheme'
+import { formSchema } from './select-equipment-form.schema'
 import { EquipmentType, EquipmentTypeItem } from './select-equipment-form.types'
 
 export const useSelectEquipmentForm = () => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
   const currentEquipmentType = (load('QNA_FORM')?.equipmentType as EquipmentType) || ''
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const schema = formSchema(tVal)
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: {
       selectEquipmentType: currentEquipmentType
     }
@@ -45,7 +47,7 @@ export const useSelectEquipmentForm = () => {
     }
   }
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     handleNavigate(values.selectEquipmentType as EquipmentType)
     updateStoredObject('QNA_FORM', { equipmentType: values.selectEquipmentType })
   }, [])

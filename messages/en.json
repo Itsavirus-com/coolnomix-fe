@@ -196,5 +196,8 @@
     "looks_like_no_declined_qna": "Looks like you have no declined QnAs for now",
     "all_set_no_reports_under_review": "All set! No reports are currently under review",
     "no_new_completed_qna": "No new completed QnAs at the moment"
+  },
+  "validation": {
+    "this_field_is_required": "This field is required"
   }
 }

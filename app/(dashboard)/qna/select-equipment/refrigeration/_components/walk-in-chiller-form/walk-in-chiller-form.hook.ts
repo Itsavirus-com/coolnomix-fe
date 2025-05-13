@@ -7,18 +7,20 @@ import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
 
-import { formSchema } from '../../regrigeration.scheme'
+import { formSchema } from '../../regrigeration.schema'
 
 export const useWalkInChillerForm = () => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
   // Should be data from backend
   const isSubmitted = false
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const schema = formSchema(tVal)
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: {
       evaporatorMake: '',
       evaporatorModel: '',
@@ -38,7 +40,7 @@ export const useWalkInChillerForm = () => {
     }
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     // Save to local storage
     console.log(values)
   }, [])

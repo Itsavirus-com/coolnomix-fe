@@ -9,7 +9,7 @@ import { ControlledButtonProps } from '@/components/button/button.types'
 import { qnaAcDetailsReviewPath, qnaAcDetailsSuccessPath } from '@/config/paths'
 import { remove } from '@/utils/storage'
 
-import { formSchema } from './phase-one-form.scheme'
+import { formSchema } from './phase-one-form.schema'
 
 const apiResponseData = [
   {
@@ -49,6 +49,7 @@ const peakLoadTarifData = [
 
 export const usePhaseOneForm = () => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
@@ -56,8 +57,9 @@ export const usePhaseOneForm = () => {
   const isSubmitted = false
   const isApproved = true
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const schema = formSchema(tVal)
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: {
       detailsForm: apiResponseData,
       peakLoadTarif: peakLoadTarifData
@@ -74,7 +76,7 @@ export const usePhaseOneForm = () => {
     name: 'peakLoadTarif'
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     console.log(values)
     router.replace(qnaAcDetailsSuccessPath({ type: 'details-form' }))
     remove('QNA_FORM')
