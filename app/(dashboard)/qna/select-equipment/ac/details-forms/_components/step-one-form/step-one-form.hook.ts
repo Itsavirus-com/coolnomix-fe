@@ -6,7 +6,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { load } from '@/utils/storage'
+import { load, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from './step-one-form.schema'
 
@@ -42,7 +42,7 @@ export const useStepOneForm = () => {
   })
 
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    console.log(values)
+    updateStoredObject('QNA_FORM', values)
   }, [])
 
   const handleBack = () => {
@@ -73,7 +73,7 @@ export const useStepOneForm = () => {
       methods.reset({
         detailsBrand: savedAnswer?.detailsBrand || apiResponseData
       })
-    }, 0)
+    }, 300)
   }, [])
 
   return { methods, fields, buttons, onSubmit }

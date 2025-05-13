@@ -6,7 +6,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { load, remove } from '@/utils/storage'
+import { load, remove, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from './phase-two-form.schema'
 
@@ -44,8 +44,8 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
 
   const onSubmit = useCallback(
     async (values: z.infer<typeof schema>) => {
-      console.log(values)
-      remove('QNA_FORM')
+      updateStoredObject('QNA_FORM', values)
+      if (inPreview) remove('QNA_FORM')
     },
     [inPreview]
   )
@@ -79,7 +79,7 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
       methods.reset({
         phaseTwo: savedAnswer?.phaseTwo || apiResponseData
       })
-    }, 0)
+    }, 300)
   }, [])
 
   return {

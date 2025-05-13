@@ -1,9 +1,9 @@
 import { TFunction } from 'next-intl'
-import { z } from 'zod'
+import { z } from 'node_modules/zod/lib'
 
-import { requiredString } from '@/utils/required-string'
+import { requiredFileSchema } from '@/utils/schema'
 
 export const formSchema = (t: TFunction) =>
   z.object({
-    acUnit: z.array(z.instanceof(File)).min(1, requiredString(t))
+    acUnit: requiredFileSchema(t)
   })

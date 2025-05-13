@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
 import { qnaRefrigerationPath } from '@/config/paths'
-import { load } from '@/utils/storage'
+import { load, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from '../../regrigeration.schema'
 
@@ -22,29 +22,11 @@ export const useWalkInFreezerForm = (inPreview: boolean) => {
 
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      evaporatorMake: '',
-      evaporatorModel: '',
-      evaporatorSerialNumber: '',
-      condenserMake: '',
-      condenserModel: '',
-      condenserSerialNumber: '',
-      compressorMake: '',
-      compressorModel: '',
-      tempSetPointCutIn: '',
-      tempSetPointCutOut: '',
-      differentialTempSetPoint: '',
-      systemAbilityToCycleOnOffBasedOnTempSetPoints: '',
-      isTheDefrostSystemFunctioning: '',
-      areTheTempMetersFunctioning: '',
-      serviceFrequency: ''
-    }
+    resolver: zodResolver(schema)
   })
 
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    // Save to local storage
-    console.log(values)
+    updateStoredObject('QNA_FORM', { walkInFreezerForm: values })
   }, [])
 
   const handleBack = () => {
@@ -78,7 +60,7 @@ export const useWalkInFreezerForm = (inPreview: boolean) => {
 
     setTimeout(() => {
       methods.reset(savedAnswer?.walkInFreezerForm)
-    }, 0)
+    }, 300)
   }, [])
 
   return {

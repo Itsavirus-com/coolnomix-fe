@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { load } from '@/utils/storage'
+import { load, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from '../../regrigeration.schema'
 
@@ -21,29 +21,11 @@ export const useWalkInChillerForm = () => {
 
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      evaporatorMake: '',
-      evaporatorModel: '',
-      evaporatorSerialNumber: '',
-      condenserMake: '',
-      condenserModel: '',
-      condenserSerialNumber: '',
-      compressorMake: '',
-      compressorModel: '',
-      tempSetPointCutIn: '',
-      tempSetPointCutOut: '',
-      differentialTempSetPoint: '',
-      systemAbilityToCycleOnOffBasedOnTempSetPoints: '',
-      isTheDefrostSystemFunctioning: '',
-      areTheTempMetersFunctioning: '',
-      serviceFrequency: ''
-    }
+    resolver: zodResolver(schema)
   })
 
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    // Save to local storage
-    console.log(values)
+    updateStoredObject('QNA_FORM', { walkInChillerForm: values })
   }, [])
 
   const handleBack = () => {
@@ -72,7 +54,7 @@ export const useWalkInChillerForm = () => {
 
     setTimeout(() => {
       methods.reset(savedAnswer?.walkInChillerForm)
-    }, 0)
+    }, 300)
   }, [])
 
   return {

@@ -6,7 +6,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { load } from '@/utils/storage'
+import { load, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from './step-two-form.schema'
 
@@ -60,7 +60,7 @@ export const useStepTwoForm = () => {
   })
 
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    console.log(values)
+    updateStoredObject('QNA_FORM', values)
   }, [])
 
   const handleBack = () => {
@@ -92,7 +92,7 @@ export const useStepTwoForm = () => {
         detailsAc: savedAnswer?.detailsAc || apiResponseData,
         peakLoadTarif: savedAnswer?.peakLoadTarif || peakLoadTarifData
       })
-    }, 0)
+    }, 300)
   }, [])
 
   return { methods, detailsAcFields, peakLoadTarifFields, buttons, onSubmit }

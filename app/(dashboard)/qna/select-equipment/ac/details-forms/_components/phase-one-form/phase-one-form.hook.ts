@@ -99,7 +99,7 @@ export const usePhaseOneForm = () => {
         })),
         peakLoadTarif: savedAnswer?.peakLoadTarif
       })
-    }, 0)
+    }, 300)
   }, [])
 
   return {

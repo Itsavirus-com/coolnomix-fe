@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
 import { qnaAcPath, qnaRefrigerationPath } from '@/config/paths'
-import { updateStoredObject } from '@/utils/storage'
+import { load, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from './select-equipment-form.schema'
 import { EquipmentType, EquipmentTypeItem } from './select-equipment-form.types'
@@ -18,9 +18,14 @@ export const useSelectEquipmentForm = () => {
 
   const router = useRouter()
 
+  const currentEquipmentType = load('QNA_FORM')?.equipmentType || ''
+
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema)
+    resolver: zodResolver(schema),
+    defaultValues: {
+      equipmentType: currentEquipmentType
+    }
   })
 
   const equipmentTypes: EquipmentTypeItem[] = useMemo(

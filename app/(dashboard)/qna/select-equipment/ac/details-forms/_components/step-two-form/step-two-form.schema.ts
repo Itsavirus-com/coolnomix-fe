@@ -7,18 +7,8 @@ export const detailsAcSchema = (t: TFunction) =>
   z.object({
     operatingHoursPerDay: z.string().min(1, requiredString(t)),
     runningDaysPerWeek: z.string().min(1, requiredString(t)),
-    peekLoadHoursStartTime: z
-      .date()
-      .nullable()
-      .refine((val) => !isNaN(val?.getTime()), {
-        message: requiredString(t)
-      }),
-    peekLoadHoursEndTime: z
-      .date()
-      .nullable()
-      .refine((val) => !isNaN(val?.getTime()), {
-        message: requiredString(t)
-      }),
+    peekLoadHoursStartTime: z.string().min(1, requiredString(t)),
+    peekLoadHoursEndTime: z.string().min(1, requiredString(t)),
     btuPerHour: z.string().optional(),
     inputPower: z.string().min(1, requiredString(t)),
     ratioOutsideToInside: z.string().min(1, requiredString(t))

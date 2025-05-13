@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { successAnimation, techVisitSuccessAnimation } from '@/assets/images'
 
 export const useSuccessSubmitted = () => {
-  const t = useTranslations('qna')
+  const t = useTranslations('common')
 
   const searchParams = useSearchParams()
   const techVisitType = searchParams.get('type') === 'tech-visit'
@@ -13,12 +13,14 @@ export const useSuccessSubmitted = () => {
   const description = techVisitType
     ? t('thank_you_your_request_has_been_received')
     : t('submission_successful_description')
+  const buttonLabel = t('view_status')
   const image = techVisitType ? techVisitSuccessAnimation : successAnimation
   const imageAlt = t('an_awesome_success_result_animation')
 
   return {
     title,
     description,
+    buttonLabel,
     image,
     imageAlt
   }

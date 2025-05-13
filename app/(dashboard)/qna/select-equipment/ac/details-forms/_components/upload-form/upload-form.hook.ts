@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { load } from '@/utils/storage'
+import { load, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from './upload-form.schema'
 
@@ -26,6 +26,7 @@ export const useUploadForm = () => {
 
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     console.log(values)
+    updateStoredObject('QNA_FORM', values)
   }, [])
 
   const handleBack = () => {
@@ -56,7 +57,7 @@ export const useUploadForm = () => {
       methods.reset({
         acUnit: savedAnswer?.acUnit || []
       })
-    }, 0)
+    }, 300)
   }, [])
 
   return { methods, buttons, onSubmit }
