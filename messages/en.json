@@ -27,7 +27,8 @@
     "qna": "Q&A",
     "data_log_monitoring": "Data Log Monitoring",
     "download_as_pdf": "Download as PDF",
-    "an_awesome_success_result_animation": "An awesome success result animation"
+    "an_awesome_success_result_animation": "An awesome success result animation",
+    "this_field_is_required": "This field is required"
   },
   "qna": {
     "get_started": "Get Started!",
@@ -161,7 +162,6 @@
     "no": "No",
     "indoor": "Indoor",
     "outdoor": "Outdoor",
-    "this_field_is_required": "This field is required",
     "review_your_information": "Review your information",
     "please_check_all_the_details_you_have_entered_before_submitting": "Please check all the details you have entered before submitting.",
     "bahasa_indonesia": "Bahasa Indonesia",
@@ -176,10 +176,10 @@
   "sidebar": {
     "platform": "PLATFORM",
     "dashboard": "Dashboard",
-    "energySavingAudit": "Energy Saving Audit",
+    "energy_saving_audit": "Energy Saving Audit",
     "monitoring": "Monitoring",
-    "qa": "Q&A",
-    "dataLogMonitoring": "Data Log Monitoring",
+    "qna": "Q&A",
+    "data_log_monitoring": "Data Log Monitoring",
     "report": "Report",
     "list_of_branch": "List of Branch",
     "qa_management": "QA Management",

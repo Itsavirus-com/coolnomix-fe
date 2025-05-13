@@ -39,7 +39,7 @@ const Sidebar: FC<SidebarProps> = (props) => {
           <SidebarGroupLabel className='font-semibold tracking-[2px] text-[#E7E7E9]'>
             {t('platform')}
           </SidebarGroupLabel>
-          <SidebarMenuItems items={getMenuItems(userType)} />
+          <SidebarMenuItems items={getMenuItems(t, userType)} />
         </SidebarGroup>
       </SidebarContent>
       <SidebarRail />
