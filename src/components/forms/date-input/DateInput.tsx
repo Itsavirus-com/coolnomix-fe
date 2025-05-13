@@ -2,9 +2,9 @@
 
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { FC } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 
 import Text from '@/components/text/Text'
 import { Button } from '@/components/ui/button'
@@ -16,7 +16,7 @@ import { cn } from '@/libs/utils'
 import { DateInputProps } from './date-input.types'
 
 const DateInput: FC<DateInputProps> = (props) => {
-  const { t } = useTranslation()
+  const t = useTranslations('common')
 
   const { name, label, required, inputLabel = t('pick_a_date'), disabled, ...rest } = props
 

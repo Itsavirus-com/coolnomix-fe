@@ -1,5 +1,5 @@
+import { useTranslations } from 'next-intl'
 import React, { FC } from 'react'
-import { useTranslation } from 'react-i18next'
 
 import ControlledInput from '@/components/forms/input/Input'
 import ControlledSelect from '@/components/forms/select/Select'
@@ -7,7 +7,7 @@ import ControlledSelect from '@/components/forms/select/Select'
 import { RefrigerationFormProps } from './refrigeration-form.types'
 
 const AcForm: FC<RefrigerationFormProps> = (props) => {
-  const { t } = useTranslation('qna')
+  const t = useTranslations('qna')
 
   const { disabled } = props
 

@@ -1,6 +1,5 @@
 import { toast } from 'sonner'
 
-import { getTranslate } from '@/locales/i18n'
 import { logout } from '@/stores/auth-store.actions'
 
 import { captureSentryException } from './sentry'
@@ -8,10 +7,8 @@ import { ApiErrorKind } from '../services/api/helpers/api-problem.types'
 
 import type { GeneralApiProblem } from '../services/api/helpers/api-problem.types'
 
-const t = getTranslate('common')
-
 const showUnexpectedError = async (error: any) => {
-  toast.error(t('an_unexpected_error_occurred'))
+  toast.error('An unexpected error occurred')
   captureSentryException(error)
 }
 

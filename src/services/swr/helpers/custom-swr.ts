@@ -1,16 +1,8 @@
 import useSWR from 'swr'
+import { SWRConfiguration } from 'swr/_internal'
 
-import { useTableSearchParams } from '@/components/table/table-params.hook'
+import { FetcherParams } from './swr.types'
 
-import type { FetcherParams } from './swr.types'
-import type { SWRConfiguration } from 'swr/_internal'
-
-export const useCustomSWR = <T>(params: FetcherParams, options?: SWRConfiguration<T>) => {
-  const searchParams = useTableSearchParams()
-
-  if (searchParams) {
-    params.path += `?${searchParams}`
-  }
-
+export const useCustomSWR = <T>(params: FetcherParams | null, options?: SWRConfiguration<T>) => {
   return useSWR<T>(params ? { path: params.path, ...params } : null, options)
 }

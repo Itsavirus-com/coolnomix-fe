@@ -11,7 +11,3 @@ export type SelectAcRequestCardProps = SelectAcRequestCardType & {
   selectedAcRequest: SelectAcRequestValue
   onSelectAcRequest: (value: SelectAcRequestValue) => void
 }
-
-export type SelectAcRequestCardsProps = {
-  items: SelectAcRequestCardType[]
-}

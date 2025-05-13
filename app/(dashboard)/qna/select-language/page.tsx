@@ -1,39 +1,25 @@
-'use client'
-
+import { Metadata } from 'next'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 
-import { SelectLanguageCardType } from '@/_components/select-language-cards/select-language-cards.types'
 import SelectLanguageCards from '@/_components/select-language-cards/SelectLanguageCards'
-import { idnFlag, ukFlag } from '@/assets/images'
 import Description from '@/components/description/Description'
+import { ENV } from '@/libs/env'
 
-const items: SelectLanguageCardType[] = [
-  {
-    image: idnFlag,
-    title: 'Bahasa Indonesia',
-    description: 'Pakai Bahasa Indonesia',
-    value: 'idn'
-  },
-  {
-    image: ukFlag,
-    title: 'English',
-    description: 'Let’s keep it in English',
-    value: 'en'
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `Select language - ${ENV.NEXT_PUBLIC_PROJECT_NAME}`
   }
-]
+}
 
 const Page = () => {
-  const { t } = useTranslation('qna')
-
   return (
     <main>
       <section className='content-placement-center'>
         <div className='flex w-[516px] flex-col items-center'>
-          <Description label={t('select_language')} className='mb-6 text-center' titleTag='h1'>
-            {t('pick_your_preferred_language_to_continue')}
+          <Description label='Select Language' className='mb-6 text-center' titleTag='h1'>
+            Pick your preferred language to continue
           </Description>
-          <SelectLanguageCards items={items} />
+          <SelectLanguageCards />
         </div>
       </section>
     </main>

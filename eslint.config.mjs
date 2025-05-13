@@ -117,7 +117,8 @@ const eslintConfig = [
       '.dockerignore',
       'captain-definition',
       'nginx.conf',
-      '.env.example'
+      '.env.example',
+      '.next'
     ]
   }
 ]

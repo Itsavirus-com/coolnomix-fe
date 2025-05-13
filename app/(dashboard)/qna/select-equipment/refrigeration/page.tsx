@@ -1,26 +1,18 @@
-'use client'
-
+import { Metadata } from 'next'
 import React from 'react'
 
-import { TabsContent } from '@/components/ui/tabs'
+import { ENV } from '@/libs/env'
 
-import WalkInChillerForm from './_components/walk-in-chiller-form/WalkInChillerForm'
-import WalkInFreezerForm from './_components/walk-in-freezer-form/WalkInFreezerForm'
-import { useRefrigerationForm } from './refrigeration.hook'
+import RefrigerationTabs from './_components/refrigeration-tabs/RefrigerationTabs'
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `Refrigeration - ${ENV.NEXT_PUBLIC_PROJECT_NAME}`
+  }
+}
 
 const Page = () => {
-  const { handleChangeTab, handleReview } = useRefrigerationForm()
-
-  return (
-    <>
-      <TabsContent value='walk-in-chiller'>
-        <WalkInChillerForm handleContinue={() => handleChangeTab('walk-in-freezer')} />
-      </TabsContent>
-      <TabsContent value='walk-in-freezer'>
-        <WalkInFreezerForm handleContinue={handleReview} />
-      </TabsContent>
-    </>
-  )
+  return <RefrigerationTabs />
 }
 
 export default Page

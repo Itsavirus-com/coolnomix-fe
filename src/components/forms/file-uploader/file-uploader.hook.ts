@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 
 import type { FileType } from './file-uploader.types'
@@ -10,7 +10,7 @@ export default function useFileUploader(
   onFileUpload?: (files?: FileType[]) => void,
   maxFiles?: number
 ) {
-  const { t } = useTranslation('common')
+  const t = useTranslations('common')
 
   const formatBytes = (bytes: number, decimals = 2) => {
     if (bytes === 0) {

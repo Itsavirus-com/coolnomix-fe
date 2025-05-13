@@ -1,8 +1,8 @@
 import type { FC } from 'react'
 
+import { useTranslations } from 'next-intl'
 import React from 'react'
 import Dropzone from 'react-dropzone'
-import { useTranslation } from 'react-i18next'
 import { v4 as uuidv4 } from 'uuid'
 
 import Icon from '@/components/icon/Icon'
@@ -17,7 +17,7 @@ import type { FileUploaderProps } from './file-uploader.types'
 const MAX_FILE_SIZE = 2 * 1024 * 1024
 
 const FileUploader: FC<FileUploaderProps> = (props) => {
-  const { t } = useTranslation('common')
+  const t = useTranslations('common')
 
   const {
     inputLabel = t('upload_image_for_ac'),
@@ -27,6 +27,7 @@ const FileUploader: FC<FileUploaderProps> = (props) => {
     acceptedFile,
     onFileUpload,
     isInvalid,
+    disabled,
     name,
     value
   } = props
@@ -49,6 +50,7 @@ const FileUploader: FC<FileUploaderProps> = (props) => {
           onDrop={(acceptedFiles) => handleAcceptedFiles(acceptedFiles)}
           maxSize={MAX_FILE_SIZE}
           onDropRejected={handleFileUploadError}
+          disabled={disabled}
         >
           {({ getRootProps, getInputProps }) => {
             return (
@@ -99,6 +101,7 @@ const FileUploader: FC<FileUploaderProps> = (props) => {
           onDrop={(acceptedFiles) => handleAcceptedFiles(acceptedFiles)}
           maxSize={MAX_FILE_SIZE}
           onDropRejected={handleFileUploadError}
+          disabled={disabled}
         >
           {({ getRootProps, getInputProps }) => {
             return (

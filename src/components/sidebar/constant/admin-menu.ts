@@ -1,41 +1,41 @@
-import { getTranslate } from '@/locales/i18n'
+import { dataLogMonitoringPath } from '@/config/paths'
 
 import type { SidebarMenuItemType } from '../components/sidebar-menu-items/sidebar-menu-items.types'
 
-const t = getTranslate('sidebar')
-
-export const ADMIN_MENU_ITEMS: SidebarMenuItemType[] = [
-  {
-    icon: '',
-    title: t('dashboard'),
-    url: '/'
-  },
-  {
-    icon: '',
-    title: t('energySavingAudit'),
-    url: '#',
-    items: [
-      {
-        title: t('qa_management'),
-        url: '#'
-      },
-      {
-        title: t('dataLogMonitoring'),
-        url: '#'
-      },
-      {
-        title: t('analysis'),
-        url: '#'
-      },
-      {
-        title: t('report'),
-        url: '#'
-      }
-    ]
-  },
-  {
-    icon: '',
-    title: t('update_status_won_lost'),
-    url: '#'
-  }
-]
+export const adminMenuItems = (t: any): SidebarMenuItemType[] => {
+  return [
+    {
+      icon: '',
+      title: t('dashboard'),
+      url: '/'
+    },
+    {
+      icon: '',
+      title: t('energy_saving_audit'),
+      url: '#',
+      items: [
+        {
+          title: t('qna_management'),
+          url: '#'
+        },
+        {
+          title: t('data_log_monitoring'),
+          url: dataLogMonitoringPath()
+        },
+        {
+          title: t('analysis'),
+          url: '#'
+        },
+        {
+          title: t('report'),
+          url: '#'
+        }
+      ]
+    },
+    {
+      icon: '',
+      title: t('update_status_won_lost'),
+      url: '#'
+    }
+  ]
+}

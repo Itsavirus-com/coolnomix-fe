@@ -1,3 +1,14 @@
 import type { SidebarMenuItemType } from '../components/sidebar-menu-items/sidebar-menu-items.types'
+import type { TFunction } from 'next-intl'
 
-export const SUPER_ADMIN_MENU_ITEMS: SidebarMenuItemType[] = []
+const superAdminMenuItems = (t: TFunction): SidebarMenuItemType[] => {
+  return [
+    {
+      icon: '',
+      title: t('dashboard'),
+      url: '/'
+    }
+  ]
+}
+
+export { superAdminMenuItems }

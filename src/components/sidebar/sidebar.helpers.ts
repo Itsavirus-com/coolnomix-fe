@@ -1,26 +1,31 @@
+import { TFunction } from 'next-intl'
+
 import type { UserType } from '@/types/general'
 
-import { ADMIN_MENU_ITEMS, SUPER_ADMIN_MENU_ITEMS } from './constant'
-import { CLIENT_BRANCH_MENU_ITEMS } from './constant/client-branch-menu'
-import { CLIENT_GROUP_MENU_ITEMS } from './constant/client-group-menu'
-import { TECHNICIAN_MENU_ITEMS } from './constant/technician-menu'
+import {
+  adminMenuItems,
+  clientBranchMenuItems,
+  clientGroupMenuItems,
+  superAdminMenuItems,
+  technicianMenuItems
+} from './constant'
 
-const getMenuItems = (userType: UserType) => {
+const getMenuItems = (t: TFunction, userType: UserType) => {
   // NOTE - You can fetch from server and return here as well
 
   switch (userType) {
     case 'super-admin':
-      return SUPER_ADMIN_MENU_ITEMS
+      return superAdminMenuItems(t)
     case 'admin':
-      return ADMIN_MENU_ITEMS
+      return adminMenuItems(t)
     case 'client-group':
-      return CLIENT_GROUP_MENU_ITEMS
+      return clientGroupMenuItems(t)
     case 'client-branch':
-      return CLIENT_BRANCH_MENU_ITEMS
+      return clientBranchMenuItems(t)
     case 'technician':
-      return TECHNICIAN_MENU_ITEMS
+      return technicianMenuItems(t)
     default:
-      return ADMIN_MENU_ITEMS
+      return adminMenuItems(t)
   }
 }
 
