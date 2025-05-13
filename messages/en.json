@@ -26,7 +26,6 @@
     "report": "Report",
     "qna": "Q&A",
     "data_log_monitoring": "Data Log Monitoring",
-    "download_as_pdf": "Download as PDF",
     "an_awesome_success_result_animation": "An awesome success result animation",
     "this_field_is_required": "This field is required"
   },
@@ -194,8 +193,15 @@
     "looks_like_no_pending_qna": "Looks like you have no pending QnAs for now",
     "looks_like_no_approved_qna": "Looks like you have no approved QnAs for now",
     "looks_like_no_declined_qna": "Looks like you have no declined QnAs for now",
+    "looks_like_no_in_review_report": "Looks like you have no reports under review",
+    "looks_like_no_approved_report": "Looks like you have no approved reports",
     "all_set_no_reports_under_review": "All set! No reports are currently under review",
-    "no_new_completed_qna": "No new completed QnAs at the moment"
+    "no_new_completed_qna": "No new completed QnAs at the moment",
+    "download_as_pdf": "Download as PDF",
+    "start_qna": "Start Q&A",
+    "form": "Form",
+    "asset_list": "Asset List",
+    "request_technician": "Request Technician"
   },
   "validation": {
     "this_field_is_required": "This field is required"
