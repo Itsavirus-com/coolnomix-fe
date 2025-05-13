@@ -6,7 +6,7 @@ import { listOfBranchPath } from '@/config/paths'
 import { useSuccessSubmitted } from './success-submitted.hook'
 
 const Page = () => {
-  const { title, description, image } = useSuccessSubmitted()
+  const { title, description, image, imageAlt } = useSuccessSubmitted()
 
   return (
     <main>
@@ -17,6 +17,7 @@ const Page = () => {
           buttonLabel='view_status'
           buttonLink={listOfBranchPath()}
           image={image}
+          imageAlt={imageAlt}
         />
       </section>
     </main>

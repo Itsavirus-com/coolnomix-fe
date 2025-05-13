@@ -7,4 +7,5 @@ export type SuccessMessageCardProps = ComponentProps<'div'> & {
   buttonLabel: string
   buttonLink: string
   image?: StaticImageData
+  imageAlt: string
 }
