@@ -4,13 +4,14 @@ import Badge from '@/components/badge'
 import Button from '@/components/button/Button'
 import ProfileInfoCard from '@/components/profile-info-card/ProfileInfoCard'
 
-import { useQnaSubmissionLists } from './qna-submission-lists.hook'
-import { QnaSubmissionListProps } from './qna-submission-lists.types'
+import { useReportList } from './report-list.hook'
+import { ReportListProps } from './report-lists.types'
 
-const QnaSubmissionList: FC<QnaSubmissionListProps> = (props) => {
-  const { name, type, date, status, equipmentType, ...rest } = props
+const ReportList: FC<ReportListProps> = (props) => {
+  const { id, branchName, name, type, date, status, equipmentType, ...rest } = props
 
-  const { icon, typeAlias, buttonLabel, phaseLabel, viewLink } = useQnaSubmissionLists(
+  const { icon, typeAlias, buttonLabel, phaseLabel, viewLink } = useReportList(
+    id,
     status,
     type,
     equipmentType
@@ -22,14 +23,24 @@ const QnaSubmissionList: FC<QnaSubmissionListProps> = (props) => {
       {...rest}
     >
       <ProfileInfoCard
-        name={name}
+        name={
+          <div className='flex items-center gap-2'>
+            {branchName && (
+              <>
+                <span>{branchName}</span>
+                <span>•</span>
+              </>
+            )}
+            <span>{name}</span>
+          </div>
+        }
         icon={icon.icon}
         iconBgColor={icon.iconBgColor}
         size='md'
         moreInfo={
-          <div>
+          <div className='flex items-center gap-2'>
             <span>{typeAlias}</span>
-            <span className='mx-2'>•</span>
+            <span>•</span>
             <span>{date}</span>
           </div>
         }
@@ -48,4 +59,4 @@ const QnaSubmissionList: FC<QnaSubmissionListProps> = (props) => {
   )
 }
 
-export default QnaSubmissionList
+export default ReportList

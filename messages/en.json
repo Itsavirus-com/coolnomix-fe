@@ -27,7 +27,10 @@
     "qna": "Q&A",
     "data_log_monitoring": "Data Log Monitoring",
     "an_awesome_success_result_animation": "An awesome success result animation",
-    "this_field_is_required": "This field is required"
+    "this_field_is_required": "This field is required",
+    "back_to_ac_request": "Back to AC Request",
+    "continue_to_phase_2": "Continue to Phase 2",
+    "submit_and_generate_report": "Submit & Generate Report"
   },
   "qna": {
     "get_started": "Get Started!",
@@ -86,6 +89,7 @@
     "what_is_the_brand_of_the_equipment": "What is the brand of the equipment?",
     "what_is_the_model_of_the_equipment": "What is the model of the equipment? (Indoor and Outdoor)",
     "what_is_the_serial_number_of_the_equipment": "What is the serial number of the equipment?",
+    "number_of_same_type_air_conditioning": "Number of Same-Type Air Conditioning",
     "what_is_the_type_of_air_conditioning_system": "What is the type of Air Conditioning? (Indoor and Outdoor)",
     "air_conditioning_title": "Air Conditioning {index}",
     "select_air_conditioning_type": "Select Air Conditioning type",
@@ -159,8 +163,8 @@
     "monthly": "Monthly",
     "yes": "Yes",
     "no": "No",
-    "indoor": "Indoor",
-    "outdoor": "Outdoor",
+    "inverter": "Inverter",
+    "non_inverter": "Non Inverter",
     "review_your_information": "Review your information",
     "please_check_all_the_details_you_have_entered_before_submitting": "Please check all the details you have entered before submitting.",
     "bahasa_indonesia": "Bahasa Indonesia",
@@ -170,7 +174,10 @@
     "walk_in_chiller": "Walk in Chiller",
     "walk_in_freezer": "Walk in Freezer",
     "preview": "Preview",
-    "submit": "Submit"
+    "submit": "Submit",
+    "add_another_air_conditioner": "Add Another Air Conditioner",
+    "if_you_have_another_air_conditioner_with": "If you have another air conditioner with a different brand, model, or type, please click the button below",
+    "e_g_3_units": "e.g., 3 units"
   },
   "sidebar": {
     "platform": "PLATFORM",
@@ -183,7 +190,8 @@
     "list_of_branch": "List of Branch",
     "qa_management": "QA Management",
     "analysis": "Analysis",
-    "update_status_won_lost": "Update Status Won Lost"
+    "update_status_won_lost": "Update Status Won Lost",
+    "list_of_report": "List of Report"
   },
   "listBranch": {
     "start_now": "Start Now",
@@ -201,7 +209,11 @@
     "start_qna": "Start Q&A",
     "form": "Form",
     "asset_list": "Asset List",
-    "request_technician": "Request Technician"
+    "request_technician": "Request Technician",
+    "report": "Report"
+  },
+  "listReport": {
+    "start_qna": "Start Q&A"
   },
   "validation": {
     "this_field_is_required": "This field is required"

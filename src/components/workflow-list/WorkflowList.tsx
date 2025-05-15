@@ -1,14 +1,14 @@
 'use client'
 
-import React from 'react'
+import React, { FC } from 'react'
 
 import Accordion from '@/components/accordion/Accordion'
 
-import { useWorkflowList } from './workflow-list.hook'
-import QnaSubmissionLists from '../qna-submission-lists/QnaSubmissionLists'
+import { WorkflowListProps } from './workflow-list.types'
+import ReportLists from '../report-lists/ReportLists'
 
-const WorkflowList = () => {
-  const { workflowLists } = useWorkflowList()
+const WorkflowList: FC<WorkflowListProps> = (props) => {
+  const { workflowData } = props
 
   return (
     <div className='mt-4'>
@@ -16,10 +16,10 @@ const WorkflowList = () => {
         type='multiple'
         defaultValue={['0', '1']}
         accordionTriggerClassName='text-sm font-normal text-grey-darkest'
-        items={workflowLists?.map((item, index) => ({
+        items={workflowData?.map((item, index) => ({
           key: index.toString(),
           title: `${item.name}:`,
-          content: <QnaSubmissionLists status={item.status} lists={item.qnaLists} />
+          content: <ReportLists status={item.status} lists={item.lists} />
         }))}
       />
     </div>

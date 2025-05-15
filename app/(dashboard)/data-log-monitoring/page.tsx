@@ -7,6 +7,7 @@ import Breadcrumbs from '@/components/breadcrumbs/Breadcrumb'
 import Button from '@/components/button/Button'
 import ProfileInfoCard from '@/components/profile-info-card/ProfileInfoCard'
 import SearchFilter from '@/components/search-filter/SearchFilter'
+import { WorkflowListProps } from '@/components/workflow-list/workflow-list.types'
 import WorkflowList from '@/components/workflow-list/WorkflowList'
 import { branchDetailedPath, listOfBranchPath } from '@/config/paths'
 import { ENV } from '@/libs/env'
@@ -22,6 +23,32 @@ const breadcrumbs = [
   { key: 'energy-saving-audit', label: 'Energy Saving Audit', href: listOfBranchPath() },
   { key: 'list-of-branch', label: 'List of Branch', href: listOfBranchPath() },
   { key: 'branch-detailed', label: 'Branch Detailed', href: branchDetailedPath() }
+]
+
+const data: WorkflowListProps['workflowData'] = [
+  {
+    id: 1,
+    name: 'Pending',
+    status: 'done',
+    lists: [
+      {
+        id: 1,
+        branchName: 'Pepito Market Group',
+        name: 'Air Conditioning Report',
+        date: '7:18 AM, February 3, 2025',
+        equipmentType: 'air-conditioning',
+        type: 'details-forms'
+      },
+      {
+        id: 2,
+        branchName: 'Pepito Market Group',
+        name: 'Refrigeration Report',
+        date: '7:18 AM, February 3, 2025',
+        equipmentType: 'refrigeration',
+        type: 'details-forms'
+      }
+    ]
+  }
 ]
 
 const Page = async () => {
@@ -42,7 +69,7 @@ const Page = async () => {
           <SearchFilter showBadge>
             <Button size='xs' className='w-fit' label={t('download_as_pdf')} />
           </SearchFilter>
-          <WorkflowList />
+          <WorkflowList workflowData={data} />
         </div>
       </section>
     </main>
