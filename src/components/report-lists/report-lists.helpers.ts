@@ -31,12 +31,12 @@ export const createIcon = (type: string, equipmentType?: string) => {
     default:
       if (equipmentType === 'refrigeration') {
         return {
-          icon: 'icon-posts',
+          icon: 'icon-notebook',
           iconBgColor: 'bg-yellow-light'
         }
       }
       return {
-        icon: 'icon-posts',
+        icon: 'icon-notebook',
         iconBgColor: 'bg-red-light'
       }
   }

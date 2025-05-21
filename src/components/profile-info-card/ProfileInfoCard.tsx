@@ -35,7 +35,7 @@ const ProfileInfoCard: FC<ProfileInfoCardProps> = (props) => {
             iconBgColor && iconBgColor
           )}
         >
-          <Icon icon={icon} className='h-full w-full' />
+          <Icon icon={icon} size={14} />
         </div>
       )}
       <div className='flex flex-col'>
