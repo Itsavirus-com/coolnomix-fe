@@ -17,17 +17,18 @@ export const requiredStringSchema = (t: TFunction) =>
     })
     .min(1, requiredString(t))
 
-export const requiredFileSchema = (t: TFunction) =>
+export const fileSchema = z.object({
+  formattedSize: z.string(),
+  path: z.string(),
+  preview: z.string(),
+  relativePath: z.string()
+})
+
+export const requiredFilesSchema = (t: TFunction) =>
   z.union([
     z.array(z.instanceof(File)).min(1, requiredString(t)),
-    z
-      .array(
-        z.object({
-          formattedSize: z.string(),
-          path: z.string(),
-          preview: z.string(),
-          relativePath: z.string()
-        })
-      )
-      .min(1, requiredString(t))
+    z.array(fileSchema).min(1, requiredString(t))
   ])
+
+export const optionalFilesSchema = () =>
+  z.union([z.array(z.instanceof(File)), z.array(fileSchema).optional()])

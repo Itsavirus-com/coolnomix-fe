@@ -3,11 +3,15 @@
 }
 
 .dropzone.dropzone-upload {
-  @apply border-dashed;
+  @apply border-none bg-transparent px-0 transition-colors;
 }
 
 .dropzone.dropzone-previews {
   @apply !cursor-default;
+}
+
+.dropzone .dz-message {
+  @apply w-full;
 }
 
 .dropzone .dz-started .dz-message {
