@@ -1,35 +1,33 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import React, { FC } from 'react'
 
-import { TabsContent } from '@/components/ui/tabs'
+import FormSidebar from '@/components/form-sidebar/FormSidebar'
+import { Tabs } from '@/components/ui/tabs'
 
 import { useRefrigerationTabs } from './refrigeration-tabs.hook'
-import { RefrigerationProps } from '../../refrigeration.types'
-import WalkInChillerForm from '../walk-in-chiller-form/WalkInChillerForm'
-import WalkInFreezerForm from '../walk-in-freezer-form/WalkInFreezerForm'
+import { RefrigerationTabsProps } from './refrigeration-tabs.types'
 
-const RefrigerationTabs: FC<RefrigerationProps> = (props) => {
-  const { inPreview } = props
+const RefrigerationTabs: FC<RefrigerationTabsProps> = (props) => {
+  const { children } = props
 
-  const { handleChangeTab, handleReview, handleSubmit } = useRefrigerationTabs()
+  const t = useTranslations('qna')
+
+  const { tabs, currentTab, handleChangeTab } = useRefrigerationTabs()
 
   return (
-    <>
-      <TabsContent value='walk-in-chiller'>
-        <WalkInChillerForm
-          inPreview={inPreview}
-          handleContinue={() => handleChangeTab('walk-in-freezer')}
+    <Tabs value={currentTab} defaultValue='walk-in-chiller'>
+      <div className='flex gap-16'>
+        <FormSidebar
+          title={t('kitchen_set')}
+          description={t('manage_refrigeration_units_for_each_kitchen_set')}
+          tabs={tabs}
+          onChangeTab={handleChangeTab}
         />
-      </TabsContent>
-      <TabsContent value='walk-in-freezer'>
-        <WalkInFreezerForm
-          inPreview={inPreview}
-          handleContinue={handleReview}
-          handleSubmit={handleSubmit}
-        />
-      </TabsContent>
-    </>
+        <div className='w-[578px]'>{children}</div>
+      </div>
+    </Tabs>
   )
 }
 

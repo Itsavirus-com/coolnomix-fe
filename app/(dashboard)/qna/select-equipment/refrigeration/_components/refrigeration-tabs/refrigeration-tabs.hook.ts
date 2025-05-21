@@ -1,17 +1,14 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { FormSidebarTab } from '@/(dashboard)/qna/_components/form-sidebar/form-sidebar.types'
-import { qnaRefrigerationReviewPath, qnaSuccessSubmittedPath } from '@/config/paths'
-import { remove } from '@/utils/storage'
+import { FormSidebarTab } from '@/components/form-sidebar/form-sidebar.types'
 
 export const useRefrigerationTabs = () => {
   const t = useTranslations('qna')
 
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const router = useRouter()
 
   const tab = searchParams.get('tab') || 'walk-in-chiller'
 
@@ -50,16 +47,6 @@ export const useRefrigerationTabs = () => {
     [pathname, searchParams]
   )
 
-  const handleReview = () => {
-    router.push(qnaRefrigerationReviewPath())
-  }
-
-  const handleSubmit = async (values: unknown) => {
-    console.log(values)
-    remove('QNA_FORM')
-    router.push(qnaSuccessSubmittedPath())
-  }
-
   useEffect(() => {
     setCurrentTab(tab)
   }, [tab])
@@ -67,8 +54,6 @@ export const useRefrigerationTabs = () => {
   return {
     tabs,
     currentTab,
-    handleChangeTab,
-    handleReview,
-    handleSubmit
+    handleChangeTab
   }
 }

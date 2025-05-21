@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
+import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaRefrigerationPath } from '@/config/paths'
 import { load, updateStoredObject } from '@/utils/storage'
 
@@ -26,7 +27,7 @@ export const useWalkInFreezerForm = (inPreview: boolean) => {
   })
 
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    updateStoredObject('QNA_FORM', { walkInFreezerForm: values })
+    updateStoredObject(QNA_FORM_STORAGE_KEY, { walkInFreezerForm: values })
   }, [])
 
   const handleBack = () => {
@@ -56,11 +57,13 @@ export const useWalkInFreezerForm = (inPreview: boolean) => {
   )
 
   useEffect(() => {
-    const savedAnswer = load('QNA_FORM')
+    const saved = load(QNA_FORM_STORAGE_KEY)
 
-    setTimeout(() => {
-      methods.reset(savedAnswer?.walkInFreezerForm)
+    const timeout = setTimeout(() => {
+      methods.reset(saved?.walkInFreezerForm)
     }, 300)
+
+    return () => clearTimeout(timeout)
   }, [])
 
   return {
