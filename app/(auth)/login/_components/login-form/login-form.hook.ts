@@ -4,7 +4,7 @@ import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { formSchema } from './login-form.scheme'
+import { formSchema } from './login-form.schema'
 
 export const useLoginForm = () => {
   const t = useTranslations('auth')
