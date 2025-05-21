@@ -7,7 +7,7 @@ import { z } from 'zod'
 import { formSchema } from './login-form.schema'
 
 export const useLoginForm = () => {
-  const t = useTranslations('auth')
+  const t = useTranslations('validation')
 
   const methods = useForm({
     resolver: zodResolver(formSchema(t))
