@@ -29,6 +29,7 @@ const TechVisitForm: FC<TechVisitFormProps> = (props) => {
           inputLabel={t('pick_appointment_date')}
           name='appointmentDate'
           disabled={inPreview}
+          minDate={new Date()}
         />
         <TimePicker
           required
@@ -39,6 +40,7 @@ const TechVisitForm: FC<TechVisitFormProps> = (props) => {
           disabled={inPreview}
         />
         <ControlledInput
+          required
           label={t('location')}
           name='location'
           placeholder='e.g., 123 Sunset Road, Kuta'

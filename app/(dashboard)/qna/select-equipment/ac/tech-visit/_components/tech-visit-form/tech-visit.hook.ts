@@ -6,9 +6,8 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { qnaSuccessSubmittedPath } from '@/config/paths'
+import { qnaSuccessPath } from '@/config/paths'
 import { showModal } from '@/stores/modal-store.actions'
-import { remove } from '@/utils/storage'
 
 import { formSchema } from './tech-visit.schema'
 
@@ -20,24 +19,16 @@ export const useTechVisitForm = (inPreview: boolean) => {
 
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      appointmentDate: null,
-      appointmentTime: null,
-      location: '',
-      additionalNotes: ''
-    }
+    resolver: zodResolver(schema)
   })
-
-  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    console.log(values)
-    router.push(`${qnaSuccessSubmittedPath()}?type=tech-visit`)
-    remove('QNA_FORM')
-  }, [])
 
   const handleBack = () => {
     router.back()
   }
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
+    console.log(values)
+    router.push(`${qnaSuccessPath()}?type=tech-visit`)
+  }, [])
 
   const handleShowModal = (values: z.infer<typeof schema>) => {
     showModal({

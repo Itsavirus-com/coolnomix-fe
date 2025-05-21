@@ -6,4 +6,5 @@ export type DateInputProps = ComponentProps<'div'> & {
   inputLabel?: string
   required?: boolean
   disabled?: boolean
+  minDate?: Date
 }

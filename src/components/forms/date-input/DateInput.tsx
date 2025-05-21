@@ -18,7 +18,7 @@ import { DateInputProps } from './date-input.types'
 const DateInput: FC<DateInputProps> = (props) => {
   const t = useTranslations('common')
 
-  const { name, label, required, inputLabel = t('pick_a_date'), disabled, ...rest } = props
+  const { name, label, required, inputLabel = t('pick_a_date'), disabled, minDate, ...rest } = props
 
   const { control } = useFormContext()
 
@@ -60,8 +60,9 @@ const DateInput: FC<DateInputProps> = (props) => {
               <Calendar
                 mode='single'
                 selected={field.value}
-                onSelect={field.onChange}
+                onSelect={(date) => field.onChange(date?.toISOString())}
                 initialFocus
+                disabled={{ before: minDate }}
               />
             </PopoverContent>
           </Popover>
