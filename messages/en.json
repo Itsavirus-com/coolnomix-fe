@@ -267,7 +267,19 @@
     "this_field_is_required": "This field is required",
     "max_operating_hours_per_day": "Max operating hours per day is 24",
     "max_running_days_per_week": "Max running days per week is 7",
-    "please_enter_a_valid_email_address": "Please enter a valid email address"
+    "please_enter_a_valid_email_address": "Please enter a valid email address",
+    "phone_number_must_be_at_least_8_digits": "Phone number must be at least 8 digits",
+    "phone_number_must_contain_only_digits": "Phone number must contain only digits",
+    "npwp_must_be_at_least_16_digits": "NPWP must be at least 16 digits",
+    "npwp_must_contain_only_digits": "NPWP must contain only digits",
+    "password_must_be_at_least_8_characters": "Password must be at least 8 characters",
+    "password_must_contain_at_least_one_uppercase_letter": "Password must contain at least one uppercase letter",
+    "password_must_contain_at_least_one_lowercase_letter": "Password must contain at least one lowercase letter",
+    "password_must_contain_at_least_one_number": "Password must contain at least one number",
+    "password_must_not_contain_spaces": "Password must not contain spaces",
+    "password_must_contain_at_least_one_special_character": "Password must contain at least one special character",
+    "passwords_do_not_match": "Passwords do not match",
+    "invalid_phone_number": "Invalid phone number"
   },
   "auth": {
     "welcome_back": "Welcome Back!",
@@ -284,6 +296,15 @@
     "registration": "Registration",
     "sign_up_to_start_your_journey_with_us_it_only_takes_a_minute": "Sign up to start your journey with us. It only takes a minute!",
     "group_name": "Group Name",
-    "continue": "Continue"
+    "continue": "Continue",
+    "phone_number": "Phone Number",
+    "contact_number": "Contact Number",
+    "phone_number_country": "Phone Number Country",
+    "legal_company_name": "Legal Company Name",
+    "pic_name": "PIC Name",
+    "pic_email": "PIC Email",
+    "pic_npwp": "PIC NPWP",
+    "confirm_password": "Confirm Password",
+    "register": "Register"
   }
 }
