@@ -1,7 +1,9 @@
 export type SelectAcRequestValue = 'asset-list' | 'details-forms' | 'tech-visit'
 
 export type SelectAcRequestCardType = {
-  image: string
+  icon: string
+  bgColor: string
+  borderColor: string
   title: string
   description: string
   type: SelectAcRequestValue

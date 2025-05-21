@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl'
 import { useCallback, useMemo, useState } from 'react'
 
 import { idnFlag, ukFlag } from '@/assets/images'
+import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaSelectEquipmentPath } from '@/config/paths'
 import { load, updateStoredObject } from '@/utils/storage'
 
@@ -13,7 +14,7 @@ export const useSelectLanguage = () => {
 
   const router = useRouter()
 
-  const currentLanguage = load('QNA_FORM')?.lang || ''
+  const currentLanguage = load(QNA_FORM_STORAGE_KEY)?.lang || ''
 
   const [selectedLanguage, setSelectedLanguage] = useState<SelectLanguageValue>(currentLanguage)
 
@@ -37,7 +38,7 @@ export const useSelectLanguage = () => {
 
   const handleSelectLanguage = useCallback((lang: SelectLanguageValue) => {
     setSelectedLanguage(lang)
-    updateStoredObject('QNA_FORM', { lang })
+    updateStoredObject(QNA_FORM_STORAGE_KEY, { lang })
   }, [])
 
   const handleContinue = () => {

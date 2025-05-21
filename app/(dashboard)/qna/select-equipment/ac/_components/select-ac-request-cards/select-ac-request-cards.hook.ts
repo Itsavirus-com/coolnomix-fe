@@ -2,8 +2,8 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback, useMemo, useState } from 'react'
 
-import { acRequest1, acRequest2, acRequest3 } from '@/assets/images'
 import { ControlledButtonProps } from '@/components/button/button.types'
+import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaAcDetailsPath } from '@/config/paths'
 import { load, updateStoredObject } from '@/utils/storage'
 
@@ -14,26 +14,32 @@ export const useSelectAcRequest = () => {
 
   const router = useRouter()
 
-  const currentAcRequest = load('QNA_FORM')?.acRequest || ''
+  const currentAcRequest = load(QNA_FORM_STORAGE_KEY)?.acRequest || ''
 
   const [selectedAcRequest, setSelectedAcRequest] = useState<SelectAcRequestValue>(currentAcRequest)
 
   const requestTypes: SelectAcRequestCardType[] = useMemo(
     () => [
       {
-        image: acRequest1,
+        icon: 'icon-zip',
+        bgColor: 'bg-[#F1CCF9]',
+        borderColor: 'border-1 border-[#EDBFF7]',
         title: t('asset_list'),
         description: t('upload_your_ac_asset_list_for_faster_processing'),
         type: 'asset-list'
       },
       {
-        image: acRequest2,
+        icon: 'icon-posts',
+        bgColor: 'bg-[#D6E0FF]',
+        borderColor: '',
         title: t('details_forms'),
         description: t('fill_out_the_form_based_on_your_air_conditioner'),
         type: 'details-forms'
       },
       {
-        image: acRequest3,
+        icon: 'icon-user',
+        bgColor: 'bg-[#E2DAFB]',
+        borderColor: 'border-1 border-[#DBD1FA]',
         title: t('technician_visit'),
         description: t('technician_will_visit_to_assess_your_ac_needs'),
         type: 'tech-visit'
@@ -44,7 +50,7 @@ export const useSelectAcRequest = () => {
 
   const handleSelectAcRequest = useCallback((type: SelectAcRequestValue) => {
     setSelectedAcRequest(type)
-    updateStoredObject('QNA_FORM', { acRequest: type })
+    updateStoredObject(QNA_FORM_STORAGE_KEY, { acRequest: type })
   }, [])
 
   const handleClick = useCallback(() => {

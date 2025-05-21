@@ -1,16 +1,22 @@
-import { useTranslations } from 'next-intl'
 import React, { FC, memo } from 'react'
 
-import Image from '@/components/image/Image'
+import Icon from '@/components/icon/Icon'
 import Text from '@/components/text/Text'
 import { cn } from '@/libs/utils'
 
 import { SelectAcRequestCardProps } from './select-ac-request-cards.types'
 
 const SelectAcRequestCard: FC<SelectAcRequestCardProps> = (props) => {
-  const { type, image, title, description, selectedAcRequest, onSelectAcRequest } = props
-
-  const t = useTranslations('common')
+  const {
+    type,
+    icon,
+    bgColor,
+    borderColor,
+    title,
+    description,
+    selectedAcRequest,
+    onSelectAcRequest
+  } = props
 
   return (
     <div
@@ -22,8 +28,14 @@ const SelectAcRequestCard: FC<SelectAcRequestCardProps> = (props) => {
         onSelectAcRequest(type)
       }}
     >
-      <div className='relative h-[42px] w-[42px]'>
-        <Image src={image} alt={t('an_awesome_country_flag')} fill />
+      <div
+        className={cn(
+          'flex h-[42px] w-[42px] items-center justify-center rounded-md',
+          bgColor,
+          borderColor
+        )}
+      >
+        <Icon icon={icon} size={16} />
       </div>
       <Text weight='semibold' className='mt-5 mb-1.5'>
         {title}

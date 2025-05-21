@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
+import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaAcPath, qnaRefrigerationPath } from '@/config/paths'
 import { load, updateStoredObject } from '@/utils/storage'
 
@@ -18,7 +19,7 @@ export const useSelectEquipmentForm = () => {
 
   const router = useRouter()
 
-  const currentEquipmentType = load('QNA_FORM')?.equipmentType || ''
+  const currentEquipmentType = load(QNA_FORM_STORAGE_KEY)?.equipmentType || ''
 
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
@@ -49,7 +50,7 @@ export const useSelectEquipmentForm = () => {
 
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     handleNavigate(values.equipmentType as EquipmentType)
-    updateStoredObject('QNA_FORM', { equipmentType: values.equipmentType })
+    updateStoredObject(QNA_FORM_STORAGE_KEY, { equipmentType: values.equipmentType })
   }, [])
 
   const handleBack = () => {

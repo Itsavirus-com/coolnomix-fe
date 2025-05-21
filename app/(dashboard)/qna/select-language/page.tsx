@@ -2,9 +2,10 @@ import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import React from 'react'
 
-import SelectLanguageCards from '@/_components/select-language-cards/SelectLanguageCards'
 import Description from '@/components/description/Description'
 import { ENV } from '@/libs/env'
+
+import SelectLanguageCards from './_components/select-language-cards/SelectLanguageCards'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
