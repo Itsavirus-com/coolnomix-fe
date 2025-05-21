@@ -46,8 +46,8 @@ export const qnaAcDetailsReviewPhase2Path: PathGeneratorWithParams = ({ type }: 
   })
 }
 
-export const qnaSuccessSubmittedPath: PathGenerator = () => {
+export const qnaSuccessPath: PathGenerator = () => {
   return createPath(QNA_PATH, {
-    suffix: 'success-submitted'
+    suffix: 'success'
   })
 }

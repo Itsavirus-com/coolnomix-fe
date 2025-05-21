@@ -35,9 +35,7 @@ const SuccessMessageCard: FC<SuccessMessageCardProps> = (props) => {
         <Text tag='h1' variant='subtitle1' weight='semibold'>
           {title}
         </Text>
-        <Text tag='p' variant='body2' className='text-grey-darkest mt-2 mb-8'>
-          {description}
-        </Text>
+        <Text className='text-grey-darkest mt-2 mb-8'>{description}</Text>
         <Button label={buttonLabel} link={buttonLink} />
       </div>
     </div>
