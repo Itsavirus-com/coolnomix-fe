@@ -10,11 +10,7 @@
     "upload_another_image": "Upload another image",
     "pick_a_date_range": "Pick a date range",
     "an_awesome_country_flag": "An awesome country flag",
-    "submission_successful": "Submission Successful!",
-    "submission_successful_description": "Thank you for providing the details! Your information has been received and will be reviewed shortly. We’ll get back to you if any additional details are needed.",
     "view_status": "View Status",
-    "we_ve_got_your_request": "We’ve Got Your Request!",
-    "thank_you_your_request_has_been_received": "Thank you! Your request has been received. Our team will contact you soon to arrange the technician visit",
     "an_awesome_image": "An awesome image",
     "an_awesome_profile_image": "An awesome profile image",
     "open": "Open",
@@ -26,12 +22,16 @@
     "report": "Report",
     "qna": "Q&A",
     "data_log_monitoring": "Data Log Monitoring",
-    "an_awesome_success_result_animation": "An awesome success result animation",
     "this_field_is_required": "This field is required",
     "back_to_ac_request": "Back to AC Request",
     "continue_to_phase_2": "Continue to Phase 2",
     "submit_and_generate_report": "Submit & Generate Report",
-    "list_of_report": "List of Report"
+    "list_of_report": "List of Report",
+    "we_ve_got_your_request": "We’ve Got Your Request!",
+    "thank_you_your_request_has_been_received": "Thank you! Your request has been received. Our team will contact you soon to arrange the technician visit",
+    "submission_successful": "Submission Successful!",
+    "submission_successful_description": "Thank you for providing the details! Your information has been received and will be reviewed shortly. We’ll get back to you if any additional details are needed.",
+    "an_awesome_success_result_animation": "An awesome success result animation"
   },
   "qna": {
     "get_started": "Get Started!",
@@ -305,6 +305,12 @@
     "pic_email": "PIC Email",
     "pic_npwp": "PIC NPWP",
     "confirm_password": "Confirm Password",
-    "register": "Register"
+    "register": "Register",
+    "forgot_password": "Forgot Password",
+    "enter_your_registered_email_address_to_receive_a_password_reset_link": "Enter your registered email address to receive a password reset link",
+    "reset_password": "Reset Password",
+    "an_awesome_success_result_animation": "An awesome success result animation",
+    "your_password_has_been_reset": "Your Password Has Been Reset",
+    "youve_successfully_changed_your_password_please_use_your_new_password_to_log_in_securely": "You’ve successfully changed your password. Please use your new password to log in securely."
   }
 }

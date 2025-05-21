@@ -4,7 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import React from 'react'
 
 import Text from '@/components/text/Text'
-import { resetPasswordPath } from '@/config/paths/auth-path'
+import { forgotPasswordPath } from '@/config/paths/auth-path'
 import { ENV } from '@/libs/env'
 
 import LoginForm from './_components/login-form/LoginForm'
@@ -38,7 +38,7 @@ const Page = async () => {
             {t('click_here_to')}
           </Text>
           <Text tag='p' variant='body2' weight='medium'>
-            <Link href={resetPasswordPath()}>{t('reset_it')}</Link>
+            <Link href={forgotPasswordPath()}>{t('reset_it')}</Link>
           </Text>
         </div>
       </div>

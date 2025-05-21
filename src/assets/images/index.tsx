@@ -1,4 +1,5 @@
 import coolnomixLogo from './coolnomix-logo.png'
+import forgotPasswordImage from './forgot-password-image.jpeg'
 import acRequest1 from './icon-asset-list.svg'
 import acRequest2 from './icon-details-forms.svg'
 import acRequest3 from './icon-tech-visit.svg'
@@ -6,6 +7,7 @@ import defaultImage from './image-default.jpg'
 import idnFlag from './indonesia.svg'
 import loginImage from './login-image.jpeg'
 import modalOverlay from './modal-overlay.png'
+import registerImage from './register-image.jpeg'
 import sentianLogo from './sentian-logo.png'
 import snowman from './snowman.svg'
 import successAnimation from './success-animation.gif'
@@ -25,5 +27,7 @@ export {
   techVisitSuccessAnimation,
   coolnomixLogo,
   sentianLogo,
-  loginImage
+  loginImage,
+  registerImage,
+  forgotPasswordImage
 }
