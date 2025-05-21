@@ -4,7 +4,6 @@ import React from 'react'
 import { ENV } from '@/libs/env'
 
 import GetStarted from './_components/get-started/GetStarted'
-import UserGuide from './_components/user-guide/UserGuide'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -15,10 +14,9 @@ export async function generateMetadata(): Promise<Metadata> {
 const Page = () => {
   return (
     <main>
-      <section className='content-placement-center content-placement-center--start !mt-24'>
+      <section className='content-placement-center'>
         <div className='flex flex-col items-center'>
           <GetStarted />
-          <UserGuide />
         </div>
       </section>
     </main>

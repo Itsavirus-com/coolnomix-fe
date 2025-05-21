@@ -7,7 +7,6 @@ import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
 import { qnaSuccessSubmittedPath } from '@/config/paths'
-import { remove } from '@/utils/storage'
 
 import { formSchema } from './asset-list-form.schema'
 
@@ -26,15 +25,11 @@ export const useAssetListForm = (inPreview: boolean) => {
     }
   })
 
+  const handleBack = () => router.back()
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     console.log(values)
     router.push(qnaSuccessSubmittedPath())
-    remove('QNA_FORM')
   }, [])
-
-  const handleBack = () => {
-    router.back()
-  }
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
     () => [
