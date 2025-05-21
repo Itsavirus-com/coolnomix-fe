@@ -5,7 +5,7 @@ import { qnaAcDetailsReviewPath } from '@/config/paths'
 
 const steps = ['upload-form', 'details-form', 'details-form-ac']
 
-export const useDetailsForms = () => {
+export const useStepFormTabs = () => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()

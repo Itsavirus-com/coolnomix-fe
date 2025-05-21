@@ -1,6 +1,6 @@
 .details-form-sidebar-tab,
 .details-form-sidebar-tab-child {
-  @apply relative block h-fit w-full cursor-pointer gap-2 rounded-tl-none rounded-bl-none py-2 pr-2 pl-2.5 text-left shadow-none;
+  @apply relative block h-fit w-full cursor-pointer rounded-tl-none rounded-bl-none py-2 pr-2 pl-2.5 text-left shadow-none;
 }
 
 .details-form-sidebar-tab-child {

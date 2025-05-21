@@ -6,7 +6,8 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { qnaAcDetailsReviewPath, qnaSuccessSubmittedPath } from '@/config/paths'
+import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
+import { qnaAcDetailsReviewPath, qnaSuccessPath } from '@/config/paths'
 import { load, remove } from '@/utils/storage'
 
 import { formSchema } from './phase-one-form.schema'
@@ -17,9 +18,12 @@ export const usePhaseOneForm = () => {
 
   const router = useRouter()
 
+  const saved = load(QNA_FORM_STORAGE_KEY)
+
   // Should be data from backend
   const isSubmitted = false
-  const isApproved = true
+  // Just for Demo
+  const isApproved = false
 
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
@@ -36,19 +40,15 @@ export const usePhaseOneForm = () => {
     name: 'peakLoadTarif'
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    console.log(values)
-    router.replace(qnaSuccessSubmittedPath())
-    remove('QNA_FORM')
-  }, [])
-
   const handleContinue = () => {
     router.push(`${qnaAcDetailsReviewPath({ type: 'details-forms' })}?tab=phase-2`)
   }
-
-  const handleBack = () => {
-    router.back()
-  }
+  const handleBack = () => router.back()
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
+    console.log(values)
+    router.replace(`${qnaSuccessPath()}?type=details-forms`)
+    remove(QNA_FORM_STORAGE_KEY)
+  }, [])
 
   const buttons = useMemo(() => {
     const buttons = []
@@ -76,30 +76,35 @@ export const usePhaseOneForm = () => {
       onClick: handleBack
     }
 
+    if (isApproved) {
+      buttons.push(continueButton)
+    }
+
     if (!isApproved) {
       buttons.push(editButton)
       buttons.push(submitButton)
-    }
-
-    if (isApproved) {
-      buttons.push(continueButton)
     }
 
     return buttons as [ControlledButtonProps, ControlledButtonProps]
   }, [isApproved, isSubmitted])
 
   useEffect(() => {
-    const savedAnswer = load('QNA_FORM')
-
-    setTimeout(() => {
-      methods.reset({
-        phaseOne: savedAnswer?.detailsBrand?.map((detailBrand: any, index: string) => ({
-          ...detailBrand,
-          ...savedAnswer?.detailsAc[index]
-        })),
-        peakLoadTarif: savedAnswer?.peakLoadTarif
-      })
+    const timeout = setTimeout(() => {
+      if (saved?.stepsForm) {
+        methods.reset({
+          phaseOne: saved.stepsForm?.map(({ acUnit, detailsAc, detailsBrand }: any) => ({
+            acUnit,
+            ...detailsBrand,
+            ...detailsAc
+          })),
+          peakLoadTarif: saved.peakLoadTarif
+        })
+      }
     }, 300)
+
+    return () => {
+      clearTimeout(timeout)
+    }
   }, [])
 
   return {

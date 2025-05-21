@@ -34,10 +34,12 @@ const FormSidebar: FC<FormSidebarProps> = (props) => {
                   onChangeTab(tab.value)
                 }}
               >
-                <Icon icon={tab.icon} size={16} />
-                <Text tag='span' variant='body2' weight='semibold'>
-                  {tab.label}
-                </Text>
+                <div className='flex items-center gap-2'>
+                  <Icon icon={tab.icon} size={14} className='text-brand-dark' />
+                  <Text tag='span' variant='body2' weight='semibold'>
+                    {tab.label}
+                  </Text>
+                </div>
               </TabsTrigger>
               {tab?.children && (
                 <div className='mt-0.5'>

@@ -30,7 +30,8 @@
     "this_field_is_required": "This field is required",
     "back_to_ac_request": "Back to AC Request",
     "continue_to_phase_2": "Continue to Phase 2",
-    "submit_and_generate_report": "Submit & Generate Report"
+    "submit_and_generate_report": "Submit & Generate Report",
+    "list_of_report": "List of Report"
   },
   "qna": {
     "get_started": "Get Started!",
@@ -177,7 +178,11 @@
     "submit": "Submit",
     "add_another_air_conditioner": "Add Another Air Conditioner",
     "if_you_have_another_air_conditioner_with": "If you have another air conditioner with a different brand, model, or type, please click the button below",
-    "e_g_3_units": "e.g., 3 units"
+    "e_g_3_units": "e.g., 3 units",
+    "every_month": "Every Month",
+    "every_two_month": "Every 2 Months",
+    "every_three_month": "Every 3 Months",
+    "nameplate_of_the_unit": "Nameplate of the unit"
   },
   "sidebar": {
     "platform": "PLATFORM",
@@ -216,6 +221,8 @@
     "start_qna": "Start Q&A"
   },
   "validation": {
-    "this_field_is_required": "This field is required"
+    "this_field_is_required": "This field is required",
+    "max_operating_hours_per_day": "Max operating hours per day is 24",
+    "max_running_days_per_week": "Max running days per week is 7"
   }
 }

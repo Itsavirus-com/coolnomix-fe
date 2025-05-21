@@ -16,6 +16,7 @@ const PeakLoadTarifForm: FC<DetailsReviewFormProps> = (props) => {
         required
         name={`${formName}.${index}.peakLoadTarif`}
         label={t('peak_load_tariff_rate_idr')}
+        type='number'
         index={index}
         disabled={disabled}
         placeholder='Eg., 1.700 IDR'
@@ -24,6 +25,7 @@ const PeakLoadTarifForm: FC<DetailsReviewFormProps> = (props) => {
         required
         name={`${formName}.${index}.noPeakLoadTarif`}
         label={t('no_peak_load_tariff_rate_idr')}
+        type='number'
         index={index}
         disabled={disabled}
         placeholder='Eg., 1.200 IDR'

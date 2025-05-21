@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
 import React from 'react'
 
@@ -7,9 +9,9 @@ import Description from '@/components/description/Description'
 import { FormProvider } from '@/components/ui/form'
 
 import { usePhaseOneForm } from './phase-one-form.hook'
-import AcForm from '../ac-form/AcForm'
-import BrandForm from '../brand-form/BrandForm'
-import PeakLoadTarifForm from '../peak-load-tarif-form/PeakLoadTarifForm'
+import AcForm from '../../../_components/ac-form/AcForm'
+import BrandForm from '../../../_components/brand-form/BrandForm'
+import PeakLoadTarifForm from '../../../_components/peak-load-tarif-form/PeakLoadTarifForm'
 
 const PhaseOneForm = () => {
   const t = useTranslations('qna')

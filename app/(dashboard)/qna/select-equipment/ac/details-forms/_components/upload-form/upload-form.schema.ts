@@ -1,9 +1,8 @@
-import { TFunction } from 'next-intl'
 import { z } from 'node_modules/zod/lib'
 
-import { requiredFileSchema } from '@/utils/schema'
+import { optionalFilesSchema } from '@/utils/schema'
 
-export const formSchema = (t: TFunction) =>
+export const formSchema = () =>
   z.object({
-    acUnit: requiredFileSchema(t)
+    acUnit: optionalFilesSchema()
   })

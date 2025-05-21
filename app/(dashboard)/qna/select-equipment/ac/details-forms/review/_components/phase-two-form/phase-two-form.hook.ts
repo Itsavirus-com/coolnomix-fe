@@ -1,33 +1,25 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
+import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
+import { qnaAcPath } from '@/config/paths'
 import { load, remove, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from './phase-two-form.schema'
-
-const apiResponseData: any = [
-  {
-    yearOfInstallation: '2020',
-    serviceFrequency: 'monthly',
-    lastServiceDate: '2020-01-01',
-    roomTemperature: '25',
-    onCoilAirTemprature: '25',
-    offCoilAirTemprature: '25',
-    wifiAvailable: 'yes',
-    filterCondition: []
-  }
-]
 
 export const usePhaseTwoForm = (inPreview: boolean) => {
   const t = useTranslations('qna')
   const tVal = useTranslations('validation')
 
   const router = useRouter()
+
+  const isFirstRender = useRef(true)
+  const saved = load(QNA_FORM_STORAGE_KEY)
 
   // Should be data from backend
   const isSubmitted = false
@@ -37,22 +29,24 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
     resolver: zodResolver(schema)
   })
 
-  const { fields: phaseTwoFormFields } = useFieldArray({
+  const { fields: phaseTwoFormFields, append } = useFieldArray({
     control: methods.control,
     name: 'phaseTwo'
   })
 
+  const handleBack = () => {
+    if (inPreview) router.back()
+    else router.push(qnaAcPath())
+  }
   const onSubmit = useCallback(
     async (values: z.infer<typeof schema>) => {
-      updateStoredObject('QNA_FORM', values)
-      if (inPreview) remove('QNA_FORM')
+      updateStoredObject(QNA_FORM_STORAGE_KEY, values)
+      if (inPreview) {
+        remove(QNA_FORM_STORAGE_KEY)
+      }
     },
     [inPreview]
   )
-
-  const handleBack = () => {
-    router.back()
-  }
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
     () => [
@@ -73,13 +67,20 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
   )
 
   useEffect(() => {
-    const savedAnswer = load('QNA_FORM')
+    if (isFirstRender.current && !saved?.phaseTwo) {
+      isFirstRender.current = false
+      append({})
+    }
 
-    setTimeout(() => {
-      methods.reset({
-        phaseTwo: savedAnswer?.phaseTwo || apiResponseData
-      })
+    const timeout = setTimeout(() => {
+      if (saved?.phaseTwo) {
+        methods.reset({
+          phaseTwo: saved.phaseTwo
+        })
+      }
     }, 300)
+
+    return () => clearTimeout(timeout)
   }, [])
 
   return {

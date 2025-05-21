@@ -16,7 +16,7 @@ const phases = [
   }
 ]
 
-export const useReviewForm = () => {
+export const useReviewTabs = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -26,7 +26,7 @@ export const useReviewForm = () => {
   const [currentPhase, setCurrentPhase] = useState(phase)
 
   // Should be data from backend
-  const isApproved = true
+  const isApproved = false
 
   const handleChangePhase = useCallback(
     (step: string) => {

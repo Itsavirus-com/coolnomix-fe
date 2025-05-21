@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
 import React, { FC } from 'react'
 
@@ -6,7 +8,7 @@ import ButtonGroup from '@/components/button-group/ButtonGroup'
 import { FormProvider } from '@/components/ui/form'
 
 import { usePhaseTwoForm } from './phase-two-form.hook'
-import { DetailsFormProps } from '../../details-forms.types'
+import { DetailsFormProps } from '../../../details-forms.types'
 import TechnicalForm from '../technical-form/TechnicalForm'
 
 const PhaseTwoForm: FC<DetailsFormProps> = (props) => {
