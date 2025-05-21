@@ -29,6 +29,7 @@
 
   --color-blue: #d4e8ef;
   --color-blue-light: #d6e0ff;
+  --color-blue-dark: #1a1b49;
   --color-green: #1aad15;
   --color-green-light: #28c76f;
   --color-red: #f30707;
@@ -39,4 +40,6 @@
   --color-purple-mid: #dbd1fa;
   --color-pale-blue: #d4e8ef;
   --color-yellow-light: #faeac2;
+  --color-orange: #ff5422;
+  --color-brown: #b62b02;
 }
