@@ -1,0 +1,7 @@
+.report-table-header tr th {
+  @apply text-grey-darkest bg-[#d9d9d980] text-[11px] font-medium uppercase;
+}
+
+.table-row-end {
+  @apply inline-block w-full text-end;
+}
