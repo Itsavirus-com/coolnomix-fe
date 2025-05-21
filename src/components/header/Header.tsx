@@ -1,17 +1,21 @@
+'use client'
+
+import dynamic from 'next/dynamic'
 import React from 'react'
+import { useSnapshot } from 'valtio'
 
 import { appStateStore } from '@/stores/app-state-store'
 
-import Icon from '../icon/Icon'
-import Text from '../text/Text'
+const Icon = dynamic(() => import('../icon/Icon'), { ssr: false })
+const Text = dynamic(() => import('../text/Text'), { ssr: false })
 
 const Header = () => {
-  const { title, icon } = appStateStore.state.pageHeader
+  const { icon, title } = useSnapshot(appStateStore).state.pageHeader
 
   return (
     <header className='bg-background sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b px-4'>
       <div className='flex items-center gap-1.5'>
-        <Icon icon={icon} size={20} />
+        <Icon icon={icon} size={18} />
         <Text weight='semibold' tag='span'>
           {title}
         </Text>
