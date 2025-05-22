@@ -19,10 +19,13 @@ export const handleGenericError = async (error: GeneralApiProblem) => {
   }
 
   const showErrorMessage = (err: any) => {
-    const message = err?.errors || err?.message
+    const title = err?.errors?.message || err?.message
+    const description = err?.errors?.data?.errors
 
-    if (typeof message === 'string') {
-      toast.error(message)
+    if (typeof title === 'string') {
+      toast.error(title, {
+        description
+      })
       captureSentryException(error)
     } else {
       showUnexpectedError(err)

@@ -8,11 +8,11 @@ export const formSchema = (t: TFunction) =>
   z
     .object({
       password: passwordSchema(t),
-      confirmPassword: z.string({
+      confirm_password: z.string({
         required_error: requiredString(t)
       })
     })
-    .refine((data) => data.password === data.confirmPassword, {
+    .refine((data) => data.password === data.confirm_password, {
       message: t('passwords_do_not_match'),
-      path: ['confirmPassword']
+      path: ['confirm_password']
     })

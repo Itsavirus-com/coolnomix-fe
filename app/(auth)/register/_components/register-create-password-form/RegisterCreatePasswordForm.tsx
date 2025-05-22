@@ -17,9 +17,18 @@ const RegisterCreatePasswordForm = () => {
   return (
     <div className='mt-6 mb-4'>
       <FormProvider methods={methods} onSubmit={onSubmit}>
-        <ControlledPasswordInput name='password' label={t('password')} />
-        <ControlledPasswordInput name='confirmPassword' label={t('confirm_password')} />
-        <ControlledButton type='submit' label={t('register')} className='mt-4 w-full' />
+        <ControlledPasswordInput name='password' label={t('password')} testID='register-password' />
+        <ControlledPasswordInput
+          name='confirm_password'
+          label={t('confirm_password')}
+          testID='register-confirm-password'
+        />
+        <ControlledButton
+          type='submit'
+          label={t('register')}
+          className='mt-4 w-full'
+          testID='register-button-submit'
+        />
       </FormProvider>
     </div>
   )

@@ -3,16 +3,16 @@ import React from 'react'
 
 import { ENV } from '@/libs/env'
 
-import RegisterGroupNameForm from './_components/register-group-name-form/RegisterGroupNameForm'
+import RegisterGroupBranchForm from './_components/register-group-branch-form/RegisterGroupBranchForm'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Register Group Name - ${ENV.NEXT_PUBLIC_PROJECT_NAME}`
+    title: `Register Group Branch - ${ENV.NEXT_PUBLIC_PROJECT_NAME}`
   }
 }
 
 const Page = () => {
-  return <RegisterGroupNameForm />
+  return <RegisterGroupBranchForm />
 }
 
 export default Page

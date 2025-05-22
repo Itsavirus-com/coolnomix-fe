@@ -1,5 +1,4 @@
 import { create } from 'apisauce'
-import dayjs from 'dayjs'
 import { snapshot } from 'valtio'
 
 import { authStore } from '@/stores/auth-store'
@@ -47,8 +46,6 @@ export class ApiCore {
   protected addHeaderTransformer() {
     this.api.addRequestTransform((request) => {
       const { authorization } = snapshot(authStore.computed)
-
-      request.headers.timezone = dayjs().utcOffset()
 
       if (authorization) {
         request.headers.Authorization = authorization

@@ -3,8 +3,6 @@ import { ApiCore } from './api-core'
 import type { Payload } from './api-core.types'
 
 export class AuthApi extends ApiCore {
-  protected pathPrefix = ''
-
   async login(payload: Payload = {}) {
     return await this.post({
       path: 'login',
@@ -18,7 +16,7 @@ export class AuthApi extends ApiCore {
 
   async register(payload: Payload = {}) {
     return await this.post({
-      path: 'register',
+      path: '/auth/signup/client-branch',
       payload
     })
   }

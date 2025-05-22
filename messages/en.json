@@ -311,6 +311,9 @@
     "reset_password": "Reset Password",
     "an_awesome_success_result_animation": "An awesome success result animation",
     "your_password_has_been_reset": "Your Password Has Been Reset",
-    "youve_successfully_changed_your_password_please_use_your_new_password_to_log_in_securely": "You’ve successfully changed your password. Please use your new password to log in securely."
+    "youve_successfully_changed_your_password_please_use_your_new_password_to_log_in_securely": "You’ve successfully changed your password. Please use your new password to log in securely.",
+    "branch_name": "Branch Name",
+    "branch_email": "Branch Email",
+    "register_success": "Register Success"
   }
 }
