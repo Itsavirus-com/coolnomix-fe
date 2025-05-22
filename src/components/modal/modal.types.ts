@@ -9,4 +9,5 @@ export type ModalProps = {
   align?: ModalAlignType
   onConfirm: () => void
   onCancel?: () => void
+  isLoading?: boolean
 }

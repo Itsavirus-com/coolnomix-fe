@@ -7,7 +7,11 @@ import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
 import { qnaSuccessPath } from '@/config/paths'
+import { qnaApi } from '@/services/api/qna-api'
+import { modalStore } from '@/stores/modal-store'
 import { showModal } from '@/stores/modal-store.actions'
+import { getDate, getTime } from '@/utils/date'
+import { handleGenericError } from '@/utils/error-handler'
 
 import { formSchema } from './tech-visit.schema'
 
@@ -25,9 +29,20 @@ export const useTechVisitForm = (inPreview: boolean) => {
   const handleBack = () => {
     router.back()
   }
-  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    console.log(values)
-    router.push(`${qnaSuccessPath()}?type=tech-visit`)
+  const onSubmit = useCallback(async (values: z.infer<typeof schema>) => {
+    try {
+      modalStore.isLoading = true
+      await qnaApi.requestTechVisit({
+        ...values,
+        appointment_date: getDate(values.appointment_date),
+        appointment_time: getTime(values.appointment_time)
+      })
+      router.push(`${qnaSuccessPath()}?type=tech-visit`)
+    } catch (error: any) {
+      handleGenericError(error)
+    } finally {
+      modalStore.isLoading = false
+    }
   }, [])
 
   const handleShowModal = (values: z.infer<typeof schema>) => {

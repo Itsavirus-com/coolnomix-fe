@@ -27,7 +27,7 @@ const TechVisitForm: FC<TechVisitFormProps> = (props) => {
           required
           label={t('appointment_date')}
           inputLabel={t('pick_appointment_date')}
-          name='appointmentDate'
+          name='appointment_date'
           disabled={inPreview}
           minDate={new Date()}
         />
@@ -35,7 +35,7 @@ const TechVisitForm: FC<TechVisitFormProps> = (props) => {
           required
           label={t('appointment_time')}
           inputLabel={t('pick_appointment_time')}
-          name='appointmentTime'
+          name='appointment_time'
           minuteStep={15}
           disabled={inPreview}
         />
@@ -48,7 +48,7 @@ const TechVisitForm: FC<TechVisitFormProps> = (props) => {
           disabled={inPreview}
         />
         <ControlledTextArea
-          name='additionalNotes'
+          name='additional_notes'
           label={t('additional_notes')}
           placeholder={t('add_any_extra_information_or_context_here')}
           className='col-span-2'

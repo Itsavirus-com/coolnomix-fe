@@ -5,8 +5,8 @@ import { requiredStringSchema } from '@/utils/schema'
 
 export const formSchema = (t: TFunction) =>
   z.object({
-    appointmentDate: requiredStringSchema(t),
-    appointmentTime: requiredStringSchema(t),
+    appointment_date: requiredStringSchema(t),
+    appointment_time: requiredStringSchema(t),
     location: requiredStringSchema(t),
-    additionalNotes: z.string().optional()
+    additional_notes: z.string().optional()
   })

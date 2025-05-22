@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl'
 
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -14,6 +13,8 @@ import {
 } from '@/components/ui/alert-dialog'
 import { cn } from '@/libs/utils'
 import { hideModal } from '@/stores/modal-store.actions'
+
+import Button from '../button/Button'
 
 import type { ModalProps } from './modal.types'
 
@@ -29,6 +30,7 @@ const Modal: FC<ModalProps> = (props) => {
     align = 'left',
     onConfirm,
     onCancel = hideModal,
+    isLoading,
     ...rest
   } = props
 
@@ -41,7 +43,7 @@ const Modal: FC<ModalProps> = (props) => {
         </AlertDialogHeader>
         <AlertDialogFooter className={cn(align === 'center' && '!justify-center')}>
           <AlertDialogCancel onClick={onCancel}>{cancelLabel}</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>{confirmLabel}</AlertDialogAction>
+          <Button size='lg' label={confirmLabel} onClick={onConfirm} isLoading={isLoading} />
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

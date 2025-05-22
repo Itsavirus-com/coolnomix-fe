@@ -17,11 +17,12 @@ const ModalHandler = () => {
     confirmLabel,
     cancelLabel,
     onConfirm,
-    onCancel = () => {}
+    onCancel = () => {},
+    isLoading
   } = useSnapshot(modalStore)
 
-  const confirm = () => {
-    onConfirm()
+  const confirm = async () => {
+    await onConfirm()
     hideModal()
   }
 
@@ -40,6 +41,7 @@ const ModalHandler = () => {
       cancelLabel={cancelLabel}
       onConfirm={confirm}
       onCancel={cancel}
+      isLoading={isLoading}
     />
   )
 }
