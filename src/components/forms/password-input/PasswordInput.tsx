@@ -35,11 +35,12 @@ const ControlledPasswordInput: FC<ControlledInputProps> = (props) => {
           {...field}
           value={field.value || ''}
         />
-        <Icon
-          icon='eye'
-          className='absolute top-1/2 right-4 -translate-y-1/2 text-black'
+        <div
           onClick={toggleVisibility}
-        />
+          className='absolute top-1/2 right-4 -translate-y-1/2 cursor-pointer text-black'
+        >
+          <Icon icon={isVisible ? 'icon-eye' : 'icon-eye-sleep'} size={12} />
+        </div>
       </div>
       <FormMessage name={name} />
     </FormItem>
