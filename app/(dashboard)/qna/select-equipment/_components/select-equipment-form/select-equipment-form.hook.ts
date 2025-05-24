@@ -5,13 +5,15 @@ import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { ControlledButtonProps } from '@/components/button/button.types'
+import type { ControlledButtonProps } from '@/components/button/button.types'
 import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaAcPath, qnaRefrigerationPath } from '@/config/paths'
+import { AcEquipmentType } from '@/types/general'
 import { load, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from './select-equipment-form.schema'
-import { EquipmentType, EquipmentTypeItem } from './select-equipment-form.types'
+
+import type { EquipmentTypeItem } from './select-equipment-form.types'
 
 export const useSelectEquipmentForm = () => {
   const t = useTranslations('qna')
@@ -37,7 +39,7 @@ export const useSelectEquipmentForm = () => {
     []
   )
 
-  const handleNavigate = (type: EquipmentType) => {
+  const handleNavigate = (type: AcEquipmentType) => {
     switch (type) {
       case 'air-conditioning':
         router.push(qnaAcPath())
@@ -49,7 +51,7 @@ export const useSelectEquipmentForm = () => {
   }
 
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    handleNavigate(values.equipmentType as EquipmentType)
+    handleNavigate(values.equipmentType as AcEquipmentType)
     updateStoredObject(QNA_FORM_STORAGE_KEY, { equipmentType: values.equipmentType })
   }, [])
 

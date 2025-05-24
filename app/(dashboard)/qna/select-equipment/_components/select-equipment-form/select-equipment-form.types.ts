@@ -1,6 +1,6 @@
-export type EquipmentType = 'air-conditioning' | 'refrigeration'
+import type { AcEquipmentType } from '@/types/general'
 
 export type EquipmentTypeItem = {
   label: string
-  value: EquipmentType
+  value: AcEquipmentType
 }
