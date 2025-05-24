@@ -1,10 +1,13 @@
-import { ReportListStatus, ReportListsType } from '../report-lists/report-lists.types'
+import type { ReportListStatus, ReportListsType } from '../report-lists/report-lists.types'
+
+export type WorkflowListType = {
+  id: string
+  name: string
+  status: ReportListStatus
+  lists: ReportListsType[]
+}
 
 export type WorkflowListProps = {
-  workflowData: {
-    id: number
-    name: string
-    status: ReportListStatus
-    lists: ReportListsType[]
-  }[]
+  isLoading?: boolean
+  workflowData: WorkflowListType[]
 }

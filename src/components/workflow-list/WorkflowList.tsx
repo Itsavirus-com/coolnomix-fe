@@ -4,11 +4,12 @@ import React, { FC } from 'react'
 
 import Accordion from '@/components/accordion/Accordion'
 
-import { WorkflowListProps } from './workflow-list.types'
 import ReportLists from '../report-lists/ReportLists'
 
+import type { WorkflowListProps } from './workflow-list.types'
+
 const WorkflowList: FC<WorkflowListProps> = (props) => {
-  const { workflowData } = props
+  const { isLoading, workflowData } = props
 
   return (
     <div className='mt-4'>
@@ -19,7 +20,7 @@ const WorkflowList: FC<WorkflowListProps> = (props) => {
         items={workflowData?.map((item, index) => ({
           key: index.toString(),
           title: `${item.name}:`,
-          content: <ReportLists status={item.status} lists={item.lists} />
+          content: <ReportLists isLoading={isLoading} status={item.status} lists={item.lists} />
         }))}
       />
     </div>
