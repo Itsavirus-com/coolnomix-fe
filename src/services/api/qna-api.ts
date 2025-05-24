@@ -11,6 +11,15 @@ export class QnaApi extends ApiCore {
       payload
     })
   }
+
+  async uploadAssetList(payload: Payload = {}) {
+    this.multipart = true
+
+    return await this.post({
+      path: 'asset-lists',
+      payload
+    })
+  }
 }
 
 export const qnaApi = new QnaApi()

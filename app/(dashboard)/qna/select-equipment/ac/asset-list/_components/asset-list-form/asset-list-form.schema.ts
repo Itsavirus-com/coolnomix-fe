@@ -5,5 +5,5 @@ import { requiredFilesSchema } from '@/utils/schema'
 
 export const formSchema = (t: TFunction) =>
   z.object({
-    assetList: requiredFilesSchema(t)
+    file: requiredFilesSchema(t)
   })

@@ -5,8 +5,10 @@ import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { ControlledButtonProps } from '@/components/button/button.types'
+import type { ControlledButtonProps } from '@/components/button/button.types'
 import { qnaSuccessPath } from '@/config/paths'
+import { qnaApi } from '@/services/api/qna-api'
+import { handleGenericError } from '@/utils/error-handler'
 
 import { formSchema } from './asset-list-form.schema'
 
@@ -21,14 +23,21 @@ export const useAssetListForm = (inPreview: boolean) => {
   const methods = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      assetList: []
+      file: []
     }
   })
 
   const handleBack = () => router.back()
-  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    console.log(values)
-    router.push(qnaSuccessPath())
+  const onSubmit = useCallback(async (values: z.infer<typeof schema>) => {
+    try {
+      await qnaApi.uploadAssetList({
+        file: values.file[0]
+      })
+      methods.reset()
+      router.push(qnaSuccessPath())
+    } catch (error: any) {
+      handleGenericError(error)
+    }
   }, [])
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
@@ -43,7 +52,8 @@ export const useAssetListForm = (inPreview: boolean) => {
         type: 'submit',
         size: 'lg',
         label: t('submit'),
-        disabled: inPreview
+        disabled: inPreview,
+        onSubmit
       }
     ],
     [inPreview]
