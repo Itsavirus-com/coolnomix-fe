@@ -73,7 +73,7 @@ export const createButtonLabel = (status: string, t: TFunction) => {
   }
 }
 
-export const createViewLink = (type: string, id: number) => {
+export const createViewLink = (type: string, id: string) => {
   switch (type) {
     case 'asset-list':
     case 'details-forms':

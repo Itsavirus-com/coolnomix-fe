@@ -6,15 +6,21 @@ import React, { FC } from 'react'
 import Text from '@/components/text/Text'
 
 import { createEmptyListMessage } from './report-lists.helpers'
-import { ReportListsProps } from './report-lists.types'
 import ReportList from './ReportList'
+import ReportListsSkeleton from './ReportListsSkeleton'
+
+import type { ReportListsProps } from './report-lists.types'
 
 const ReportLists: FC<ReportListsProps> = (props) => {
-  const { lists, status, ...rest } = props
+  const { isLoading, lists, status, ...rest } = props
 
   const t = useTranslations('listBranch')
 
   const emptyListMessage = createEmptyListMessage(t, status)
+
+  if (isLoading) {
+    return <ReportListsSkeleton />
+  }
 
   if (!lists?.length) {
     return (

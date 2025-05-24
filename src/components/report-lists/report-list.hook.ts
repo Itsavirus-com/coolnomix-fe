@@ -10,7 +10,7 @@ import {
   createViewLink
 } from './report-lists.helpers'
 
-export const useReportList = (id: number, status: string, type: string, equipmentType?: string) => {
+export const useReportList = (id: string, status: string, type: string, equipmentType?: string) => {
   const t = useTranslations('listBranch')
 
   const icon = useMemo(() => createIcon(type, equipmentType), [type, equipmentType])
