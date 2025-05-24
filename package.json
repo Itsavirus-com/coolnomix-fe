@@ -22,6 +22,7 @@
     "lint:fix": "eslint src app --fix",
     "check-types": "tsc --noEmit --pretty",
     "format": "prettier --write .",
+    "checks": "run-s lint:fix format check-types",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "commit": "git-cz",
