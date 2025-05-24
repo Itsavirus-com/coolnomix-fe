@@ -7,3 +7,7 @@ export const getTime = (isoDate: string) => {
 export const getDate = (isoDate: string) => {
   return dayjs(isoDate).format('YYYY-MM-DD')
 }
+
+export const getDateTime = (isoDate: string) => {
+  return dayjs(isoDate).format('h:mm A, MMMM D, YYYY')
+}

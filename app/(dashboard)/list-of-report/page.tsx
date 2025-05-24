@@ -4,12 +4,12 @@ import React from 'react'
 
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumb'
 import Button from '@/components/button/Button'
-import { WorkflowListProps } from '@/components/workflow-list/workflow-list.types'
-import WorkflowList from '@/components/workflow-list/WorkflowList'
 import { qnaPath } from '@/config/paths'
 import { reportListPath } from '@/config/paths/list-of-report-path'
 import PageHeaderHandler from '@/handlers/page-header-handler/PageHeaderHandler'
 import { ENV } from '@/libs/env'
+
+import ReportList from './_components/report-list/ReportList'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -23,24 +23,6 @@ const breadcrumbs = [
   { key: 'list-of-report', label: 'List of Report', href: reportListPath() }
 ]
 
-const data: WorkflowListProps['workflowData'] = [
-  {
-    id: 1,
-    name: 'Pending',
-    status: 'done',
-    lists: [
-      {
-        id: 1,
-        branchName: 'Pepito Market Group',
-        name: 'Air Conditioning Report',
-        date: '7:18 AM, February 3, 2025',
-        equipmentType: 'air-conditioning',
-        type: 'report'
-      }
-    ]
-  }
-]
-
 const Page = async () => {
   const t = await getTranslations('report')
 
@@ -51,7 +33,7 @@ const Page = async () => {
       <section className='content-placement-center content-placement-center--start'>
         <div className='flex w-[578px] flex-col'>
           <Button size='xs' className='w-fit self-end' label={t('start_qna')} link={qnaPath()} />
-          <WorkflowList workflowData={data} />
+          <ReportList />
         </div>
       </section>
     </main>

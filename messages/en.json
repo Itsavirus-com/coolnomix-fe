@@ -261,7 +261,8 @@
     "total_realised_savings": "Total Realised Savings",
     "total_investment": "Total Investment",
     "rent_2_own": "Rent - 2 - Own",
-    "savings": "Savings"
+    "savings": "Savings",
+    "previous_report": "Previous Report"
   },
   "validation": {
     "this_field_is_required": "This field is required",
