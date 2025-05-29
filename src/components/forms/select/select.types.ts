@@ -10,4 +10,5 @@ export type SelectProps = ComponentProps<'select'> & {
   width?: string
   className?: string
   index?: number
+  hasSearch?: boolean
 }
