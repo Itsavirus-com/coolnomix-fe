@@ -6,12 +6,14 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
+import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaSuccessPath } from '@/config/paths'
 import { qnaApi } from '@/services/api/qna-api'
 import { modalStore } from '@/stores/modal-store'
 import { showModal } from '@/stores/modal-store.actions'
 import { getDate, getTime } from '@/utils/date'
 import { handleGenericError } from '@/utils/error-handler'
+import { remove } from '@/utils/storage'
 
 import { formSchema } from './tech-visit.schema'
 
@@ -37,6 +39,8 @@ export const useTechVisitForm = (inPreview: boolean) => {
         appointment_date: getDate(values.appointment_date),
         appointment_time: getTime(values.appointment_time)
       })
+      methods.reset()
+      remove(QNA_FORM_STORAGE_KEY)
       router.push(`${qnaSuccessPath()}?type=tech-visit`)
     } catch (error: any) {
       handleGenericError(error)
