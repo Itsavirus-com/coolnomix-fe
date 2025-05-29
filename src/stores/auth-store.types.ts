@@ -1,7 +1,6 @@
 export type User = {
   id: number
-  firstName: string
-  lastName: string
+  name: string
   email: string
   isSuperAdmin: boolean
 }
@@ -13,4 +12,11 @@ export type AuthStore = {
   refreshToken: string
   refreshTokenExpiry: string
   refreshingToken: boolean
+}
+
+export type RegisterPayload = {
+  name: string
+  email: string
+  password: string
+  confirm_password: string
 }

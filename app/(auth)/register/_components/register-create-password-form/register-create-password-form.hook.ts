@@ -7,7 +7,7 @@ import { toast } from 'sonner'
 import { snapshot } from 'valtio'
 import { z } from 'zod'
 
-import { authApi } from '@/services/api/auth-api'
+import { register } from '@/stores/auth-store.actions'
 import { registerStateStore } from '@/stores/register-state-store'
 import { resetRegisterState, setGroupBranchPassword } from '@/stores/register-state-store.actions'
 import { handleGenericError } from '@/utils/error-handler'
@@ -27,7 +27,7 @@ export const useRegisterCreatePasswordForm = () => {
     const registerState = snapshot(registerStateStore).state
 
     try {
-      await authApi.register(registerState)
+      await register(registerState)
       resetRegisterState()
       toast.success(t('register_success'))
       router.push('/')
