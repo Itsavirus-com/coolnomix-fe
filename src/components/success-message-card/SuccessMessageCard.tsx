@@ -14,13 +14,14 @@ const SuccessMessageCard: FC<SuccessMessageCardProps> = (props) => {
   const {
     title,
     description,
-    buttonLabel,
-    buttonLink,
+    buttons,
     imageAlt,
     className,
     image = successAnimation,
     ...rest
   } = props
+
+  const [leftButton, rightButton] = buttons
 
   return (
     <div
@@ -36,7 +37,10 @@ const SuccessMessageCard: FC<SuccessMessageCardProps> = (props) => {
           {title}
         </Text>
         <Text className='text-grey-darkest mt-2 mb-8'>{description}</Text>
-        <Button label={buttonLabel} link={buttonLink} />
+        <div className='flex items-center gap-3'>
+          {leftButton && <Button {...leftButton} />}
+          <Button {...rightButton} />
+        </div>
       </div>
     </div>
   )
