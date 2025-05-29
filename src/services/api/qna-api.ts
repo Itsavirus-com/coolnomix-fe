@@ -4,6 +4,8 @@ import type { Payload } from './api-core.types'
 
 export class QnaApi extends ApiCore {
   async requestTechVisit(payload: Payload = {}) {
+    this.multipart = false
+
     return await this.post({
       path: 'technician-visits',
       payload
