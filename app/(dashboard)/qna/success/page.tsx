@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
+import { Suspense } from 'react'
 
-import SuccessMessageCard from '@/components/success-message-card/SuccessMessageCard'
 import { ENV } from '@/libs/env'
 
-import { getSuccessMessage } from './success.helpers'
+import SuccessLayout from './components/success-layout/SuccessLayout'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -11,30 +11,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-const Page = async ({
-  searchParams
-}: {
-  searchParams: Promise<{
-    type: string
-  }>
-}) => {
-  const { type } = await searchParams
-  const { title, description, buttonLabel, image, imageAlt, buttonLink } =
-    await getSuccessMessage(type)
-
+const Page = () => {
   return (
-    <main>
-      <section className='content-placement-center'>
-        <SuccessMessageCard
-          title={title}
-          description={description}
-          buttonLabel={buttonLabel}
-          buttonLink={buttonLink}
-          image={image}
-          imageAlt={imageAlt}
-        />
-      </section>
-    </main>
+    <Suspense>
+      <SuccessLayout />
+    </Suspense>
   )
 }
 

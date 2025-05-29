@@ -21,8 +21,12 @@ const Page = async () => {
       description={t(
         'youve_successfully_changed_your_password_please_use_your_new_password_to_log_in_securely'
       )}
-      buttonLabel={t('login')}
-      buttonLink={loginPath()}
+      buttons={[
+        {
+          label: t('login'),
+          link: loginPath()
+        }
+      ]}
       imageAlt={t('an_awesome_success_result_animation')}
     />
   )
