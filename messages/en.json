@@ -32,6 +32,7 @@
     "thank_you_your_request_has_been_received": "Thank you! Your request has been received. Our team will contact you soon to arrange the technician visit",
     "submission_successful": "Submission Successful!",
     "submission_successful_description": "Thank you for providing the details! Your information has been received and will be reviewed shortly. We’ll get back to you if any additional details are needed.",
+    "submission_successful_description_phase_2": "Thank you for providing the details! Your information has been received. To proceed, you need to complete the follow-up questions in Phase 2 before the report can be generated. Please note that you cannot go back or cancel at this stage.",
     "an_awesome_success_result_animation": "An awesome success result animation"
   },
   "qna": {
