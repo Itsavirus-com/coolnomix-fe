@@ -198,7 +198,8 @@
     "qa_management": "QA Management",
     "analysis": "Analysis",
     "update_status_won_lost": "Update Status Won Lost",
-    "list_of_report": "List of Report"
+    "list_of_report": "List of Report",
+    "logout": "Logout"
   },
   "listBranch": {
     "start_now": "Start Now",

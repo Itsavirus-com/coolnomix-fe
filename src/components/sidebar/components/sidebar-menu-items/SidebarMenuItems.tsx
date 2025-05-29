@@ -42,7 +42,7 @@ const SidebarMenuItems: FC<SidebarMenuItemsProps> = (props) => {
                 className={cn('hover:!bg-sidebar-accent', isCurrent && '!bg-sidebar-accent')}
               >
                 <Link href={url}>
-                  <Icon icon={icon} size={16} />
+                  <Icon icon={icon} size={16} className={isCurrent && 'text-black'} />
                   <Text
                     tag='span'
                     variant='body2'
