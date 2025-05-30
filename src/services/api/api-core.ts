@@ -1,9 +1,8 @@
 import { create } from 'apisauce'
-import dayjs from 'dayjs'
 import { snapshot } from 'valtio'
 
 import { authStore } from '@/stores/auth-store'
-import { setAuthenticatedUser, setRefreshingToken } from '@/stores/auth-store.actions'
+// import { setAuthenticatedUser, setRefreshingToken } from '@/stores/auth-store.actions'
 import { delay } from '@/utils/delay'
 
 import { getGeneralApiProblem } from './helpers/api-problem'
@@ -26,7 +25,7 @@ export class ApiCore {
   /**
    * API Request timeout in milliseconds.
    */
-  protected timeout = 10000
+  protected timeout = 50000
 
   /**
    * Enable blob response type.
@@ -47,8 +46,6 @@ export class ApiCore {
   protected addHeaderTransformer() {
     this.api.addRequestTransform((request) => {
       const { authorization } = snapshot(authStore.computed)
-
-      request.headers.timezone = dayjs().utcOffset()
 
       if (authorization) {
         request.headers.Authorization = authorization
@@ -111,7 +108,7 @@ export class ApiCore {
           }
 
           try {
-            setRefreshingToken(true)
+            // setRefreshingToken(true)
             const res = await this.refreshToken()
             if (res.ok) {
               originalRequest.headers.Authorization = res.headers.authorization
@@ -120,7 +117,7 @@ export class ApiCore {
           } catch {
             return Promise.reject(error)
           } finally {
-            setRefreshingToken(false)
+            // setRefreshingToken(false)
           }
         }
 
@@ -243,7 +240,7 @@ export class ApiCore {
     )
 
     if (res.ok) {
-      setAuthenticatedUser(res)
+      // setAuthenticatedUser(res)
     }
 
     return res

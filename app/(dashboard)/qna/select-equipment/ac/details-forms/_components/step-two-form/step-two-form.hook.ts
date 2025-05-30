@@ -1,72 +1,50 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
+import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
+import { load, updateStoredObject } from '@/utils/storage'
 
-import { formSchema } from './step-two-form.scheme'
-
-const apiResponseData = [
-  {
-    operatingHoursPerDay: '10',
-    runningDaysPerWeek: '5',
-    btuPerHour: '10',
-    inputPower: '10',
-    ratioOutsideToInside: '1:1',
-    peekLoadHoursStartTime: new Date(),
-    peekLoadHoursEndTime: new Date()
-  },
-  {
-    operatingHoursPerDay: '10',
-    runningDaysPerWeek: '5',
-    btuPerHour: '10',
-    inputPower: '10',
-    ratioOutsideToInside: '1:1',
-    peekLoadHoursStartTime: new Date(),
-    peekLoadHoursEndTime: new Date()
-  }
-]
-
-const peakLoadTarifData = [
-  {
-    peakLoadTarif: '10',
-    noPeakLoadTarif: '10'
-  }
-]
+import { formSchema } from './step-two-form.schema'
 
 export const useStepTwoForm = () => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      detailsAc: apiResponseData,
-      peakLoadTarif: peakLoadTarifData
-    }
+  const isFirstRender = useRef(true)
+  const saved = load(QNA_FORM_STORAGE_KEY)
+
+  const schema = formSchema(tVal)
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema)
   })
 
-  const { fields: detailsAcFields } = useFieldArray({
+  const { fields: detailsAcFields, append: appendDetailsAc } = useFieldArray({
     control: methods.control,
     name: 'detailsAc'
   })
 
-  const { fields: peakLoadTarifFields } = useFieldArray({
+  const { fields: peakLoadTarifFields, append: appendPeakLoadTarif } = useFieldArray({
     control: methods.control,
     name: 'peakLoadTarif'
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
-    console.log(values)
+  const handleBack = () => router.back()
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
+    updateStoredObject(QNA_FORM_STORAGE_KEY, {
+      stepsForm: values.detailsAc.map((item, index: number) => ({
+        ...saved?.stepsForm[index],
+        detailsAc: item
+      })),
+      peakLoadTarif: [...values.peakLoadTarif]
+    })
   }, [])
-
-  const handleBack = () => {
-    router.back()
-  }
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
     () => [
@@ -84,6 +62,33 @@ export const useStepTwoForm = () => {
     ],
     []
   )
+
+  useEffect(() => {
+    if (isFirstRender.current && !saved?.stepsForm) {
+      isFirstRender.current = false
+      saved?.stepsForm?.map(() => appendDetailsAc({}))
+    }
+
+    if (isFirstRender.current && !saved?.peakLoadTarif) {
+      isFirstRender.current = false
+      appendPeakLoadTarif({})
+    }
+
+    const timeout = setTimeout(() => {
+      if (saved?.stepsForm) {
+        methods.reset({
+          detailsAc: saved.stepsForm?.map(({ detailsAc }: any) => ({
+            ...detailsAc
+          })),
+          peakLoadTarif: saved?.peakLoadTarif
+        })
+      }
+    }, 300)
+
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [])
 
   return { methods, detailsAcFields, peakLoadTarifFields, buttons, onSubmit }
 }

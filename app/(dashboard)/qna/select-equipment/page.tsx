@@ -5,7 +5,7 @@ import React from 'react'
 import Description from '@/components/description/Description'
 import { ENV } from '@/libs/env'
 
-import SelectEquipmentForm from '../_components/select-equipment-form/SelectEquipmentForm'
+import SelectEquipmentForm from './_components/select-equipment-form/SelectEquipmentForm'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

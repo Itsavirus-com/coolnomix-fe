@@ -1,47 +1,33 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { qnaTypeRefrigerationPath } from '@/config/paths'
+import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
+import { qnaRefrigerationPath } from '@/config/paths'
+import { load, updateStoredObject } from '@/utils/storage'
 
-import { formSchema } from '../../regrigeration.scheme'
+import { formSchema } from '../../regrigeration.schema'
 
 export const useWalkInFreezerForm = (inPreview: boolean) => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
   // Should be data from backend
   const isSubmitted = false
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      evaporatorMake: '',
-      evaporatorModel: '',
-      evaporatorSerialNumber: '',
-      condenserMake: '',
-      condenserModel: '',
-      condenserSerialNumber: '',
-      compressorMake: '',
-      compressorModel: '',
-      tempSetPointCutIn: '',
-      tempSetPointCutOut: '',
-      differentialTempSetPoint: '',
-      systemAbilityToCycleOnOffBasedOnTempSetPoints: '',
-      isTheDefrostSystemFunctioning: '',
-      areTheTempMetersFunctioning: '',
-      serviceFrequency: ''
-    }
+  const schema = formSchema(tVal)
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema)
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
-    // Save to local storage
-    console.log(values)
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
+    updateStoredObject(QNA_FORM_STORAGE_KEY, { walkInFreezerForm: values })
   }, [])
 
   const handleBack = () => {
@@ -49,7 +35,7 @@ export const useWalkInFreezerForm = (inPreview: boolean) => {
   }
 
   const handleEdit = () => {
-    router.push(qnaTypeRefrigerationPath())
+    router.push(qnaRefrigerationPath())
   }
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
@@ -69,6 +55,16 @@ export const useWalkInFreezerForm = (inPreview: boolean) => {
     ],
     [inPreview, isSubmitted]
   )
+
+  useEffect(() => {
+    const saved = load(QNA_FORM_STORAGE_KEY)
+
+    const timeout = setTimeout(() => {
+      methods.reset(saved?.walkInFreezerForm)
+    }, 300)
+
+    return () => clearTimeout(timeout)
+  }, [])
 
   return {
     methods,

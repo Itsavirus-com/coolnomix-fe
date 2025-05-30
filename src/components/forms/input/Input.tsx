@@ -22,6 +22,11 @@ const ControlledInput: FC<ControlledInputProps> = (props) => {
     hint,
     index,
     disabled,
+    type,
+    min = 0,
+    max,
+    inputMode,
+    pattern,
     ...rest
   } = props
 
@@ -38,7 +43,7 @@ const ControlledInput: FC<ControlledInputProps> = (props) => {
         {hint && (
           <Tooltip>
             <TooltipTrigger asChild>
-              <Icon icon='icon-hint' />
+              <Icon icon='icon-info-circle' size={14} className='text-brand-muted' />
             </TooltipTrigger>
             <TooltipContent>
               <Text tag='span' className='text-grey-darkest'>
@@ -53,8 +58,13 @@ const ControlledInput: FC<ControlledInputProps> = (props) => {
         placeholder={placeholder}
         data-test-id={testID}
         disabled={disabled}
+        type={type}
+        inputMode={inputMode}
+        pattern={pattern}
         {...field}
         value={field.value || ''}
+        min={min}
+        max={max}
       />
       <FormMessage index={index} name={name} />
     </FormItem>

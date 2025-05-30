@@ -14,7 +14,7 @@ const UploadForm: FC<DetailsFormProps> = (props) => {
 
   const t = useTranslations('qna')
 
-  const { methods, onSubmit, buttons } = useUploadForm()
+  const { methods, buttons, onSubmit } = useUploadForm()
 
   return (
     <FormProvider
@@ -25,7 +25,6 @@ const UploadForm: FC<DetailsFormProps> = (props) => {
       }}
     >
       <ControlledFileUploader
-        required
         name='acUnit'
         label={t('upload_a_picture_of_nameplate_of_the_unit_indoor_outdoor_unit')}
         title={t('media_upload')}
@@ -33,6 +32,7 @@ const UploadForm: FC<DetailsFormProps> = (props) => {
         inputLabel={t('upload_image_for_ac')}
         acceptedFile={acceptedFileImage}
         maxFiles={10}
+        uploadFileLabel={t('add_another_air_conditioner')}
       />
       <ButtonGroup className='mt-14 justify-end' buttons={buttons} />
     </FormProvider>

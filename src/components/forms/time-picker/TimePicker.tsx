@@ -65,8 +65,10 @@ const TimePicker: FC<TimePickerProps> = (props) => {
         render={({ field }) => {
           const { value, onChange, ref } = field
 
-          const currentHours = value ? value?.getHours() : 0
-          const currentMinutes = value ? value?.getMinutes() : 0
+          const currentValue = new Date(value)
+
+          const currentHours = currentValue ? currentValue?.getHours() : 0
+          const currentMinutes = currentValue ? currentValue?.getMinutes() : 0
 
           return (
             <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
@@ -97,7 +99,7 @@ const TimePicker: FC<TimePickerProps> = (props) => {
                     value={currentHours.toString().padStart(2, '0')}
                     onValueChange={(val) => {
                       const newTime = calculateNewTime(value, val, 'hours')
-                      onChange(newTime)
+                      onChange(newTime.toISOString())
                     }}
                   >
                     <SelectTrigger id='hours-select' className='w-20'>
@@ -116,7 +118,7 @@ const TimePicker: FC<TimePickerProps> = (props) => {
                     value={currentMinutes.toString().padStart(2, '0')}
                     onValueChange={(val) => {
                       const newTime = calculateNewTime(value, val, 'minutes')
-                      onChange(newTime)
+                      onChange(newTime.toISOString())
                     }}
                   >
                     <SelectTrigger id='minutes-select' className='w-20'>

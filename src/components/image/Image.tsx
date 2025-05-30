@@ -1,3 +1,5 @@
+'use client'
+
 import type { FC } from 'react'
 
 import NextImage from 'next/image'
@@ -8,7 +10,7 @@ import { defaultImage } from '@/assets/images'
 import type { ImageProps } from 'next/image'
 
 const Image: FC<ImageProps> = (props) => {
-  const { alt = 'An awesome image', priority, src, ...rest } = props
+  const { alt, priority, src, fill, ...rest } = props
 
   const [isError, setIsError] = useState(false)
 
@@ -18,6 +20,7 @@ const Image: FC<ImageProps> = (props) => {
       loading={priority ? 'eager' : 'lazy'}
       decoding='async'
       quality={65}
+      fill={fill}
       style={{ objectFit: 'cover' }}
       onError={() => {
         setIsError(true)

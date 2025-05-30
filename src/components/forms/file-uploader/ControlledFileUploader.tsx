@@ -40,13 +40,11 @@ export const ControlledFileUploader = (props: ControlledFileUploaderProps) => {
               {label}
               {hint && (
                 <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Icon icon='icon-hint' />
+                  <TooltipTrigger>
+                    <Icon icon='icon-info-circle' size={14} className='text-brand-muted' />
                   </TooltipTrigger>
                   <TooltipContent>
-                    <Text tag='span' className='text-grey-darkest'>
-                      {hint}
-                    </Text>
+                    <Text tag='span'>{hint}</Text>
                   </TooltipContent>
                 </Tooltip>
               )}

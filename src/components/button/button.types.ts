@@ -15,6 +15,7 @@ export type ButtonProps = ComponentProps<'button'> &
 
 export type ButtonWithLinkProps = ButtonProps & {
   link?: string
+  ariaLabel?: string
 }
 
 export type ControlledButtonProps<TFormValues extends Record<string, any> = Record<string, any>> =

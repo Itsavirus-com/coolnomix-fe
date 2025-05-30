@@ -10,4 +10,6 @@ export type AccordionItemType = {
 
 export type AccordionProps = ComponentProps<typeof AccordionPrimitive.Root> & {
   items: AccordionItemType[]
+  accordionTriggerClassName?: string
+  handleRemove?: (index: number) => void
 }

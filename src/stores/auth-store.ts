@@ -8,8 +8,7 @@ import type { AuthStore } from './auth-store.types'
 export const defaultAuthStore: AuthStore = {
   user: {
     id: null,
-    firstName: null,
-    lastName: null,
+    name: null,
     email: null,
     isSuperAdmin: null
   },

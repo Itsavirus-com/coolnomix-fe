@@ -5,8 +5,9 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getLocale } from 'next-intl/server'
 
 import { hanken_font } from '@/assets/fonts'
-
-import App from './app'
+import Providers from '@/components/providers/Providers'
+import ModalHandler from '@/handlers/modal-handler/ModalHandler'
+import ToastHandler from '@/handlers/toast-handler/ToastHandler'
 
 import '@/assets/styles/main.css'
 
@@ -20,7 +21,11 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     <html lang={locale}>
       <body suppressHydrationWarning className={clsx(hanken_font.className, 'antialiased')}>
         <NextIntlClientProvider>
-          <App>{children}</App>
+          <Providers>
+            {children}
+            <ModalHandler />
+            <ToastHandler />
+          </Providers>
         </NextIntlClientProvider>
       </body>
     </html>

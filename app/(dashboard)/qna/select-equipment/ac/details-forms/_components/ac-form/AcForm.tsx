@@ -7,6 +7,19 @@ import TimePicker from '@/components/forms/time-picker/TimePicker'
 
 import { DetailsReviewFormProps } from '../../details-forms.types'
 
+const AC_RATIO_OPTIONS = [
+  { label: '1:1', value: '1:1' },
+  { label: '1:2', value: '1:2' },
+  { label: '1:3', value: '1:3' },
+  { label: '1:4', value: '1:4' },
+  { label: '1:5', value: '1:5' },
+  { label: '1:6', value: '1:6' },
+  { label: '1:7', value: '1:7' },
+  { label: '1:8', value: '1:8' },
+  { label: '1:9', value: '1:9' },
+  { label: '1:10', value: '1:10' }
+]
+
 const AcForm: FC<DetailsReviewFormProps> = (props) => {
   const t = useTranslations('qna')
 
@@ -18,6 +31,7 @@ const AcForm: FC<DetailsReviewFormProps> = (props) => {
         required
         name={`${formName}.${index}.operatingHoursPerDay`}
         label={t('air_conditioner_operating_hours_per_day')}
+        type='number'
         placeholder={t('enter_operating_hours_per_day')}
         index={index}
         className='col-span-2'
@@ -27,6 +41,7 @@ const AcForm: FC<DetailsReviewFormProps> = (props) => {
         required
         name={`${formName}.${index}.runningDaysPerWeek`}
         label={t('number_of_days_per_week_is_the_ac_running')}
+        type='number'
         placeholder={t('enter_number_of_days_per_week')}
         index={index}
         className='col-span-2'
@@ -53,6 +68,7 @@ const AcForm: FC<DetailsReviewFormProps> = (props) => {
       <ControlledInput
         name={`${formName}.${index}.btuPerHour`}
         label={t('btu_per_hour')}
+        type='number'
         placeholder={t('enter_btu_value_per_hour')}
         index={index}
         className='col-span-2'
@@ -62,6 +78,7 @@ const AcForm: FC<DetailsReviewFormProps> = (props) => {
         required
         name={`${formName}.${index}.inputPower`}
         label={t('input_power')}
+        type='number'
         placeholder={t('enter_input_power')}
         index={index}
         className='col-span-2'
@@ -71,12 +88,7 @@ const AcForm: FC<DetailsReviewFormProps> = (props) => {
         required
         name={`${formName}.${index}.ratioOutsideToInside`}
         label={t('ratio_of_outside_units_to_inside_units')}
-        items={[
-          {
-            label: '1:1',
-            value: '1:1'
-          }
-        ]}
+        items={AC_RATIO_OPTIONS}
         placeholder={t('select_ratio')}
         index={index}
         className='col-span-2'

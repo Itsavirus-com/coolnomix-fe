@@ -1,22 +1,35 @@
 import { authApi } from '@/services/api/auth-api'
 
 import { authStore, defaultAuthStore } from './auth-store'
+import { RegisterPayload } from './auth-store.types'
 import reset from './helpers/reset'
 
 import type { ApiOkResponse } from 'apisauce'
 
 export const setAuthenticatedUser = (result: ApiOkResponse<any>) => {
-  const { headers, data } = result
+  const { data } = result
 
   authStore.state.user = data.data
-  authStore.state.token = headers.authorization
-  authStore.state.tokenExpiry = headers['expired-at']
-  authStore.state.refreshToken = headers['refresh-token']
-  authStore.state.refreshTokenExpiry = headers['refresh-token-expired']
+
+  // For now, our backend not support token refresh token, this code bellow will use later.
+  // authStore.state.token = headers.authorization
+  // authStore.state.tokenExpiry = headers['expired-at']
+  // authStore.state.refreshToken = headers['refresh-token']
+  // authStore.state.refreshTokenExpiry = headers['refresh-token-expired']
 }
 
 export const login = async (email: string, password: string) => {
   const result = await authApi.login({ email, password })
+
+  if (result.ok) {
+    setAuthenticatedUser(result)
+  }
+
+  return result.ok
+}
+
+export const register = async (registerPayload: RegisterPayload) => {
+  const result = await authApi.register(registerPayload)
 
   if (result.ok) {
     setAuthenticatedUser(result)

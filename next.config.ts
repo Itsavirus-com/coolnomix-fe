@@ -2,6 +2,8 @@ import withBundleAnalyzer from '@next/bundle-analyzer'
 import { withSentryConfig } from '@sentry/nextjs'
 import createNextIntlPlugin from 'next-intl/plugin'
 
+import { ENV } from '@/libs/env'
+
 const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true'
 })
@@ -16,8 +18,8 @@ export default withNextIntl(
         optimizePackageImports: []
       },
       env: {
-        API_BASE_URL: '',
-        SENTRY_DSN: ''
+        NEXT_PUBLIC_API_BASE_URL: ENV.NEXT_PUBLIC_API_BASE_URL,
+        SENTRY_DSN: ENV.NEXT_PUBLIC_SENTRY_DSN
       }
     }),
     {

@@ -1,38 +1,24 @@
-'use client'
-
-import { useTranslations } from 'next-intl'
-import React from 'react'
+import { getTranslations } from 'next-intl/server'
+import React, { ReactNode, Suspense } from 'react'
 
 import Description from '@/components/description/Description'
-import { Tabs } from '@/components/ui/tabs'
 
-import { useRefrigerationTabs } from './_components/refrigeration-tabs/refrigeration-tabs.hook'
-import FormSidebar from '../../_components/form-sidebar/FormSidebar'
+import RefrigerationTabs from './_components/refrigeration-tabs/RefrigerationTabs'
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
-  const t = useTranslations('qna')
-
-  const { currentTab, tabs, handleChangeTab } = useRefrigerationTabs()
+const Layout = async ({ children }: { children: ReactNode }) => {
+  const t = await getTranslations('qna')
 
   return (
     <main>
       <section className='content-placement-center content-placement-center--start'>
-        <Tabs value={currentTab} defaultValue='walk-in-chiller'>
-          <div className='flex gap-16'>
-            <FormSidebar
-              title={t('kitchen_set')}
-              description={t('manage_refrigeration_units_for_each_kitchen_set')}
-              tabs={tabs}
-              onChangeTab={handleChangeTab}
-            />
-            <div className='w-[578px]'>
-              <Description label={t('refrigeration_details')} className='mb-8' titleTag='h1'>
-                {t('fill_in_the_necessary_details_about_your_refrigeration_system')}
-              </Description>
-              {children}
-            </div>
-          </div>
-        </Tabs>
+        <Suspense>
+          <RefrigerationTabs>
+            <Description label={t('refrigeration_details')} className='mb-8' titleTag='h1'>
+              {t('fill_in_the_necessary_details_about_your_refrigeration_system')}
+            </Description>
+            {children}
+          </RefrigerationTabs>
+        </Suspense>
       </section>
     </main>
   )

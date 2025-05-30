@@ -1,11 +1,12 @@
 import type { FC } from 'react'
 
-import { ChevronDown, SquareTerminal } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { memo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
+import Icon from '@/components/icon/Icon'
 import Text from '@/components/text/Text'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import {
@@ -28,7 +29,7 @@ const SidebarMenuItems: FC<SidebarMenuItemsProps> = (props) => {
 
   return (
     <SidebarMenu>
-      {items?.map(({ title, isActive, items: subItems, url }) => {
+      {items?.map(({ icon, title, isActive, items: subItems, url }) => {
         const isChildActive = subItems?.some((item) => pathname.includes(item.url))
         const isCurrent = isActive || isChildActive || pathname === url
 
@@ -41,7 +42,7 @@ const SidebarMenuItems: FC<SidebarMenuItemsProps> = (props) => {
                 className={cn('hover:!bg-sidebar-accent', isCurrent && '!bg-sidebar-accent')}
               >
                 <Link href={url}>
-                  <SquareTerminal />
+                  <Icon icon={icon} size={16} className={isCurrent && 'text-black'} />
                   <Text
                     tag='span'
                     variant='body2'
@@ -70,7 +71,7 @@ const SidebarMenuItems: FC<SidebarMenuItemsProps> = (props) => {
                             <Link
                               href={url}
                               className={cn(
-                                '!text-[#607A9B] transition-all hover:font-semibold hover:!text-black',
+                                '!text-brand-muted transition-all hover:font-semibold hover:!text-black',
                                 pathname.includes(url) && 'font-semibold !text-black'
                               )}
                             >

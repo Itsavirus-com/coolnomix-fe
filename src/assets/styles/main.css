@@ -11,6 +11,7 @@
 @import './components/header.css';
 @import './components/tab-progress.css';
 @import './components/details-form-sidebar-tab.css';
+@import './components/table.css';
 
 /* Generic */
 @import './generic/normalize.css';
@@ -18,6 +19,7 @@
 /* Plugins */
 @import './plugins/dropzone.css';
 @import './plugins/shadcn.css';
+@import './plugins/icomoon.css';
 
 /* Settings */
 @import './settings/global.css';

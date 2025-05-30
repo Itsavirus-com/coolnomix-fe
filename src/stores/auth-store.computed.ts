@@ -5,7 +5,6 @@ import type { AuthStore } from './auth-store.types'
 
 export const computeAuthStore = (state: AuthStore) =>
   derive({
-    name: (get) => `${get(state).user.firstName} ${get(state).user.lastName}`,
     authorization: (get) => get(state).token,
     isAuthenticated: (get) => {
       const hasToken = !!get(state).token

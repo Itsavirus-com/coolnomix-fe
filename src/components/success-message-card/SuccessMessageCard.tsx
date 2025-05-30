@@ -1,8 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
-import React, { FC, memo } from 'react'
+import React, { FC } from 'react'
 
 import { successAnimation } from '@/assets/images'
 import { cn } from '@/libs/utils'
@@ -15,14 +14,14 @@ const SuccessMessageCard: FC<SuccessMessageCardProps> = (props) => {
   const {
     title,
     description,
-    buttonLabel,
-    buttonLink,
+    buttons,
+    imageAlt,
     className,
     image = successAnimation,
     ...rest
   } = props
 
-  const t = useTranslations('common')
+  const [leftButton, rightButton] = buttons
 
   return (
     <div
@@ -33,22 +32,18 @@ const SuccessMessageCard: FC<SuccessMessageCardProps> = (props) => {
       {...rest}
     >
       <div className='flex flex-col items-center py-4 text-center sm:py-0'>
-        <Image
-          src={image}
-          alt={t('an_awesome_success_result_animation')}
-          height={228}
-          width={228}
-        />
+        <Image src={image} alt={imageAlt} height={228} width={228} />
         <Text tag='h1' variant='subtitle1' weight='semibold'>
-          {t(title)}
+          {title}
         </Text>
-        <Text tag='p' variant='body2' className='text-grey-darkest mt-2 mb-8'>
-          {t(description)}
-        </Text>
-        <Button label={t(buttonLabel)} link={buttonLink} />
+        <Text className='text-grey-darkest mt-2 mb-8'>{description}</Text>
+        <div className='flex items-center gap-3'>
+          {leftButton && <Button {...leftButton} />}
+          <Button {...rightButton} />
+        </div>
       </div>
     </div>
   )
 }
 
-export default memo(SuccessMessageCard)
+export default SuccessMessageCard

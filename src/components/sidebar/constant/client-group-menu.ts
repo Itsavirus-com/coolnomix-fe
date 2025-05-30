@@ -1,42 +1,24 @@
-import { dataLogMonitoringPath, qnaPath } from '@/config/paths'
-import { listOfBranchPath } from '@/config/paths/list-of-branch-path'
+import { qnaPath } from '@/config/paths'
+import { reportListPath } from '@/config/paths/list-of-report-path'
 
 import type { SidebarMenuItemType } from '../components/sidebar-menu-items/sidebar-menu-items.types'
 
 export const clientGroupMenuItems = (t: any): SidebarMenuItemType[] => {
   return [
     {
-      icon: '',
-      title: t('dashboard'),
-      url: '/'
-    },
-    {
-      icon: '',
+      icon: 'icon-snow',
       title: t('energy_saving_audit'),
-      url: listOfBranchPath(),
+      url: reportListPath(),
       items: [
         {
-          title: t('list_of_branch'),
-          url: listOfBranchPath()
+          title: t('list_of_report'),
+          url: reportListPath()
         },
         {
           title: t('qna'),
           url: qnaPath()
-        },
-        {
-          title: t('data_log_monitoring'),
-          url: dataLogMonitoringPath()
-        },
-        {
-          title: t('report'),
-          url: '#'
         }
       ]
-    },
-    {
-      icon: '',
-      title: t('monitoring'),
-      url: '#'
     }
   ]
 }

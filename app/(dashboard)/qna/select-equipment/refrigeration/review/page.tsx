@@ -3,7 +3,7 @@ import React from 'react'
 
 import { ENV } from '@/libs/env'
 
-import RefrigerationTabs from '../_components/refrigeration-tabs/RefrigerationTabs'
+import RefrigerationTabsContent from '../_components/refrigeration-tabs-content/RefrigerationTabsContent'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const Page = () => {
-  return <RefrigerationTabs />
+  return <RefrigerationTabsContent inPreview />
 }
 
 export default Page

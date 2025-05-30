@@ -6,7 +6,7 @@ import ControlledSelect from '@/components/forms/select/Select'
 
 import { RefrigerationFormProps } from './refrigeration-form.types'
 
-const AcForm: FC<RefrigerationFormProps> = (props) => {
+const RefrigerationForm: FC<RefrigerationFormProps> = (props) => {
   const t = useTranslations('qna')
 
   const { disabled } = props
@@ -165,4 +165,4 @@ const AcForm: FC<RefrigerationFormProps> = (props) => {
   )
 }
 
-export default AcForm
+export default RefrigerationForm

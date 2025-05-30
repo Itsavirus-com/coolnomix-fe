@@ -7,7 +7,7 @@ import { snowman } from '@/assets/images'
 import Button from '@/components/button/Button'
 import Description from '@/components/description/Description'
 import Image from '@/components/image/Image'
-import { qnaSelectLanguagePath } from '@/config/paths'
+import { qnaAcPath } from '@/config/paths'
 
 const GetStarted = () => {
   const t = useTranslations('qna')
@@ -26,7 +26,7 @@ const GetStarted = () => {
           {t('get_started_description')}
         </Description>
       </div>
-      <Button className='mt-5' label={t('start_qna')} link={qnaSelectLanguagePath()} />
+      <Button className='mt-5' label={t('start_qna')} link={qnaAcPath()} />
     </div>
   )
 }

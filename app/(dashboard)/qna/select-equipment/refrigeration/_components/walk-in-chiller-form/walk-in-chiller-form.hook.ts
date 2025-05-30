@@ -1,46 +1,32 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
+import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
+import { load, updateStoredObject } from '@/utils/storage'
 
-import { formSchema } from '../../regrigeration.scheme'
+import { formSchema } from '../../regrigeration.schema'
 
 export const useWalkInChillerForm = () => {
   const t = useTranslations('qna')
+  const tVal = useTranslations('validation')
 
   const router = useRouter()
 
   // Should be data from backend
   const isSubmitted = false
 
-  const methods = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      evaporatorMake: '',
-      evaporatorModel: '',
-      evaporatorSerialNumber: '',
-      condenserMake: '',
-      condenserModel: '',
-      condenserSerialNumber: '',
-      compressorMake: '',
-      compressorModel: '',
-      tempSetPointCutIn: '',
-      tempSetPointCutOut: '',
-      differentialTempSetPoint: '',
-      systemAbilityToCycleOnOffBasedOnTempSetPoints: '',
-      isTheDefrostSystemFunctioning: '',
-      areTheTempMetersFunctioning: '',
-      serviceFrequency: ''
-    }
+  const schema = formSchema(tVal)
+  const methods = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema)
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
-    // Save to local storage
-    console.log(values)
+  const onSubmit = useCallback((values: z.infer<typeof schema>) => {
+    updateStoredObject(QNA_FORM_STORAGE_KEY, { walkInChillerForm: values })
   }, [])
 
   const handleBack = () => {
@@ -63,6 +49,16 @@ export const useWalkInChillerForm = () => {
     ],
     []
   )
+
+  useEffect(() => {
+    const saved = load(QNA_FORM_STORAGE_KEY)
+
+    const timeout = setTimeout(() => {
+      methods.reset(saved?.walkInChillerForm)
+    }, 300)
+
+    return () => clearTimeout(timeout)
+  }, [])
 
   return {
     methods,

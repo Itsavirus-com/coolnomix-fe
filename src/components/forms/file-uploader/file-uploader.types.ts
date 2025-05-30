@@ -18,6 +18,7 @@ export type FileUploaderProps = {
   acceptedFile?: Accept
   maxFiles?: number
   disabled?: boolean
+  uploadFileLabel?: string
   onFileUpload?: (files?: FileType[]) => void
 }
 
