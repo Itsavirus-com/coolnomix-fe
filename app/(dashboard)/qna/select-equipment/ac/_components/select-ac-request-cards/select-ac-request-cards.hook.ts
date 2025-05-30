@@ -4,7 +4,8 @@ import { useCallback, useMemo, useState } from 'react'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
 import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
-import { qnaAcDetailsPath } from '@/config/paths'
+import { qnaAcDetailsPath, qnaSuccessPath } from '@/config/paths'
+import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
 import { load, updateStoredObject } from '@/utils/storage'
 
 import { SelectAcRequestCardType, SelectAcRequestValue } from './select-ac-request-cards.types'
@@ -17,6 +18,8 @@ export const useSelectAcRequest = () => {
   const currentAcRequest = load(QNA_FORM_STORAGE_KEY)?.acRequest || ''
 
   const [selectedAcRequest, setSelectedAcRequest] = useState<SelectAcRequestValue>(currentAcRequest)
+
+  const { hasApprovedAircons } = useQnaGetAircons()
 
   const requestTypes: SelectAcRequestCardType[] = useMemo(
     () => [
@@ -48,18 +51,30 @@ export const useSelectAcRequest = () => {
     []
   )
 
-  const handleSelectAcRequest = useCallback((type: SelectAcRequestValue) => {
-    setSelectedAcRequest(type)
-    updateStoredObject(QNA_FORM_STORAGE_KEY, { acRequest: type })
-  }, [])
+  const handleSelectAcRequest = useCallback(
+    (type: SelectAcRequestValue) => {
+      setSelectedAcRequest(type)
+      updateStoredObject(QNA_FORM_STORAGE_KEY, { acRequest: type })
+    },
+    [selectedAcRequest]
+  )
+
+  const getPath = () => {
+    const isDetailsForms = currentAcRequest === 'details-forms'
+
+    if (isDetailsForms && hasApprovedAircons) {
+      return `${qnaSuccessPath()}?type=details-forms`
+    }
+
+    return qnaAcDetailsPath({ type: selectedAcRequest })
+  }
 
   const handleClick = useCallback(() => {
-    router.push(qnaAcDetailsPath({ type: selectedAcRequest }))
-  }, [selectedAcRequest])
+    const path = getPath()
+    router.push(path)
+  }, [currentAcRequest, hasApprovedAircons])
 
-  const handleBack = () => {
-    router.back()
-  }
+  const handleBack = () => router.back()
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
     () => [

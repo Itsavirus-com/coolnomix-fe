@@ -8,4 +8,5 @@ export interface SuccessMessageType {
   image: StaticImageData
   imageAlt: string
   buttons: ButtonWithLinkProps[]
+  loading?: boolean
 }

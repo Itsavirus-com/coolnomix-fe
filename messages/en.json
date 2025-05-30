@@ -184,7 +184,11 @@
     "every_month": "Every Month",
     "every_two_month": "Every 2 Months",
     "every_three_month": "Every 3 Months",
-    "nameplate_of_the_unit": "Nameplate of the unit"
+    "nameplate_of_the_unit": "Nameplate of the unit",
+    "internal_unit": "{ratio} internal unit",
+    "external_unit": "{ratio} external unit",
+    "generating_report": "Generating Report...",
+    "this_may_take_a_few_minutes": "This may take a few minutes"
   },
   "sidebar": {
     "platform": "PLATFORM",
@@ -269,8 +273,8 @@
   },
   "validation": {
     "this_field_is_required": "This field is required",
-    "max_operating_hours_per_day": "Max operating hours per day is 24",
-    "max_running_days_per_week": "Max running days per week is 7",
+    "max_operating_hours_per_day": "Minimum operating hours per day is 1 and maximum is 24",
+    "max_running_days_per_week": "Minimum running days per week is 1 and maximum is 7",
     "please_enter_a_valid_email_address": "Please enter a valid email address",
     "phone_number_must_be_at_least_8_digits": "Phone number must be at least 8 digits",
     "phone_number_must_contain_only_digits": "Phone number must contain only digits",
@@ -283,7 +287,8 @@
     "password_must_not_contain_spaces": "Password must not contain spaces",
     "password_must_contain_at_least_one_special_character": "Password must contain at least one special character",
     "passwords_do_not_match": "Passwords do not match",
-    "invalid_phone_number": "Invalid phone number"
+    "invalid_phone_number": "Invalid phone number",
+    "minimum_input_is_1": "Minimum input is 1"
   },
   "auth": {
     "welcome_back": "Welcome Back!",
