@@ -10,6 +10,14 @@ import { acceptedFileImage } from '@/config/constant'
 
 import { DetailsReviewFormProps } from '../../../details-forms.types'
 
+const yearsOptions = Array.from({ length: 20 }, (_, i) => {
+  const year = new Date().getFullYear() - i
+  return {
+    label: year.toString(),
+    value: year.toString()
+  }
+})
+
 const TechnicalForm: FC<DetailsReviewFormProps> = (props) => {
   const t = useTranslations('qna')
 
@@ -17,14 +25,15 @@ const TechnicalForm: FC<DetailsReviewFormProps> = (props) => {
 
   return (
     <div className='mt-4 flex flex-col gap-4'>
-      <ControlledInput
+      <ControlledSelect
         required
         name={`${formName}.${index}.yearOfInstallation`}
         label={t('when_was_the_equipment_installed')}
+        items={yearsOptions}
+        placeholder={t('enter_year_of_installation')}
         index={index}
         disabled={disabled}
-        type='number'
-        placeholder={t('enter_year_of_installation')}
+        hasSearch
       />
       <ControlledSelect
         required
