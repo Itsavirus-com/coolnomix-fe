@@ -10,5 +10,6 @@ export const modalStore = proxy<ModalStore>({
   cancelLabel: null,
   onConfirm: null,
   onCancel: null,
-  align: 'left'
+  align: 'left',
+  type: 'confirm'
 })
