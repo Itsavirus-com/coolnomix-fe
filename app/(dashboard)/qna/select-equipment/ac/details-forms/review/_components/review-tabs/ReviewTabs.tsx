@@ -5,6 +5,7 @@ import React from 'react'
 
 import Description from '@/components/description/Description'
 import FormSidebar from '@/components/form-sidebar/FormSidebar'
+import LoadingWithText from '@/components/loading-with-text/LoadingWithText'
 import { Tabs, TabsContent } from '@/components/ui/tabs'
 
 import { useReviewTabs } from './review-tabs.hook'
@@ -14,8 +15,10 @@ import PhaseTwoForm from '../phase-two-form/PhaseTwoForm'
 const ReviewTabs = () => {
   const t = useTranslations('qna')
 
-  const { phases, currentPhase, hasApprovedAircons, handleChangePhase, handleContinue } =
+  const { phases, hasApprovedAircons, isLoading, currentPhase, handleChangePhase, handleContinue } =
     useReviewTabs()
+
+  if (isLoading) return <LoadingWithText className='mt-[25%]' />
 
   return (
     <Tabs value={currentPhase} defaultValue='phase-1'>

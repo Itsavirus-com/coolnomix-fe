@@ -26,7 +26,7 @@ export const useReviewTabs = () => {
 
   const [currentPhase, setCurrentPhase] = useState(phase)
 
-  const { hasApprovedAircons } = useQnaGetAircons()
+  const { isLoading, hasApprovedAircons } = useQnaGetAircons()
 
   const handleChangePhase = useCallback(
     (step: string) => {
@@ -48,8 +48,9 @@ export const useReviewTabs = () => {
   }, [phase])
 
   return {
-    hasApprovedAircons,
     phases,
+    hasApprovedAircons,
+    isLoading,
     currentPhase,
     handleChangePhase,
     handleContinue
