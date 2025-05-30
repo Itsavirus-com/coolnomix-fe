@@ -28,7 +28,8 @@ export const getAirconsLocalData = (aircons: QnaDetailsFormsStateStore): QnaAirc
       aircon_operating_details: { ...detailsAc },
       aircon_installation_details: {
         ...phaseTwo,
-        wifi_availability: phaseTwo.wifi_availability === 'yes'
+        wifi_availability: phaseTwo.wifi_availability === 'yes',
+        year_of_installation: Number(phaseTwo.year_of_installation)
       },
       tariff_low,
       tariff_high
