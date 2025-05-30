@@ -9,4 +9,5 @@ export type SuccessMessageCardProps = ComponentProps<'div'> & {
   buttons: ButtonWithLinkProps[]
   image?: StaticImageData
   imageAlt: string
+  loading?: boolean
 }

@@ -4,6 +4,7 @@ import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 
 import { Button as CButton } from '@/components/ui/button'
+import { cn } from '@/libs/utils'
 
 import type { ButtonWithLinkProps } from './button.types'
 
@@ -18,6 +19,7 @@ const Button = (props: ButtonWithLinkProps) => {
     type = 'button',
     testID = `${name}-button`,
     ariaLabel,
+    disabled,
     ...rest
   } = props
 
@@ -28,17 +30,26 @@ const Button = (props: ButtonWithLinkProps) => {
       size={size}
       asChild={!!link}
       type={type}
+      disabled={disabled || isLoading}
       {...rest}
     >
       {link ? (
-        <Link href={link} aria-label={ariaLabel}>
+        <Link
+          href={link}
+          aria-label={ariaLabel}
+          className={cn(
+            'flex items-center gap-2',
+            (disabled || isLoading) && 'pointer-events-none opacity-50'
+          )}
+        >
+          {isLoading && <Loader2 size={14} className='animate-spin' />}
           {label}
         </Link>
       ) : (
-        <>
+        <div className='flex items-center gap-2'>
           {isLoading && <Loader2 size={14} className='animate-spin' />}
           {label}
-        </>
+        </div>
       )}
     </CButton>
   )
