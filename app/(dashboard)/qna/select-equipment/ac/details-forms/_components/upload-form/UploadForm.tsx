@@ -25,7 +25,7 @@ const UploadForm: FC<DetailsFormProps> = (props) => {
       }}
     >
       <ControlledFileUploader
-        name='acUnit'
+        name='ac_unit'
         label={t('upload_a_picture_of_nameplate_of_the_unit_indoor_outdoor_unit')}
         title={t('media_upload')}
         description={t('add_your_media_here_we_only_support_jpg_and_png_files')}

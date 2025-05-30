@@ -14,7 +14,7 @@ const PeakLoadTarifForm: FC<DetailsReviewFormProps> = (props) => {
     <div className='mt-4 flex flex-col gap-4'>
       <ControlledInput
         required
-        name={`${formName}.${index}.peakLoadTarif`}
+        name={`${formName}.${index}.tariff_low`}
         label={t('peak_load_tariff_rate_idr')}
         type='number'
         index={index}
@@ -23,7 +23,7 @@ const PeakLoadTarifForm: FC<DetailsReviewFormProps> = (props) => {
       />
       <ControlledInput
         required
-        name={`${formName}.${index}.noPeakLoadTarif`}
+        name={`${formName}.${index}.tariff_high`}
         label={t('no_peak_load_tariff_rate_idr')}
         type='number'
         index={index}

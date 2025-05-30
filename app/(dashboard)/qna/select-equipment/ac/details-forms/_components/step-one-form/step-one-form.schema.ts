@@ -6,35 +6,37 @@ import { fileSchema } from '@/utils/schema'
 
 export const detailsBrandSchema = (t: TFunction) =>
   z.object({
-    acUnit: fileSchema.optional(),
-    brandEquipment: z
+    ac_unit: z.union([fileSchema(), z.string()]).optional().nullable(),
+    brand: z
       .string({
         required_error: requiredString(t)
       })
       .min(1, requiredString(t)),
-    modelEquipment: z
+    model: z
       .string({
         required_error: requiredString(t)
       })
       .min(1, requiredString(t)),
-    serialNumber: z
+    serial_number: z
       .string({
         required_error: requiredString(t)
       })
       .min(1, requiredString(t)),
-    acType: z
+    type: z
       .string({
         required_error: requiredString(t)
       })
       .min(1, requiredString(t)),
-    numberOfSameType: z
-      .string({
+    number_of_same_type: z
+      .number({
         required_error: requiredString(t)
       })
-      .min(1, requiredString(t))
+      .refine((val) => Number(val) >= 1, {
+        message: t('minimum_input_is_1')
+      })
   })
 
 export const formSchema = (t: TFunction) =>
   z.object({
-    detailsBrand: z.array(detailsBrandSchema(t))
+    details_brand: z.array(detailsBrandSchema(t))
   })

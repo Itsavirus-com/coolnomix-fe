@@ -6,9 +6,10 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import { ControlledButtonProps } from '@/components/button/button.types'
-import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
-import { load, updateStoredObject } from '@/utils/storage'
+import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
+import { setAcUnit } from '@/stores/qna-details-forms.actions'
 
+import { getSavedAcUnit } from './upload-form.helpers'
 import { formSchema } from './upload-form.schema'
 
 export const useUploadForm = () => {
@@ -16,24 +17,17 @@ export const useUploadForm = () => {
 
   const router = useRouter()
 
-  const saved = load(QNA_FORM_STORAGE_KEY)
+  const { aircons } = useQnaGetAircons()
+  const savedAcUnit = getSavedAcUnit(aircons)
 
   const schema = formSchema()
   const methods = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      acUnit: []
-    }
+    resolver: zodResolver(schema)
   })
 
   const handleBack = () => router.back()
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
-    updateStoredObject(QNA_FORM_STORAGE_KEY, {
-      stepsForm: values.acUnit?.map((item, index: number) => ({
-        ...(saved?.stepsForm?.[index] || {}),
-        acUnit: item
-      }))
-    })
+    setAcUnit(values.ac_unit)
   }, [])
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
@@ -54,16 +48,10 @@ export const useUploadForm = () => {
   )
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      methods.reset({
-        acUnit:
-          saved?.stepsForm?.filter(({ acUnit }: any) => acUnit)?.map(({ acUnit }: any) => acUnit) ||
-          []
-      })
-    }, 300)
-
-    return () => clearTimeout(timeout)
-  }, [])
+    methods.reset({
+      ac_unit: savedAcUnit
+    })
+  }, [savedAcUnit.length])
 
   return { methods, buttons, onSubmit }
 }

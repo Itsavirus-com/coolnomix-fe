@@ -36,7 +36,7 @@ const StepOneForm: FC<DetailsFormProps> = (props) => {
         items={fields.map((_, index) => ({
           key: index.toString(),
           title: t('air_conditioning_title', { index: index + 1 }),
-          content: <BrandForm index={index} formName='detailsBrand' />
+          content: <BrandForm index={index} formName='details_brand' />
         }))}
       />
       <div className='mx-auto mt-10 flex max-w-[320px] flex-col items-center gap-2.5'>
