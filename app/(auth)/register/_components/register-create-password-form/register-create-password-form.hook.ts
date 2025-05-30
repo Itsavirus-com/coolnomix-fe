@@ -7,6 +7,7 @@ import { toast } from 'sonner'
 import { snapshot } from 'valtio'
 import { z } from 'zod'
 
+import { reportListPath } from '@/config/paths/list-of-report-path'
 import { register } from '@/stores/auth-store.actions'
 import { registerStateStore } from '@/stores/register-state-store'
 import { resetRegisterState, setGroupBranchPassword } from '@/stores/register-state-store.actions'
@@ -30,7 +31,7 @@ export const useRegisterCreatePasswordForm = () => {
       await register(registerState)
       resetRegisterState()
       toast.success(t('register_success'))
-      router.push('/')
+      router.push(reportListPath())
     } catch (error: any) {
       handleGenericError(error)
     }
