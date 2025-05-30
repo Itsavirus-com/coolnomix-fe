@@ -6,7 +6,7 @@ import { optionalFilesSchema, requiredNumberSchema, requiredStringSchema } from 
 export const acPhaseTwoSchema = (t: TFunction) =>
   z.array(
     z.object({
-      year_of_installation: requiredNumberSchema(t),
+      year_of_installation: requiredStringSchema(t),
       service_frequency: requiredStringSchema(t),
       last_service_date: requiredStringSchema(t),
       existing_room_temp: z

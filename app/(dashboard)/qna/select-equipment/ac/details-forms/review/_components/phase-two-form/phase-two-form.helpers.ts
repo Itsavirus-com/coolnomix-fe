@@ -36,7 +36,13 @@ export const getPayload = (
 ) => {
   return {
     aircons: values.phaseTwo?.map((item, index) => {
-      const { filter_condition, last_service_date, wifi_availability, ...rest } = item
+      const {
+        year_of_installation,
+        filter_condition,
+        last_service_date,
+        wifi_availability,
+        ...rest
+      } = item
 
       return {
         aircon_id: aircons[index].id,
@@ -50,6 +56,7 @@ export const getPayload = (
           }),
           last_service_date: getDate(last_service_date),
           wifi_availability: wifi_availability === 'yes',
+          year_of_installation: Number(year_of_installation),
           ...rest
         }
       }
