@@ -105,6 +105,7 @@ export const usePhaseOneForm = () => {
   }, [hasApprovedAircons, isSubmitted])
 
   useEffect(() => {
+    mutate()
     methods.reset({
       phaseOne: savedPhaseOne,
       peakLoadTarif: savedPeakLoadTarif
