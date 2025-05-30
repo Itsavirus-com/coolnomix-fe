@@ -2,6 +2,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 
 import { qnaAcDetailsReviewPhase2Path } from '@/config/paths'
+import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
 
 const phases = [
   {
@@ -25,8 +26,7 @@ export const useReviewTabs = () => {
 
   const [currentPhase, setCurrentPhase] = useState(phase)
 
-  // Should be data from backend
-  const isApproved = false
+  const { hasApprovedAircons } = useQnaGetAircons()
 
   const handleChangePhase = useCallback(
     (step: string) => {
@@ -48,7 +48,7 @@ export const useReviewTabs = () => {
   }, [phase])
 
   return {
-    isApproved,
+    hasApprovedAircons,
     phases,
     currentPhase,
     handleChangePhase,

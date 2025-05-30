@@ -14,12 +14,13 @@ import PhaseTwoForm from '../phase-two-form/PhaseTwoForm'
 const ReviewTabs = () => {
   const t = useTranslations('qna')
 
-  const { phases, currentPhase, isApproved, handleChangePhase, handleContinue } = useReviewTabs()
+  const { phases, currentPhase, hasApprovedAircons, handleChangePhase, handleContinue } =
+    useReviewTabs()
 
   return (
     <Tabs value={currentPhase} defaultValue='phase-1'>
       <div className='flex gap-16'>
-        {isApproved && (
+        {hasApprovedAircons && (
           <FormSidebar
             title={t('air_conditioning')}
             description={t('please_check_all_the_details_you_have_entered_before_submitting')}
