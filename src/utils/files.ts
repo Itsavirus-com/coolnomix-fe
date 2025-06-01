@@ -38,32 +38,42 @@ export const convertFilesToBase64 = async (files: FileType[]): Promise<string[]>
   return Promise.all(base64Promises)
 }
 
-export const dataUrlToFile = (dataUrl: string, filename: string): FileWithPreview | undefined => {
-  const arr = dataUrl.split(',')
-  if (arr.length < 2) {
-    return undefined
-  }
-  const mimeArr = arr[0].match(/:(.*?);/)
-  if (!mimeArr || mimeArr.length < 2) {
-    return undefined
-  }
+export const dataUrlToFile = (dataUrl: string, filename: string): FileWithPreview | null => {
+  try {
+    const arr = dataUrl.split(',')
+    if (arr.length < 2) {
+      console.warn('Invalid data URL format')
+      return null
+    }
 
-  const mime = mimeArr[1]
-  const buff = Buffer.from(arr[1], 'base64')
+    const mimeArr = arr[0].match(/:(.*?);/)
+    if (!mimeArr || mimeArr.length < 2) {
+      console.warn('Invalid MIME type in data URL')
+      return null
+    }
 
-  return new File([buff], filename, { type: mime }) as FileWithPreview
+    const mime = mimeArr[1]
+    const buff = Buffer.from(arr[1], 'base64')
+
+    return new File([buff], filename, { type: mime }) as FileWithPreview
+  } catch (error) {
+    console.error('Error converting data URL to file:', error)
+    return null
+  }
 }
 
 export const dataUrlsToFiles = (dataUrls: string[]): FileWithPreview[] => {
-  return dataUrls.map((dataUrl, index) => {
-    const file = dataUrlToFile(dataUrl, `File ${index + 1}`)
+  return dataUrls
+    .map((dataUrl, index) => {
+      const file = dataUrlToFile(dataUrl, `File ${index + 1}`)
 
-    if (file) {
-      Object.assign(file, {
-        preview: file.type.split('/')[0] === 'image' ? dataUrl : null,
-        formattedSize: formatBytes(file.size)
-      })
-    }
-    return file
-  })
+      if (file) {
+        Object.assign(file, {
+          preview: file.type.split('/')[0] === 'image' ? dataUrl : null,
+          formattedSize: formatBytes(file.size)
+        })
+      }
+      return file
+    })
+    .filter((file): file is FileWithPreview => file !== null)
 }
