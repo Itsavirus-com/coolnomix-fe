@@ -5,9 +5,9 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { ControlledButtonProps } from '@/components/button/button.types'
 import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
 import { setAcUnit } from '@/stores/qna-details-forms.actions'
+import { ButtonGroupType } from '@/types/general'
 
 import { getSavedAcUnit } from './upload-form.helpers'
 import { formSchema } from './upload-form.schema'
@@ -18,7 +18,7 @@ export const useUploadForm = () => {
   const router = useRouter()
 
   const { aircons } = useQnaGetAircons()
-  const savedAcUnit = getSavedAcUnit(aircons)
+  const acUnit = getSavedAcUnit(aircons)
 
   const schema = formSchema()
   const methods = useForm<z.infer<typeof schema>>({
@@ -30,11 +30,11 @@ export const useUploadForm = () => {
     setAcUnit(values.ac_unit)
   }, [])
 
-  const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
-    () => [
+  const buttons = useMemo((): ButtonGroupType => {
+    return [
       {
         size: 'lg',
-        variant: 'secondary',
+        variant: 'cancel',
         label: t('back'),
         onClick: handleBack
       },
@@ -43,15 +43,14 @@ export const useUploadForm = () => {
         size: 'lg',
         label: t('continue')
       }
-    ],
-    []
-  )
+    ]
+  }, [])
 
   useEffect(() => {
     methods.reset({
-      ac_unit: savedAcUnit
+      ac_unit: acUnit
     })
-  }, [savedAcUnit.length])
+  }, [acUnit.length])
 
   return { methods, buttons, onSubmit }
 }

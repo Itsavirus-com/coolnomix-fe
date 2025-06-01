@@ -1,14 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import type { ControlledButtonProps } from '@/components/button/button.types'
 import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaAcPath, qnaRefrigerationPath } from '@/config/paths'
-import { AcEquipmentType } from '@/types/general'
+import { AcEquipmentType, ButtonGroupType } from '@/types/general'
 import { load, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from './select-equipment-form.schema'
@@ -21,14 +20,9 @@ export const useSelectEquipmentForm = () => {
 
   const router = useRouter()
 
-  const currentEquipmentType = load(QNA_FORM_STORAGE_KEY)?.equipmentType || ''
-
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      equipmentType: currentEquipmentType
-    }
+    resolver: zodResolver(schema)
   })
 
   const equipmentTypes: EquipmentTypeItem[] = useMemo(
@@ -50,20 +44,17 @@ export const useSelectEquipmentForm = () => {
     }
   }
 
+  const handleBack = () => router.back()
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     handleNavigate(values.equipmentType as AcEquipmentType)
     updateStoredObject(QNA_FORM_STORAGE_KEY, { equipmentType: values.equipmentType })
   }, [])
 
-  const handleBack = () => {
-    router.back()
-  }
-
-  const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
-    () => [
+  const buttons = useMemo((): ButtonGroupType => {
+    return [
       {
         size: 'lg',
-        variant: 'secondary',
+        variant: 'cancel',
         label: t('back'),
         onClick: handleBack
       },
@@ -72,9 +63,15 @@ export const useSelectEquipmentForm = () => {
         size: 'lg',
         label: t('continue')
       }
-    ],
-    []
-  )
+    ]
+  }, [])
+
+  useEffect(() => {
+    const equipmentType = load(QNA_FORM_STORAGE_KEY)?.equipmentType || ''
+    methods.reset({
+      equipmentType: equipmentType
+    })
+  }, [])
 
   return { equipmentTypes, buttons, methods, onSubmit }
 }

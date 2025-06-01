@@ -6,7 +6,6 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { useSnapshot } from 'valtio'
 import { z } from 'zod'
 
-import { ControlledButtonProps } from '@/components/button/button.types'
 import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaAcPath } from '@/config/paths'
 import { reportDetailPath } from '@/config/paths/list-of-report-path'
@@ -16,6 +15,7 @@ import { hideModal, showModal } from '@/stores/modal-store.actions'
 import { qnaDetailsFormsStateStore } from '@/stores/qna-details-forms'
 import { resetQnaDetailsForms, setPhaseTwo } from '@/stores/qna-details-forms.actions'
 import { QnaDetailsFormsStateStore } from '@/stores/qna-details-forms.types'
+import { ButtonGroupType } from '@/types/general'
 import { handleGenericError } from '@/utils/error-handler'
 import { remove } from '@/utils/storage'
 
@@ -82,11 +82,11 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
     [inPreview, aircons.length]
   )
 
-  const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
-    () => [
+  const buttons = useMemo((): ButtonGroupType => {
+    return [
       {
         size: 'lg',
-        variant: 'secondary',
+        variant: 'cancel',
         label: inPreview ? t('edit') : t('back'),
         onClick: handleBack
       },
@@ -97,15 +97,16 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
         disabled: isSubmitted,
         onSubmit
       }
-    ],
-    [inPreview]
-  )
+    ]
+  }, [inPreview, isSubmitted])
 
   useEffect(() => {
-    methods.reset({
-      phaseTwo: savedPhaseTwo
-    })
-  }, [savedPhaseTwo.length])
+    if (savedPhaseTwo.length) {
+      methods.reset({
+        phaseTwo: savedPhaseTwo
+      })
+    }
+  }, [savedPhaseTwo.length, methods])
 
   return {
     methods,
