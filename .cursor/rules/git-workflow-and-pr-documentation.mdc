@@ -3,7 +3,6 @@ description:
 globs: 
 alwaysApply: false
 ---
-
 # Git Workflow & Pull Request Documentation Rules
 
 You are working on a Next.js TypeScript project with strict git workflow and documentation requirements. Always follow these rules when creating branches, commits, and pull request documentation.
@@ -15,109 +14,72 @@ You are working on a Next.js TypeScript project with strict git workflow and doc
 **ALWAYS provide these 3 components in order:**
 
 1. **Git Operations**
-
    - Create branch with proper naming convention
    - Commit with conventional commit format
    - Push to remote repository
 
 2. **Pull Request Title**
-
    - Keep concise and descriptive
 
 3. **Pull Request Description**
    - Follow the specified template format
-   - Include comprehensive documentation
+   - Include brief but clear documentation
 
 ## Pull Request Documentation Template
 
 ### Title Format
-
-Short title for pull request
+Short and descriptive title
 
 ### Description Format
-
 ```markdown
 ## Summary
-
-Summary for all commit message
+Brief overview of what was changed and why
 
 ## Changes
-
-<detailed explanation of each commit with:>
-- **What was changed**: Specific files and modifications
-- **Why it was changed**: Reasoning behind the changes
-- **How it benefits**: Impact and improvements
-- **Technical details**: Implementation specifics when relevant
+- **File/Component changed**: Short explanation of what was modified
+- **Another change**: Brief description of the modification
+- **Additional change**: Concise explanation of the update
 ```
 
 ## Documentation Standards
 
 ### Summary Section
-
-- Provide high-level overview of all changes
-- Explain the purpose and scope of the branch
-- Keep it concise but informative
-- Focus on the business value and technical impact
+- One or two sentences explaining the overall purpose
+- Focus on the main goal of the changes
 
 ### Changes Section
-
-- Document EVERY commit in the branch
-- Use the exact commit message as subsection header
-- Provide detailed explanation for each commit
-- Include file-specific changes when relevant
-- Explain the reasoning behind each change
-- Highlight technical improvements
+- List each significant change as a bullet point
+- Use format: **What was changed**: Brief explanation
+- Keep explanations concise but clear
+- Focus on the most important modifications
 
 ## Example Implementation
 
 ```markdown
-## Pull Request for `feat/user-authentication`
+## Pull Request for `feat/user-dashboard`
 
 ### **Title:**
 ```
-
-Add user authentication system
-
-````
+Add user dashboard with statistics
+```
 
 ### **Description:**
 ```markdown
 ## Summary
-
-This PR implements a comprehensive user authentication system with login, registration, and session management. The changes include new components, API integration, form validation, and security enhancements to provide a secure and user-friendly authentication experience.
+Added a new user dashboard component with data visualization and user statistics to improve user experience.
 
 ## Changes
-
-**Added Authentication Components:**
-- **LoginForm component**: Implements secure login with email/password validation
-- **RegisterForm component**: User registration with form validation and error handling
-- **AuthLayout component**: Shared layout for authentication pages
-- **Form validation**: Zod schema validation for user inputs
-- **Error handling**: Comprehensive error states and user feedback
-
-### feat(api): integrate authentication endpoints
-
-**API Integration:**
-- **Auth service**: Centralized authentication API calls
-- **Token management**: Secure JWT token handling and storage
-- **Session persistence**: Automatic session restoration on app reload
-- **Error handling**: Proper API error handling and user notifications
-
-### feat(ui): add authentication pages and routing
-
-**Page Implementation:**
-- **Login page**: Clean, responsive login interface
-- **Register page**: User-friendly registration flow
-- **Protected routes**: Route guards for authenticated content
-- **Redirect logic**: Proper navigation flow after authentication
-````
+- **DashboardLayout component**: Created responsive layout with navigation
+- **UserStats component**: Added statistics display with charts
+- **Dashboard routing**: Implemented protected routes for dashboard access
+- **TypeScript interfaces**: Added type definitions for dashboard data
+```
 
 ## Automation Rules
 
 ### For Every Branch Creation Request:
 
 1. **Execute Git Operations**
-
    ```bash
    git checkout -b <type>/<description>
    git add <files>
@@ -126,40 +88,25 @@ This PR implements a comprehensive user authentication system with login, regist
    ```
 
 2. **Generate PR Title**
-
-   - Use the commit message format
-   - Ensure it follows conventional commit standards
+   - Keep it short and descriptive
+   - Focus on the main feature/change
 
 3. **Generate PR Description**
-   - Use the template format exactly
-   - Fill in all sections comprehensively
-   - Provide actionable and detailed information
+   - Use the concise template format
+   - Keep explanations brief but clear
+   - Focus on key changes only
 
 ### Quality Standards
-
-- **Completeness**: Every commit must be documented
-- **Clarity**: Explanations should be clear and technical
+- **Brevity**: Keep explanations short and to the point
+- **Clarity**: Ensure each change is clearly explained
+- **Relevance**: Only include significant changes
 - **Consistency**: Follow the same format for every PR
-- **Detail**: Include specific file changes and technical reasoning
-- **Benefits**: Always highlight the value and improvements
 
 ## Integration with Development Workflow
-
 - Apply these rules for ALL branch and commit requests
-- Maintain consistency across all pull requests
-- Use this documentation as the standard for team collaboration
-- Ensure every PR is ready for review with complete documentation
-- Support code review process with comprehensive change explanations
+- Maintain consistency with concise documentation
+- Focus on essential information only
+- Support efficient code review process
 
 ## Template Reusability
-
-This template and workflow should be used for:
-
-- Feature development
-- Bug fixes
-- Refactoring tasks
-- Documentation updates
-- Configuration changes
-- Any code changes requiring pull requests
-
-The goal is to maintain high-quality documentation that makes code review efficient and knowledge transfer seamless across the development team.
+This simplified template should be used for all types of changes while maintaining brevity and clarity.
