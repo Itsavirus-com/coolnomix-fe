@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 
-import type { ControlledButtonProps } from '../button/button.types'
+import { ButtonGroupType } from '@/types/general'
 
 export type ButtonGroupProps = ComponentProps<'div'> & {
-  buttons: [ControlledButtonProps | null, ControlledButtonProps]
+  buttons: ButtonGroupType
 }
