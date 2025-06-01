@@ -7,7 +7,7 @@ export default function useToggle(
 
   const show = useCallback(() => setIsOpen(true), [])
   const hide = useCallback(() => setIsOpen(false), [])
-  const toggle = useCallback(() => setIsOpen(!isOpen), [isOpen])
+  const toggle = useCallback(() => setIsOpen((prev) => !prev), [])
 
   return [isOpen, toggle, show, hide]
 }
