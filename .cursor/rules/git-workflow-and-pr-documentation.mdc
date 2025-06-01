@@ -3,6 +3,7 @@ description:
 globs: 
 alwaysApply: false
 ---
+
 # Git Workflow & Pull Request Documentation Rules
 
 You are working on a Next.js TypeScript project with strict git workflow and documentation requirements. Always follow these rules when creating branches, commits, and pull request documentation.
@@ -21,7 +22,6 @@ You are working on a Next.js TypeScript project with strict git workflow and doc
 
 2. **Pull Request Title**
 
-   - Use conventional commit format
    - Keep concise and descriptive
 
 3. **Pull Request Description**
@@ -32,33 +32,22 @@ You are working on a Next.js TypeScript project with strict git workflow and doc
 
 ### Title Format
 
-```
-<type>(<scope>): <description>
-```
+Short title for pull request
 
 ### Description Format
 
 ```markdown
 ## Summary
 
-<brief explanation of changes from each commit in the branch>
+Summary for all commit message
 
 ## Changes
-
-### <commit-message>
 
 <detailed explanation of each commit with:>
 - **What was changed**: Specific files and modifications
 - **Why it was changed**: Reasoning behind the changes
 - **How it benefits**: Impact and improvements
 - **Technical details**: Implementation specifics when relevant
-
-**Benefits:**
-
-- <list of concrete benefits>
-- <improved functionality>
-- <better maintainability>
-- <enhanced user experience>
 ```
 
 ## Documentation Standards
@@ -79,13 +68,6 @@ You are working on a Next.js TypeScript project with strict git workflow and doc
 - Explain the reasoning behind each change
 - Highlight technical improvements
 
-### Benefits Section
-
-- List concrete, measurable benefits
-- Include both technical and business benefits
-- Focus on maintainability, performance, and user experience
-- Mention future-proofing aspects when applicable
-
 ## Example Implementation
 
 ```markdown
@@ -94,7 +76,7 @@ You are working on a Next.js TypeScript project with strict git workflow and doc
 ### **Title:**
 ```
 
-feat: add user authentication system
+Add user authentication system
 
 ````
 
@@ -105,8 +87,6 @@ feat: add user authentication system
 This PR implements a comprehensive user authentication system with login, registration, and session management. The changes include new components, API integration, form validation, and security enhancements to provide a secure and user-friendly authentication experience.
 
 ## Changes
-
-### feat: add login and registration components
 
 **Added Authentication Components:**
 - **LoginForm component**: Implements secure login with email/password validation
@@ -130,13 +110,6 @@ This PR implements a comprehensive user authentication system with login, regist
 - **Register page**: User-friendly registration flow
 - **Protected routes**: Route guards for authenticated content
 - **Redirect logic**: Proper navigation flow after authentication
-
-**Benefits:**
-- Secure user authentication with industry best practices
-- Improved user experience with intuitive forms and feedback
-- Better code maintainability with modular components
-- Enhanced security with proper token management
-- Scalable architecture for future authentication features
 ````
 
 ## Automation Rules
