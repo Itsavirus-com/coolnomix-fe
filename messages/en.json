@@ -224,7 +224,8 @@
     "form": "Form",
     "asset_list": "Asset List",
     "request_technician": "Request Technician",
-    "report": "Report"
+    "report": "Report",
+    "it_looks_like_you_dont_have_a_report_yet": "It looks like you don't have a report yet. Complete the Q&A first to generate your first report"
   },
   "report": {
     "start_qna": "Start Q&A",
