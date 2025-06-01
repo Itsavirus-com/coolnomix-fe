@@ -79,7 +79,7 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
         }
       }
     },
-    [inPreview]
+    [inPreview, aircons.length]
   )
 
   const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(

@@ -45,7 +45,7 @@ export const getPayload = (
       } = item
 
       return {
-        aircon_id: aircons[index].id,
+        aircon_id: aircons[index]?.id,
         installation_details: {
           ...(filter_condition && {
             image: {

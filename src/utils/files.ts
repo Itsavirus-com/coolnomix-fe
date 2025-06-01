@@ -55,7 +55,6 @@ export const dataUrlToFile = (dataUrl: string, filename: string): FileWithPrevie
 }
 
 export const dataUrlsToFiles = (dataUrls: string[]): FileWithPreview[] => {
-  console.log(dataUrls)
   return dataUrls.map((dataUrl, index) => {
     const file = dataUrlToFile(dataUrl, `File ${index + 1}`)
 
