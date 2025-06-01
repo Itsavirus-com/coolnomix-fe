@@ -5,12 +5,12 @@ import { useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { ControlledButtonProps } from '@/components/button/button.types'
 import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaSuccessPath } from '@/config/paths'
 import { qnaApi } from '@/services/api/qna-api'
 import { modalStore } from '@/stores/modal-store'
 import { showModal } from '@/stores/modal-store.actions'
+import { ButtonGroupType } from '@/types/general'
 import { getDate, getTime } from '@/utils/date'
 import { handleGenericError } from '@/utils/error-handler'
 import { remove } from '@/utils/storage'
@@ -28,9 +28,7 @@ export const useTechVisitForm = (inPreview: boolean) => {
     resolver: zodResolver(schema)
   })
 
-  const handleBack = () => {
-    router.back()
-  }
+  const handleBack = () => router.back()
   const onSubmit = useCallback(async (values: z.infer<typeof schema>) => {
     try {
       modalStore.isLoading = true
@@ -59,11 +57,11 @@ export const useTechVisitForm = (inPreview: boolean) => {
     })
   }
 
-  const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
-    () => [
+  const buttons = useMemo((): ButtonGroupType => {
+    return [
       {
         size: 'lg',
-        variant: 'secondary',
+        variant: 'cancel',
         label: t('cancel'),
         onClick: handleBack
       },
@@ -73,9 +71,8 @@ export const useTechVisitForm = (inPreview: boolean) => {
         label: t('book_technician'),
         disabled: inPreview
       }
-    ],
-    [inPreview]
-  )
+    ]
+  }, [inPreview])
 
   return { methods, buttons, handleShowModal }
 }

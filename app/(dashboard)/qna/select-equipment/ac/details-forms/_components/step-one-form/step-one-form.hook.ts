@@ -5,10 +5,10 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import type { ControlledButtonProps } from '@/components/button/button.types'
 import { qnaAcDetailsPath } from '@/config/paths'
 import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
 import { setDetailsBrand } from '@/stores/qna-details-forms.actions'
+import { ButtonGroupType } from '@/types/general'
 
 import { getSavedDetailsBrand } from './step-one-form.helpers'
 import { formSchema } from './step-one-form.schema'
@@ -20,7 +20,7 @@ export const useStepOneForm = () => {
   const router = useRouter()
 
   const { aircons } = useQnaGetAircons()
-  const savedDetailsBrand = getSavedDetailsBrand(aircons)
+  const detailsBrand = getSavedDetailsBrand(aircons)
 
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
@@ -39,7 +39,7 @@ export const useStepOneForm = () => {
     setDetailsBrand(values.details_brand)
   }, [])
 
-  const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(() => {
+  const buttons = useMemo((): ButtonGroupType => {
     return [
       {
         size: 'lg',
@@ -58,9 +58,9 @@ export const useStepOneForm = () => {
 
   useEffect(() => {
     methods.reset({
-      details_brand: savedDetailsBrand
+      details_brand: detailsBrand
     })
-  }, [savedDetailsBrand.length])
+  }, [detailsBrand.length])
 
   return {
     methods,

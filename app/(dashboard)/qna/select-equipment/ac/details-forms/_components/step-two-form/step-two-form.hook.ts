@@ -5,10 +5,10 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { ControlledButtonProps } from '@/components/button/button.types'
 import { qnaAcDetailsPath } from '@/config/paths'
 import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
 import { setDetailsAc } from '@/stores/qna-details-forms.actions'
+import { ButtonGroupType } from '@/types/general'
 
 import { getSavedDetailsAc, getSavedPeakLoadTarif } from './step-two-form.helpers'
 import { formSchema } from './step-two-form.schema'
@@ -20,8 +20,8 @@ export const useStepTwoForm = () => {
   const router = useRouter()
 
   const { aircons } = useQnaGetAircons()
-  const savedDetailsAc = getSavedDetailsAc(aircons)
-  const savedPeakLoadTarif = getSavedPeakLoadTarif(aircons)
+  const detailsAc = getSavedDetailsAc(aircons)
+  const peakLoadTarif = getSavedPeakLoadTarif(aircons)
 
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
@@ -46,11 +46,11 @@ export const useStepTwoForm = () => {
     setDetailsAc(values.details_ac, values.peak_load_tarif)
   }, [])
 
-  const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
-    () => [
+  const buttons = useMemo((): ButtonGroupType => {
+    return [
       {
         size: 'lg',
-        variant: 'secondary',
+        variant: 'cancel',
         label: t('back'),
         onClick: handleBack
       },
@@ -59,16 +59,15 @@ export const useStepTwoForm = () => {
         size: 'lg',
         label: t('continue')
       }
-    ],
-    []
-  )
+    ]
+  }, [])
 
   useEffect(() => {
     methods.reset({
-      details_ac: savedDetailsAc,
-      peak_load_tarif: savedPeakLoadTarif
+      details_ac: detailsAc,
+      peak_load_tarif: peakLoadTarif
     })
-  }, [savedDetailsAc.length, savedPeakLoadTarif.length])
+  }, [detailsAc.length, peakLoadTarif.length])
 
   return { methods, detailsAcFields, peakLoadTarifFields, buttons, onSubmit }
 }

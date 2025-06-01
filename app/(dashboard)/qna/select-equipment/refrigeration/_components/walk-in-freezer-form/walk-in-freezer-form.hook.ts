@@ -5,9 +5,9 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { ControlledButtonProps } from '@/components/button/button.types'
 import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaRefrigerationPath } from '@/config/paths'
+import { ButtonGroupType } from '@/types/general'
 import { load, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from '../../regrigeration.schema'
@@ -26,23 +26,17 @@ export const useWalkInFreezerForm = (inPreview: boolean) => {
     resolver: zodResolver(schema)
   })
 
+  const handleEdit = () => router.push(qnaRefrigerationPath())
+  const handleBack = () => router.back()
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     updateStoredObject(QNA_FORM_STORAGE_KEY, { walkInFreezerForm: values })
   }, [])
 
-  const handleBack = () => {
-    router.back()
-  }
-
-  const handleEdit = () => {
-    router.push(qnaRefrigerationPath())
-  }
-
-  const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
-    () => [
+  const buttons = useMemo((): ButtonGroupType => {
+    return [
       {
         size: 'lg',
-        variant: 'secondary',
+        variant: 'cancel',
         label: inPreview ? t('edit') : t('back'),
         onClick: inPreview ? handleEdit : handleBack
       },
@@ -52,18 +46,12 @@ export const useWalkInFreezerForm = (inPreview: boolean) => {
         label: inPreview ? t('submit') : t('preview'),
         disabled: isSubmitted
       }
-    ],
-    [inPreview, isSubmitted]
-  )
+    ]
+  }, [inPreview, isSubmitted])
 
   useEffect(() => {
-    const saved = load(QNA_FORM_STORAGE_KEY)
-
-    const timeout = setTimeout(() => {
-      methods.reset(saved?.walkInFreezerForm)
-    }, 300)
-
-    return () => clearTimeout(timeout)
+    const walkInFreezerForm = load(QNA_FORM_STORAGE_KEY)?.walkInFreezerForm || {}
+    methods.reset(walkInFreezerForm)
   }, [])
 
   return {

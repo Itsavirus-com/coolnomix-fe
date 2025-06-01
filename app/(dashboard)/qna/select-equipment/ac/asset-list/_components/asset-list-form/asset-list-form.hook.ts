@@ -6,11 +6,11 @@ import { useForm } from 'react-hook-form'
 import { useSnapshot } from 'valtio'
 import { z } from 'zod'
 
-import type { ControlledButtonProps } from '@/components/button/button.types'
 import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaSuccessPath } from '@/config/paths'
 import { qnaApi } from '@/services/api/qna-api'
 import { authStore } from '@/stores/auth-store'
+import { ButtonGroupType } from '@/types/general'
 import { handleGenericError } from '@/utils/error-handler'
 import { remove } from '@/utils/storage'
 
@@ -48,11 +48,11 @@ export const useAssetListForm = (inPreview: boolean) => {
     }
   }, [])
 
-  const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
-    () => [
+  const buttons = useMemo((): ButtonGroupType => {
+    return [
       {
         size: 'lg',
-        variant: 'secondary',
+        variant: 'cancel',
         label: t('back'),
         onClick: handleBack
       },
@@ -63,9 +63,8 @@ export const useAssetListForm = (inPreview: boolean) => {
         disabled: inPreview,
         onSubmit
       }
-    ],
-    [inPreview]
-  )
+    ]
+  }, [inPreview])
 
   return { methods, buttons, onSubmit }
 }

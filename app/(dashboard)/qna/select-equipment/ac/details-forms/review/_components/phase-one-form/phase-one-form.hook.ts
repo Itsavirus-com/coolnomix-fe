@@ -5,12 +5,12 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { ControlledButtonProps } from '@/components/button/button.types'
 import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaAcDetailsPath, qnaAcDetailsReviewPath, qnaSuccessPath } from '@/config/paths'
 import { qnaApi } from '@/services/api/qna-api'
 import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
 import { resetQnaDetailsForms } from '@/stores/qna-details-forms.actions'
+import { ButtonGroupType } from '@/types/general'
 import { handleGenericError } from '@/utils/error-handler'
 import { remove } from '@/utils/storage'
 
@@ -87,7 +87,7 @@ export const usePhaseOneForm = () => {
     const editButton = {
       type: 'button',
       size: 'lg',
-      variant: 'secondary',
+      variant: 'cancel',
       label: t('edit'),
       onClick: handleBack
     }
@@ -101,16 +101,17 @@ export const usePhaseOneForm = () => {
       buttons.push(submitButton)
     }
 
-    return buttons as [ControlledButtonProps, ControlledButtonProps]
+    return buttons as ButtonGroupType
   }, [hasApprovedAircons, isSubmitted])
 
   useEffect(() => {
-    mutate()
-    methods.reset({
-      phaseOne: savedPhaseOne,
-      peakLoadTarif: savedPeakLoadTarif
-    })
-  }, [savedPhaseOne.length, savedPeakLoadTarif.length])
+    if (savedPhaseOne.length > 0 || savedPeakLoadTarif.length > 0) {
+      methods.reset({
+        phaseOne: savedPhaseOne,
+        peakLoadTarif: savedPeakLoadTarif
+      })
+    }
+  }, [savedPhaseOne.length, savedPeakLoadTarif.length, methods])
 
   return {
     methods,
