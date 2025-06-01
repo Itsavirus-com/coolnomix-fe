@@ -1,18 +1,13 @@
-import { usePathname, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
 import { FormSidebarTab } from '@/components/form-sidebar/form-sidebar.types'
+import { useTabParams } from '@/hooks/url-params.hook'
 
 export const useRefrigerationTabs = () => {
   const t = useTranslations('qna')
 
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-
-  const tab = searchParams.get('tab') || 'walk-in-chiller'
-
-  const [currentTab, setCurrentTab] = useState(tab)
+  const { currentValue, updateParam } = useTabParams('walk-in-chiller')
 
   const tabs: FormSidebarTab[] = useMemo(
     () => [
@@ -36,24 +31,9 @@ export const useRefrigerationTabs = () => {
     []
   )
 
-  const handleChangeTab = useCallback(
-    (tab: string) => {
-      setCurrentTab(tab)
-
-      const params = new URLSearchParams(searchParams)
-      params.set('tab', tab)
-      window.history.pushState({}, '', pathname + '?' + params.toString())
-    },
-    [pathname, searchParams]
-  )
-
-  useEffect(() => {
-    setCurrentTab(tab)
-  }, [tab])
-
   return {
     tabs,
-    currentTab,
-    handleChangeTab
+    currentTab: currentValue,
+    handleChangeTab: updateParam
   }
 }
