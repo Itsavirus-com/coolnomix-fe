@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
 # Git Workflow & Pull Request Documentation Rules
 
 You are working on a Next.js TypeScript project with strict git workflow and documentation requirements. Always follow these rules when creating branches, commits, and pull request documentation.

@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
 # Conventional Commit & Branch Naming Rules
 
 You are working on a Next.js TypeScript project that follows strict conventional commit and branch naming conventions. Always adhere to these rules when suggesting commits, branches, or code changes.
