@@ -1,0 +1,187 @@
+# Git Workflow & Pull Request Documentation Rules
+
+You are working on a Next.js TypeScript project with strict git workflow and documentation requirements. Always follow these rules when creating branches, commits, and pull request documentation.
+
+## Workflow Requirements
+
+### When User Requests Branch and Commit Creation
+
+**ALWAYS provide these 3 components in order:**
+
+1. **Git Operations**
+
+   - Create branch with proper naming convention
+   - Commit with conventional commit format
+   - Push to remote repository
+
+2. **Pull Request Title**
+
+   - Use conventional commit format
+   - Keep concise and descriptive
+
+3. **Pull Request Description**
+   - Follow the specified template format
+   - Include comprehensive documentation
+
+## Pull Request Documentation Template
+
+### Title Format
+
+```
+<type>(<scope>): <description>
+```
+
+### Description Format
+
+```markdown
+## Summary
+
+<brief explanation of changes from each commit in the branch>
+
+## Changes
+
+### <commit-message>
+
+<detailed explanation of each commit with:>
+- **What was changed**: Specific files and modifications
+- **Why it was changed**: Reasoning behind the changes
+- **How it benefits**: Impact and improvements
+- **Technical details**: Implementation specifics when relevant
+
+**Benefits:**
+
+- <list of concrete benefits>
+- <improved functionality>
+- <better maintainability>
+- <enhanced user experience>
+```
+
+## Documentation Standards
+
+### Summary Section
+
+- Provide high-level overview of all changes
+- Explain the purpose and scope of the branch
+- Keep it concise but informative
+- Focus on the business value and technical impact
+
+### Changes Section
+
+- Document EVERY commit in the branch
+- Use the exact commit message as subsection header
+- Provide detailed explanation for each commit
+- Include file-specific changes when relevant
+- Explain the reasoning behind each change
+- Highlight technical improvements
+
+### Benefits Section
+
+- List concrete, measurable benefits
+- Include both technical and business benefits
+- Focus on maintainability, performance, and user experience
+- Mention future-proofing aspects when applicable
+
+## Example Implementation
+
+```markdown
+## Pull Request for `feat/user-authentication`
+
+### **Title:**
+```
+
+feat: add user authentication system
+
+````
+
+### **Description:**
+```markdown
+## Summary
+
+This PR implements a comprehensive user authentication system with login, registration, and session management. The changes include new components, API integration, form validation, and security enhancements to provide a secure and user-friendly authentication experience.
+
+## Changes
+
+### feat: add login and registration components
+
+**Added Authentication Components:**
+- **LoginForm component**: Implements secure login with email/password validation
+- **RegisterForm component**: User registration with form validation and error handling
+- **AuthLayout component**: Shared layout for authentication pages
+- **Form validation**: Zod schema validation for user inputs
+- **Error handling**: Comprehensive error states and user feedback
+
+### feat(api): integrate authentication endpoints
+
+**API Integration:**
+- **Auth service**: Centralized authentication API calls
+- **Token management**: Secure JWT token handling and storage
+- **Session persistence**: Automatic session restoration on app reload
+- **Error handling**: Proper API error handling and user notifications
+
+### feat(ui): add authentication pages and routing
+
+**Page Implementation:**
+- **Login page**: Clean, responsive login interface
+- **Register page**: User-friendly registration flow
+- **Protected routes**: Route guards for authenticated content
+- **Redirect logic**: Proper navigation flow after authentication
+
+**Benefits:**
+- Secure user authentication with industry best practices
+- Improved user experience with intuitive forms and feedback
+- Better code maintainability with modular components
+- Enhanced security with proper token management
+- Scalable architecture for future authentication features
+````
+
+## Automation Rules
+
+### For Every Branch Creation Request:
+
+1. **Execute Git Operations**
+
+   ```bash
+   git checkout -b <type>/<description>
+   git add <files>
+   git commit -m "<conventional-commit-message>"
+   git push -u origin <branch-name>
+   ```
+
+2. **Generate PR Title**
+
+   - Use the commit message format
+   - Ensure it follows conventional commit standards
+
+3. **Generate PR Description**
+   - Use the template format exactly
+   - Fill in all sections comprehensively
+   - Provide actionable and detailed information
+
+### Quality Standards
+
+- **Completeness**: Every commit must be documented
+- **Clarity**: Explanations should be clear and technical
+- **Consistency**: Follow the same format for every PR
+- **Detail**: Include specific file changes and technical reasoning
+- **Benefits**: Always highlight the value and improvements
+
+## Integration with Development Workflow
+
+- Apply these rules for ALL branch and commit requests
+- Maintain consistency across all pull requests
+- Use this documentation as the standard for team collaboration
+- Ensure every PR is ready for review with complete documentation
+- Support code review process with comprehensive change explanations
+
+## Template Reusability
+
+This template and workflow should be used for:
+
+- Feature development
+- Bug fixes
+- Refactoring tasks
+- Documentation updates
+- Configuration changes
+- Any code changes requiring pull requests
+
+The goal is to maintain high-quality documentation that makes code review efficient and knowledge transfer seamless across the development team.
