@@ -1,0 +1,18 @@
+# <type>(<scope>): <subject>
+#
+# <body>
+#
+# <footer>
+
+# Types: feat, fix, refactor, style, perf, test, docs, chore, ci, build
+# Scope: auth, ui, api, types, utils, config (optional)
+# Subject: imperative mood, no period, max 50 chars
+# Body: explain what and why (optional)
+# Footer: breaking changes, issues closed (optional)
+
+# Examples:
+# feat: add user authentication
+# fix: resolve login validation error
+# refactor: optimize user service
+# feat(auth): add OAuth integration
+# fix(ui): resolve button alignment issue 
