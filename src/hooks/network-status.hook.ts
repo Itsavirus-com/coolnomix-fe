@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 const useNetworkStatus = () => {
   const [isOnline, setOnline] = useState(true)
 
-  const updateNetworkStatus = () => {
-    if (typeof window !== 'undefined') {
-      setOnline(navigator.onLine)
+  const updateNetworkStatus = useCallback(() => {
+    if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+      return
     }
-  }
+
+    setOnline(navigator.onLine)
+  }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined') {
-      return null
+      return () => {}
     }
 
     updateNetworkStatus()

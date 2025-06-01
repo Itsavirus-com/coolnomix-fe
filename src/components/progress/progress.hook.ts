@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 
 export const useProgress = (steps: string[], currentStepName: string) => {
-  const currentStep = steps.findIndex((step) => step === currentStepName) + 1
+  const { safeCurrentStep, percentage, safeTotalSteps } = useMemo(() => {
+    const currentStep = steps.findIndex((step) => step === currentStepName) + 1
+    const safeTotalSteps = Math.max(1, steps.length)
+    const safeCurrentStep = Math.max(1, Math.min(currentStep, safeTotalSteps))
+    const percentage = safeTotalSteps > 0 ? Math.round((safeCurrentStep / safeTotalSteps) * 100) : 0
 
-  const [safeCurrentStep, setSafeCurrentStep] = useState(currentStep)
-
-  const safeTotalSteps = Math.max(1, steps.length)
-  const percentage = safeTotalSteps > 0 ? Math.round((safeCurrentStep / safeTotalSteps) * 100) : 0
-
-  useEffect(() => {
-    setSafeCurrentStep(currentStep)
-  }, [currentStep])
+    return { safeCurrentStep, percentage, safeTotalSteps }
+  }, [steps, currentStepName])
 
   return { safeCurrentStep, percentage, safeTotalSteps }
 }

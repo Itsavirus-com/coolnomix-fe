@@ -1,6 +1,12 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useMemo } from 'react'
 
-const detectDevice = () => {
+type DeviceType = 'IOS' | 'Android' | 'Other'
+
+const detectDevice = (): DeviceType => {
+  if (typeof window === 'undefined' || typeof navigator === 'undefined') {
+    return 'Other'
+  }
+
   const userAgent = navigator.userAgent.toLowerCase()
 
   if (/iphone|ipad/.test(userAgent)) {
@@ -13,20 +19,8 @@ const detectDevice = () => {
   return 'Other'
 }
 
-const useDeviceDetection = () => {
-  const [device, setDevice] = useState<'IOS' | 'Android' | 'Other'>(detectDevice)
-
-  const updateDevice = useCallback(() => {
-    setDevice(detectDevice())
-  }, [])
-
-  useEffect(() => {
-    window.addEventListener('resize', updateDevice)
-
-    return () => {
-      window.removeEventListener('resize', updateDevice)
-    }
-  }, [updateDevice])
+const useDeviceDetection = (): DeviceType => {
+  const device = useMemo(() => detectDevice(), [])
 
   return device
 }
