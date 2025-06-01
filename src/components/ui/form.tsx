@@ -53,7 +53,7 @@ function FormLabel({
     <Label
       data-slot='form-label'
       data-error={!!error}
-      className={cn('data-[error=true]:text-destructive text-smAlt mb-1.5 gap-1', className)}
+      className={cn('text-smAlt mb-1.5 gap-1', className)}
       htmlFor={id}
       {...props}
     />
