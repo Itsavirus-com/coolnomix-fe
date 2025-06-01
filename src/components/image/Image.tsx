@@ -10,7 +10,7 @@ import { defaultImage } from '@/assets/images'
 import type { ImageProps } from 'next/image'
 
 const Image: FC<ImageProps> = (props) => {
-  const { alt, priority, src, fill, ...rest } = props
+  const { alt, priority, src, fill, quality = 65, ...rest } = props
 
   const [isError, setIsError] = useState(false)
 
@@ -19,12 +19,10 @@ const Image: FC<ImageProps> = (props) => {
       alt={alt}
       loading={priority ? 'eager' : 'lazy'}
       decoding='async'
-      quality={65}
+      quality={quality}
       fill={fill}
       style={{ objectFit: 'cover' }}
-      onError={() => {
-        setIsError(true)
-      }}
+      onError={() => setIsError(true)}
       src={isError ? defaultImage : src}
       {...rest}
     />
