@@ -1,3 +1,4 @@
+import { createSession, deleteSession } from '@/lib/session'
 import { authApi } from '@/services/api/auth-api'
 
 import { authStore, defaultAuthStore } from './auth-store'
@@ -6,10 +7,11 @@ import reset from './helpers/reset'
 
 import type { ApiOkResponse } from 'apisauce'
 
-export const setAuthenticatedUser = (result: ApiOkResponse<any>) => {
+export const setAuthenticatedUser = async (result: ApiOkResponse<any>) => {
   const { data } = result
 
   authStore.state.user = data.data
+  await createSession(authStore.state.user?.id)
 
   // For now, our backend not support token refresh token, this code bellow will use later.
   // authStore.state.token = headers.authorization
@@ -22,7 +24,7 @@ export const login = async (email: string, password: string) => {
   const result = await authApi.login({ email, password })
 
   if (result.ok) {
-    setAuthenticatedUser(result)
+    await setAuthenticatedUser(result)
   }
 
   return result.ok
@@ -32,7 +34,7 @@ export const register = async (registerPayload: RegisterPayload) => {
   const result = await authApi.register(registerPayload)
 
   if (result.ok) {
-    setAuthenticatedUser(result)
+    await setAuthenticatedUser(result)
   }
 
   return result.ok
@@ -43,6 +45,7 @@ export const logout = async () => {
 
   if (result.ok) {
     reset(authStore.state, defaultAuthStore)
+    await deleteSession()
   }
 
   return result.ok
@@ -63,6 +66,7 @@ export const syncUserProfile = async () => {
 
 export const resetAuthState = async () => {
   reset(authStore.state, defaultAuthStore)
+  await deleteSession()
 }
 
 export const setRefreshingToken = (state: boolean) => {
