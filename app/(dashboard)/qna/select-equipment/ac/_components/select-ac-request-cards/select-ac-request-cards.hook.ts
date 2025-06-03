@@ -17,7 +17,7 @@ export const useSelectAcRequest = () => {
 
   const [selectedAcRequest, setSelectedAcRequest] = useState<SelectAcRequestValue>(null)
 
-  const { hasApprovedAircons } = useQnaGetAircons()
+  const { isLoading, hasApprovedAircons, mutate } = useQnaGetAircons()
 
   const requestTypes: SelectAcRequestCardType[] = useMemo(
     () => [
@@ -68,10 +68,15 @@ export const useSelectAcRequest = () => {
   }
 
   const handleBack = () => router.back()
-  const handleClick = useCallback(() => {
+  const handleClick = useCallback(async () => {
+    if (isLoading) {
+      await mutate()
+      return
+    }
+
     const path = getPath()
     router.push(path)
-  }, [selectedAcRequest, hasApprovedAircons])
+  }, [selectedAcRequest, hasApprovedAircons, isLoading])
 
   const buttons = useMemo((): ButtonGroupType => {
     return [
@@ -88,7 +93,7 @@ export const useSelectAcRequest = () => {
         disabled: !selectedAcRequest
       }
     ]
-  }, [selectedAcRequest])
+  }, [selectedAcRequest, isLoading])
 
   useEffect(() => {
     const acRequest = load(QNA_FORM_STORAGE_KEY)?.acRequest || ''
