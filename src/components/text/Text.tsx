@@ -1,5 +1,3 @@
-'use client'
-
 import clsx from 'clsx'
 import { createElement } from 'react'
 

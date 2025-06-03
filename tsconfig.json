@@ -48,6 +48,9 @@
       "@/_components/*": ["./app/(dashboard)/qna/_components/*"],
       "@/details_forms/_components/*": [
         "app/(dashboard)/qna/select-equipment/ac/details-forms/_components/*"
+      ],
+      "@/details_forms/review/_components/*": [
+        "app/(dashboard)/qna/select-equipment/ac/details-forms/review/_components/*"
       ]
     },
 

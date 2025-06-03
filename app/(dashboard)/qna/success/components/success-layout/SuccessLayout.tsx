@@ -7,7 +7,7 @@ import SuccessMessageCard from '@/components/success-message-card/SuccessMessage
 import { useSuccessLayout } from './success-layout.hook'
 
 const SuccessLayout = () => {
-  const { title, description, buttons, image, imageAlt } = useSuccessLayout()
+  const { title, description, buttons, image, imageAlt, loading } = useSuccessLayout()
 
   return (
     <section className='content-placement-center'>
@@ -17,6 +17,7 @@ const SuccessLayout = () => {
         buttons={buttons}
         image={image}
         imageAlt={imageAlt}
+        loading={loading}
       />
     </section>
   )

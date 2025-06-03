@@ -22,7 +22,7 @@ const ControlledInput: FC<ControlledInputProps> = (props) => {
     hint,
     index,
     disabled,
-    type,
+    type = 'text',
     min = 0,
     max,
     inputMode,
@@ -35,6 +35,15 @@ const ControlledInput: FC<ControlledInputProps> = (props) => {
     name,
     control
   })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (type === 'number') {
+      const value = e.target.value ? Number(e.target.value) : ''
+      field.onChange(value)
+    } else {
+      field.onChange(e.target.value)
+    }
+  }
 
   return (
     <FormItem {...rest}>
@@ -63,6 +72,7 @@ const ControlledInput: FC<ControlledInputProps> = (props) => {
         pattern={pattern}
         {...field}
         value={field.value || ''}
+        onChange={handleChange}
         min={min}
         max={max}
       />

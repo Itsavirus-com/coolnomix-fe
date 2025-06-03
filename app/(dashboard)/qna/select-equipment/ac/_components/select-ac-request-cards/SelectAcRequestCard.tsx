@@ -24,9 +24,7 @@ const SelectAcRequestCard: FC<SelectAcRequestCardProps> = (props) => {
         'border-color-50 flex flex-1/3 cursor-pointer flex-col rounded-lg p-4',
         selectedAcRequest === type && 'bg-grey-lightest'
       )}
-      onClick={() => {
-        onSelectAcRequest(type)
-      }}
+      onClick={() => onSelectAcRequest(type)}
     >
       <div
         className={cn(

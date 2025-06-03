@@ -5,8 +5,8 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { ControlledButtonProps } from '@/components/button/button.types'
 import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
+import { ButtonGroupType } from '@/types/general'
 import { load, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from '../../regrigeration.schema'
@@ -25,19 +25,16 @@ export const useWalkInChillerForm = () => {
     resolver: zodResolver(schema)
   })
 
+  const handleBack = () => router.back()
   const onSubmit = useCallback((values: z.infer<typeof schema>) => {
     updateStoredObject(QNA_FORM_STORAGE_KEY, { walkInChillerForm: values })
   }, [])
 
-  const handleBack = () => {
-    router.back()
-  }
-
-  const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
-    () => [
+  const buttons = useMemo((): ButtonGroupType => {
+    return [
       {
         size: 'lg',
-        variant: 'secondary',
+        variant: 'cancel',
         label: t('back'),
         onClick: handleBack
       },
@@ -46,18 +43,12 @@ export const useWalkInChillerForm = () => {
         size: 'lg',
         label: t('continue')
       }
-    ],
-    []
-  )
+    ]
+  }, [])
 
   useEffect(() => {
-    const saved = load(QNA_FORM_STORAGE_KEY)
-
-    const timeout = setTimeout(() => {
-      methods.reset(saved?.walkInChillerForm)
-    }, 300)
-
-    return () => clearTimeout(timeout)
+    const walkInChillerForm = load(QNA_FORM_STORAGE_KEY)?.walkInChillerForm || {}
+    methods.reset(walkInChillerForm)
   }, [])
 
   return {

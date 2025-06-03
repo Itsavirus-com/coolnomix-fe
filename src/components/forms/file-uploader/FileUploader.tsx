@@ -3,6 +3,7 @@ import type { FC } from 'react'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 import Dropzone from 'react-dropzone'
+import { v4 as uuidv4 } from 'uuid'
 
 import Button from '@/components/button/Button'
 import Icon from '@/components/icon/Icon'
@@ -78,12 +79,12 @@ const FileUploader: FC<FileUploaderProps> = (props) => {
       )}
       {showPreview && value?.length > 0 && (
         <div className='flex flex-col gap-1.5'>
-          {value.map((f) => (
-            <div key={f?.preview} className='dropzone dropzone-previews'>
+          {value.map((f, index) => (
+            <div key={uuidv4()} className='dropzone dropzone-previews'>
               <div className='dz-message'>
                 <div className='flex w-full flex-row items-center justify-between'>
                   <Text tag='span' className='text-grey-darkest'>
-                    {f?.name}
+                    {`File ${index + 1}`}
                   </Text>
                   <div className='flex items-center gap-2'>
                     <div

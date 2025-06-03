@@ -10,3 +10,10 @@ export const acceptedFileExcelAndPdf = {
 }
 
 export const QNA_FORM_STORAGE_KEY = 'QNA_FORM'
+
+export const SESSION_COOKIE = {
+  name: 'session',
+  maxAge: 60 * 60 * 24 * 7, // 7 days
+  value: 'authenticated',
+  unauthenticatedValue: 'unauthenticated'
+}

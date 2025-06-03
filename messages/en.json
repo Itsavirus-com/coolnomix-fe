@@ -33,7 +33,9 @@
     "submission_successful": "Submission Successful!",
     "submission_successful_description": "Thank you for providing the details! Your information has been received and will be reviewed shortly. We’ll get back to you if any additional details are needed.",
     "submission_successful_description_phase_2": "Thank you for providing the details! Your information has been received. To proceed, you need to complete the follow-up questions in Phase 2 before the report can be generated. Please note that you cannot go back or cancel at this stage.",
-    "an_awesome_success_result_animation": "An awesome success result animation"
+    "an_awesome_success_result_animation": "An awesome success result animation",
+    "just_a_moment": "Just a moment...",
+    "an_awesome_media_input_preview_image": "An awesome media input preview image"
   },
   "qna": {
     "get_started": "Get Started!",
@@ -184,7 +186,11 @@
     "every_month": "Every Month",
     "every_two_month": "Every 2 Months",
     "every_three_month": "Every 3 Months",
-    "nameplate_of_the_unit": "Nameplate of the unit"
+    "nameplate_of_the_unit": "Nameplate of the unit",
+    "internal_unit": "{ratio} internal unit",
+    "external_unit": "{ratio} external unit",
+    "generating_report": "Generating Report...",
+    "this_may_take_a_few_minutes": "This may take a few minutes"
   },
   "sidebar": {
     "platform": "PLATFORM",
@@ -218,7 +224,8 @@
     "form": "Form",
     "asset_list": "Asset List",
     "request_technician": "Request Technician",
-    "report": "Report"
+    "report": "Report",
+    "it_looks_like_you_dont_have_a_report_yet": "It looks like you don't have a report yet. Complete the Q&A first to generate your first report"
   },
   "report": {
     "start_qna": "Start Q&A",
@@ -269,8 +276,8 @@
   },
   "validation": {
     "this_field_is_required": "This field is required",
-    "max_operating_hours_per_day": "Max operating hours per day is 24",
-    "max_running_days_per_week": "Max running days per week is 7",
+    "max_operating_hours_per_day": "Minimum operating hours per day is 1 and maximum is 24",
+    "max_running_days_per_week": "Minimum running days per week is 1 and maximum is 7",
     "please_enter_a_valid_email_address": "Please enter a valid email address",
     "phone_number_must_be_at_least_8_digits": "Phone number must be at least 8 digits",
     "phone_number_must_contain_only_digits": "Phone number must contain only digits",
@@ -283,7 +290,8 @@
     "password_must_not_contain_spaces": "Password must not contain spaces",
     "password_must_contain_at_least_one_special_character": "Password must contain at least one special character",
     "passwords_do_not_match": "Passwords do not match",
-    "invalid_phone_number": "Invalid phone number"
+    "invalid_phone_number": "Invalid phone number",
+    "minimum_input_is_1": "Minimum input is 1"
   },
   "auth": {
     "welcome_back": "Welcome Back!",

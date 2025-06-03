@@ -1,0 +1,182 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Git Workflow & Pull Request Documentation Rules
+
+You are working on a Next.js TypeScript project with strict git workflow and documentation requirements. Always follow these rules when creating branches, commits, and pull request documentation.
+
+## Workflow Requirements
+
+### Before Creating Any Commit
+
+**ALWAYS check branch compatibility first:**
+
+1. **Check Current Branch Scope**
+   - Analyze the current branch name and its intended scope
+   - Compare with the new commit type and scope
+   - Determine if they are compatible
+
+2. **Branch Compatibility Rules**
+   - **If commit matches current branch scope**: Commit directly to current branch
+   - **If commit has different scope**: Create new branch for the commit
+   - **Examples of compatible scopes**:
+     - `feat/user-dashboard` + `feat: add dashboard charts` ✅ (same feature scope)
+     - `fix/login-error` + `fix: resolve validation issue` ✅ (same fix scope)
+     - `docs/api-guide` + `docs: update API examples` ✅ (same docs scope)
+   - **Examples of incompatible scopes**:
+     - `feat/user-dashboard` + `fix: resolve login error` ❌ (different scope)
+     - `docs/readme-update` + `feat: add new component` ❌ (different type)
+     - `refactor/auth-service` + `style: format components` ❌ (different purpose)
+
+### When User Requests Branch and Commit Creation
+
+**ALWAYS provide these components based on compatibility check:**
+
+**If Compatible (same scope):**
+1. **Git Operations**
+   - Commit directly to current branch
+   - Push to existing remote branch
+
+**If Incompatible (different scope):**
+1. **Git Operations**
+   - Create new branch with proper naming convention
+   - Commit with conventional commit format
+   - Push to new remote repository
+
+2. **Pull Request Title**
+   - Keep concise and descriptive
+
+3. **Pull Request Description**
+   - Follow the specified template format
+   - Include brief but clear documentation
+
+## Branch Compatibility Check Process
+
+### Step 1: Analyze Current Branch
+```bash
+# Check current branch name
+git branch --show-current
+
+# Examples:
+# feat/user-dashboard -> Feature scope: user dashboard
+# fix/payment-error -> Fix scope: payment issues  
+# docs/api-guide -> Documentation scope: API
+# refactor/auth-logic -> Refactor scope: authentication
+```
+
+### Step 2: Analyze New Commit
+```bash
+# Determine commit type and scope from changes
+# Examples:
+# "feat: add dashboard charts" -> Feature scope: dashboard (compatible with feat/user-dashboard)
+# "fix: resolve login validation" -> Fix scope: login (incompatible with feat/user-dashboard)
+```
+
+### Step 3: Make Decision
+- **Same scope**: Continue with current branch
+- **Different scope**: Create new branch
+
+## Pull Request Documentation Template
+
+### Title Format
+Short and descriptive title
+
+### Description Format
+```markdown
+## Summary
+Brief overview of what was changed and why
+
+## Changes
+- **File/Component changed**: Short explanation of what was modified
+- **Another change**: Brief description of the modification
+- **Additional change**: Concise explanation of the update
+```
+
+## Documentation Standards
+
+### Summary Section
+- One or two sentences explaining the overall purpose
+- Focus on the main goal of the changes
+
+### Changes Section
+- List each significant change as a bullet point
+- Use format: **What was changed**: Brief explanation
+- Keep explanations concise but clear
+- Focus on the most important modifications
+
+## Example Implementation
+
+```markdown
+## Pull Request for `feat/user-dashboard`
+
+### **Title:**
+```
+Add user dashboard with statistics
+```
+
+### **Description:**
+```markdown
+## Summary
+Added a new user dashboard component with data visualization and user statistics to improve user experience.
+
+## Changes
+- **DashboardLayout component**: Created responsive layout with navigation
+- **UserStats component**: Added statistics display with charts
+- **Dashboard routing**: Implemented protected routes for dashboard access
+- **TypeScript interfaces**: Added type definitions for dashboard data
+```
+
+## Automation Rules
+
+### For Every Commit Request:
+
+1. **Check Branch Compatibility**
+   ```bash
+   # Current branch: feat/user-dashboard
+   # New commit: "feat: add dashboard filters"
+   # Decision: Compatible ✅ -> Commit to current branch
+   
+   # Current branch: feat/user-dashboard  
+   # New commit: "fix: resolve API timeout"
+   # Decision: Incompatible ❌ -> Create new branch
+   ```
+
+2. **Execute Git Operations Based on Compatibility**
+   
+   **If Compatible:**
+   ```bash
+   git add <files>
+   git commit -m "<conventional-commit-message>"
+   git push
+   ```
+   
+   **If Incompatible:**
+   ```bash
+   git checkout -b <type>/<description>
+   git add <files>
+   git commit -m "<conventional-commit-message>"
+   git push -u origin <branch-name>
+   ```
+
+3. **Generate PR Documentation (only for new branches)**
+   - Use the concise template format
+   - Keep explanations brief but clear
+   - Focus on key changes only
+
+### Quality Standards
+- **Branch Logic**: Always check compatibility before creating new branches
+- **Brevity**: Keep explanations short and to the point
+- **Clarity**: Ensure each change is clearly explained
+- **Relevance**: Only include significant changes
+- **Consistency**: Follow the same format for every PR
+
+## Integration with Development Workflow
+- Apply branch compatibility check for ALL commit requests
+- Maintain logical branch organization
+- Avoid unnecessary branch proliferation
+- Support efficient code review process
+
+## Template Reusability
+This workflow should be used for all types of changes while maintaining branch logic and clarity.

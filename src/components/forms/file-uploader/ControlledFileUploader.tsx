@@ -58,6 +58,7 @@ export const ControlledFileUploader = (props: ControlledFileUploaderProps) => {
               <Text tag='span' weight='medium' className='mb-1'>
                 {title}
               </Text>
+              {!label && required && <span className='text-destructive'>*</span>}
             </div>
             <Text tag='span' className='text-grey-darkest'>
               {description}

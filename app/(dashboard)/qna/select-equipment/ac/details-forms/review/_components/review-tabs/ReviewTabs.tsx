@@ -5,6 +5,7 @@ import React from 'react'
 
 import Description from '@/components/description/Description'
 import FormSidebar from '@/components/form-sidebar/FormSidebar'
+import LoadingWithText from '@/components/loading-with-text/LoadingWithText'
 import { Tabs, TabsContent } from '@/components/ui/tabs'
 
 import { useReviewTabs } from './review-tabs.hook'
@@ -14,12 +15,15 @@ import PhaseTwoForm from '../phase-two-form/PhaseTwoForm'
 const ReviewTabs = () => {
   const t = useTranslations('qna')
 
-  const { phases, currentPhase, isApproved, handleChangePhase, handleContinue } = useReviewTabs()
+  const { phases, hasApprovedAircons, isLoading, currentPhase, handleChangePhase, handleContinue } =
+    useReviewTabs()
+
+  if (isLoading) return <LoadingWithText className='mt-[25%]' />
 
   return (
     <Tabs value={currentPhase} defaultValue='phase-1'>
       <div className='flex gap-16'>
-        {isApproved && (
+        {hasApprovedAircons && (
           <FormSidebar
             title={t('air_conditioning')}
             description={t('please_check_all_the_details_you_have_entered_before_submitting')}

@@ -15,6 +15,7 @@ import { cn } from '@/libs/utils'
 import { hideModal } from '@/stores/modal-store.actions'
 
 import Button from '../button/Button'
+import DotsLoading from '../dots-loading/DotsLoading'
 
 import type { ModalProps } from './modal.types'
 
@@ -31,6 +32,7 @@ const Modal: FC<ModalProps> = (props) => {
     onConfirm,
     onCancel = hideModal,
     isLoading,
+    type = 'confirm',
     ...rest
   } = props
 
@@ -42,8 +44,13 @@ const Modal: FC<ModalProps> = (props) => {
           <AlertDialogDescription>{message}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className={cn(align === 'center' && '!justify-center')}>
-          <AlertDialogCancel onClick={onCancel}>{cancelLabel}</AlertDialogCancel>
-          <Button size='lg' label={confirmLabel} onClick={onConfirm} isLoading={isLoading} />
+          {type === 'confirm' && (
+            <>
+              <AlertDialogCancel onClick={onCancel}>{cancelLabel}</AlertDialogCancel>
+              <Button size='lg' label={confirmLabel} onClick={onConfirm} isLoading={isLoading} />
+            </>
+          )}
+          {type === 'loading' && <DotsLoading />}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

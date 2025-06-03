@@ -31,7 +31,7 @@ const StepTwoForm: FC<DetailsFormProps> = (props) => {
         items={detailsAcFields.map((_, index) => ({
           key: index.toString(),
           title: t('air_conditioning_title', { index: index + 1 }),
-          content: <AcForm index={index} formName='detailsAc' />
+          content: <AcForm index={index} formName='details_ac' />
         }))}
       />
       <Accordion
@@ -40,7 +40,7 @@ const StepTwoForm: FC<DetailsFormProps> = (props) => {
         items={peakLoadTarifFields.map((_, index) => ({
           key: index.toString(),
           title: t('peak_load_tarif'),
-          content: <PeakLoadTarifForm index={index} formName='peakLoadTarif' />
+          content: <PeakLoadTarifForm index={index} formName='peak_load_tarif' />
         }))}
       />
       <ButtonGroup className='mt-14 justify-end' buttons={buttons} />

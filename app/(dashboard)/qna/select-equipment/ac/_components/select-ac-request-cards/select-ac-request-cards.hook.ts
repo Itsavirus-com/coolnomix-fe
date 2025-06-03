@@ -1,10 +1,11 @@
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { ControlledButtonProps } from '@/components/button/button.types'
 import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
-import { qnaAcDetailsPath } from '@/config/paths'
+import { qnaAcDetailsPath, qnaSuccessPath } from '@/config/paths'
+import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
+import { ButtonGroupType } from '@/types/general'
 import { load, updateStoredObject } from '@/utils/storage'
 
 import { SelectAcRequestCardType, SelectAcRequestValue } from './select-ac-request-cards.types'
@@ -14,9 +15,9 @@ export const useSelectAcRequest = () => {
 
   const router = useRouter()
 
-  const currentAcRequest = load(QNA_FORM_STORAGE_KEY)?.acRequest || ''
+  const [selectedAcRequest, setSelectedAcRequest] = useState<SelectAcRequestValue>(null)
 
-  const [selectedAcRequest, setSelectedAcRequest] = useState<SelectAcRequestValue>(currentAcRequest)
+  const { isLoading, hasApprovedAircons, mutate } = useQnaGetAircons()
 
   const requestTypes: SelectAcRequestCardType[] = useMemo(
     () => [
@@ -48,24 +49,40 @@ export const useSelectAcRequest = () => {
     []
   )
 
-  const handleSelectAcRequest = useCallback((type: SelectAcRequestValue) => {
-    setSelectedAcRequest(type)
-    updateStoredObject(QNA_FORM_STORAGE_KEY, { acRequest: type })
-  }, [])
+  const handleSelectAcRequest = useCallback(
+    (type: SelectAcRequestValue) => {
+      setSelectedAcRequest(type)
+      updateStoredObject(QNA_FORM_STORAGE_KEY, { acRequest: type })
+    },
+    [selectedAcRequest]
+  )
 
-  const handleClick = useCallback(() => {
-    router.push(qnaAcDetailsPath({ type: selectedAcRequest }))
-  }, [selectedAcRequest])
+  const getPath = () => {
+    const isDetailsForms = selectedAcRequest === 'details-forms'
 
-  const handleBack = () => {
-    router.back()
+    if (isDetailsForms && hasApprovedAircons) {
+      return `${qnaSuccessPath()}?type=details-forms`
+    }
+
+    return qnaAcDetailsPath({ type: selectedAcRequest })
   }
 
-  const buttons: [ControlledButtonProps, ControlledButtonProps] = useMemo(
-    () => [
+  const handleBack = () => router.back()
+  const handleClick = useCallback(async () => {
+    if (isLoading) {
+      await mutate()
+      return
+    }
+
+    const path = getPath()
+    router.push(path)
+  }, [selectedAcRequest, hasApprovedAircons, isLoading])
+
+  const buttons = useMemo((): ButtonGroupType => {
+    return [
       {
         size: 'lg',
-        variant: 'secondary',
+        variant: 'cancel',
         label: t('back'),
         onClick: handleBack
       },
@@ -75,9 +92,13 @@ export const useSelectAcRequest = () => {
         onClick: handleClick,
         disabled: !selectedAcRequest
       }
-    ],
-    [selectedAcRequest]
-  )
+    ]
+  }, [selectedAcRequest, isLoading])
+
+  useEffect(() => {
+    const acRequest = load(QNA_FORM_STORAGE_KEY)?.acRequest || ''
+    setSelectedAcRequest(acRequest)
+  }, [])
 
   return { requestTypes, buttons, selectedAcRequest, handleSelectAcRequest }
 }

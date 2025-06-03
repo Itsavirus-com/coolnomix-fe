@@ -4,5 +4,5 @@ import { optionalFilesSchema } from '@/utils/schema'
 
 export const formSchema = () =>
   z.object({
-    acUnit: optionalFilesSchema()
+    ac_unit: optionalFilesSchema()
   })

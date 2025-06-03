@@ -18,6 +18,7 @@ const SuccessMessageCard: FC<SuccessMessageCardProps> = (props) => {
     imageAlt,
     className,
     image = successAnimation,
+    loading,
     ...rest
   } = props
 
@@ -39,7 +40,7 @@ const SuccessMessageCard: FC<SuccessMessageCardProps> = (props) => {
         <Text className='text-grey-darkest mt-2 mb-8'>{description}</Text>
         <div className='flex items-center gap-3'>
           {leftButton && <Button {...leftButton} />}
-          <Button {...rightButton} />
+          <Button isLoading={loading} {...rightButton} />
         </div>
       </div>
     </div>

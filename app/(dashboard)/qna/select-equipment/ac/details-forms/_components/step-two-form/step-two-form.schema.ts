@@ -5,31 +5,35 @@ import { requiredString } from '@/utils/required-string'
 
 export const detailsAcSchema = (t: TFunction) =>
   z.object({
-    operatingHoursPerDay: z
-      .string({
+    daily_operating_hours: z
+      .number({
         required_error: requiredString(t)
       })
-      .refine((val) => Number(val) <= 24, {
+      .refine((val) => Number(val) >= 1 && Number(val) <= 24, {
         message: t('max_operating_hours_per_day')
       }),
-    runningDaysPerWeek: z
-      .string({
+    days_operating_per_week: z
+      .number({
         required_error: requiredString(t)
       })
-      .refine((val) => Number(val) <= 7, {
+      .refine((val) => Number(val) >= 1 && Number(val) <= 7, {
         message: t('max_running_days_per_week')
       }),
-    peekLoadHoursStartTime: z.string({
+    peak_hours_start: z.string({
       required_error: requiredString(t)
     }),
-    peekLoadHoursEndTime: z.string({
+    peak_hours_end: z.string({
       required_error: requiredString(t)
     }),
-    btuPerHour: z.string().optional(),
-    inputPower: z.string({
-      required_error: requiredString(t)
-    }),
-    ratioOutsideToInside: z.string({
+    hourly_btu: z.number().optional(),
+    input_power_kw: z
+      .number({
+        required_error: requiredString(t)
+      })
+      .refine((val) => Number(val) >= 1, {
+        message: t('minimum_input_is_1')
+      }),
+    ratio: z.string({
       required_error: requiredString(t)
     })
   })
@@ -37,10 +41,10 @@ export const detailsAcSchema = (t: TFunction) =>
 export const peakLoadTarifSchema = (t: TFunction) =>
   z.array(
     z.object({
-      peakLoadTarif: z.string({
+      tariff_low: z.number({
         required_error: requiredString(t)
       }),
-      noPeakLoadTarif: z.string({
+      tariff_high: z.number({
         required_error: requiredString(t)
       })
     })
@@ -48,6 +52,6 @@ export const peakLoadTarifSchema = (t: TFunction) =>
 
 export const formSchema = (t: TFunction) =>
   z.object({
-    detailsAc: z.array(detailsAcSchema(t)),
-    peakLoadTarif: peakLoadTarifSchema(t)
+    details_ac: z.array(detailsAcSchema(t)),
+    peak_load_tarif: peakLoadTarifSchema(t)
   })

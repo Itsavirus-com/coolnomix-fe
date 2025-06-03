@@ -11,6 +11,7 @@ export const showModal = (props: ShowModalProps) => {
   modalStore.onConfirm = props.onConfirm
   modalStore.onCancel = props.onCancel
   modalStore.align = props.align
+  modalStore.type = props.type
 }
 
 export const hideModal = () => {
@@ -24,5 +25,6 @@ export const hideModal = () => {
     modalStore.onConfirm = null
     modalStore.onCancel = null
     modalStore.align = null
+    modalStore.type = null
   }, 200)
 }

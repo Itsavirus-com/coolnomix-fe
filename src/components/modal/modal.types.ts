@@ -7,7 +7,8 @@ export type ModalProps = {
   confirmLabel?: string
   cancelLabel?: string
   align?: ModalAlignType
-  onConfirm: () => void
+  onConfirm?: () => void
   onCancel?: () => void
   isLoading?: boolean
+  type?: 'confirm' | 'loading'
 }

@@ -18,21 +18,16 @@ export const requiredStringSchema = (t: TFunction) =>
     })
     .min(1, requiredString(t))
 
-export const fileSchema = z.object({
-  formattedSize: z.string(),
-  path: z.string(),
-  preview: z.string(),
-  relativePath: z.string()
-})
+export const requiredNumberSchema = (t: TFunction) =>
+  z
+    .number({
+      required_error: requiredString(t)
+    })
+    .min(1, requiredString(t))
 
-export const requiredFilesSchema = (t: TFunction) =>
-  z.union([
-    z.array(z.instanceof(File)).min(1, requiredString(t)),
-    z.array(fileSchema).min(1, requiredString(t))
-  ])
-
-export const optionalFilesSchema = () =>
-  z.union([z.array(z.instanceof(File)), z.array(fileSchema).optional()])
+export const fileSchema = () => z.instanceof(File)
+export const requiredFilesSchema = (t: TFunction) => z.array(fileSchema()).min(1, requiredString(t))
+export const optionalFilesSchema = () => z.array(fileSchema()).optional()
 
 export const requiredEmailSchema = (t: TFunction) =>
   z

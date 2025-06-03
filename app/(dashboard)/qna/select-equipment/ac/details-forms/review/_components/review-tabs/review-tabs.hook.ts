@@ -1,7 +1,8 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { qnaAcDetailsReviewPhase2Path } from '@/config/paths'
+import { useTabParams } from '@/hooks/url-params.hook'
+import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
 
 const phases = [
   {
@@ -17,41 +18,22 @@ const phases = [
 ]
 
 export const useReviewTabs = () => {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
   const router = useRouter()
 
-  const phase = searchParams.get('tab') || 'phase-1'
+  const { currentValue, updateParam } = useTabParams('phase-1')
 
-  const [currentPhase, setCurrentPhase] = useState(phase)
-
-  // Should be data from backend
-  const isApproved = false
-
-  const handleChangePhase = useCallback(
-    (step: string) => {
-      setCurrentPhase(step)
-
-      const params = new URLSearchParams(searchParams)
-      params.set('tab', step)
-      window.history.pushState({}, '', pathname + '?' + params.toString())
-    },
-    [pathname, searchParams]
-  )
+  const { isLoading, hasApprovedAircons } = useQnaGetAircons()
 
   const handleContinue = () => {
     router.push(qnaAcDetailsReviewPhase2Path({ type: 'details-forms' }))
   }
 
-  useEffect(() => {
-    setCurrentPhase(phase)
-  }, [phase])
-
   return {
-    isApproved,
     phases,
-    currentPhase,
-    handleChangePhase,
+    hasApprovedAircons,
+    isLoading,
+    currentPhase: currentValue,
+    handleChangePhase: updateParam,
     handleContinue
   }
 }

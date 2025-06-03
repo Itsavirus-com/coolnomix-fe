@@ -16,13 +16,13 @@ const BrandForm: FC<DetailsReviewFormProps> = (props) => {
     <div className='mt-4 flex flex-col gap-4'>
       {disabled && (
         <MediaInputPreview
-          name={`${formName}.${index}.acUnit`}
+          name={`${formName}.${index}.ac_unit`}
           label={t('nameplate_of_the_unit')}
         />
       )}
       <ControlledInput
         required
-        name={`${formName}.${index}.brandEquipment`}
+        name={`${formName}.${index}.brand`}
         label={t('what_is_the_brand_of_the_equipment')}
         hint=''
         index={index}
@@ -30,7 +30,7 @@ const BrandForm: FC<DetailsReviewFormProps> = (props) => {
       />
       <ControlledInput
         required
-        name={`${formName}.${index}.modelEquipment`}
+        name={`${formName}.${index}.model`}
         label={t('what_is_the_model_of_the_equipment')}
         hint=''
         index={index}
@@ -38,7 +38,7 @@ const BrandForm: FC<DetailsReviewFormProps> = (props) => {
       />
       <ControlledInput
         required
-        name={`${formName}.${index}.serialNumber`}
+        name={`${formName}.${index}.serial_number`}
         label={t('what_is_the_serial_number_of_the_equipment')}
         hint=''
         index={index}
@@ -46,7 +46,7 @@ const BrandForm: FC<DetailsReviewFormProps> = (props) => {
       />
       <ControlledSelect
         required
-        name={`${formName}.${index}.acType`}
+        name={`${formName}.${index}.type`}
         label={t('what_is_the_type_of_air_conditioning_system')}
         items={[
           { label: t('inverter'), value: 'inverter' },
@@ -58,7 +58,7 @@ const BrandForm: FC<DetailsReviewFormProps> = (props) => {
       />
       <ControlledInput
         required
-        name={`${formName}.${index}.numberOfSameType`}
+        name={`${formName}.${index}.number_of_same_type`}
         label={t('number_of_same_type_air_conditioning')}
         type='number'
         index={index}

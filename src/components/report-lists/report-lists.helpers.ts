@@ -95,6 +95,8 @@ export const createEmptyListMessage = (t: TFunction, status: string, type?: stri
     switch (status) {
       case 'in-review':
         return t('looks_like_no_in_review_report')
+      case 'done':
+        return t('it_looks_like_you_dont_have_a_report_yet')
       case 'approved':
       default:
         return t('looks_like_no_approved_report')

@@ -5,6 +5,7 @@ import { useMemo } from 'react'
 import { successAnimation, techVisitSuccessAnimation } from '@/assets/images'
 import { qnaAcDetailsReviewPath, qnaAcPath } from '@/config/paths'
 import { reportListPath } from '@/config/paths/list-of-report-path'
+import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
 
 import { SuccessMessageType } from './success-layout.types'
 
@@ -14,6 +15,8 @@ export const useSuccessLayout = () => {
   const searchParams = useSearchParams()
 
   const type = searchParams.get('type')
+
+  const { isLoading: isLoadingAircons } = useQnaGetAircons()
 
   const successMessage = useMemo((): SuccessMessageType => {
     switch (type) {
@@ -43,11 +46,12 @@ export const useSuccessLayout = () => {
             null,
             {
               label: t('continue_to_phase_2'),
-              link: qnaAcDetailsReviewPath({ type: 'details-forms' })
+              link: `${qnaAcDetailsReviewPath({ type: 'details-forms' })}?tab=phase-2`
             }
           ],
           image: successAnimation,
-          imageAlt: t('an_awesome_success_result_animation')
+          imageAlt: t('an_awesome_success_result_animation'),
+          loading: isLoadingAircons
         }
       default:
         return {
@@ -68,7 +72,7 @@ export const useSuccessLayout = () => {
           imageAlt: t('an_awesome_success_result_animation')
         }
     }
-  }, [type])
+  }, [type, isLoadingAircons])
 
   return { ...successMessage }
 }
