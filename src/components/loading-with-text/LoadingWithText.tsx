@@ -13,7 +13,7 @@ const LoadingWithText: FC<LoadingWithTextProps> = (props) => {
   const { text = t('just_a_moment'), className, ...rest } = props
 
   return (
-    <div className={cn('flex items-center gap-2', className)} {...rest}>
+    <div className={cn('flex w-full items-center justify-center gap-2', className)} {...rest}>
       <Loader2 size={14} className='animate-spin' />
       <Text tag='p' variant='body1' weight='medium'>
         {text}
