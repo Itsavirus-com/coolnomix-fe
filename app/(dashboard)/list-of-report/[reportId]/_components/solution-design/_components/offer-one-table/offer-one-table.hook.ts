@@ -1,42 +1,45 @@
+import { startCase, upperCase } from 'lodash'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
-import { getColumns } from './offer-two-table.helpers'
+import { DUMMY_REPORT_DETAIL_ID } from '@/config/constant'
+import { useReportDetail } from '@/services/swr/hooks/use-report-detail'
+
+import { formatValue, getColumns } from './offer-two-table.helpers'
 import { OfferTableType } from '../offer-table/offer-table.types'
+
+const fieldsToExclude = [
+  'id',
+  'created_at',
+  'updated_at',
+  'type',
+  'report_offer_fees',
+  'line_chart',
+  'line_chart_id',
+  'total_investments',
+  'total_savings'
+]
 
 export const useOfferOneTable = () => {
   const t = useTranslations('report')
 
-  const data: OfferTableType[] = [
-    {
-      category: 'Term',
-      description: '60 months'
-    },
-    {
-      category: 'Payments',
-      description: 'Monthly'
-    },
-    {
-      category: 'Structure',
-      description: '90% > 20%'
-    },
-    {
-      category: 'Capex',
-      description: 'Free'
-    },
-    {
-      category: 'Guarantee',
-      description: '5 years'
-    },
-    {
-      category: 'Servicing',
-      description: '20% discount'
-    },
-    {
-      category: 'ROI',
-      description: '0%'
-    }
-  ]
+  const { report } = useReportDetail(DUMMY_REPORT_DETAIL_ID)
+
+  const savingShare = report.report_solution_design.report_offers.find(
+    (offer) => offer.type === 'saving_share'
+  )
+
+  const data: OfferTableType[] = useMemo(() => {
+    if (!savingShare) return []
+
+    return Object.keys(savingShare)
+      .filter((key) => !fieldsToExclude.includes(key))
+      .map((key) => ({
+        category: ['roi', 'capex'].includes(key) ? upperCase(key) : startCase(key),
+        description: formatValue(key, savingShare[key as keyof typeof savingShare])
+      }))
+  }, [savingShare])
+
   const columns = useMemo(() => getColumns(t), [])
 
   return {

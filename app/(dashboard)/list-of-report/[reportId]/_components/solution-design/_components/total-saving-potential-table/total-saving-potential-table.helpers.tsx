@@ -15,7 +15,7 @@ export const getColumns = (t: TFunction): ColumnDef<TableType>[] => {
       accessorKey: 'idr',
       header: () => <span className='table-row-end'>{t('idr')}</span>,
       cell: ({ row }) => {
-        const formatted = toCurrencyString(row.getValue('idr'))
+        const formatted = toCurrencyString(row.original.idr)
         return <span className='table-row-end font-semibold'>{formatted}</span>
       }
     }

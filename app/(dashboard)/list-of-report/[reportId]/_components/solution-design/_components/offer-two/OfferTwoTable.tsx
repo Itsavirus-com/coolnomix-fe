@@ -4,13 +4,13 @@ import React from 'react'
 import Text from '@/components/text/Text'
 import { TableCell, TableFooter, TableRow } from '@/components/ui/table'
 
-import { useOfferOneTable } from './offer-two-table.hook'
+import { useOfferTwoTable } from './offer-two-table.hook'
 import OfferTable from '../offer-table/OfferTable'
 
 const OfferTwoTable = () => {
   const t = useTranslations('report')
 
-  const { data, columns, totalInvestment, totalRealisedSavings } = useOfferOneTable()
+  const { data, columns, totalInvestment, totalSavings } = useOfferTwoTable()
 
   return (
     <OfferTable
@@ -38,7 +38,7 @@ const OfferTwoTable = () => {
             <TableCell colSpan={columns.length}>
               <div className='flex items-center gap-1.5'>
                 <span className='text-[12px] font-semibold'>{t('total_realised_savings')}</span>
-                <span className='table-row-end text-[13px] font-bold'>{totalRealisedSavings}</span>
+                <span className='table-row-end text-[13px] font-bold'>{totalSavings}</span>
               </div>
             </TableCell>
           </TableRow>
