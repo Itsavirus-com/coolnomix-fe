@@ -1,38 +1,50 @@
 FROM node:20-alpine AS builder
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
-# Setup buildtime environment variables
-ARG ENVIRONMENT=${ENVIRONMENT}
+# Setup buildtime environment variables with defaults
+ARG ENVIRONMENT=staging
 ENV ENVIRONMENT=${ENVIRONMENT}
-ARG SENTRY_SUPPRESS_TURBOPACK_WARNING=${SENTRY_SUPPRESS_TURBOPACK_WARNING}
+ARG SENTRY_SUPPRESS_TURBOPACK_WARNING=true
 ENV SENTRY_SUPPRESS_TURBOPACK_WARNING=${SENTRY_SUPPRESS_TURBOPACK_WARNING}
-ARG NEXT_PUBLIC_NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_SENTRY_DSN}
+ARG NEXT_PUBLIC_SENTRY_DSN=""
 ENV NEXT_PUBLIC_SENTRY_DSN=${NEXT_PUBLIC_SENTRY_DSN}
-ARG NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+ARG NEXT_PUBLIC_API_BASE_URL=""
 ENV NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
-ARG NEXT_PUBLIC_PROJECT_NAME=${NEXT_PUBLIC_PROJECT_NAME}
+ARG NEXT_PUBLIC_PROJECT_NAME="coolnomix"
 ENV NEXT_PUBLIC_PROJECT_NAME=${NEXT_PUBLIC_PROJECT_NAME}
 
 # Add a work directory
 WORKDIR /app
 
-# Cache and Install dependencies
-COPY package.json .
-COPY yarn.lock .
-RUN yarn install
+# Copy package.json and yarn.lock files
+COPY package.json yarn.lock ./
 
-# Copy app files
-COPY . .
+# Install dependencies with production flag and clean cache
+RUN yarn install --frozen-lockfile --production=false && \
+    yarn cache clean
 
-# Build the app
+# Copy only necessary files for build
+COPY next.config.ts ./
+COPY tsconfig.json ./
+COPY postcss.config.mjs ./
+COPY tailwind.config.ts ./
+COPY src ./src
+COPY app ./app
+COPY messages ./messages
+COPY middleware.ts ./
+
+# Clean the .next directory if exists
+RUN rm -rf .next
+
+# Build the application for production with increased memory limit
 RUN yarn build
 
 # Bundle static assets with nginx
-FROM nginx:1.23-alpine as production
-ENV NODE_ENV production
+FROM nginx:1.23-alpine AS production
+ENV NODE_ENV=production
 
 # Copy built assets from builder
-COPY --from=builder /app/dist /etc/nginx/html
+COPY --from=builder /app/.next /usr/share/nginx/html
 
 # Add your nginx.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
