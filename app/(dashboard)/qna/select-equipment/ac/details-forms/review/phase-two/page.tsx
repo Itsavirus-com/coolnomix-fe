@@ -1,11 +1,17 @@
-'use client'
-
+import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 import React from 'react'
 
 import Description from '@/components/description/Description'
+import { ENV } from '@/libs/env'
 
 import PhaseTwoForm from '../_components/phase-two-form/PhaseTwoForm'
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `Air Conditioning Review Phase Two - ${ENV.NEXT_PUBLIC_PROJECT_NAME}`
+  }
+}
 
 const Page = () => {
   const t = useTranslations('qna')
