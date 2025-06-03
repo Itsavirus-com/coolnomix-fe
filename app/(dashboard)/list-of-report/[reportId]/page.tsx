@@ -5,9 +5,7 @@ import Breadcrumbs from '@/components/breadcrumbs/Breadcrumb'
 import { reportListPath } from '@/config/paths/list-of-report-path'
 import { ENV } from '@/libs/env'
 
-import ReportAnalysis from './_components/report-analysis/ReportAnalysis'
-import ReportProfile from './_components/report-profile/ReportProfile'
-import SolutionDesign from './_components/solution-design/SolutionDesign'
+import ReportDetail from './_components/report-detail/ReportDetail'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -26,9 +24,7 @@ const Page = () => {
     <main>
       <Breadcrumbs items={breadcrumbs} />
       <div className='flex flex-col gap-8 px-[44px] pt-[54px]'>
-        <ReportProfile />
-        <ReportAnalysis />
-        <SolutionDesign />
+        <ReportDetail />
       </div>
     </main>
   )

@@ -1,27 +1,16 @@
 import { useMemo } from 'react'
 
-export const useSystemHealth = () => {
-  const score = 85.6
+import { DUMMY_REPORT_DETAIL_ID } from '@/config/constant'
+import { useReportDetail } from '@/services/swr/hooks/use-report-detail'
 
-  const scoreColor = useMemo(() => {
-    switch (true) {
-      case score >= 75:
-        return {
-          background: 'bg-blue-dark',
-          color: 'text-blue-dark'
-        }
-      case score >= 50:
-        return {
-          background: 'bg-orange',
-          color: 'text-orange'
-        }
-      default:
-        return {
-          background: 'bg-brown',
-          color: 'text-brown'
-        }
-    }
-  }, [score])
+import { getScoreColorConfig } from './system-health.helpers'
+
+export const useSystemHealth = () => {
+  const { report } = useReportDetail(DUMMY_REPORT_DETAIL_ID)
+
+  const score = report?.report_health?.health_score ?? 0
+
+  const scoreColor = useMemo(() => getScoreColorConfig(score), [score])
 
   return {
     score,

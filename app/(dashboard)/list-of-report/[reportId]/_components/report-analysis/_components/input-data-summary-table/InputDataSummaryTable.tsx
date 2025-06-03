@@ -10,8 +10,7 @@ import { useInputDataSummaryTable } from './input-data-summary-table.hook'
 const InputDataSummaryTable = () => {
   const t = useTranslations('report')
 
-  const { summaryData, kwhSummaryData, unitSummaryColumns, kwhSummaryColumns } =
-    useInputDataSummaryTable()
+  const { data, unitSummaryColumns, kwhSummaryColumns } = useInputDataSummaryTable()
 
   return (
     <Card>
@@ -30,7 +29,7 @@ const InputDataSummaryTable = () => {
               header: 'report-table-header'
             }}
             columns={unitSummaryColumns}
-            data={summaryData}
+            data={data}
           />
           <DataTable
             classNames={{
@@ -38,7 +37,7 @@ const InputDataSummaryTable = () => {
               header: 'report-table-header'
             }}
             columns={kwhSummaryColumns}
-            data={kwhSummaryData}
+            data={data}
           />
         </div>
       </CardContent>

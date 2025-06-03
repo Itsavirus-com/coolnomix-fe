@@ -23,7 +23,7 @@ import { useCurrentAndSavingChart } from './current-and-saving-chart.hook'
 export const CurrentAndSavingChart = () => {
   const t = useTranslations('report')
 
-  const { ticks, apiResponse, chartConfig } = useCurrentAndSavingChart()
+  const { ticks, chartConfig, data } = useCurrentAndSavingChart()
 
   return (
     <Card>
@@ -37,7 +37,7 @@ export const CurrentAndSavingChart = () => {
               config={chartConfig}
               style={{ height: ' -webkit-fill-available', width: ' -webkit-fill-available' }}
             >
-              <RechartsBarChart accessibilityLayer data={apiResponse.data}>
+              <RechartsBarChart accessibilityLayer data={data}>
                 <CartesianGrid vertical={false} />
                 <XAxis dataKey='label' tickLine={false} axisLine={false} tickMargin={16} />
                 <YAxis
