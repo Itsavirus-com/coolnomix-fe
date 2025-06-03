@@ -44,6 +44,7 @@ export const useQnaGetAircons = () => {
   return {
     aircons: getFilteredAircons()?.data,
     hasApprovedAircons,
+    allAirconsCompleted,
     isLoading,
     isError: !!error,
     mutate
