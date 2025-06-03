@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
 import { registerPath } from '@/config/paths/auth-path'
+import { resetAuthState } from '@/stores/auth-store.actions'
 import { clear } from '@/utils/storage'
 
 export const useSidebarProfile = () => {
@@ -11,6 +12,7 @@ export const useSidebarProfile = () => {
 
   const handleLogout = () => {
     clear()
+    resetAuthState()
     router.push(registerPath())
   }
 

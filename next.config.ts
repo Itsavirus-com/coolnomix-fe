@@ -2,6 +2,7 @@ import withBundleAnalyzer from '@next/bundle-analyzer'
 import { withSentryConfig } from '@sentry/nextjs'
 import createNextIntlPlugin from 'next-intl/plugin'
 
+import { listOfBranchPath } from '@/config/paths'
 import { ENV } from '@/libs/env'
 
 const bundleAnalyzer = withBundleAnalyzer({
@@ -20,6 +21,15 @@ export default withNextIntl(
       env: {
         NEXT_PUBLIC_API_BASE_URL: ENV.NEXT_PUBLIC_API_BASE_URL,
         SENTRY_DSN: ENV.NEXT_PUBLIC_SENTRY_DSN
+      },
+      async redirects() {
+        return [
+          {
+            source: '/',
+            destination: listOfBranchPath(),
+            permanent: true
+          }
+        ]
       }
     }),
     {
