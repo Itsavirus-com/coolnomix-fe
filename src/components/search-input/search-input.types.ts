@@ -2,7 +2,8 @@ import type { ComponentProps } from 'react'
 
 import { VariantProps } from 'class-variance-authority'
 
-import { inputVariants } from '@/components/ui/input'
+import { inputVariants } from '../ui/input'
 
-export type SearchInputProps = Omit<ComponentProps<'input'>, 'size'> &
-  VariantProps<typeof inputVariants>
+export type SearchInputProps = Omit<ComponentProps<'input'>, 'size'> & {
+  size?: VariantProps<typeof inputVariants>['size']
+}
