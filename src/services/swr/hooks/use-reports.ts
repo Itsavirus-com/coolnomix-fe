@@ -7,6 +7,9 @@ export const useReports = () => {
   const { isLoading, error, data } = useCustomSWR<ReportCollection>(
     { path: 'reports' },
     {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false,
       use: [
         collectionAdaptor({
           collectionName: 'reports',
