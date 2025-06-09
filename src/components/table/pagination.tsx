@@ -4,11 +4,17 @@ import { useTranslations } from 'next-intl'
 import React, { FC, useMemo } from 'react'
 
 import { Button } from '@/components/ui/button'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
 import { cn } from '@/libs/utils'
 
 import { generatePageSizeOptions } from './table.helper'
 import { PaginationProps } from './table.types'
-import UncontrolledSelect from '../forms/select/UncontrolledSelect'
 import Icon from '../icon/Icon'
 import Text from '../text/Text'
 
@@ -50,10 +56,10 @@ const Pagination: FC<PaginationProps> = (props) => {
     goToPage(pageCount - 1)
   }
 
-  const setPageSize = (size: number) => {
+  const setPageSize = (value: string) => {
     setPagination((old) => ({
       ...old,
-      pageSize: size,
+      pageSize: Number(value),
       pageIndex: 0
     }))
   }
@@ -64,12 +70,18 @@ const Pagination: FC<PaginationProps> = (props) => {
         <Text tag='span' variant='body1'>
           {t('rows_per_page')}
         </Text>
-        <UncontrolledSelect
-          items={pageSizeOptions}
-          value={pageSize.toString()}
-          onValueChange={(value) => setPageSize(Number(value))}
-          placeholder={pageSize.toString()}
-        />
+        <Select value={pageSize.toString()} onValueChange={setPageSize}>
+          <SelectTrigger className='w-[70px]'>
+            <SelectValue placeholder={pageSize.toString()} />
+          </SelectTrigger>
+          <SelectContent>
+            {pageSizeOptions.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <div className='flex items-center gap-8'>
         <Text tag='span' variant='body1'>
