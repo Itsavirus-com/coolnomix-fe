@@ -3,6 +3,7 @@
 import { truncate } from 'lodash'
 import { FC } from 'react'
 
+import Button from '@/components/button/Button'
 import Icon from '@/components/icon/Icon'
 import Image from '@/components/image/Image'
 import Text from '@/components/text/Text'
@@ -28,32 +29,40 @@ const SidebarProfile: FC<SidebarProfileProps> = (props) => {
 
   const { sidebarProfileMenu } = useSidebarProfile()
 
-  const { isMobile } = useSidebar()
+  const { isMobile, state } = useSidebar()
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size='lg'
-              className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:!bg-sidebar-accent cursor-pointer'
-            >
-              <div className='relative h-8 w-8 overflow-hidden rounded-lg'>
-                <Image src={avatar} alt={name || ''} fill />
-              </div>
-              <div className='flex flex-col pr-2'>
-                <Text tag='span' weight='semibold' className='leading-[110%]'>
-                  {name}
-                </Text>
-                <Text tag='span' variant='caption' className='text-grey-darkest leading-[130%]'>
-                  {truncate(email, { length: 20 })}
-                </Text>
-              </div>
-              <div className='flex flex-1 items-center justify-center'>
-                <Icon icon='icon-setting' size={20} className='text-brand-muted' />
-              </div>
-            </SidebarMenuButton>
+            <div className='flex items-center justify-between'>
+              <SidebarMenuButton
+                size='lg'
+                className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground cursor-pointer'
+              >
+                <div className='flex items-center gap-2'>
+                  <div className='relative h-8 w-8 flex-shrink-0 overflow-hidden rounded-lg'>
+                    <Image src={avatar} alt={name || ''} fill />
+                  </div>
+                  <div className='flex flex-col pr-2'>
+                    <Text tag='span' weight='semibold' className='leading-[110%]'>
+                      {truncate(name, { length: 15 })}
+                    </Text>
+                    <Text tag='span' variant='caption' className='text-grey-darkest leading-[130%]'>
+                      {truncate(email, { length: 18 })}
+                    </Text>
+                  </div>
+                </div>
+              </SidebarMenuButton>
+              {state === 'expanded' && (
+                <Button
+                  variant='ghost'
+                  size='icon'
+                  label={<Icon icon='icon-setting' size={20} className='text-brand-muted' />}
+                />
+              )}
+            </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className='w-[--radix-dropdown-menu-trigger-width] min-w-[205px] rounded-md'
