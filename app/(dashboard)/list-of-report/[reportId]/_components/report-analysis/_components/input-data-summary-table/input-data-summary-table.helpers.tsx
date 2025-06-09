@@ -1,60 +1,52 @@
-import { ColumnDef } from '@tanstack/react-table'
 import { TFunction } from 'next-intl'
 
+import { ExtendedColumnDef } from '@/components/table/table.types'
 import { toCurrencyString } from '@/utils/to-currency-string'
 
 import { InputDataSummaryTableType } from './input-data-summary-table.types'
 
-export const getUnitSummaryColumns = (t: TFunction): ColumnDef<InputDataSummaryTableType>[] => {
+export const getUnitSummaryColumns = (
+  t: TFunction
+): ExtendedColumnDef<InputDataSummaryTableType>[] => {
   return [
     {
       accessorKey: 'external_units',
-      header: () => <span>{t('external_units')}</span>,
-      cell: ({ row }) => {
-        return <span className='font-semibold'>{row.original.external_units}</span>
-      }
+      header: () => t('external_units')
     },
     {
       accessorKey: 'internal_units',
-      header: () => <span>{t('internal_units')}</span>,
-      cell: ({ row }) => {
-        return <span className='font-semibold'>{row.original.internal_units}</span>
-      }
+      header: () => t('internal_units')
     },
     {
       accessorKey: 'total_kw',
-      header: () => <span>{t('total_kw')}</span>,
-      cell: ({ row }) => {
-        return <span className='font-semibold'>{row.original.total_kw}</span>
-      }
+      header: () => t('total_kw')
     }
   ]
 }
 
-export const getKwhSummaryColumns = (t: TFunction): ColumnDef<InputDataSummaryTableType>[] => {
+export const getKwhSummaryColumns = (
+  t: TFunction
+): ExtendedColumnDef<InputDataSummaryTableType>[] => {
   return [
     {
       accessorKey: 'tariff_lwb',
-      header: () => <span>{t('kwh_tarif_lwb')}</span>,
+      header: () => t('kwh_tarif_lwb'),
       cell: ({ row }) => {
         const formatted = toCurrencyString(row.original.tariff_lwb)
-        return <span className='font-semibold'>{formatted}</span>
+        return <span>{formatted}</span>
       }
     },
     {
       accessorKey: 'tariff_glwb',
-      header: () => <span>{t('kwh_tarif_glwb')}</span>,
+      header: () => t('kwh_tarif_glwb'),
       cell: ({ row }) => {
         const formatted = toCurrencyString(row.original.tariff_glwb)
-        return <span className='font-semibold'>{formatted}</span>
+        return <span>{formatted}</span>
       }
     },
     {
       accessorKey: 'average_operating_hours',
-      header: () => <span>{t('avg_operating_hours')}</span>,
-      cell: ({ row }) => {
-        return <span className='font-semibold'>{row.original?.average_operating_hours}</span>
-      }
+      header: () => t('avg_operating_hours')
     }
   ]
 }

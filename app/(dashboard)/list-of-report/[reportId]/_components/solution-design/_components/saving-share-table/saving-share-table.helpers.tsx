@@ -1,22 +1,23 @@
-import { ColumnDef } from '@tanstack/react-table'
 import { truncate } from 'lodash'
 import { TFunction } from 'next-intl'
 
+import { ExtendedColumnDef } from '@/components/table/table.types'
 import Text from '@/components/text/Text'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { toCurrencyString } from '@/utils/to-currency-string'
 
 import { TableType } from './saving-share-table.types'
 
-export const getColumns = (t: TFunction): ColumnDef<TableType>[] => {
+export const getColumns = (t: TFunction): ExtendedColumnDef<TableType>[] => {
   return [
     {
       accessorKey: 'label',
-      header: () => <span>{t('year')}</span>
+      header: () => t('year')
     },
     {
       accessorKey: 'fee',
-      header: () => <span className='table-row-end'>{`${t('fee')}(IDR)`}</span>,
+      header: () => `${t('fee')}(IDR)`,
+      headerClassName: 'table-row-end',
       cell: ({ row }) => {
         const formatted = toCurrencyString(row.original.fee)
 
@@ -40,7 +41,8 @@ export const getColumns = (t: TFunction): ColumnDef<TableType>[] => {
     },
     {
       accessorKey: 'actual_savings',
-      header: () => <span className='table-row-end'>{t('actual_savings')}</span>,
+      header: () => t('actual_savings'),
+      headerClassName: 'table-row-end',
       cell: ({ row }) => {
         const formatted = toCurrencyString(row.original.actual_savings)
 

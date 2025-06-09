@@ -1,20 +1,19 @@
-import { ColumnDef } from '@tanstack/react-table'
 import { TFunction } from 'next-intl'
+
+import { ExtendedColumnDef } from '@/components/table/table.types'
 
 import { OfferTableType } from './offer-table.types'
 
-export const getColumns = (t: TFunction): ColumnDef<OfferTableType>[] => {
+export const getColumns = (t: TFunction): ExtendedColumnDef<OfferTableType>[] => {
   return [
     {
       accessorKey: 'category',
-      header: () => <span>{t('category')}</span>,
-      cell: ({ row }) => {
-        return <span className='font-semibold'>{row.original.category}</span>
-      }
+      header: () => t('category'),
+      cellClassName: 'font-semibold'
     },
     {
       accessorKey: 'description',
-      header: () => <span>{t('description')}</span>
+      header: () => t('description')
     }
   ]
 }

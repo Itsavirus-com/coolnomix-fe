@@ -1,8 +1,8 @@
 import React from 'react'
 
+import Table from '@/components/table/table'
 import Text from '@/components/text/Text'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { DataTable } from '@/components/ui/data-table'
 import { cn } from '@/libs/utils'
 
 import { ReportTableProps } from './report-table.types'
@@ -47,7 +47,7 @@ const ReportTable = <TData, TValue>(props: ReportTableProps<TData, TValue>) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <DataTable<TData, TValue>
+        <Table
           classNames={{
             container: hasBorder ? '' : 'border-none',
             header: 'report-table-header'
@@ -55,6 +55,8 @@ const ReportTable = <TData, TValue>(props: ReportTableProps<TData, TValue>) => {
           columns={columns}
           data={data}
           footer={footer}
+          enablePagination={false}
+          enableSorting={false}
         />
       </CardContent>
     </Card>

@@ -1,19 +1,20 @@
-import { ColumnDef } from '@tanstack/react-table'
 import { TFunction } from 'next-intl'
 
+import { ExtendedColumnDef } from '@/components/table/table.types'
 import { toCurrencyString } from '@/utils/to-currency-string'
 
 import { TableType } from './total-saving-potential-table.types'
 
-export const getColumns = (t: TFunction): ColumnDef<TableType>[] => {
+export const getColumns = (t: TFunction): ExtendedColumnDef<TableType>[] => {
   return [
     {
       accessorKey: 'kw',
-      header: () => <span>{t('kw')}</span>
+      header: () => t('kw')
     },
     {
       accessorKey: 'idr',
-      header: () => <span className='table-row-end'>{t('idr')}</span>,
+      header: () => t('idr'),
+      headerClassName: 'table-row-end',
       cell: ({ row }) => {
         const formatted = toCurrencyString(row.original.idr)
         return <span className='table-row-end font-semibold'>{formatted}</span>
