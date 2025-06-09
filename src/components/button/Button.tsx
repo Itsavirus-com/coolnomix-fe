@@ -20,6 +20,8 @@ const Button = (props: ButtonWithLinkProps) => {
     testID = `${name}-button`,
     ariaLabel,
     disabled,
+    startContent,
+    endContent,
     ...rest
   } = props
 
@@ -46,9 +48,13 @@ const Button = (props: ButtonWithLinkProps) => {
           {label}
         </Link>
       ) : (
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-1'>
           {isLoading && <Loader2 size={14} className='animate-spin' />}
-          {label}
+          <div className='flex items-center gap-2'>
+            {startContent}
+            {label}
+            {endContent}
+          </div>
         </div>
       )}
     </CButton>
