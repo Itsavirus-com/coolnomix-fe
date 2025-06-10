@@ -50,12 +50,8 @@ const StepOneForm: FC<DetailsFormProps> = (props) => {
         <Button
           variant='ghost-alt'
           size='lgAlt'
-          label={
-            <div className='flex items-center gap-2'>
-              <Icon icon='icon-plus' size={14} className='text-brand-dark' />
-              {t('add_another_air_conditioner')}
-            </div>
-          }
+          startContent={<Icon icon='icon-plus' size={14} className='text-brand-dark' />}
+          label={t('add_another_air_conditioner')}
           onClick={handleAdd}
         />
       </div>
