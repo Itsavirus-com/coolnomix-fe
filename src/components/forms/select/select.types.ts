@@ -12,3 +12,13 @@ export type SelectProps = ComponentProps<'select'> & {
   index?: number
   hasSearch?: boolean
 }
+
+export type UncontrolledSelectProps = ComponentProps<'select'> & {
+  items: {
+    label: string
+    value: string
+  }[]
+  value: string
+  onValueChange: (value: string) => void
+  placeholder: string
+}
