@@ -20,7 +20,7 @@ const SearchFilter: FC<SearchFilterProps> = (props) => {
 
   return (
     <>
-      <SearchInput name='search' className='h-8 px-3 py-1' />
+      <SearchInput name='search' size='md' />
       <div className='mt-3 flex items-center justify-between'>
         <div className='flex items-center gap-1.5'>
           <FormProvider methods={methods} onSubmit={onSubmit}>
