@@ -25,7 +25,7 @@ const buttonVariants = cva(
           'text-secondary-foreground hover:bg-accent dark:hover:bg-accent/50 bg-grey-lightest'
       },
       size: {
-        default: 'h-9 px-6 ',
+        default: 'h-9 px-6',
         xs: 'h-7 px-3.5 !text-xsAlt font-medium rounded-sm',
         sm: 'h-[34px] px-3',
         lg: 'h-10 px-3',
@@ -57,7 +57,7 @@ function Button({
     <Comp
       data-slot='button'
       data-test-id={`${name}-button`}
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size }), className)}
       {...props}
     />
   )
