@@ -1,7 +1,11 @@
 .report-table-header tr th {
-  @apply text-grey-darkest bg-[#d9d9d980] text-[11px] font-medium uppercase;
+  @apply bg-[#d9d9d980];
+}
+
+.report-table-header tr th span {
+  @apply text-grey-darkest flex w-full text-[11px] font-medium uppercase;
 }
 
 .table-row-end {
-  @apply inline-block w-full text-end;
+  @apply flex w-full justify-end;
 }
