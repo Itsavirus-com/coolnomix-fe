@@ -1,25 +1,21 @@
-import { ColumnDef } from '@tanstack/react-table'
 import { TFunction } from 'next-intl'
+
+import { ExtendedColumnDef } from '@/components/table/table.types'
 
 import { TableType } from './hardware-requirement-table.types'
 
-export const getColumns = (t: TFunction): ColumnDef<TableType>[] => {
+export const getColumns = (t: TFunction): ExtendedColumnDef<TableType>[] => {
   return [
     {
       accessorKey: 'total_coolnomix_unit',
-      header: () => <span>{t('no_of_coolnomix_units')}</span>,
-      cell: ({ row }) => {
-        return <span className='font-semibold'>{row.original.total_coolnomix_unit}</span>
-      }
+      header: () => t('no_of_coolnomix_units'),
+      cellClassName: 'font-semibold'
     },
     {
       accessorKey: 'total_energy_monitors',
-      header: () => <span className='table-row-end'>{t('no_of_energy_monitors')}</span>,
-      cell: ({ row }) => {
-        return (
-          <span className='table-row-end font-semibold'>{row.original.total_energy_monitors}</span>
-        )
-      }
+      header: () => t('no_of_energy_monitors'),
+      headerClassName: 'table-row-end',
+      cellClassName: 'table-row-end font-semibold'
     }
   ]
 }

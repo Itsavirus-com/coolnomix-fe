@@ -1,7 +1,7 @@
-import { ColumnDef } from '@tanstack/react-table'
 import { capitalize } from 'lodash'
 import { TFunction } from 'next-intl'
 
+import { ExtendedColumnDef } from '@/components/table/table.types'
 import { toCurrencyString } from '@/utils/to-currency-string'
 
 import { OfferTableType } from '../offer-table/offer-table.types'
@@ -25,18 +25,16 @@ export const formatValue = (key: string, value: any): string => {
   }
 }
 
-export const getColumns = (t: TFunction): ColumnDef<OfferTableType>[] => {
+export const getColumns = (t: TFunction): ExtendedColumnDef<OfferTableType>[] => {
   return [
     {
       accessorKey: 'category',
-      header: () => <span>{t('category')}</span>,
-      cell: ({ row }) => {
-        return <span className='font-semibold'>{row.original.category}</span>
-      }
+      header: () => t('category'),
+      cellClassName: 'font-semibold'
     },
     {
       accessorKey: 'description',
-      header: () => <span>{t('description')}</span>
+      header: () => t('description')
     }
   ]
 }

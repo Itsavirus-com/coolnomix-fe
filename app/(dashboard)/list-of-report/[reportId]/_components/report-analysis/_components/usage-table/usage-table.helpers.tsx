@@ -10,7 +10,7 @@ export const getColumns = (t: TFunction): ColumnDef<UsageTableType>[] => {
   return [
     {
       accessorKey: 'name',
-      header: () => <div></div>,
+      header: () => <span></span>,
       cell: ({ row }) => {
         return (
           <div className='text-grey-darkest flex flex-col'>
@@ -22,7 +22,7 @@ export const getColumns = (t: TFunction): ColumnDef<UsageTableType>[] => {
     },
     {
       accessorKey: 'energy_usage_kw',
-      header: () => <div>{t('per_month')}</div>,
+      header: () => t('per_month'),
       cell: ({ row }) => {
         const formatted = toCurrencyString(row.original.energy_usage_kw)
         const kwFormatted = formatKw(row.original.energy_usage_kw)
@@ -35,7 +35,7 @@ export const getColumns = (t: TFunction): ColumnDef<UsageTableType>[] => {
     },
     {
       accessorKey: 'running_cost_idr',
-      header: () => <div className='table-row-end'>{t('per_year')}</div>,
+      header: () => <span className='table-row-end'>{t('per_year')}</span>,
       cell: ({ row }) => {
         const formatted = toCurrencyString(row.original.running_cost_idr)
         const kwFormatted = formatKw(row.original.running_cost_idr)

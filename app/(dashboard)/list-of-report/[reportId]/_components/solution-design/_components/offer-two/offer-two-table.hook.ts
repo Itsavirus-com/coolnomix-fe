@@ -16,7 +16,9 @@ const fieldsToExclude = [
   'type',
   'report_offer_fees',
   'line_chart',
-  'line_chart_id'
+  'line_chart_id',
+  'total_investments',
+  'total_savings'
 ]
 
 export const useOfferTwoTable = () => {
