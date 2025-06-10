@@ -18,7 +18,7 @@ export const getColumns = (t: TFunction): ColumnDef<TableType>[] => {
       accessorKey: 'fee',
       header: () => <span className='table-row-end'>{`${t('fee')}(IDR)`}</span>,
       cell: ({ row }) => {
-        const formatted = toCurrencyString(row.getValue('fee'))
+        const formatted = toCurrencyString(row.original.fee)
 
         if (formatted.length < 10) {
           return <span className='table-row-end text-blue-dark font-semibold'>{formatted}</span>
@@ -42,7 +42,7 @@ export const getColumns = (t: TFunction): ColumnDef<TableType>[] => {
       accessorKey: 'actual_savings',
       header: () => <span className='table-row-end'>{t('actual_savings')}</span>,
       cell: ({ row }) => {
-        const formatted = toCurrencyString(row.getValue('actual_savings'))
+        const formatted = toCurrencyString(row.original.actual_savings)
 
         if (formatted.length < 10) {
           return <span className='table-row-end text-blue-dark font-semibold'>{formatted}</span>

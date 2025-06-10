@@ -1,3 +1,5 @@
+import { ModelDetail } from '../middleware/model-adaptor.types'
+
 import type { Collection } from '../middleware/collection-adaptor.types'
 
 type BaseEntity = {
@@ -23,7 +25,7 @@ type ReportHealth = BaseEntity & {
   health_notes: string
 }
 
-type ReportSummaryInputDatum = BaseEntity & {
+export type ReportSummaryInputDatum = BaseEntity & {
   external_units: number
   internal_units: number
   total_kw: number
@@ -32,7 +34,7 @@ type ReportSummaryInputDatum = BaseEntity & {
   average_operating_hours: number
 }
 
-type ReportEstimatedUsageData = BaseEntity & {
+export type ReportEstimatedUsageData = BaseEntity & {
   period: 'monthly' | 'yearly'
   energy_usage_kw: number
   running_cost_idr: number
@@ -66,12 +68,12 @@ type ReportHardwareRequirement = BaseEntity & {
   total_energy_monitors: number
 }
 
-type ReportTotalSavingPotential = BaseEntity & {
+export type ReportTotalSavingPotential = BaseEntity & {
   kw: number
   idr: number
 }
 
-type ReportOfferFee = BaseEntity & {
+export type ReportOfferFee = BaseEntity & {
   label: string
   fee: number
   actual_savings: number
@@ -118,3 +120,5 @@ export type ReportModel = BaseEntity & {
 }
 
 export type ReportCollection = Collection<'reports', ReportModel>
+
+export type ReportDetailModel = ModelDetail<ReportModel | null>

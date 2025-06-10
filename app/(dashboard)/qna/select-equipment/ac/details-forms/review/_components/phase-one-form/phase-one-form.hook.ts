@@ -58,6 +58,7 @@ export const usePhaseOneForm = () => {
       await qnaApi.createAcPhaseOne(payload)
       remove(QNA_FORM_STORAGE_KEY)
       resetQnaDetailsForms()
+      methods.reset()
       mutate()
       router.replace(`${qnaSuccessPath()}?type=details-forms`)
     } catch (error: any) {
@@ -111,7 +112,7 @@ export const usePhaseOneForm = () => {
         peakLoadTarif: savedPeakLoadTarif
       })
     }
-  }, [savedPhaseOne.length, savedPeakLoadTarif.length, methods])
+  }, [savedPhaseOne.length, savedPeakLoadTarif.length])
 
   return {
     methods,

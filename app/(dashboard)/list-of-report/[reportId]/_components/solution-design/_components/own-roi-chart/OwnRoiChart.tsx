@@ -24,7 +24,7 @@ import { useOwnRoiChart } from './own-roi-chart.hook'
 const OwnRoiChart = () => {
   const t = useTranslations('report')
 
-  const { ticks, apiResponse, chartConfig } = useOwnRoiChart()
+  const { ticks, data, chartConfig } = useOwnRoiChart()
 
   return (
     <Card>
@@ -40,7 +40,7 @@ const OwnRoiChart = () => {
             >
               <RechartsLineChart
                 accessibilityLayer
-                data={apiResponse.data}
+                data={data}
                 margin={{
                   left: 20,
                   right: 20

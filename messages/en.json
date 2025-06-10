@@ -272,7 +272,11 @@
     "total_investment": "Total Investment",
     "rent_2_own": "Rent - 2 - Own",
     "savings": "Savings",
-    "previous_report": "Previous Report"
+    "previous_report": "Previous Report",
+    "total_energy_usage_units": "Total Energy Usage - {unit} Units",
+    "total_running_usage_units": "Total Running Usage - {unit} Units",
+    "kw_after_saving": "KW (After {saving}% saving)",
+    "idr_after_saving": "IDR (After {saving}% saving)"
   },
   "validation": {
     "this_field_is_required": "This field is required",

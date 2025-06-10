@@ -24,7 +24,7 @@ import { useEstimatedSavingSharingsChart } from './estimated-saving-sharings-cha
 const EstimatedSavingSharingsChart = () => {
   const t = useTranslations('report')
 
-  const { ticks, apiResponse, chartConfig } = useEstimatedSavingSharingsChart()
+  const { ticks, data, chartConfig } = useEstimatedSavingSharingsChart()
 
   return (
     <Card>
@@ -40,7 +40,7 @@ const EstimatedSavingSharingsChart = () => {
             >
               <RechartsLineChart
                 accessibilityLayer
-                data={apiResponse.data}
+                data={data}
                 margin={{
                   left: 20,
                   right: 20
@@ -74,7 +74,7 @@ const EstimatedSavingSharingsChart = () => {
                   dot={false}
                 />
                 <Line
-                  dataKey='actualSavings'
+                  dataKey='actual_savings'
                   type='monotone'
                   stroke='var(--color-blue-dark)'
                   strokeWidth={2}

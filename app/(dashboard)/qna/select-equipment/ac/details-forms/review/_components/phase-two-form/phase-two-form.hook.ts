@@ -6,16 +6,18 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { useSnapshot } from 'valtio'
 import { z } from 'zod'
 
-import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
+import { DUMMY_REPORT_DETAIL_ID, QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaAcPath } from '@/config/paths'
 import { reportDetailPath } from '@/config/paths/list-of-report-path'
 import { qnaApi } from '@/services/api/qna-api'
+import { useMutator } from '@/services/swr/hooks/use-mutator'
 import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
 import { hideModal, showModal } from '@/stores/modal-store.actions'
 import { qnaDetailsFormsStateStore } from '@/stores/qna-details-forms'
 import { resetQnaDetailsForms, setPhaseTwo } from '@/stores/qna-details-forms.actions'
 import { QnaDetailsFormsStateStore } from '@/stores/qna-details-forms.types'
 import { ButtonGroupType } from '@/types/general'
+import { delay } from '@/utils/delay'
 import { handleGenericError } from '@/utils/error-handler'
 import { remove } from '@/utils/storage'
 
@@ -28,12 +30,11 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
 
   const router = useRouter()
 
-  const { aircons, mutate } = useQnaGetAircons()
+  const { aircons, allAirconsCompleted, mutate: mutateAircons } = useQnaGetAircons()
+  const { mutateReportDetail } = useMutator()
+
   const { acPhaseTwo } = useSnapshot(qnaDetailsFormsStateStore).state as QnaDetailsFormsStateStore
   const savedPhaseTwo = getSavedPhaseTwo(acPhaseTwo, inPreview, aircons.length)
-
-  // Should be data from backend
-  const isSubmitted = false
 
   const schema = formSchema(tVal)
   const methods = useForm<z.infer<typeof schema>>({
@@ -45,9 +46,26 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
     name: 'phaseTwo'
   })
 
-  const handleBack = () => {
-    if (inPreview) router.back()
-    else router.push(qnaAcPath())
+  const handleSubmitPhaseTwo = async (values: z.infer<typeof schema>) => {
+    const payload = getPayload(values, aircons)
+    await qnaApi.updateAcPhaseTwo(payload)
+    remove(QNA_FORM_STORAGE_KEY)
+    resetQnaDetailsForms()
+    mutateAircons()
+  }
+
+  const handleProcessReport = async () => {
+    showModal({
+      title: t('generating_report'),
+      message: t('this_may_take_a_few_minutes'),
+      align: 'center',
+      type: 'loading'
+    })
+    await mutateReportDetail(DUMMY_REPORT_DETAIL_ID)
+    // For testing purpose
+    await delay(2000)
+    hideModal()
+    router.push(reportDetailPath(DUMMY_REPORT_DETAIL_ID))
   }
 
   const onSubmit = useCallback(
@@ -56,24 +74,9 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
 
       if (inPreview) {
         try {
-          const payload = getPayload(values, aircons)
-          await qnaApi.updateAcPhaseTwo(payload)
-          remove(QNA_FORM_STORAGE_KEY)
-          resetQnaDetailsForms()
-          mutate()
-          showModal({
-            title: t('generating_report'),
-            message: t('this_may_take_a_few_minutes'),
-            align: 'center',
-            type: 'loading'
-          })
-          // Remove this setTimout and use the api response to show the modal,
-          // because for now is to show the modal for client
-          setTimeout(() => {
-            hideModal()
-            methods.reset()
-            router.push(reportDetailPath('1'))
-          }, 1000)
+          await handleSubmitPhaseTwo(values)
+          await handleProcessReport()
+          methods.reset()
         } catch (error: any) {
           handleGenericError(error)
         }
@@ -81,6 +84,11 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
     },
     [inPreview, aircons.length]
   )
+
+  const handleBack = () => {
+    if (inPreview) router.back()
+    else router.push(qnaAcPath())
+  }
 
   const buttons = useMemo((): ButtonGroupType => {
     return [
@@ -94,11 +102,11 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
         type: 'submit',
         size: 'lg',
         label: inPreview ? t('submit') : t('preview'),
-        disabled: isSubmitted,
+        disabled: allAirconsCompleted,
         onSubmit
       }
     ]
-  }, [inPreview, isSubmitted])
+  }, [inPreview, allAirconsCompleted])
 
   useEffect(() => {
     if (savedPhaseTwo.length) {
@@ -106,13 +114,12 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
         phaseTwo: savedPhaseTwo
       })
     }
-  }, [savedPhaseTwo.length, methods])
+  }, [savedPhaseTwo.length])
 
   return {
     methods,
     phaseTwoFormFields,
     buttons,
-    isSubmitted,
     onSubmit
   }
 }

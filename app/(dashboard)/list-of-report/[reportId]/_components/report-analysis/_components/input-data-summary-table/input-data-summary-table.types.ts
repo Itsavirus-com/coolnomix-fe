@@ -1,13 +1,3 @@
-export type UnitSummaryType = {
-  id: string
-  external_units: number
-  internal_units: number
-  total_kw: number
-}
+import { ReportSummaryInputDatum } from '@/services/swr/models/report.types'
 
-export type KwhSummaryType = {
-  id: string
-  kwh_tarif: number
-  kwh_tarif_glwb: number
-  avg_operating_hours: number
-}
+export type InputDataSummaryTableType = Omit<ReportSummaryInputDatum, 'created_at' | 'updated_at'>

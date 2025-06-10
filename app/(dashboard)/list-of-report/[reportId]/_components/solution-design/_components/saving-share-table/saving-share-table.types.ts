@@ -1,6 +1,3 @@
-export type TableType = {
-  id: number
-  label: string
-  fee: number
-  actual_savings: number
-}
+import { ReportOfferFee } from '@/services/swr/models/report.types'
+
+export type TableType = Pick<ReportOfferFee, 'label' | 'fee' | 'actual_savings'>

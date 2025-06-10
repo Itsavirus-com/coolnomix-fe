@@ -1,23 +1,22 @@
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
+import { DUMMY_REPORT_DETAIL_ID } from '@/config/constant'
+import { useReportDetail } from '@/services/swr/hooks/use-report-detail'
+
 import { getColumns } from './total-saving-potential-table.helpers'
-import { TableType } from './total-saving-potential-table.types'
 
 export const useTotalSavingPotentialTable = () => {
   const t = useTranslations('report')
 
-  const data: TableType[] = [
-    {
-      id: '1',
-      kw: 281.58,
-      idr: 387137400
-    }
-  ]
+  const { report } = useReportDetail(DUMMY_REPORT_DETAIL_ID)
+
+  const data = report.report_solution_design.report_total_saving_potential
+
   const columns = useMemo(() => getColumns(t), [])
 
   return {
-    data,
+    data: [data],
     columns
   }
 }

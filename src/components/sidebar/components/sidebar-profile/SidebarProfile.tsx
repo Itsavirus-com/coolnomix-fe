@@ -37,7 +37,7 @@ const SidebarProfile: FC<SidebarProfileProps> = (props) => {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size='lg'
-              className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:!bg-sidebar-accent'
+              className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:!bg-sidebar-accent cursor-pointer'
             >
               <div className='relative h-8 w-8 overflow-hidden rounded-lg'>
                 <Image src={avatar} alt={name || ''} fill />
