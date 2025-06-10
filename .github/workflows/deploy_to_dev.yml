@@ -3,7 +3,7 @@ name: Deploy to dev
 on:
   push:
     branches:
-      - feat/cicd
+      - dev
 
 jobs:
   deploy-to-dev:
