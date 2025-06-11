@@ -57,7 +57,12 @@
     "no_data_found": "No data found",
     "we_couldnt_find_any_data_to_display_at_the_moment": "We couldn't find any data to display at the moment.",
     "active_filters": "Active filters",
-    "clear_all": "Clear all"
+    "clear_all": "Clear all",
+    "manage_administrators": "Manage Administrators",
+    "add_account": "Add Account",
+    "account_added_successfully": "Account Added Successfully!",
+    "the_account_has_been_added": "The account has been added, and the details have been saved. You can view the updated list on the user management page.",
+    "go_to_home": "Go to Home"
   },
   "qna": {
     "get_started": "Get Started!",
@@ -362,6 +367,22 @@
     "action": "Action",
     "choose_role": "Choose Role",
     "indicates_whether_an_account_is_active": "Indicates whether an account is active and usable, inactive and no longer accessible, or in invite status where an email invitation has been sent but the user hasn't registered yet.",
-    "add_account": "Add Account"
+    "add_account": "Add Account",
+    "account_details": "Account Details",
+    "enter_the_necessary_information": "Enter the necessary information to add a new account. Ensure all details are accurate before proceeding.",
+    "client_branch_title": "Client Branch {index}",
+    "add_another_client_branch": "Add Another Client Branch",
+    "internal_technician_title": "Internal Technician {index}",
+    "add_another_internal_technician": "Add Another Internal Technician",
+    "group_name": "Group Name",
+    "email": "Email",
+    "select_role": "Select Role",
+    "back": "Back",
+    "select_internal_technician": "Select Internal Technician",
+    "are_you_absolutely_sure": "Are you absolutely sure?",
+    "this_action_will_deactivate_the_account_and_revoke_all_associated_access": "This action will deactivate the account and revoke all associated access.",
+    "deactivate": "Deactivate",
+    "cancel": "Cancel",
+    "choose_branch_group": "Choose Branch Group"
   }
 }
