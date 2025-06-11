@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import React from 'react'
 
+import { successAnimation } from '@/assets/images'
 import SuccessMessageCard from '@/components/success-message-card/SuccessMessageCard'
 import { loginPath } from '@/config/paths/auth-path'
 import { ENV } from '@/libs/env'
@@ -27,6 +28,7 @@ const Page = async () => {
           link: loginPath()
         }
       ]}
+      image={successAnimation}
       imageAlt={t('an_awesome_success_result_animation')}
     />
   )

@@ -76,7 +76,7 @@ export const useSuccessLayout = () => {
     'details-forms': detailsFormsMessage
   }
 
-  const message = useMemo(() => actionHandlers[type] || defaultMessage, [type])
+  const message = useMemo(() => actionHandlers[type] || defaultMessage, [type, isLoadingAircons])
 
   return {
     ...message
