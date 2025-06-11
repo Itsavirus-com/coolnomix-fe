@@ -23,12 +23,7 @@ export const useInternalTechnicianForm = () => {
   })
 
   const techniciansOptions = useMemo((): SelectItem[] => {
-    return [
-      {
-        label: 'John Doe',
-        value: 'john-doe'
-      }
-    ]
+    return []
   }, [])
 
   useEffect(() => {
