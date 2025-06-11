@@ -25,7 +25,14 @@ export const detailsAcSchema = (t: TFunction) =>
     peak_hours_end: z.string({
       required_error: requiredString(t)
     }),
-    hourly_btu: z.number().optional(),
+    hourly_btu: z
+      .number()
+      .optional()
+      .nullable()
+      .transform((val: any) => {
+        if (!val) return null
+        return val
+      }),
     input_power_kw: z
       .number({
         required_error: requiredString(t)

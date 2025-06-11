@@ -1,12 +1,13 @@
+import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 
-import { DUMMY_REPORT_DETAIL_ID } from '@/config/constant'
 import { useReportDetail } from '@/services/swr/hooks/use-report-detail'
 
 export const useYearPotentialSavingTable = () => {
   const t = useTranslations('report')
 
-  const { isLoading, report } = useReportDetail(DUMMY_REPORT_DETAIL_ID)
+  const { reportId } = useParams()
+  const { isLoading, report } = useReportDetail(reportId as string)
 
   const reportEstimatedUsages = report?.report_analysis?.report_estimated_usages
   const unit = report?.report_analysis?.report_summary_input_datum.external_units

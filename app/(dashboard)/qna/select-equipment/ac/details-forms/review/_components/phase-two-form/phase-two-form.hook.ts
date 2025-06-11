@@ -6,7 +6,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { useSnapshot } from 'valtio'
 import { z } from 'zod'
 
-import { DUMMY_REPORT_DETAIL_ID, QNA_FORM_STORAGE_KEY } from '@/config/constant'
+import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaAcPath } from '@/config/paths'
 import { reportDetailPath } from '@/config/paths/list-of-report-path'
 import { qnaApi } from '@/services/api/qna-api'
@@ -48,24 +48,26 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
 
   const handleSubmitPhaseTwo = async (values: z.infer<typeof schema>) => {
     const payload = getPayload(values, aircons)
-    await qnaApi.updateAcPhaseTwo(payload)
+    const response = await qnaApi.updateAcPhaseTwo(payload)
     remove(QNA_FORM_STORAGE_KEY)
     resetQnaDetailsForms()
     mutateAircons()
+
+    return response
   }
 
-  const handleProcessReport = async () => {
+  const handleProcessReport = async (id: string) => {
     showModal({
       title: t('generating_report'),
       message: t('this_may_take_a_few_minutes'),
       align: 'center',
       type: 'loading'
     })
-    await mutateReportDetail(DUMMY_REPORT_DETAIL_ID)
+    await mutateReportDetail(id)
     // For testing purpose
     await delay(2000)
     hideModal()
-    router.push(reportDetailPath(DUMMY_REPORT_DETAIL_ID))
+    router.push(reportDetailPath(id))
   }
 
   const onSubmit = useCallback(
@@ -74,8 +76,8 @@ export const usePhaseTwoForm = (inPreview: boolean) => {
 
       if (inPreview) {
         try {
-          await handleSubmitPhaseTwo(values)
-          await handleProcessReport()
+          const { data } = await handleSubmitPhaseTwo(values)
+          await handleProcessReport(data.data.reportID)
           methods.reset()
         } catch (error: any) {
           handleGenericError(error)

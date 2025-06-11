@@ -1,7 +1,7 @@
+import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
-import { DUMMY_REPORT_DETAIL_ID } from '@/config/constant'
 import { useReportDetail } from '@/services/swr/hooks/use-report-detail'
 
 import { getKwhSummaryColumns, getUnitSummaryColumns } from './input-data-summary-table.helpers'
@@ -9,7 +9,8 @@ import { getKwhSummaryColumns, getUnitSummaryColumns } from './input-data-summar
 export const useInputDataSummaryTable = () => {
   const t = useTranslations('report')
 
-  const { report } = useReportDetail(DUMMY_REPORT_DETAIL_ID)
+  const { reportId } = useParams()
+  const { report } = useReportDetail(reportId as string)
 
   const data = report?.report_analysis?.report_summary_input_datum
 

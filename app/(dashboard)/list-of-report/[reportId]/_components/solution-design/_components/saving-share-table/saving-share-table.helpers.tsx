@@ -52,7 +52,7 @@ export const getColumns = (t: TFunction): ExtendedColumnDef<TableType>[] => {
 
         return (
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger className='w-full'>
               <span className='table-row-end text-blue-dark font-semibold'>
                 {truncate(formatted, { length: 10 })}
               </span>
