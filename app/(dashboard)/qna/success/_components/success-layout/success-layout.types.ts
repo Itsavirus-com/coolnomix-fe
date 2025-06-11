@@ -11,4 +11,4 @@ export type SuccessMessageLayoutType = {
   loading?: boolean
 }
 
-export type SuccessMessageType = 'tech-visit' | 'details-forms' | 'add-user'
+export type SuccessMessageType = 'tech-visit' | 'details-forms'

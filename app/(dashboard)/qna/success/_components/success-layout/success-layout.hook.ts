@@ -4,7 +4,6 @@ import { useMemo } from 'react'
 
 import { successAnimation, techVisitSuccessAnimation } from '@/assets/images'
 import { qnaAcDetailsReviewPath, qnaAcPath, reportListPath } from '@/config/paths'
-import { userManagementPath } from '@/config/paths/user-management-path'
 import { useQnaGetAircons } from '@/services/swr/hooks/use-qna-get-aircons'
 
 import { SuccessMessageLayoutType, SuccessMessageType } from './success-layout.types'
@@ -19,7 +18,7 @@ export const useSuccessLayout = () => {
   const { isLoading: isLoadingAircons } = useQnaGetAircons()
 
   const baseMessage = {
-    image: techVisitSuccessAnimation,
+    image: successAnimation,
     imageAlt: t('an_awesome_success_result_animation')
   }
 
@@ -37,7 +36,8 @@ export const useSuccessLayout = () => {
         link: reportListPath()
       }
     ],
-    ...baseMessage
+    ...baseMessage,
+    image: techVisitSuccessAnimation
   }
 
   const detailsFormsMessage: SuccessMessageLayoutType = {
@@ -51,20 +51,6 @@ export const useSuccessLayout = () => {
       }
     ],
     loading: isLoadingAircons,
-    ...baseMessage,
-    image: successAnimation
-  }
-
-  const addUserMessage: SuccessMessageLayoutType = {
-    title: t('account_added_successfully'),
-    description: t('the_account_has_been_added'),
-    buttons: [
-      null,
-      {
-        label: t('go_to_home'),
-        link: userManagementPath()
-      }
-    ],
     ...baseMessage
   }
 
@@ -87,8 +73,7 @@ export const useSuccessLayout = () => {
 
   const actionHandlers: Record<SuccessMessageType, SuccessMessageLayoutType> = {
     'tech-visit': techVisitMessage,
-    'details-forms': detailsFormsMessage,
-    'add-user': addUserMessage
+    'details-forms': detailsFormsMessage
   }
 
   const message = useMemo(() => actionHandlers[type] || defaultMessage, [type])
