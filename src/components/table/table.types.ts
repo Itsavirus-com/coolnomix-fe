@@ -12,7 +12,7 @@ export type ExtendedColumnDef<TData, TValue = unknown> = ColumnDef<TData, TValue
 
 export type FilterState = Record<string, any>
 
-export type Action = 'view' | 'edit' | 'delete' | 'deactivate' | 'activate'
+export type Action = 'view' | 'edit' | 'delete' | 'deactivate' | 'activate' | 'resend'
 
 type BaseTableProps<TData> = {
   table: Table<TData>
@@ -93,10 +93,10 @@ export interface TableActionsProps<TData> extends Pick<BaseTableProps<TData>, 't
   actions?: Action[]
 }
 
-export type TableAction = {
-  label: Action
-  action: () => void
+export type TableAction<T extends Action = Action> = {
+  label: T
   variant?: VariantProps<typeof buttonVariants>['variant']
+  action: () => void
 }
 
 export interface TableRowActionsProps<TData> {

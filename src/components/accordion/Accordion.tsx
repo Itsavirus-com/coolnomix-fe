@@ -19,7 +19,7 @@ const Accordion: FC<AccordionProps> = (props) => {
   return (
     <SAccordion type='multiple' className='w-full' {...rest}>
       {items.map((item, index) => (
-        <AccordionItem value={item.key} key={item.key}>
+        <AccordionItem value={item.key} key={item.key} className='mb-2'>
           <AccordionTrigger
             className={accordionTriggerClassName}
             canRemove={canRemove}

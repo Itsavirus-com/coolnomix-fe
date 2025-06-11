@@ -18,7 +18,7 @@ const UncontrolledSelect: FC<UncontrolledSelectProps> = (props) => {
 
   return (
     <Select value={value} onValueChange={onValueChange} disabled={disabled}>
-      <SelectTrigger className={cn('h-8', className)}>
+      <SelectTrigger className={cn('cursor-pointer', className)}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
