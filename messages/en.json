@@ -303,7 +303,10 @@
     "total_energy_usage_units": "Total Energy Usage - {unit} Units",
     "total_running_usage_units": "Total Running Usage - {unit} Units",
     "kw_after_saving": "KW (After {saving}% saving)",
-    "idr_after_saving": "IDR (After {saving}% saving)"
+    "idr_after_saving": "IDR (After {saving}% saving)",
+    "report_not_found": "Report Not Found",
+    "the_report_you_are_looking_for_does_not_exist": "The report you are looking for does not exist.",
+    "back_to_report_list": "Back to Report List"
   },
   "validation": {
     "this_field_is_required": "This field is required",
