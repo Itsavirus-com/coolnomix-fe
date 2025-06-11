@@ -2,7 +2,7 @@ import { StaticImageData } from 'next/image'
 
 import { ButtonWithLinkProps } from '@/components/button/button.types'
 
-export interface SuccessMessageType {
+export type SuccessMessageLayoutType = {
   title: string
   description: string
   image: StaticImageData
@@ -10,3 +10,5 @@ export interface SuccessMessageType {
   buttons: ButtonWithLinkProps[]
   loading?: boolean
 }
+
+export type SuccessMessageType = 'tech-visit' | 'details-forms' | 'add-user'

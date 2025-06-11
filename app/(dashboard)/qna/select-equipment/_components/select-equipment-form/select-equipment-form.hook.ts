@@ -5,14 +5,13 @@ import { useCallback, useEffect, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { SelectItem } from '@/components/forms/select/select.types'
 import { QNA_FORM_STORAGE_KEY } from '@/config/constant'
 import { qnaAcPath, qnaRefrigerationPath } from '@/config/paths'
 import { AcEquipmentType, ButtonGroupType } from '@/types/general'
 import { load, updateStoredObject } from '@/utils/storage'
 
 import { formSchema } from './select-equipment-form.schema'
-
-import type { EquipmentTypeItem } from './select-equipment-form.types'
 
 export const useSelectEquipmentForm = () => {
   const t = useTranslations('qna')
@@ -25,8 +24,8 @@ export const useSelectEquipmentForm = () => {
     resolver: zodResolver(schema)
   })
 
-  const equipmentTypes: EquipmentTypeItem[] = useMemo(
-    () => [
+  const equipmentTypes = useMemo(
+    (): SelectItem[] => [
       { label: t('air_conditioning'), value: 'air-conditioning' },
       { label: t('refrigeration'), value: 'refrigeration' }
     ],

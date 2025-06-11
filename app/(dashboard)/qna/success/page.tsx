@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 
 import { ENV } from '@/libs/env'
 
-import SuccessLayout from './components/success-layout/SuccessLayout'
+import SuccessLayout from './_components/success-layout/SuccessLayout'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

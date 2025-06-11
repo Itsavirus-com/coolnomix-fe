@@ -3,6 +3,7 @@ import React, { FC, useMemo } from 'react'
 
 import ControlledInput from '@/components/forms/input/Input'
 import ControlledSelect from '@/components/forms/select/Select'
+import { SelectItem } from '@/components/forms/select/select.types'
 import TimePicker from '@/components/forms/time-picker/TimePicker'
 
 import { DetailsReviewFormProps } from '../../details-forms.types'
@@ -12,7 +13,7 @@ const AcForm: FC<DetailsReviewFormProps> = (props) => {
 
   const { index, formName, disabled } = props
 
-  const acRatioOptions = useMemo(() => {
+  const acRatioOptions = useMemo((): SelectItem[] => {
     return Array.from({ length: 10 }, (_, i) => ({
       label: `${t('internal_unit', { ratio: 1 })} : ${t('external_unit', { ratio: i + 1 })}`,
       value: `${i + 1}:${i + 1}`
