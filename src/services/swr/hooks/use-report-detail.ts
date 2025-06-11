@@ -7,7 +7,8 @@ export const useReportDetail = (id: string) => {
     { path: `reports/${id}` },
     {
       revalidateOnFocus: false,
-      revalidateOnReconnect: true
+      revalidateOnReconnect: false,
+      revalidateIfStale: false
     }
   )
 
