@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl'
+import { TFunction, useTranslations } from 'next-intl'
 import React, { FC } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -18,6 +18,24 @@ const yearsOptions = Array.from({ length: 20 }, (_, i) => {
     value: year.toString()
   }
 })
+
+const serviceFrequencyOptions = (t: TFunction) => {
+  const options = []
+
+  for (let i = 1; i <= 9; i++) {
+    options.push({
+      label: t(`every_${i}_month`),
+      value: `every_${i}_month`
+    })
+  }
+
+  options.push({
+    label: t('every_10+_month'),
+    value: 'every_10+_month'
+  })
+
+  return options
+}
 
 const TechnicalForm: FC<DetailsReviewFormProps> = (props) => {
   const t = useTranslations('qna')
@@ -45,11 +63,7 @@ const TechnicalForm: FC<DetailsReviewFormProps> = (props) => {
         required
         name={`${formName}.${index}.service_frequency`}
         label={t('how_often_do_you_maintain_your_equipment')}
-        items={[
-          { label: t('every_month'), value: 'every_month' },
-          { label: t('every_two_month'), value: 'every_two_month' },
-          { label: t('every_three_month'), value: 'every_three_month' }
-        ]}
+        items={serviceFrequencyOptions(t)}
         placeholder={t('select_service_frequency')}
         index={index}
         disabled={disabled}
