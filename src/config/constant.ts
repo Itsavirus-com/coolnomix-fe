@@ -18,3 +18,10 @@ export const SESSION_COOKIE = {
   unauthenticatedValue: 'unauthenticated'
 }
 export const DUMMY_REPORT_DETAIL_ID = '123e4567-e89b-12d3-a456-426614174000'
+
+export const ROLE_OPTIONS = {
+  admin: 'administrator',
+  client_group: 'client_group',
+  client_branch: 'client_branch',
+  internal_technician: 'internal_technician'
+}
