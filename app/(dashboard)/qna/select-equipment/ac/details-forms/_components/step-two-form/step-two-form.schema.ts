@@ -37,8 +37,8 @@ export const detailsAcSchema = (t: TFunction) =>
       .number({
         required_error: requiredString(t)
       })
-      .refine((val) => Number(val) >= 1, {
-        message: t('minimum_input_is_1')
+      .refine((val) => val >= 0.1, {
+        message: t('minimum_input_is_0_1')
       }),
     ratio: z.string({
       required_error: requiredString(t)
