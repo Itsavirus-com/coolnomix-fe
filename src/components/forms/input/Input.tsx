@@ -27,6 +27,7 @@ const ControlledInput: FC<ControlledInputProps> = (props) => {
     max,
     inputMode,
     pattern,
+    step,
     ...rest
   } = props
 
@@ -75,6 +76,7 @@ const ControlledInput: FC<ControlledInputProps> = (props) => {
         onChange={handleChange}
         min={min}
         max={max}
+        step={type === 'number' ? step || 'any' : undefined}
       />
       <FormMessage index={index} name={name} />
     </FormItem>
