@@ -45,7 +45,11 @@ const Button = (props: ButtonWithLinkProps) => {
           )}
         >
           {isLoading && <Loader2 size={14} className='animate-spin' />}
-          {label}
+          <div className='flex items-center gap-2'>
+            {startContent}
+            {label}
+            {endContent}
+          </div>
         </Link>
       ) : (
         <div className='flex items-center gap-1'>

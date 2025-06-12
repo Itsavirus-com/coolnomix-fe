@@ -1,11 +1,13 @@
 import type { ComponentProps } from 'react'
 
+export type SelectItem = {
+  label: string
+  value: string
+}
+
 export type SelectProps = ComponentProps<'select'> & {
   label: string
-  items: {
-    label: string
-    value: string
-  }[]
+  items: SelectItem[]
   placeholder: string
   width?: string
   className?: string
