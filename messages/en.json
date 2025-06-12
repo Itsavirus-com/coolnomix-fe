@@ -217,7 +217,17 @@
     "internal_unit": "{ratio} internal unit",
     "external_unit": "{ratio} external unit",
     "generating_report": "Generating Report...",
-    "this_may_take_a_few_minutes": "This may take a few minutes"
+    "this_may_take_a_few_minutes": "This may take a few minutes",
+    "every_1_month": "Every 1 Month",
+    "every_2_month": "Every 2 Months",
+    "every_3_month": "Every 3 Months",
+    "every_4_month": "Every 4 Months",
+    "every_5_month": "Every 5 Months",
+    "every_6_month": "Every 6 Months",
+    "every_7_month": "Every 7 Months",
+    "every_8_month": "Every 8 Months",
+    "every_9_month": "Every 9 Months",
+    "every_10+_month": "Every 10+ Months"
   },
   "sidebar": {
     "platform": "PLATFORM",
@@ -325,7 +335,8 @@
     "password_must_contain_at_least_one_special_character": "Password must contain at least one special character",
     "passwords_do_not_match": "Passwords do not match",
     "invalid_phone_number": "Invalid phone number",
-    "minimum_input_is_1": "Minimum input is 1"
+    "minimum_input_is_1": "Minimum input is 1",
+    "minimum_input_is_0_1": "Minimum input is 0.1"
   },
   "auth": {
     "welcome_back": "Welcome Back!",
