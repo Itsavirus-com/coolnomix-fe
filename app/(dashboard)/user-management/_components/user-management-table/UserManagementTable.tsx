@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import Table from '@/components/table/table'
 
@@ -10,13 +10,15 @@ const UserManagementTable = () => {
   const { data, columns } = useUserManagementTable()
 
   return (
-    <Table
-      data={data}
-      columns={columns}
-      classNames={{
-        container: 'border-none'
-      }}
-    />
+    <Suspense>
+      <Table
+        data={data}
+        columns={columns}
+        classNames={{
+          container: 'border-none'
+        }}
+      />
+    </Suspense>
   )
 }
 
