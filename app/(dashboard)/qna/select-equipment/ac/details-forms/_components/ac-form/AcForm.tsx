@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl'
 import React, { FC, useMemo } from 'react'
+import { useFormContext } from 'react-hook-form'
 
 import ControlledInput from '@/components/forms/input/Input'
 import ControlledSelect from '@/components/forms/select/Select'
@@ -19,6 +20,11 @@ const AcForm: FC<DetailsReviewFormProps> = (props) => {
       value: `${i + 1}:${i + 1}`
     }))
   }, [])
+
+  const { getValues } = useFormContext()
+
+  const shouldShowBtuPerHour =
+    !disabled || (disabled && !!getValues(`${formName}.${index}.hourly_btu`))
 
   return (
     <div className='mt-4 grid grid-cols-2 flex-col gap-4'>
@@ -60,15 +66,17 @@ const AcForm: FC<DetailsReviewFormProps> = (props) => {
         index={index}
         disabled={disabled}
       />
-      <ControlledInput
-        name={`${formName}.${index}.hourly_btu`}
-        label={t('btu_per_hour')}
-        type='number'
-        placeholder={t('enter_btu_value_per_hour')}
-        index={index}
-        className='col-span-2'
-        disabled={disabled}
-      />
+      {shouldShowBtuPerHour && (
+        <ControlledInput
+          name={`${formName}.${index}.hourly_btu`}
+          label={t('btu_per_hour')}
+          type='number'
+          placeholder={t('enter_btu_value_per_hour')}
+          index={index}
+          className='col-span-2'
+          disabled={disabled}
+        />
+      )}
       <ControlledInput
         required
         name={`${formName}.${index}.input_power_kw`}

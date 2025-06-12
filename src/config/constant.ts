@@ -17,7 +17,6 @@ export const SESSION_COOKIE = {
   value: 'authenticated',
   unauthenticatedValue: 'unauthenticated'
 }
-export const DUMMY_REPORT_DETAIL_ID = '123e4567-e89b-12d3-a456-426614174000'
 
 export const ROLE_OPTIONS = {
   admin: 'administrator',

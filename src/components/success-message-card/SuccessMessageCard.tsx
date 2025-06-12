@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import React, { FC } from 'react'
 
-import { successAnimation } from '@/assets/images'
 import { cn } from '@/libs/utils'
 
 import { SuccessMessageCardProps } from './success-message-card.types'
@@ -11,16 +10,7 @@ import Button from '../button/Button'
 import Text from '../text/Text'
 
 const SuccessMessageCard: FC<SuccessMessageCardProps> = (props) => {
-  const {
-    title,
-    description,
-    buttons,
-    imageAlt,
-    className,
-    image = successAnimation,
-    loading,
-    ...rest
-  } = props
+  const { title, description, buttons, imageAlt, className, image, loading, ...rest } = props
 
   const [leftButton, rightButton] = buttons
 

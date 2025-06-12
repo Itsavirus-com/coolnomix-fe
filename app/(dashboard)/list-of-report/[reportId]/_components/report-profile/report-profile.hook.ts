@@ -1,8 +1,10 @@
-import { DUMMY_REPORT_DETAIL_ID } from '@/config/constant'
+import { useParams } from 'next/navigation'
+
 import { useReportDetail } from '@/services/swr/hooks/use-report-detail'
 
 export const useReportProfile = () => {
-  const { report } = useReportDetail(DUMMY_REPORT_DETAIL_ID)
+  const { reportId } = useParams()
+  const { report } = useReportDetail(reportId as string)
 
   const reportProfile = {
     ...report?.client_branch?.user,

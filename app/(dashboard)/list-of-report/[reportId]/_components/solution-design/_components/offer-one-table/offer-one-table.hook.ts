@@ -1,8 +1,8 @@
 import { startCase, upperCase } from 'lodash'
+import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
-import { DUMMY_REPORT_DETAIL_ID } from '@/config/constant'
 import { useReportDetail } from '@/services/swr/hooks/use-report-detail'
 
 import { formatValue, getColumns } from './offer-two-table.helpers'
@@ -23,7 +23,8 @@ const fieldsToExclude = [
 export const useOfferOneTable = () => {
   const t = useTranslations('report')
 
-  const { report } = useReportDetail(DUMMY_REPORT_DETAIL_ID)
+  const { reportId } = useParams()
+  const { report } = useReportDetail(reportId as string)
 
   const savingShare = report.report_solution_design.report_offers.find(
     (offer) => offer.type === 'saving_share'

@@ -1,5 +1,6 @@
+import { useParams } from 'next/navigation'
+
 import { ChartConfig } from '@/components/ui/chart'
-import { DUMMY_REPORT_DETAIL_ID } from '@/config/constant'
 import { useReportDetail } from '@/services/swr/hooks/use-report-detail'
 
 const ticks = [20000, 40000, 60000, 80000]
@@ -16,7 +17,8 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export const useCurrentAndSavingChart = () => {
-  const { report } = useReportDetail(DUMMY_REPORT_DETAIL_ID)
+  const { reportId } = useParams()
+  const { report } = useReportDetail(reportId as string)
 
   const data = report?.report_analysis?.grouped_bar_chart.data
 

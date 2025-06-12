@@ -23,9 +23,7 @@ const Page = () => {
   return (
     <main>
       <Breadcrumbs items={breadcrumbs} />
-      <div className='flex flex-col gap-8 px-[44px] pt-[54px]'>
-        <ReportDetail />
-      </div>
+      <ReportDetail />
     </main>
   )
 }
