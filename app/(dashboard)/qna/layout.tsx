@@ -6,7 +6,6 @@ import { reportListPath } from '@/config/paths/list-of-report-path'
 import PageHeaderHandler from '@/handlers/page-header-handler/PageHeaderHandler'
 
 const breadcrumbs = [
-  { key: 'pepito-market', label: 'Pepito Market', href: '/' },
   { key: 'energy-saving-audit', label: 'Energy Saving Audit', href: reportListPath() },
   { key: 'qna', label: 'QNA', href: qnaPath() }
 ]
