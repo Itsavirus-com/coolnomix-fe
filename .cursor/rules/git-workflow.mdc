@@ -3,306 +3,130 @@ description: create git commit and pull request
 globs:
 alwaysApply: false
 ---
-# Unified Git, Branch, Commit & PR Rules
+# Git Workflow and Pull Request Guidelines
 
-## 1. Conventional Commit & Branch Naming
+This document outlines the Git workflow and standards for this project. Following these rules ensures a clean, maintainable, and collaborative development history.
 
-### Commit Message Format
-```
-<type>(<scope>): <description>
-```
-- **Types:** feat, fix, refactor, style, perf, test, docs, chore, ci, build, hotfix
-- **Scope:** (optional) e.g. auth, ui, api, types, utils, config
-- **Description:** imperative, concise, max 50 chars, no period
+## 1. Core Principles
 
-**Examples:**
-```
-feat: add user dashboard
-fix(ui): resolve button alignment
-refactor(auth): simplify logic
-```
+- **One Logical Change per Pull Request:** Each PR should represent a single, self-contained logical change (e.g., one feature, one bug fix).
+- **Group Related Files:** Group logically related file changes into a single branch and PR. Do not commit unrelated changes together. If you have multiple independent changes, create separate branches for each.
+- **Main Branch:** The `dev` branch is the main integration branch. It must always be stable.
 
-### Branch Naming Convention
+---
+
+## 2. Branching Strategy
+
+### A. Branch Naming Convention
+
+All branch names must follow this format:
+
 ```
 <type>/<short-description>
 ```
-- **Types:** feature, fix, refactor, chore, docs, test, perf, style, ci, hotfix
-- **Description:** kebab-case, max 30 chars
 
-**Examples:**
-```
-feature/user-dashboard
-fix/payment-timeout
-refactor/auth-logic
-```
+- **Types:** `feature`, `fix`, `refactor`, `chore`, `docs`, `test`, `perf`, `style`, `ci`, `hotfix`
+- **Short Description:**
+  - Use kebab-case (e.g., `user-dashboard`).
+  - Keep it concise (max 30 characters).
+  - **Examples:**
+    - `feature/user-dashboard`
+    - `fix/payment-timeout`
+    - `refactor/auth-logic`
 
-### Length & Formatting Rules
-- **Commit messages**: Max 50 characters
-- **Branch names**: Max 30 characters
-- **Description part**: Max 20 chars for branches, 40 for commits
-- Use **imperative mood**: "add" not "added"
-- Use **kebab-case** for branches: `user-auth` not `userAuth`
-- **No periods** at end of commit messages
-- **Lowercase** descriptions
+### B. Creating Branches
 
----
+- **Independent Changes:** For new, independent work (e.g., a new feature or a bug fix unrelated to other ongoing work), always create your branch from `dev`.
+  ```bash
+  git checkout dev
+  git pull origin dev
+  git checkout -b <type>/<short-description>
+  ```
+- **Dependent Changes (Stacked PRs):** If your work depends on changes in another feature branch (that is not yet merged into `dev`), create your branch from that feature branch.
+  ```bash
+  git checkout feature/base-branch
+  git pull
+  git checkout -b feature/dependent-branch
+  ```
 
-## 2. Branch & Commit Workflow
+### C. Stacked PR Maintenance
 
-### A. Branch Compatibility & Dependency
-
-1. **Always analyze all file changes** before creating a branch or PR.
-2. **Check branch compatibility:**
-   - **If the commit matches the current branch's scope/type:** commit directly on the current branch.
-   - **If the commit is a different scope/type:** create a new branch from the appropriate base branch.
-
-3. **Stacked PR/Branch Dependency:**
-   - If changes are dependent, create a new branch from the branch containing the dependency (not from dev).
-   - If changes are independent, always create a new branch from `dev`.
-
-### B. Branching & Commit Rules
-
-- **Independent changes:**
-  - Checkout to `dev`.
-  - Create a new branch from `dev`.
-  - Commit, push, and PR separately.
-
-- **Dependent changes (Stacked PR):**
-  - Checkout to the base branch (the dependency).
-  - Create a new branch from that branch.
-  - Commit, push, and PR as a stacked PR (in order).
-
-- **Branch naming:**
-  - Use the format and branch type as above.
+- If a base branch (e.g., `feature/base-branch`) is merged into `dev`, you must rebase your dependent branch onto `dev` before creating a pull request. This keeps the history linear and avoids unnecessary merge commits.
+  ```bash
+  git checkout feature/dependent-branch
+  git rebase dev
+  ```
 
 ---
 
-## 3. Pull Request Documentation
+## 3. Committing Changes
 
-### PR Title
-- Short, clear, and descriptive.
+### A. Commit Message Format
 
-### PR Description Template
+All commit messages must follow the [Conventional Commits](mdc:https:/www.conventionalcommits.org/en/v1.0.0) specification.
+
+```
+<type>(<scope>): <description>
+```
+
+- **Types:** `feat`, `fix`, `refactor`, `style`, `perf`, `test`, `docs`, `chore`, `ci`, `build`, `hotfix`
+- **Scope (optional):** A noun describing the section of the codebase affected (e.g., `auth`, `ui`, `api`).
+- **Description:**
+  - Use imperative mood (e.g., "add" not "added" or "adds").
+  - Keep it concise (max 50 characters).
+  - Do not end with a period.
+- **Examples:**
+  ```
+  feat: add user dashboard
+  fix(ui): resolve button alignment
+  refactor(auth): simplify user login logic
+  ```
+
+---
+
+## 4. Pull Requests
+
+### A. PR Title and Description
+
+- **Title:** Keep it short, clear, and descriptive. It should summarize the change.
+- **Description:** Use the following template to explain the changes.
+
 ```markdown
 ## Summary
-Brief overview of what was changed and why
+A brief overview of what was changed and why.
 
 ## Changes
-- **File/Component changed**: Short explanation of what was modified
-- **Another change**: Brief description of the modification
-- **Additional change**: Concise explanation of the update
+- **File/Component changed**: Short explanation of what was modified.
+- **Another change**: Brief description of the modification.
 ```
 
-### Documentation Standards
-- **Summary Section:** One or two sentences explaining the main purpose.
-- **Changes Section:** List significant changes, format: **What was changed**: Short explanation.
-- **Brevity:** Keep explanations short and to the point.
-- **Clarity:** Ensure each change is clearly explained.
-- **Relevance:** Only include significant changes.
-- **Consistency:** Use the same format for every PR.
+### B. Documentation Standards
 
----
-
-## 4. Automation & Integration
-
-- **Always perform branch compatibility checks** before committing or creating a PR.
-- **Use the commit and branch naming conventions** throughout the workflow.
-- **Stacked PRs:**
-  - If the base branch is merged to `dev`, rebase the dependent branch onto `dev` before the next PR.
-- **Avoid irrelevant branches** to prevent conflicts and keep PRs clean.
+- **Summary:** Explain the "why" behind the change in one or two sentences.
+- **Changes:** List the most significant changes. Be specific but concise.
+- **Clarity:** Ensure the description is easy to understand for all team members.
 
 ---
 
 ## 5. Example Scenarios
 
 ### Scenario 1: Independent Change
-- Modify file A (no dependency):
-  - Checkout to `dev`, create branch `feature/file-a`, commit, push, PR.
+- **Task:** Add a new, independent feature.
+- **Workflow:**
+  1. Create a branch `feature/new-feature` from `dev`.
+  2. Make commits following the commit message format.
+  3. Push the branch and open a PR to merge into `dev`.
 
-### Scenario 2: Stacked PR
-- Modify file B (depends on file C):
-  - Checkout to `feature/file-c`, create branch `feature/file-b`, commit, push, PR (stacked on top of PR for file C).
+### Scenario 2: Stacked PR (Dependent Change)
+- **Task:** Work on a feature (`feature/part-2`) that depends on another (`feature/part-1`).
+- **Workflow:**
+  1. Create branch `feature/part-1` from `dev`.
+  2. Complete work on `feature/part-1` and open a PR.
+  3. Create branch `feature/part-2` from `feature/part-1`.
+  4. Complete work on `feature/part-2` and open a PR to merge into `feature/part-1`.
+  5. Once `feature/part-1` is merged into `dev`, rebase `feature/part-2` onto `dev` and update its PR to target `dev`.
 
 ---
 
-**Use these rules for all development, commit, branching, and PR processes in this project.**
-If there are major changes, update this document to keep it relevant and consistent!
-
-# Git Workflow & Pull Request Documentation Rules
-
-You are working on a Next.js TypeScript project with strict git workflow and documentation requirements. Always follow these rules when creating branches and pull request documentation.
-
-## Workflow Requirements
-
-### Before Creating Any Commit
-
-**ALWAYS check branch compatibility first:**
-
-1. **Check Current Branch Scope**
-   - Analyze the current branch name and its intended scope
-   - Compare with the new commit type and scope
-   - Determine if they are compatible
-
-2. **Branch Compatibility Rules**
-   - **If commit matches current branch scope**: Commit directly to current branch
-   - **If commit has different scope**: Create new branch for the commit
-   - **Examples of compatible scopes**:
-     - `feat/user-dashboard` + `feat: add dashboard charts` ✅ (same feature scope)
-     - `fix/login-error` + `fix: resolve validation issue` ✅ (same fix scope)
-     - `docs/api-guide` + `docs: update API examples` ✅ (same docs scope)
-   - **Examples of incompatible scopes**:
-     - `feat/user-dashboard` + `fix: resolve login error` ❌ (different scope)
-     - `docs/readme-update` + `feat: add new component` ❌ (different type)
-     - `refactor/auth-service` + `style: format components` ❌ (different purpose)
-
-### When User Requests Branch and Commit Creation
-
-**ALWAYS provide these components based on compatibility check:**
-
-**If Compatible (same scope):**
-1. **Git Operations**
-   - Commit directly to current branch
-   - Push to existing remote branch
-
-**If Incompatible (different scope):**
-1. **Git Operations**
-   - Create new branch with proper naming convention like pull request rules above
-   - Commit with conventional commit format like commit rules above
-   - Push to new remote repository
-
-2. **Pull Request Title**
-   - Keep concise and descriptive
-
-3. **Pull Request Description**
-   - Follow the specified template format
-   - Include brief but clear documentation
-
-## Branch Compatibility Check Process
-
-### Step 1: Analyze Current Branch
-```bash
-# Check current branch name
-git branch --show-current
-
-# Examples:
-# feat/user-dashboard -> Feature scope: user dashboard
-# fix/payment-error -> Fix scope: payment issues
-# docs/api-guide -> Documentation scope: API
-# refactor/auth-logic -> Refactor scope: authentication
-```
-
-### Step 2: Analyze New Commit
-```bash
-# Determine commit type and scope from changes
-# Examples:
-# "feat: add dashboard charts" -> Feature scope: dashboard (compatible with feat/user-dashboard)
-# "fix: resolve login validation" -> Fix scope: login (incompatible with feat/user-dashboard)
-```
-
-### Step 3: Make Decision
-- **Same scope**: Continue with current branch
-- **Different scope**: Create new branch
-
-## Pull Request Documentation Template
-
-### Title Format
-Short and descriptive title
-
-### Description Format
-```markdown
-## Summary
-Brief overview of what was changed and why
-
-## Changes
-- **File/Component changed**: Short explanation of what was modified
-- **Another change**: Brief description of the modification
-- **Additional change**: Concise explanation of the update
-```
-
-## Documentation Standards
-
-### Summary Section
-- One or two sentences explaining the overall purpose
-- Focus on the main goal of the changes
-
-### Changes Section
-- List each significant change as a bullet point
-- Use format: **What was changed**: Brief explanation
-- Keep explanations concise but clear
-- Focus on the most important modifications
-
-## Example Implementation
-
-```markdown
-## Pull Request for `feat/user-dashboard`
-
-### **Title:**
-```
-Add user dashboard with statistics
-```
-
-### **Description:**
-```markdown
-## Summary
-Added a new user dashboard component with data visualization and user statistics to improve user experience.
-
-## Changes
-- **DashboardLayout component**: Created responsive layout with navigation
-- **UserStats component**: Added statistics display with charts
-- **Dashboard routing**: Implemented protected routes for dashboard access
-- **TypeScript interfaces**: Added type definitions for dashboard data
-```
-
-## Automation Rules
-
-### For Every Commit Request:
-
-1. **Check Branch Compatibility**
-   ```bash
-   # Current branch: feat/user-dashboard
-   # New commit: "feat: add dashboard filters"
-   # Decision: Compatible ✅ -> Commit to current branch
-
-   # Current branch: feat/user-dashboard
-   # New commit: "fix: resolve API timeout"
-   # Decision: Incompatible ❌ -> Create new branch
-   ```
-
-2. **Execute Git Operations Based on Compatibility**
-
-   **If Compatible:**
-   ```bash
-   git add <files>
-   git commit -m "<conventional-commit-message>"
-   git push origin <branch-name>
-   ```
-
-   **If Incompatible:**
-   ```bash
-   git checkout -b <type>/<description>
-   git add <files>
-   git commit -m "<conventional-commit-message>"
-   git push origin <branch-name>
-   ```
-
-3. **Generate PR Documentation (only for new branches)**
-   - Use the concise template format
-   - Keep explanations brief but clear
-   - Focus on key changes only
-
-### Quality Standards
-- **Branch Logic**: Always check compatibility before creating new branches
-- **Brevity**: Keep explanations short and to the point
-- **Clarity**: Ensure each change is clearly explained
-- **Relevance**: Only include significant changes
-- **Consistency**: Follow the same format for every PR
-
-## Integration with Development Workflow
-- Apply branch compatibility check for ALL commit requests
-- Maintain logical branch organization
-- Avoid unnecessary branch proliferation
-- Support efficient code review process
-
-## Template Reusability
-This workflow should be used for all types of changes while maintaining branch logic and clarity.
+**These rules apply to all development, commit, branching, and PR processes in this project.**
 
