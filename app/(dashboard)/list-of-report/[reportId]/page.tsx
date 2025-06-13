@@ -14,7 +14,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const breadcrumbs = [
-  { key: 'pepito-market', label: 'Pepito Market', href: '/' },
   { key: 'energy-saving-audit', label: 'Energy Saving Audit', href: reportListPath() },
   { key: 'report-id', label: 'Report', href: '' }
 ]

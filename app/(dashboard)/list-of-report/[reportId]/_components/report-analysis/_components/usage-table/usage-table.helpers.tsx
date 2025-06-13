@@ -1,9 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { TFunction } from 'next-intl'
 
-import { formatKw } from '@/utils/formatter'
-import { toCurrencyString } from '@/utils/to-currency-string'
-
 import { UsageTableType } from './usage-table.types'
 
 export const getColumns = (t: TFunction): ColumnDef<UsageTableType>[] => {
@@ -21,30 +18,17 @@ export const getColumns = (t: TFunction): ColumnDef<UsageTableType>[] => {
       }
     },
     {
-      accessorKey: 'energy_usage_kw',
+      accessorKey: 'perMonth',
       header: () => t('per_month'),
       cell: ({ row }) => {
-        const formatted = toCurrencyString(row.original.energy_usage_kw)
-        const kwFormatted = formatKw(row.original.energy_usage_kw)
-        return (
-          <span className='font-semibold'>
-            {row.original.period === 'yearly' ? formatted : kwFormatted}
-          </span>
-        )
+        return <span className='font-semibold'>{row.original.perMonth}</span>
       }
     },
     {
-      accessorKey: 'running_cost_idr',
+      accessorKey: 'perYear',
       header: () => <span className='table-row-end'>{t('per_year')}</span>,
       cell: ({ row }) => {
-        const formatted = toCurrencyString(row.original.running_cost_idr)
-        const kwFormatted = formatKw(row.original.running_cost_idr)
-
-        return (
-          <span className='table-row-end font-semibold'>
-            {row.original.period === 'yearly' ? formatted : kwFormatted}
-          </span>
-        )
+        return <span className='table-row-end font-semibold'>{row.original.perYear}</span>
       }
     }
   ]

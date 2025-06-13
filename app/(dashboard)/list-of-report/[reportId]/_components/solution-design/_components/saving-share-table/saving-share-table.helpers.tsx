@@ -27,9 +27,9 @@ export const getColumns = (t: TFunction): ExtendedColumnDef<TableType>[] => {
 
         return (
           <Tooltip>
-            <TooltipTrigger>
+            <TooltipTrigger className='w-full'>
               <span className='table-row-end text-blue-dark font-semibold'>
-                {truncate(formatted, { length: 10 })}
+                {truncate(formatted, { length: 11 })}
               </span>
             </TooltipTrigger>
             <TooltipContent>
@@ -54,7 +54,7 @@ export const getColumns = (t: TFunction): ExtendedColumnDef<TableType>[] => {
           <Tooltip>
             <TooltipTrigger className='w-full'>
               <span className='table-row-end text-blue-dark font-semibold'>
-                {truncate(formatted, { length: 10 })}
+                {truncate(formatted, { length: 12 })}
               </span>
             </TooltipTrigger>
             <TooltipContent>

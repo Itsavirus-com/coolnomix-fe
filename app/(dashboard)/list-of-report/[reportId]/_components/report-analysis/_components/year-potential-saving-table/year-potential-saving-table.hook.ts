@@ -1,37 +1,50 @@
 import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useMemo } from 'react'
 
 import { useReportDetail } from '@/services/swr/hooks/use-report-detail'
+import { formatKw } from '@/utils/formatter'
+import { toCurrencyString } from '@/utils/to-currency-string'
+
+import { UsageTableType } from '../usage-table/usage-table.types'
 
 export const useYearPotentialSavingTable = () => {
   const t = useTranslations('report')
 
   const { reportId } = useParams()
-  const { isLoading, report } = useReportDetail(reportId as string)
+  const { report } = useReportDetail(reportId as string)
+
+  const potentialSaving = 30
+  const unit = report?.report_analysis?.report_summary_input_datum.external_units
 
   const reportEstimatedUsages = report?.report_analysis?.report_estimated_usages
-  const unit = report?.report_analysis?.report_summary_input_datum.external_units
-  const potentialSaving = 30
+  const potentialUsage = reportEstimatedUsages?.find((usage) => usage.type === 'potential')
+  const estimatedUsage = potentialUsage?.report_estimated_usage_data || []
+  const monthlyData = estimatedUsage?.find((data) => data.period === 'monthly')
+  const yearlyData = estimatedUsage?.find((data) => data.period === 'yearly')
 
-  const data = reportEstimatedUsages
-    ?.find((usage) => usage.type === 'potential')
-    .report_estimated_usage_data.map((data) => ({
-      id: data.id,
-      name:
-        data.period === 'yearly'
-          ? t('total_running_usage_units', { unit })
-          : t('total_energy_usage_units', { unit }),
-      description:
-        data.period === 'yearly'
-          ? t('idr_after_saving', { saving: potentialSaving })
-          : t('kw_after_saving', { saving: potentialSaving }),
-      energy_usage_kw: data.energy_usage_kw,
-      running_cost_idr: data.running_cost_idr,
-      period: data.period
-    }))
+  const data: UsageTableType[] = useMemo(() => {
+    if (!monthlyData || !yearlyData) return []
+
+    return [
+      {
+        id: 'energy-usage',
+        name: t('total_energy_usage', { unit }),
+        description: t('kw_after_saving', { saving: potentialSaving }),
+        perMonth: formatKw(monthlyData.energy_usage_kw),
+        perYear: formatKw(yearlyData.energy_usage_kw)
+      },
+      {
+        id: 'running-cost',
+        name: t('total_running_cost', { unit }),
+        description: t('idr_after_saving', { saving: potentialSaving }),
+        perMonth: toCurrencyString(monthlyData.running_cost_idr),
+        perYear: toCurrencyString(yearlyData.running_cost_idr)
+      }
+    ]
+  }, [monthlyData, yearlyData, unit])
 
   return {
-    isLoading,
     data,
     potentialSaving
   }

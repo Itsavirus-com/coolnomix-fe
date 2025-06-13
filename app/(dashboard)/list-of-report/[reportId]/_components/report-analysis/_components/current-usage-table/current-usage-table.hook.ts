@@ -1,7 +1,12 @@
 import { useParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useMemo } from 'react'
 
 import { useReportDetail } from '@/services/swr/hooks/use-report-detail'
+import { formatKw } from '@/utils/formatter'
+import { toCurrencyString } from '@/utils/to-currency-string'
+
+import { UsageTableType } from '../usage-table/usage-table.types'
 
 export const useCurrentUsageTable = () => {
   const t = useTranslations('report')
@@ -9,22 +14,34 @@ export const useCurrentUsageTable = () => {
   const { reportId } = useParams()
   const { report } = useReportDetail(reportId as string)
 
-  const reportEstimatedUsages = report?.report_analysis?.report_estimated_usages
-  const unit = report?.report_analysis?.report_summary_input_datum.external_units
+  const unit = report?.report_analysis?.report_summary_input_datum.external_units ?? 0
 
-  const data = reportEstimatedUsages
-    ?.find((usage) => usage.type === 'current')
-    .report_estimated_usage_data.map((data) => ({
-      id: data.id,
-      name:
-        data.period === 'yearly'
-          ? t('total_running_usage_units', { unit })
-          : t('total_energy_usage_units', { unit }),
-      description: data.period === 'yearly' ? '(IDR)' : '(KW)',
-      energy_usage_kw: data.energy_usage_kw,
-      running_cost_idr: data.running_cost_idr,
-      period: data.period
-    }))
+  const reportEstimatedUsages = report?.report_analysis?.report_estimated_usages
+  const currentUsage = reportEstimatedUsages?.find((usage) => usage.type === 'current')
+  const estimatedUsage = currentUsage?.report_estimated_usage_data || []
+  const monthlyData = estimatedUsage?.find((data) => data.period === 'monthly')
+  const yearlyData = estimatedUsage?.find((data) => data.period === 'yearly')
+
+  const data: UsageTableType[] = useMemo(() => {
+    if (!monthlyData || !yearlyData) return []
+
+    return [
+      {
+        id: 'energy-usage',
+        name: t('total_energy_usage', { unit }),
+        description: '(KW)',
+        perMonth: formatKw(monthlyData.energy_usage_kw),
+        perYear: formatKw(yearlyData.energy_usage_kw)
+      },
+      {
+        id: 'running-cost',
+        name: t('total_running_cost', { unit }),
+        description: '(IDR)',
+        perMonth: toCurrencyString(monthlyData.running_cost_idr),
+        perYear: toCurrencyString(yearlyData.running_cost_idr)
+      }
+    ]
+  }, [monthlyData, yearlyData, unit])
 
   return {
     data
