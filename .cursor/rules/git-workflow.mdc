@@ -1,0 +1,165 @@
+---
+description: create git commit and pull request
+globs:
+alwaysApply: false
+---
+# Git Workflow and Pull Request Guidelines
+
+This document outlines the Git workflow and standards for this project. Following these rules ensures a clean, maintainable, and collaborative development history.
+
+## 1. Core Principles
+
+- **One Logical Change per Pull Request:** Each PR should represent a single, self-contained logical change (e.g., one feature, one bug fix).
+- **Group Related Files:** Group logically related file changes into a single branch and PR. Do not commit unrelated changes together. If you have multiple independent changes, create separate branches for each.
+- **Main Branch:** The `dev` branch is the main integration branch. It must always be stable.
+
+---
+
+## 2. Branching Strategy
+
+### A. Branch Naming Convention
+
+All branch names must follow this format:
+
+```
+<type>/<short-description>
+```
+
+- **Types:** `feature`, `fix`, `refactor`, `chore`, `docs`, `test`, `perf`, `style`, `ci`, `hotfix`
+- **Short Description:**
+  - Use kebab-case (e.g., `user-dashboard`).
+  - Keep it concise (max 30 characters).
+  - **Examples:**
+    - `feature/user-dashboard`
+    - `fix/payment-timeout`
+    - `refactor/auth-logic`
+
+### B. Creating Branches
+
+- **Independent Changes:** For new, independent work (e.g., a new feature or a bug fix unrelated to other ongoing work), always create your branch from `dev`.
+  ```bash
+  git checkout dev
+  git pull origin dev
+  git checkout -b <type>/<short-description>
+  ```
+- **Dependent Changes (Stacked PRs):** If your work depends on changes in another feature branch (that is not yet merged into `dev`), create your branch from that feature branch.
+  ```bash
+  git checkout feature/base-branch
+  git pull
+  git checkout -b feature/dependent-branch
+  ```
+
+### C. Stacked PR Maintenance
+
+- If a base branch (e.g., `feature/base-branch`) is merged into `dev`, you must rebase your dependent branch onto `dev` before creating a pull request. This keeps the history linear and avoids unnecessary merge commits.
+  ```bash
+  git checkout feature/dependent-branch
+  git rebase dev
+  ```
+
+---
+
+## 3. Committing Changes
+
+### A. Commit Message Format
+
+All commit messages must follow the @Conventional Commits specification.
+
+```
+<type>(<scope>): <description>
+```
+
+- **Types:** `feat`, `fix`, `refactor`, `style`, `perf`, `test`, `docs`, `chore`, `ci`, `build`, `hotfix`
+- **Scope (optional):** A noun describing the section of the codebase affected (e.g., `auth`, `ui`, `api`).
+- **Description:**
+  - Use imperative mood (e.g., "add" not "added" or "adds").
+  - Keep it concise (max 50 characters).
+  - Do not end with a period.
+- **Examples:**
+  ```
+  feat: add user dashboard
+  fix(ui): resolve button alignment
+  refactor(auth): simplify user login logic
+  ```
+
+### B. Pre-Commit Review Process
+
+Before committing, follow these steps to ensure changes are reviewed correctly:
+
+1.  **Check Status:** Always start by checking the repository status.
+    ```bash
+    git status
+    ```
+2.  **Review Staged Files:** If there are files in the staging area ("Changes to be committed"), unstage them to review them individually.
+    ```bash
+    git reset
+    ```
+3.  **Inspect Changes:** Review the changes in each file one by one using `git diff`.
+    ```bash
+    git diff <path/to/file>
+    ```
+4.  **Stage and Commit:** Once reviewed, stage the desired files.
+
+5.  **Final Consistency Check:**
+    - After reviewing all files and staging your changes, run:
+      ```bash
+      git diff --staged
+      ```
+    - **If all staged changes are consistent with the context described by the branch name:**
+      Commit directly.
+    - **If the staged changes contain unrelated or logically separate contexts:**
+      Create a new branch from the current branch for the unrelated changes, and commit them separately.
+
+---
+
+## 4. Pull Requests
+
+### A. PR Title and Description
+
+- **Title:** The PR title must be different from the Git commit message. Keep it short, clear, and descriptive, summarizing the change.
+- **Description:** Use the following template to explain the changes.
+
+```markdown
+## Summary
+A brief overview of what was changed and why.
+
+## Changes
+- **File/Component changed**: Short explanation of what was modified.
+- **Another change**: Brief description of the modification.
+```
+
+### B. Documentation Standards
+
+- **Summary:** Explain the "why" behind the change in one or two sentences.
+- **Changes:** List the most significant changes. Be specific but concise.
+- **Clarity:** Ensure the description is easy to understand for all team members.
+
+### C. Target Branch
+
+- **Primary Target:** All pull requests should target the `dev` branch.
+- **Protected Branches:** Do not open pull requests directly against `main` or `staging`. These branches are updated through controlled merges from `dev`.
+
+---
+
+## 5. Example Scenarios
+
+### Scenario 1: Independent Change
+- **Task:** Add a new, independent feature.
+- **Workflow:**
+  1. Create a branch `feature/new-feature` from `dev`.
+  2. Make commits following the commit message format.
+  3. Push the branch and open a PR to merge into `dev`.
+
+### Scenario 2: Stacked PR (Dependent Change)
+- **Task:** Work on a feature (`feature/part-2`) that depends on another (`feature/part-1`).
+- **Workflow:**
+  1. Create branch `feature/part-1` from `dev`.
+  2. Complete work on `feature/part-1` and open a PR.
+  3. Create branch `feature/part-2` from `feature/part-1`.
+  4. Complete work on `feature/part-2` and open a PR to merge into `feature/part-1`.
+  5. Once `feature/part-1` is merged into `dev`, rebase `feature/part-2` onto `dev` and update its PR to target `dev`.
+
+---
+
+**These rules apply to all development, commit, branching, and PR processes in this project.**
+
