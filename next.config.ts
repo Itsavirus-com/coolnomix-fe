@@ -2,7 +2,7 @@ import withBundleAnalyzer from '@next/bundle-analyzer'
 import { withSentryConfig } from '@sentry/nextjs'
 import createNextIntlPlugin from 'next-intl/plugin'
 
-import { listOfBranchPath } from '@/config/paths'
+import { reportListPath } from '@/config/paths'
 import { ENV } from '@/libs/env'
 
 const bundleAnalyzer = withBundleAnalyzer({
@@ -26,7 +26,7 @@ export default withNextIntl(
         return [
           {
             source: '/',
-            destination: listOfBranchPath(),
+            destination: reportListPath(),
             permanent: true
           }
         ]
