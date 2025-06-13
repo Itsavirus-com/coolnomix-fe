@@ -1,9 +1,17 @@
+import { Metadata } from 'next'
 import React, { ReactNode } from 'react'
 
 import Breadcrumbs from '@/components/breadcrumbs/Breadcrumb'
 import { qnaPath } from '@/config/paths'
 import { reportListPath } from '@/config/paths/list-of-report-path'
 import PageHeaderHandler from '@/handlers/page-header-handler/PageHeaderHandler'
+import { ENV } from '@/libs/env'
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `QNA - ${ENV.NEXT_PUBLIC_PROJECT_NAME}`
+  }
+}
 
 const breadcrumbs = [
   { key: 'pepito-market', label: 'Pepito Market', href: '/' },

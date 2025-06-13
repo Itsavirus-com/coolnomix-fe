@@ -1,17 +1,9 @@
-import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import React from 'react'
 
 import Description from '@/components/description/Description'
-import { ENV } from '@/libs/env'
 
 import SelectLanguageCards from './_components/select-language-cards/SelectLanguageCards'
-
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: `Select language - ${ENV.NEXT_PUBLIC_PROJECT_NAME}`
-  }
-}
 
 const Page = async () => {
   const t = await getTranslations('qna')
