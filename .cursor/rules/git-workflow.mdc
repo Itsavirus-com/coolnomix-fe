@@ -82,6 +82,24 @@ All commit messages must follow the @Conventional Commits specification.
   refactor(auth): simplify user login logic
   ```
 
+### B. Pre-Commit Review Process
+
+Before committing, follow these steps to ensure changes are reviewed correctly:
+
+1.  **Check Status:** Always start by checking the repository status.
+    ```bash
+    git status
+    ```
+2.  **Review Staged Files:** If there are files in the staging area ("Changes to be committed"), unstage them to review them individually.
+    ```bash
+    git reset
+    ```
+3.  **Inspect Changes:** Review the changes in each file one by one using `git diff`.
+    ```bash
+    git diff <path/to/file>
+    ```
+4.  **Stage and Commit:** Once reviewed, stage the desired files and commit them with a compliant message.
+
 ---
 
 ## 4. Pull Requests
