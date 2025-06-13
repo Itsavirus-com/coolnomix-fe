@@ -63,7 +63,7 @@ All branch names must follow this format:
 
 ### A. Commit Message Format
 
-All commit messages must follow the [Conventional Commits](mdc:https:/www.conventionalcommits.org/en/v1.0.0) specification.
+All commit messages must follow the @Conventional Commits specification.
 
 ```
 <type>(<scope>): <description>
@@ -88,7 +88,7 @@ All commit messages must follow the [Conventional Commits](mdc:https:/www.conven
 
 ### A. PR Title and Description
 
-- **Title:** Keep it short, clear, and descriptive. It should summarize the change.
+- **Title:** The PR title must be different from the Git commit message. Keep it short, clear, and descriptive, summarizing the change.
 - **Description:** Use the following template to explain the changes.
 
 ```markdown
@@ -105,6 +105,11 @@ A brief overview of what was changed and why.
 - **Summary:** Explain the "why" behind the change in one or two sentences.
 - **Changes:** List the most significant changes. Be specific but concise.
 - **Clarity:** Ensure the description is easy to understand for all team members.
+
+### C. Target Branch
+
+- **Primary Target:** All pull requests should target the `dev` branch.
+- **Protected Branches:** Do not open pull requests directly against `main` or `staging`. These branches are updated through controlled merges from `dev`.
 
 ---
 
