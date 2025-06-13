@@ -1,15 +1,6 @@
-import { Metadata } from 'next'
 import { Suspense } from 'react'
 
-import { ENV } from '@/libs/env'
-
 import SuccessLayout from './_components/success-layout/SuccessLayout'
-
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: `Success - ${ENV.NEXT_PUBLIC_PROJECT_NAME}`
-  }
-}
 
 const Page = () => {
   return (
